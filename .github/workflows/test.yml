@@ -1,5 +1,5 @@
 name: Test
-on: [push]
+on: [push, workflow_dispatch]
 jobs:
   docker-compose:
     name: Build
@@ -9,23 +9,23 @@ jobs:
       - name: Setup Docker
         shell: bash
         run: |
-          docker-compose build
+          docker-compose up --build
           docker-compose exec backend bin/rails db:create
         env:
           RAILS_ENV: test
 
       - name: Run RSpec
         shell: bash
-        run: docker-compose exec backend bin/rails bundle exec rspec
+        run: docker-compose exec backend /bin/bash -c "bundle exec rspec"
 
       - name: Run Rubocop
         shell: bash
-        run: docker-compose exec backend bin/rails bundle exec
+        run: docker-compose exec backend /bin/bash -c "bundle exec bundle exec rubocop --require rubocop-airbnb"
 
       - name: Run Jest
         shell: bash
-        run: docker-compose exec frontend yarn test
+        run: docker-compose exec frontend /bin/bash -c "yarn test"
 
       - name: Run ESLint
         shell: bash
-        run: docker-compose exec frontend yarn lint
+        run: docker-compose exec frontend /bin/bash -c "yarn lint"
