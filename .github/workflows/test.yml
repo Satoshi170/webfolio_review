@@ -9,7 +9,7 @@ jobs:
       - name: Setup Docker
         shell: bash
         run: |
-          docker-compose up -d
+          docker-compose build
           docker-compose exec backend bin/rails db:create
         env:
           RAILS_ENV: test
