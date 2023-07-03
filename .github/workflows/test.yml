@@ -1,0 +1,31 @@
+name: Test
+on: [push]
+jobs:
+  docker-compose:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Docker
+        shell: bash
+        run: |
+          docker-compose up -d
+          docker-compose exec backend bin/rails db:create
+        env:
+          RAILS_ENV: test
+
+      - name: Run RSpec
+        shell: bash
+        run: docker-compose exec backend bin/rails bundle exec rspec
+
+      - name: Run Rubocop
+        shell: bash
+        run: docker-compose exec backend bin/rails bundle exec
+
+      - name: Run Jest
+        shell: bash
+        run: docker-compose exec frontend yarn test
+
+      - name: Run ESLint
+        shell: bash
+        run: docker-compose exec frontend yarn lint
