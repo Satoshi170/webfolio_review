@@ -9,8 +9,6 @@ jobs:
       - name: Setup Docker
         shell: bash
         run: |
-          docker-compose run frontend yarn install --check-files
-          docker-compose run frontend yarn upgrade
           docker-compose build
           docker-compose up -d
         env:
