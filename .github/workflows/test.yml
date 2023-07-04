@@ -9,7 +9,7 @@ jobs:
       - name: Setup Docker
         shell: bash
         run:
-          docker-compose up --build
+          docker-compose up -d
           # docker-compose exec backend bin/rails db:create
         env:
           RAILS_ENV: test
@@ -20,12 +20,12 @@ jobs:
 
       - name: Run Rubocop
         shell: bash
-        run: docker-compose exec backend /bin/bash -c "bundle exec bundle exec rubocop --require rubocop-airbnb"
+        run: docker-compose exec  -T backend /bin/bash -c "bundle exec rubocop --require rubocop-airbnb"
 
       - name: Run Jest
         shell: bash
-        run: docker-compose exec frontend /bin/bash -c "yarn test"
+        run: docker-compose exec  -T frontend /bin/bash -c "yarn test"
 
       - name: Run ESLint
         shell: bash
-        run: docker-compose exec frontend /bin/bash -c "yarn lint"
+        run: docker-compose exec  -T frontend /bin/bash -c "yarn lint"
