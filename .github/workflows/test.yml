@@ -11,6 +11,7 @@ jobs:
         run: |
           docker-compose build
           docker-compose up -d
+          docker-compose exec -T frontend /bin/bash -c "yarn install --check-files"
         env:
           RAILS_ENV: test
 
