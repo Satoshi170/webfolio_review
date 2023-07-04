@@ -9,9 +9,10 @@ jobs:
       - name: Setup Docker
         shell: bash
         run: |
+          docker-compose run frontend yarn install --check-files
+          docker-compose run frontend yarn upgrade
           docker-compose build
           docker-compose up -d
-          docker-compose exec -T frontend /bin/bash -c "yarn install --check-files"
         env:
           RAILS_ENV: test
 
