@@ -10,7 +10,7 @@ RUN apt-get update -qq && \
   sudo \
   nginx && \
   gem install bundler
-RUN bundle install
+RUN bundle install --without test development
 COPY . /app
 RUN mkdir -p tmp/sockets
 RUN mkdir -p tmp/pids

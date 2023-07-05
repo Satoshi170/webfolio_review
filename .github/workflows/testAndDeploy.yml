@@ -1,0 +1,71 @@
+name: Test
+on: [push, workflow_dispatch]
+jobs:
+  test:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Docker
+        shell: bash
+        run: |
+          docker-compose run frontend yarn install --check-files
+          docker-compose run frontend yarn upgrade
+          docker-compose build
+          docker-compose up -d
+        env:
+          RAILS_ENV: test
+
+      # - name: Run RSpec
+      #   shell: bash
+      #   run: docker-compose exec backend /bin/bash -c "bundle exec rspec"
+
+      - name: Run Rubocop
+        shell: bash
+        run: docker-compose exec  -T backend /bin/bash -c "bundle exec rubocop --require rubocop-airbnb"
+
+      - name: Run Jest
+        shell: bash
+        run: docker-compose exec  -T frontend /bin/bash -c "yarn test"
+
+      - name: Run ESLint
+        shell: bash
+        run: docker-compose exec  -T frontend /bin/bash -c "yarn lint"
+
+  deploy:
+    name: Push Image to AWS ECR
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ap-northeast-1
+          role-to-assume: ${{ secrets.AWS_IAM_ROLE_ARN }}
+
+      - uses: aws-actions/amazon-ecr-login@v1
+        id: login-ecr
+
+      - name: build and push docker image to ecr(frontend)
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: ${{ secrets.FRONTEND_ECR_REPOSITRY_URI }}
+        run: |
+          cd frontend
+          docker build -t ${{ env.REGISTRY }} . -f Dockerfile.prod
+          docker tag ${{ env.REGISTRY }}:latest ${{ env.REPOSITORY }}:latest
+          docker push ${{ env.REPOSITORY }}:latest
+
+      - name: build and push docker image to ecr(backend)
+        env:
+          REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          REPOSITORY: ${{ secrets.BACKEND_ECR_REPOSITRY_URI }}
+        run: |
+          cd backend
+          docker build -t ${{ env.REGISTRY }} . -f Dockerfile.prod
+          docker tag ${{ env.REGISTRY }}:latest ${{ env.REPOSITORY }}:latest
+          docker push ${{ env.REPOSITORY }}:latest
