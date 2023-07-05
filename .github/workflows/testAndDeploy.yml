@@ -34,6 +34,7 @@ jobs:
 
   deploy:
     name: Push Image to AWS ECR
+    needs: test
     runs-on: ubuntu-latest
     permissions:
       id-token: write
