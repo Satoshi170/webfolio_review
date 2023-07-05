@@ -1,5 +1,7 @@
-const Home: React.FC = () => {
-  return <h1>Jestの動作確認</h1>;
-};
+"use client";
 
-export default Home;
+import { Heading } from "@chakra-ui/react";
+
+export default function Home() {
+  return <Heading>Jestの動作確認</Heading>;
+}
