@@ -1,7 +1,7 @@
 FROM node:18.16.0
 WORKDIR /usr/src/app
 COPY ./app /usr/src/app/
-RUN yarn install --production
+RUN yarn install --production && yarn build
 EXPOSE 3000
 
 CMD ["yarn", "start"]
