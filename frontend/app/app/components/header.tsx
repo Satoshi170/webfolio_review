@@ -3,7 +3,6 @@
 import { Flex, Heading, Link, Icon, Box } from "@chakra-ui/react";
 import { TiMessage } from "react-icons/ti";
 import { TfiBell } from "react-icons/tfi";
-import React from "react";
 
 const Header: React.FC = () => {
   return (
