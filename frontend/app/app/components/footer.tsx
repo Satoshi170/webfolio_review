@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
   const yearRange = currentYear === 2023 ? 2023 : `2023-${currentYear}`;
 
   return (
-    <Box bg="gray.900" color="gray.50" textAlign="center">
+    <Box as="footer" bg="gray.900" color="gray.50" textAlign="center">
       <Link
         as={NextLink}
         href="/"
