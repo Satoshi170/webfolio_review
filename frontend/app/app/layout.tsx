@@ -1,10 +1,7 @@
-import { Inter } from "next/font/google";
-
 import Footer from "./components/footer";
 import Header from "./components/header";
+import Main from "./components/main";
 import { Providers } from "./providers";
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Webfolio-Review",
@@ -14,10 +11,10 @@ export const metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ja">
-      <body className={inter.className}>
+      <body>
         <Providers>
           <Header />
-          {children}
+          <Main>{children}</Main>
           <Footer />
         </Providers>
       </body>
