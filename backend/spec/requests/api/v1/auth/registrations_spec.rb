@@ -1,15 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "Api::V1::Auth::Registrations", type: :request do
-  let(:valid_user_params) { attributes_for(:user) }
-  let(:existing_user_params) { attributes_for(:user, email: "existing@example.com") }
+  let(:valid_user_params) { attributes_for(:user, password_confirmation: :password) }
+  let(:existing_user_params) do
+    attributes_for(:user,
+      email: "existing@example.com",
+      password_confirmation: :password)
+  end
   let(:mismatched_password_params) do
     attributes_for(:user,
       password: "password1",
       password_confirmation: "password2")
   end
 
-  describe "POST /api/v1/auth" do
+  describe "POST /auth" do
     context "有効なパラメータが指定された場合" do
       it "新しいユーザーを作成" do
         post "/api/v1/auth", params: valid_user_params
