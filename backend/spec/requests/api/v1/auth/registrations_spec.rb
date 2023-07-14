@@ -52,4 +52,40 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
       end
     end
   end
+
+  describe "DELETE /auth" do
+    let!(:user) { create(:user) }
+    let!(:other_user) do
+      create(:user,
+        email: "test@otheruser.com",
+        password: "other_user_password")
+    end
+
+    before do
+      sign_in(email: user.email, password: user.password)
+    end
+
+    context "認証済みユーザーが自分のアカウントを削除する場合" do
+      it "アカウントが削除されること" do
+        token = response.headers.slice('client', 'uid', 'token-type', 'access-token')
+        delete_auth(token)
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include("Account with UID '#{user.email}' has been destroyed")
+      end
+    end
+
+    context "認証情報がない場合" do
+      it "削除に失敗しエラーが発生する" do
+        delete_auth
+        expect(response).to have_http_status(:not_found)
+        expect(response.body).not_to include('"status":"success"')
+        expect(response.body).to include('"status":"error"')
+        expect(response.body).to include("Unable to locate account for destruction.")
+      end
+    end
+  end
+
+  def delete_auth(headers = {})
+    delete "/api/v1/auth", headers: headers
+  end
 end
