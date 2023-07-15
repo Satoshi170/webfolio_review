@@ -1,19 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "Api::V1::Auth::Registrations", type: :request do
-  let(:valid_user_params) { attributes_for(:user, password_confirmation: :password) }
-  let(:existing_user_params) do
-    attributes_for(:user,
-      email: "existing@example.com",
-      password_confirmation: :password)
-  end
-  let(:mismatched_password_params) do
-    attributes_for(:user,
-      password: "password1",
-      password_confirmation: "password2")
-  end
-
   describe "POST /auth" do
+    let(:valid_user_params) { attributes_for(:user, password_confirmation: :password) }
+    let(:existing_user_params) do
+      attributes_for(:user,
+        email: "existing@example.com",
+        password_confirmation: :password)
+    end
+    let(:mismatched_password_params) do
+      attributes_for(:user,
+        password: "password1",
+        password_confirmation: "password2")
+    end
+
     context "有効なパラメータが指定された場合" do
       it "新しいユーザーを作成" do
         post "/api/v1/auth", params: valid_user_params
@@ -62,7 +62,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
     end
 
     before do
-      sign_in(email: user.email, password: user.password)
+      sign_in({ email: user.email, password: user.password })
     end
 
     context "認証済みユーザーが自分のアカウントを削除する場合" do
@@ -81,6 +81,23 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
         expect(response.body).not_to include('"status":"success"')
         expect(response.body).to include('"status":"error"')
         expect(response.body).to include("Unable to locate account for destruction.")
+      end
+    end
+  end
+
+  describe "PATCH /auth" do
+    let!(:user) { create(:user, name: "name") }
+    let(:new_params) { { name: "newname" } }
+
+    context "有効なパラメータが指定された場合" do
+      it "ユーザの情報が更新されること" do
+        sign_in({ email: user.email, password: user.password })
+        expect(response).to have_http_status(:success)
+        put "/api/v1/auth", headers: headers, params: new_params.to_json
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include('"status":"success"')
+        user.reload
+        expect(user.name).to eq(new_params[:name])
       end
     end
   end
