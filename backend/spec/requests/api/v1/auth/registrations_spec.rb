@@ -13,6 +13,14 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
         password: "password1",
         password_confirmation: "password2")
     end
+    let(:invalid_params) do
+      {
+        email: "test@example.com",
+        password: "password",
+        password_confirmation: "password",
+        invalid_param: "invalid"
+      }
+    end
 
     context "有効なパラメータが指定された場合" do
       it "新しいユーザーを作成" do
@@ -48,6 +56,16 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
           expect(response.body).not_to include('"status":"success"')
           expect(response.body).to include('"status":"error"')
           expect(response.body).to include("Password confirmation doesn't match Password")
+        end
+      end
+
+      context "ストロングパラメータ以外のパラメータが指定された場合" do
+        it "未知のパラメータを無視し新しいユーザーを作成" do
+          post "/api/v1/auth", params: invalid_params
+
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include('"status":"success"')
+          expect(response.body).not_to include(invalid_params[:invalid_param])
         end
       end
     end
@@ -86,16 +104,30 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
   end
 
   describe "PATCH /auth" do
-    let!(:user) { create(:user, name: "name") }
+    let!(:user) { create(:user) }
     let(:new_params) { { name: "newname" } }
+    let(:invalid_params) { { name: "newname", invalid_param: "invalid" } }
+
+    before do
+      sign_in({ email: user.email, password: user.password })
+    end
 
     context "有効なパラメータが指定された場合" do
       it "ユーザの情報が更新されること" do
-        sign_in({ email: user.email, password: user.password })
-        expect(response).to have_http_status(:success)
-        put "/api/v1/auth", headers: headers, params: new_params.to_json
+        patch "/api/v1/auth", headers: headers, params: new_params.to_json
         expect(response).to have_http_status(:success)
         expect(response.body).to include('"status":"success"')
+        user.reload
+        expect(user.name).to eq(new_params[:name])
+      end
+    end
+
+    context "ストロングパラメータ以外のパラメータが指定された場合" do
+      it "未知のパラメータを無視しユーザー情報を更新" do
+        patch "/api/v1/auth", headers: headers, params: invalid_params.to_json
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include('"status":"success"')
+        expect(response.body).not_to include(invalid_params[:invalid_param])
         user.reload
         expect(user.name).to eq(new_params[:name])
       end
