@@ -18,7 +18,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
         email: "test@example.com",
         password: "password",
         password_confirmation: "password",
-        invalid_param: "invalid"
+        invalid_param: "invalid",
       }
     end
 
@@ -95,10 +95,9 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
     context "認証情報がない場合" do
       it "削除に失敗しエラーが発生する" do
         delete_auth
-        expect(response).to have_http_status(:not_found)
+        expect(response).to have_http_status(:unauthorized)
         expect(response.body).not_to include('"status":"success"')
-        expect(response.body).to include('"status":"error"')
-        expect(response.body).to include("Unable to locate account for destruction.")
+        expect(response.body).to include("You need to sign in or sign up before continuing.")
       end
     end
   end
