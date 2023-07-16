@@ -55,4 +55,27 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
     #   end
     # end
   end
+
+  describe "GET /auth/sessions" do
+    context "認証済みユーザーの場合" do
+      it "成功のHTTPステータスとユーザー情報を返すこと" do
+        auth_headers = sign_in({ email: user.email, password: user.password })
+        get "/api/v1/auth/sessions", headers: auth_headers
+
+        expect(response).to have_http_status(:success)
+        expect(response.body).to include('"is_login":true')
+        expect(response.body).to include(user.email)
+      end
+    end
+
+    context "未認証ユーザーの場合" do
+      it "失敗のHTTPステータスとエラーメッセージを返すこと" do
+        get "/api/v1/auth/sessions"
+
+        expect(response).to have_http_status(:unauthorized)
+        expect(response.body).to include('"is_login":false')
+        expect(response.body).to include("ユーザーが存在しません")
+      end
+    end
+  end
 end
