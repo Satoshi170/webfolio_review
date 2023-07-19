@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Api::V1::Auth::Sessions", type: :request do
   let!(:user) { create(:user) }
 
-  describe "GET /auth/sign_in" do
+  describe "POST /auth/sign_in" do
     context "正しい資格情報を使用した場合" do
       it "ユーザーがサインインし、認証ヘッダーが返されること" do
         sign_in(email: user.email, password: user.password)
