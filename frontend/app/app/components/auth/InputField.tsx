@@ -4,6 +4,7 @@ import { FieldError, FieldValues, Path, UseFormRegister } from "react-hook-form"
 type InputFieldProps<T extends FieldValues> = {
   name: Path<T>;
   label: string;
+  type?: string;
   register: UseFormRegister<T>;
   error?: FieldError;
 };
@@ -11,6 +12,7 @@ type InputFieldProps<T extends FieldValues> = {
 const InputField = <T extends FieldValues>({
   name,
   label,
+  type = "text",
   register,
   error
 }: InputFieldProps<T>) => {
@@ -22,7 +24,7 @@ const InputField = <T extends FieldValues>({
           *
         </Text>
       </FormLabel>
-      <Input id={name as string} {...register(name)} />
+      <Input type={type} id={name as string} {...register(name)} />
       <FormErrorMessage>{error?.message}</FormErrorMessage>
     </FormControl>
   );
