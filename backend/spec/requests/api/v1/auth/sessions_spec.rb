@@ -63,8 +63,9 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
         get "/api/v1/auth/sessions", headers: auth_headers
 
         expect(response).to have_http_status(:success)
+        puts response.body
         expect(response.body).to include('"is_login":true')
-        expect(response.body).to include(user.email)
+        expect(response.body).to include(user.id.to_s)
       end
     end
 
@@ -73,6 +74,7 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
         get "/api/v1/auth/sessions"
 
         expect(response).to have_http_status(:unauthorized)
+        # puts response.body
         expect(response.body).to include('"is_login":false')
         expect(response.body).to include("ユーザーが存在しません")
       end

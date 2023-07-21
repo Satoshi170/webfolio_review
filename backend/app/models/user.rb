@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+
+  def for_api
+    self.as_json(only: [:id, :name, :image])
+  end
 end
