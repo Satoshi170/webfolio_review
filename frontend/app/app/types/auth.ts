@@ -14,7 +14,6 @@ export interface UserResponse {
   uid: string;
   allowPassword: boolean;
   name: string | null;
-  nickname: string | null;
   image: string | null;
   email: string;
   createdAt: Date | null;
@@ -35,3 +34,8 @@ export interface AuthResponseError {
 }
 
 export type AuthResponse = AuthResponseSuccess | AuthResponseError;
+
+export interface AuthSessionsResponse {
+  isLogin: boolean;
+  data: [];
+}
