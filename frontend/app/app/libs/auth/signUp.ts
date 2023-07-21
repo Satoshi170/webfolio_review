@@ -1,13 +1,12 @@
 import axios from "axios";
 
-import { AuthResponse, AuthResponseError, SignUpCredentials } from "@/app/types/auth";
+import { AuthResponseError, SignUpCredentials } from "@/app/types/auth";
 
 import api from "../api";
 
-export const signUp = async (credentials: SignUpCredentials): Promise<AuthResponse> => {
+export const signUp = async (credentials: SignUpCredentials): Promise<void> => {
   try {
-    const response = await api.post<AuthResponse>("/auth", credentials);
-    return response.data;
+    await api.post("/auth", credentials);
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       const errorResponse = error.response.data as AuthResponseError;
