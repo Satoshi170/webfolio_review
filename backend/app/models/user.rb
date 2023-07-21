@@ -8,6 +8,6 @@ class User < ActiveRecord::Base
   include DeviseTokenAuth::Concerns::User
 
   def for_api
-    self.as_json(only: [:id, :name, :image])
+    as_json(only: [:id, :name, :image])
   end
 end
