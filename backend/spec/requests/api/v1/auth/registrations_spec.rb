@@ -24,8 +24,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
 
     context "有効なパラメータが指定された場合" do
       it "新しいユーザーを作成" do
-        post "/api/v1/auth", params: valid_user_params
-
+        post "/api/v1/auth", params: { registration: valid_user_params }
         expect(response).to have_http_status(:success)
         expect(response.body).to include('"status":"success"')
         expect(response.body).to include(valid_user_params[:email])
@@ -39,7 +38,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
         end
 
         it "エラーが発生する" do
-          post "/api/v1/auth", params: existing_user_params
+          post "/api/v1/auth", params: { registration: existing_user_params }
 
           expect(response).to have_http_status(:unprocessable_entity)
           expect(response.body).not_to include('"status":"success"')
@@ -50,7 +49,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
 
       context "パスワードとパスワード確認が一致しない場合" do
         it "エラーが発生する" do
-          post "/api/v1/auth", params: mismatched_password_params
+          post "/api/v1/auth", params: { registration: mismatched_password_params }
 
           expect(response).to have_http_status(:unprocessable_entity)
           expect(response.body).not_to include('"status":"success"')
@@ -61,7 +60,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
 
       context "ストロングパラメータ以外のパラメータが指定された場合" do
         it "未知のパラメータを無視し新しいユーザーを作成" do
-          post "/api/v1/auth", params: invalid_params
+          post "/api/v1/auth", params: { registration: invalid_params }
 
           expect(response).to have_http_status(:success)
           expect(response.body).to include('"status":"success"')
