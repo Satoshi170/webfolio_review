@@ -8,8 +8,8 @@ import { useForm } from "react-hook-form";
 import InputField from "@/app/components/auth/InputField";
 import SubmitButton from "@/app/components/auth/SubmitButton";
 import { useAuthForm } from "@/app/hooks/auth/useAuthForm";
-import { refinedSignUpSchema } from "@/app/libs/auth/schemas";
-import { signUp } from "@/app/libs/auth/signUp";
+import { signUp } from "@/app/libs/axios/auth/signUp";
+import { refinedSignUpSchema } from "@/app/libs/zod/auth/schemas";
 import { SignUpCredentials } from "@/app/types/auth";
 
 const SignUp: React.FC = () => {

@@ -9,8 +9,8 @@ import { useForm } from "react-hook-form";
 
 import InputField from "@/app/components/auth/InputField";
 import SubmitButton from "@/app/components/auth/SubmitButton";
-import { signInSchema } from "@/app/libs/auth/schemas";
-import { signIn } from "@/app/libs/auth/signIn";
+import { signIn } from "@/app/libs/axios/auth/signIn";
+import { signInSchema } from "@/app/libs/zod/auth/schemas";
 import { SignInCredentials } from "@/app/types/auth";
 
 const SignIn: React.FC = () => {
