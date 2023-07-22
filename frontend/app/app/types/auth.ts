@@ -35,7 +35,20 @@ export interface AuthResponseError {
 
 export type AuthResponse = AuthResponseSuccess | AuthResponseError;
 
-export interface AuthSessionsResponse {
-  isLogin: boolean;
-  data: [];
+export interface AuthSessionsSuccessResponse {
+  isLogin: true;
+  data: UserData;
 }
+
+export interface AuthSessionsErrorResponse {
+  isLogin: false;
+}
+export interface UserData {
+  id: number;
+  name: string | null;
+  image: string | null;
+}
+
+export type AuthSessionsResponse =
+  | AuthSessionsSuccessResponse
+  | AuthSessionsErrorResponse;

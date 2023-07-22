@@ -73,10 +73,9 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
       it "失敗のHTTPステータスとエラーメッセージを返すこと" do
         get "/api/v1/auth/sessions"
 
-        expect(response).to have_http_status(:unauthorized)
+        expect(response).to have_http_status(:success)
 
         expect(response.body).to include('"is_login":false')
-        expect(response.body).to include("ユーザーが存在しません")
       end
     end
   end
