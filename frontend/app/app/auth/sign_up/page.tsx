@@ -16,7 +16,7 @@ const SignUp: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm<SignUpCredentials>({
     resolver: zodResolver(refinedSignUpSchema),
     mode: "onChange"
@@ -56,7 +56,7 @@ const SignUp: React.FC = () => {
           register={register}
           error={errors.passwordConfirmation}
         />
-        <SubmitButton text="登録する" isLoading={isLoading} />
+        <SubmitButton text="登録する" isLoading={isLoading} isDisabled={!isValid} />
         <Divider my="4" />
         <Text>
           すでにアカウントをお持ちですか？

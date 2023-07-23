@@ -19,7 +19,7 @@ const SignIn: React.FC = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm<SignInCredentials>({
     resolver: zodResolver(signInSchema),
     mode: "onChange"
@@ -58,7 +58,7 @@ const SignIn: React.FC = () => {
           register={register}
           error={errors.password}
         />
-        <SubmitButton text="ログイン" isLoading={loading} />
+        <SubmitButton text="ログイン" isLoading={loading} isDisabled={!isValid} />
         <Divider my="4" />
         <Text>
           初めてのご利用ですか？新規登録は
