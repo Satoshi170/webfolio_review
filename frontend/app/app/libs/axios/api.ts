@@ -6,8 +6,7 @@ const options = {
 };
 
 const api = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT,
-  withCredentials: true
+  baseURL: process.env.NEXT_PUBLIC_API_ENDPOINT
 });
 
 applyCaseMiddleware(api, options);
