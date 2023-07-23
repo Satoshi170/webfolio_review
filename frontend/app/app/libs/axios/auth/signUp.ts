@@ -1,12 +1,15 @@
 import axios from "axios";
 
 import { AuthResponseError, SignUpCredentials } from "@/app/types/auth";
+import { CustomAxiosResponse } from "@/app/types/axios/customAxiosResponse";
 
+import { saveAuthInfoFromHeader } from "../../cookie/saveAuthInfo";
 import api from "../api";
 
 export const signUp = async (credentials: SignUpCredentials): Promise<void> => {
   try {
-    await api.post("/auth", credentials);
+    const response: CustomAxiosResponse = await api.post("/auth", credentials);
+    saveAuthInfoFromHeader(response);
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       const errorResponse = error.response.data as AuthResponseError;
