@@ -3,17 +3,22 @@ import { useState } from "react";
 import { useSetRecoilState } from "recoil";
 
 import { toastState } from "@/app/stores/atoms/toastState";
+
+import { useCheckLogin } from "../useCheckLogin";
+
 type AuthFunction<T> = (data: T) => Promise<void>;
 
 export const useAuthForm = <T>(authFunction: AuthFunction<T>, onSuccessRoute: string) => {
   const [isLoading, setIsLoading] = useState(false);
   const setToast = useSetRecoilState(toastState);
   const router = useRouter();
+  const checkLoginStatus = useCheckLogin();
 
   const onSubmit = async (data: T) => {
     setIsLoading(true);
     try {
       await authFunction(data);
+      await checkLoginStatus();
       router.push(onSuccessRoute);
     } catch (e) {
       const errorMessage =
