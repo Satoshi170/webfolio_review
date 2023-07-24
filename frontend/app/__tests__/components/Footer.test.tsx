@@ -14,13 +14,13 @@ describe("<Footer />", () => {
 
   it("現在の年が2023年の場合、著作権表示が2023年だけであること", () => {
     jest.setSystemTime(new Date(2023, 3, 1));
-    const { getByText } = render(<Footer />);
-    expect(getByText("2023")).toBeInTheDocument();
+    const { getByTestId } = render(<Footer />);
+    expect(getByTestId("footer")).toHaveTextContent("©2023");
   });
 
   it("現在の年が2024年の場合、著作権表示が2023-2024であること", () => {
     jest.setSystemTime(new Date(2024, 3, 1));
-    const { getByText } = render(<Footer />);
-    expect(getByText("2023-2024")).toBeInTheDocument();
+    const { getByTestId } = render(<Footer />);
+    expect(getByTestId("footer")).toHaveTextContent("©2023-2024");
   });
 });

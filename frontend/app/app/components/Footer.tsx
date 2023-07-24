@@ -9,7 +9,13 @@ const Footer: React.FC = () => {
   const yearRange = currentYear === 2023 ? 2023 : `2023-${currentYear}`;
 
   return (
-    <Box as="footer" bg="gray.900" color="gray.50" textAlign="center">
+    <Box
+      as="footer"
+      bg="gray.900"
+      color="gray.50"
+      textAlign="center"
+      data-testid="footer"
+    >
       <Link
         as={NextLink}
         href="/"
@@ -19,7 +25,7 @@ const Footer: React.FC = () => {
         Webfolio-Review
       </Link>
       <Text fontSize={{ base: "xs", md: "sm" }} padding={{ base: 1.0, md: 2.0 }}>
-        © {yearRange}
+        ©{yearRange}
       </Text>
     </Box>
   );
