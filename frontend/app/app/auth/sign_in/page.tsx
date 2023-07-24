@@ -3,41 +3,27 @@
 import { Box, Divider, Heading, Link, Text } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import NextLink from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import InputField from "@/app/components/auth/InputField";
 import SubmitButton from "@/app/components/auth/SubmitButton";
+import { useSignInForm } from "@/app/hooks/auth/useSignInForm";
 import { signIn } from "@/app/libs/axios/auth/signIn";
 import { signInSchema } from "@/app/libs/zod/auth/schemas";
 import { SignInCredentials } from "@/app/types/auth";
 
 const SignIn: React.FC = () => {
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isValid }
   } = useForm<SignInCredentials>({
     resolver: zodResolver(signInSchema),
     mode: "onChange"
   });
 
-  const onSubmit = (data: SignInCredentials) => {
-    setLoading(true);
-    signIn(data)
-      .then(() => {
-        router.push("/");
-      })
-      .catch((error) => {
-        console.error(error);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+  const { onSubmit, isLoading } = useSignInForm(signIn, "/", setError);
 
   return (
     <Box flex="1" m="auto" maxW="md" boxShadow="md" p="12" rounded="md">
@@ -58,7 +44,7 @@ const SignIn: React.FC = () => {
           register={register}
           error={errors.password}
         />
-        <SubmitButton text="ログイン" isLoading={loading} isDisabled={!isValid} />
+        <SubmitButton text="ログイン" isLoading={isLoading} isDisabled={!isValid} />
         <Divider my="4" />
         <Text>
           初めてのご利用ですか？新規登録は

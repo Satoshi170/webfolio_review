@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { SignInCredentials, AuthResponseError } from "@/app/types/auth";
+import { SignInCredentials, SignInResponseError } from "@/app/types/auth";
 import { CustomAxiosResponse } from "@/app/types/axios/customAxiosResponse";
 
 import { saveAuthInfoFromHeader } from "../../cookie/saveAuthInfo";
@@ -12,8 +12,8 @@ export const signIn = async (credentials: SignInCredentials): Promise<void> => {
     saveAuthInfoFromHeader(response);
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      const errorResponse = error.response.data as AuthResponseError;
-      const errorMessage = errorResponse.errors.fullMessages.join(", ");
+      const errorResponse = error.response.data as SignInResponseError;
+      const errorMessage = errorResponse.errors.join(", ");
       throw new Error(errorMessage);
     } else {
       throw error;

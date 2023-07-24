@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 
 import InputField from "@/app/components/auth/InputField";
 import SubmitButton from "@/app/components/auth/SubmitButton";
-import { useAuthForm } from "@/app/hooks/auth/useAuthForm";
+import { useSignUpForm } from "@/app/hooks/auth/useSignUpForm";
 import { signUp } from "@/app/libs/axios/auth/signUp";
 import { refinedSignUpSchema } from "@/app/libs/zod/auth/schemas";
 import { SignUpCredentials } from "@/app/types/auth";
@@ -16,13 +16,14 @@ const SignUp: React.FC = () => {
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isValid }
   } = useForm<SignUpCredentials>({
     resolver: zodResolver(refinedSignUpSchema),
     mode: "onChange"
   });
 
-  const { onSubmit, isLoading } = useAuthForm(signUp, "/user/account");
+  const { onSubmit, isLoading } = useSignUpForm(signUp, "/user/account", setError);
 
   return (
     <Box flex="1" m="auto" maxW="md" boxShadow="md" p="12" rounded="md">
