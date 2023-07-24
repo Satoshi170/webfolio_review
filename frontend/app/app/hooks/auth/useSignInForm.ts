@@ -26,6 +26,11 @@ export const useSignInForm = (
       await signUpFunction(data);
       await checkLoginStatus();
       router.push(onSuccessRoute);
+      setToast({
+        message: "ログインに成功しました",
+        status: "success",
+        timestamp: Date.now()
+      });
     } catch (e) {
       const errorMessage =
         e instanceof Error ? e.message : "予期せぬエラーが発生しました";
@@ -35,12 +40,11 @@ export const useSignInForm = (
           message: "メールアドレスまたはパスワードが違います"
         });
       } else {
-        setToast((prevToast) => ({
-          ...prevToast,
+        setToast({
           message: errorMessage,
           status: "error",
           timestamp: Date.now()
-        }));
+        });
       }
     } finally {
       setIsLoading(false);
