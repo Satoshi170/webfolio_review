@@ -35,6 +35,11 @@ export interface AuthResponseError {
 
 export type AuthResponse = AuthResponseSuccess | AuthResponseError;
 
+export interface SignInResponseError {
+  success: false;
+  errors: string[];
+}
+
 export interface AuthSessionsSuccessResponse {
   isLogin: true;
   data: UserData;
