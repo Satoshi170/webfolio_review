@@ -1,6 +1,7 @@
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./components/Main";
+import ToastWrapper from "./components/ToastWrapper";
 import { Providers } from "./providers";
 
 export const metadata = {
@@ -16,6 +17,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Header />
           <Main>{children}</Main>
           <Footer />
+          <ToastWrapper />
         </Providers>
       </body>
     </html>
