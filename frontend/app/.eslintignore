@@ -7,3 +7,4 @@ public/
 yarn.lock
 next.config.js
 jest.config.mjs
+jest.setup.js
