@@ -6,7 +6,7 @@ import { TiMessage } from "react-icons/ti";
 
 const LoggedInHeaderRightSection: React.FC = () => {
   return (
-    <Flex gap="4">
+    <Flex gap="4" data-testid="logged-in-header">
       <Link>
         <Icon as={TiMessage} boxSize={12} />
       </Link>

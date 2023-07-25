@@ -2,7 +2,7 @@ import { atom } from "recoil";
 
 import { UserData } from "@/app/types/auth";
 
-interface Login {
+export interface Login {
   isLogin: boolean;
   data: UserData | null;
 }

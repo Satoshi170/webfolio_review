@@ -4,7 +4,7 @@ import { Button, Flex, Spacer } from "@chakra-ui/react";
 
 const LoggedOutHeaderRightSection: React.FC = () => {
   return (
-    <Flex align="center">
+    <Flex align="center" data-testid="logged-out-header">
       <Button as="a" href="/auth/sign_up" colorScheme="messenger">
         新規登録
       </Button>
