@@ -1,7 +1,7 @@
 import { FormControl, FormErrorMessage, FormLabel, Input, Text } from "@chakra-ui/react";
 import { FieldError, FieldValues, Path, UseFormRegister } from "react-hook-form";
 
-type InputFieldProps<T extends FieldValues> = {
+export type InputFieldProps<T extends FieldValues> = {
   name: Path<T>;
   label: string;
   type?: string;
