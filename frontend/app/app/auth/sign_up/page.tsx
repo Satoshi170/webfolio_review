@@ -9,7 +9,7 @@ import InputField from "@/app/components/auth/InputField";
 import SubmitButton from "@/app/components/auth/SubmitButton";
 import { useSignUpForm } from "@/app/hooks/auth/useSignUpForm";
 import { signUp } from "@/app/libs/axios/auth/signUp";
-import { refinedSignUpSchema } from "@/app/libs/zod/auth/schemas";
+import { refinedSignUpSchema } from "@/app/libs/zod/auth/signUpSchema";
 import { SignUpCredentials } from "@/app/types/auth";
 
 const SignUp: React.FC = () => {
