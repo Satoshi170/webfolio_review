@@ -12,6 +12,7 @@ const config = {
   // setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
 
   testEnvironment: "jest-environment-jsdom",
+  testPathIgnorePatterns: ["/node_modules/", "/__tests__/helpers/"],
   setupFilesAfterEnv: ["<rootDir>/jest.setup.js"]
 };
 
