@@ -4,6 +4,7 @@ import {
   getErrorMessages,
   getErrorMessagesProps
 } from "@/__tests__/helpers/zodTestHelpers";
+import { signInValidationErrorMessages } from "@/app/constants/auth/signIn/Messages";
 import { signInSchema } from "@/app/libs/zod/auth/signInSchema";
 import { SignInCredentials } from "@/app/types/auth";
 
@@ -34,14 +35,14 @@ describe("signInSchema", () => {
       const invalidEmailData = { ...validData, email: "" };
       expect(() => signInSchema.parse(invalidEmailData)).toThrow(ZodError);
       const emailErrors = getSignInErrorMessages(invalidEmailData, "email");
-      expect(emailErrors[0]).toBe("メールアドレスを入力してください");
+      expect(emailErrors[0]).toBe(signInValidationErrorMessages.emailRequired);
     });
 
     it("emailの形式が正しくない場合、正しいエラーメッセージをスローする", () => {
       const invalidEmailData = { ...validData, email: "aaa" };
       expect(() => signInSchema.parse(invalidEmailData)).toThrow(ZodError);
       const emailErrors = getSignInErrorMessages(invalidEmailData, "email");
-      expect(emailErrors[0]).toBe("無効なメールアドレス形式です");
+      expect(emailErrors[0]).toBe(signInValidationErrorMessages.invalidEmail);
     });
   });
 
@@ -50,7 +51,7 @@ describe("signInSchema", () => {
       const invalidPasswordData = { ...validData, password: "" };
       expect(() => signInSchema.parse(invalidPasswordData)).toThrow(ZodError);
       const passwordErrors = getSignInErrorMessages(invalidPasswordData, "password");
-      expect(passwordErrors[0]).toBe("パスワードを入力してください");
+      expect(passwordErrors[0]).toBe(signInValidationErrorMessages.passwordRequired);
     });
   });
 });

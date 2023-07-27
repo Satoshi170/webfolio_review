@@ -1,9 +1,11 @@
 import { z } from "zod";
 
+import { signInValidationErrorMessages } from "@/app/constants/auth/signIn/Messages";
+
 export const signInSchema = z.object({
   email: z
     .string()
-    .min(1, "メールアドレスを入力してください")
-    .email("無効なメールアドレス形式です"),
-  password: z.string().min(1, "パスワードを入力してください")
+    .min(1, signInValidationErrorMessages.emailRequired)
+    .email(signInValidationErrorMessages.invalidEmail),
+  password: z.string().min(1, signInValidationErrorMessages.passwordRequired)
 });

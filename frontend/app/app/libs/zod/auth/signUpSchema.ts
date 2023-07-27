@@ -1,25 +1,29 @@
 import { z } from "zod";
 
+import { signUpValidationErrorMessages } from "@/app/constants/auth/signUp/Messages";
+
 const signUpSchema = z.object({
   name: z
     .string()
-    .min(1, "ユーザー名は必須です")
-    .max(25, "ユーザー名は25文字以内である必要があります"),
+    .min(1, signUpValidationErrorMessages.nameRequired)
+    .max(25, signUpValidationErrorMessages.nameTooLong),
   email: z
     .string()
-    .min(1, "メールアドレスは必須です")
-    .email("無効なメールアドレス形式です"),
+    .min(1, signUpValidationErrorMessages.emailRequired)
+    .email(signUpValidationErrorMessages.invalidEmail),
   password: z
     .string()
-    .min(1, "パスワードは必須です")
-    .min(6, "パスワードは6文字以上である必要があります"),
-  passwordConfirmation: z.string().min(1, "パスワードをもう一度入力してください")
+    .min(1, signUpValidationErrorMessages.passwordRequired)
+    .min(6, signUpValidationErrorMessages.passwordTooShort),
+  passwordConfirmation: z
+    .string()
+    .min(1, signUpValidationErrorMessages.passwordConfirmationRequired)
 });
 
 export const refinedSignUpSchema = signUpSchema.refine(
   (data) => data.password === data.passwordConfirmation,
   {
-    message: "パスワードと確認用パスワードが一致しません",
+    message: signUpValidationErrorMessages.passwordConfirmationMismatch,
     path: ["passwordConfirmation"]
   }
 );
