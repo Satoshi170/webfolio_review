@@ -13,7 +13,7 @@ const signUpSchema = z.object({
     .string()
     .min(1, "パスワードは必須です")
     .min(6, "パスワードは6文字以上である必要があります"),
-  passwordConfirmation: z.string()
+  passwordConfirmation: z.string().min(1, "パスワードをもう一度入力してください")
 });
 
 export const refinedSignUpSchema = signUpSchema.refine(
