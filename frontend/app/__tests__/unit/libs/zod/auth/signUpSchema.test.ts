@@ -1,5 +1,6 @@
 import { ZodError } from "zod";
 
+import { validSignUpData } from "@/__tests__/fixtures/auth/validSignUpData";
 import {
   getErrorMessages,
   getErrorMessagesProps
@@ -20,28 +21,21 @@ const getSignUpErrorMessages = (
   return getErrorMessages(props);
 };
 
-const validData = {
-  name: "testuser",
-  email: "test@example.com",
-  password: "password",
-  passwordConfirmation: "password"
-};
-
 describe("signUpSchema", () => {
   it("name,email,password,password_confirmationが正しい形式の場合エラーをスローしない", () => {
-    expect(() => refinedSignUpSchema.parse(validData)).not.toThrow();
+    expect(() => refinedSignUpSchema.parse(validSignUpData)).not.toThrow();
   });
 
   describe("name", () => {
     it("nameが入力されていない場合、正しいエラーメッセージをスローする", () => {
-      const invalidNameData = { ...validData, name: "" };
+      const invalidNameData = { ...validSignUpData, name: "" };
       expect(() => refinedSignUpSchema.parse(invalidNameData)).toThrow(ZodError);
       const nameErrors = getSignUpErrorMessages(invalidNameData, "name");
       expect(nameErrors[0]).toBe(signUpValidationErrorMessages.nameRequired);
     });
 
     it("nameが26文字以上の場合、正しいエラーメッセージをスローする", () => {
-      const invalidNameData = { ...validData, name: "a".repeat(26) };
+      const invalidNameData = { ...validSignUpData, name: "a".repeat(26) };
       expect(() => refinedSignUpSchema.parse(invalidNameData)).toThrow(ZodError);
       const nameErrors = getSignUpErrorMessages(invalidNameData, "name");
       expect(nameErrors[0]).toBe(signUpValidationErrorMessages.nameTooLong);
@@ -50,14 +44,14 @@ describe("signUpSchema", () => {
 
   describe("email", () => {
     it("emailが入力されていない場合、正しいエラーメッセージをスローする", () => {
-      const invalidEmailData = { ...validData, email: "" };
+      const invalidEmailData = { ...validSignUpData, email: "" };
       expect(() => refinedSignUpSchema.parse(invalidEmailData)).toThrow(ZodError);
       const emailErrors = getSignUpErrorMessages(invalidEmailData, "email");
       expect(emailErrors[0]).toBe(signUpValidationErrorMessages.emailRequired);
     });
 
     it("emailの形式が正しくない場合、正しいエラーメッセージをスローする", () => {
-      const invalidEmailData = { ...validData, email: "aaa" };
+      const invalidEmailData = { ...validSignUpData, email: "aaa" };
       expect(() => refinedSignUpSchema.parse(invalidEmailData)).toThrow(ZodError);
       const emailErrors = getSignUpErrorMessages(invalidEmailData, "email");
       expect(emailErrors[0]).toBe(signUpValidationErrorMessages.invalidEmail);
@@ -66,14 +60,14 @@ describe("signUpSchema", () => {
 
   describe("password", () => {
     it("passwordが入力されていない場合、正しいエラーメッセージをスローする", () => {
-      const invalidPasswordData = { ...validData, password: "" };
+      const invalidPasswordData = { ...validSignUpData, password: "" };
       expect(() => refinedSignUpSchema.parse(invalidPasswordData)).toThrow(ZodError);
       const passwordErrors = getSignUpErrorMessages(invalidPasswordData, "password");
       expect(passwordErrors[0]).toBe(signUpValidationErrorMessages.passwordRequired);
     });
 
     it("passwordが入力されていて6文字未満の場合、正しいエラーメッセージをスローする", () => {
-      const invalidPasswordData = { ...validData, password: "aaaaa" };
+      const invalidPasswordData = { ...validSignUpData, password: "aaaaa" };
       expect(() => refinedSignUpSchema.parse(invalidPasswordData)).toThrow(ZodError);
       const passwordErrors = getSignUpErrorMessages(invalidPasswordData, "password");
       expect(passwordErrors[0]).toBe(signUpValidationErrorMessages.passwordTooShort);
@@ -82,7 +76,10 @@ describe("signUpSchema", () => {
 
   describe("passwordConfirmation", () => {
     it("passwordConfirmationが入力されていない場合、正しいエラーメッセージをスローする", () => {
-      const invalidPasswordConfirmationData = { ...validData, passwordConfirmation: "" };
+      const invalidPasswordConfirmationData = {
+        ...validSignUpData,
+        passwordConfirmation: ""
+      };
       expect(() => refinedSignUpSchema.parse(invalidPasswordConfirmationData)).toThrow(
         ZodError
       );
@@ -97,7 +94,7 @@ describe("signUpSchema", () => {
 
     it("passwordとpasswordConfirmationが一致していない場合、正しいエラーメッセージをスローする", () => {
       const invalidPasswordConfirmationData = {
-        ...validData,
+        ...validSignUpData,
         passwordConfirmation: "differentpassword"
       };
       expect(() => refinedSignUpSchema.parse(invalidPasswordConfirmationData)).toThrow(
