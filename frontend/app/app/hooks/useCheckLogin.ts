@@ -1,6 +1,6 @@
 import { useSetRecoilState } from "recoil";
 
-import { sessions } from "@/app/libs/axios/auth/sessions";
+import { getSessions } from "@/app/libs/axios/auth/getSessions";
 
 import { loginState } from "../stores/atoms/loginState";
 
@@ -9,7 +9,7 @@ export const useCheckLogin = () => {
 
   const checkLoginStatus = async () => {
     try {
-      const response = await sessions();
+      const response = await getSessions();
       if (response.isLogin) {
         setLogin({ isLogin: true, data: response.data });
       } else {

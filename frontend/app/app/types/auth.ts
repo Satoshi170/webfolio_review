@@ -40,12 +40,12 @@ export interface SignInResponseError {
   errors: string[];
 }
 
-export interface AuthSessionsSuccessResponse {
+export interface GetAuthSessionsSuccessResponse {
   isLogin: true;
   data: UserData;
 }
 
-export interface AuthSessionsErrorResponse {
+export interface GetAuthSessionsErrorResponse {
   isLogin: false;
 }
 export interface UserData {
@@ -54,6 +54,6 @@ export interface UserData {
   image: string | null;
 }
 
-export type AuthSessionsResponse =
-  | AuthSessionsSuccessResponse
-  | AuthSessionsErrorResponse;
+export type GetAuthSessionsResponse =
+  | GetAuthSessionsSuccessResponse
+  | GetAuthSessionsErrorResponse;

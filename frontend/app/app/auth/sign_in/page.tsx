@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import InputField from "@/app/components/auth/InputField";
 import SubmitButton from "@/app/components/auth/SubmitButton";
 import { useSignInForm } from "@/app/hooks/auth/useSignInForm";
-import { signIn } from "@/app/libs/axios/auth/signIn";
+import { postSignIn } from "@/app/libs/axios/auth/postSignIn";
 import { signInSchema } from "@/app/libs/zod/auth/signInSchema";
 import { SignInCredentials } from "@/app/types/auth";
 
@@ -23,7 +23,7 @@ const SignIn: React.FC = () => {
     mode: "onChange"
   });
 
-  const { onSubmit, isLoading } = useSignInForm(signIn, "/", setError);
+  const { onSubmit, isLoading } = useSignInForm(postSignIn, "/", setError);
 
   return (
     <Box flex="1" m="auto" maxW="md" boxShadow="md" p="12" rounded="md">
