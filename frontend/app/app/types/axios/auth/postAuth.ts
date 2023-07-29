@@ -1,15 +1,14 @@
-import { PostSignInCredentials } from "./postAuthSignIn";
+import { PostAuthSignInCredentials } from "./postAuthSignIn";
+import { UserData } from "../../auth";
 import { CustomAxiosResponse } from "../customAxiosResponse";
 
-export interface PostAuthCredentials extends PostSignInCredentials {
+export interface PostAuthCredentials extends PostAuthSignInCredentials {
   passwordConfirmation: string;
   name: string;
 }
 
-export interface PostAuthSuccessData {
+export interface PostAuthSuccessData extends UserData {
   status: "success";
-  name: string | null;
-  image: string | null;
 }
 
 export interface PostAuthErrorData {

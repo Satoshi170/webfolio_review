@@ -8,9 +8,9 @@ import { useForm } from "react-hook-form";
 import InputField from "@/app/components/auth/InputField";
 import SubmitButton from "@/app/components/auth/SubmitButton";
 import { useSignInForm } from "@/app/hooks/auth/useSignInForm";
-import { postSignIn } from "@/app/libs/axios/auth/postSignIn";
+import { postAuthSignIn } from "@/app/libs/axios/auth/postAuthSignIn";
 import { signInSchema } from "@/app/libs/zod/auth/signInSchema";
-import { SignInCredentials } from "@/app/types/auth";
+import { PostAuthSignInCredentials } from "@/app/types/axios/auth/postAuthSignIn";
 
 const SignIn: React.FC = () => {
   const {
@@ -18,12 +18,12 @@ const SignIn: React.FC = () => {
     handleSubmit,
     setError,
     formState: { errors, isValid }
-  } = useForm<SignInCredentials>({
+  } = useForm<PostAuthSignInCredentials>({
     resolver: zodResolver(signInSchema),
     mode: "onChange"
   });
 
-  const { onSubmit, isLoading } = useSignInForm(postSignIn, "/", setError);
+  const { onSubmit, isLoading } = useSignInForm(postAuthSignIn, "/", setError);
 
   return (
     <Box flex="1" m="auto" maxW="md" boxShadow="md" p="12" rounded="md">
