@@ -7,10 +7,6 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  def for_api
-    as_json(only: [:id, :name, :image])
-  end
-
   validates :name,
             presence: { message: 'Name is required.' },
             length: { minimum: 1, maximum: 25, too_long: 'Name is too long.' },
