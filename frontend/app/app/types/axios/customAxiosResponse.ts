@@ -1,10 +1,11 @@
 import { AxiosResponse } from "axios";
 
-export interface CustomAxiosResponse extends AxiosResponse {
-  headers: {
-    [header: string]: string;
-    "access-token": string;
-    client: string;
-    uid: string;
-  };
+interface CustomHeaders {
+  "access-token": string;
+  client: string;
+  uid: string;
 }
+
+export type CustomAxiosResponse<T = any> = AxiosResponse<T> & {
+  headers: AxiosResponse<T>["headers"] & CustomHeaders;
+};

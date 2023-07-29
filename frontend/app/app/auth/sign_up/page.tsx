@@ -8,9 +8,9 @@ import { useForm } from "react-hook-form";
 import InputField from "@/app/components/auth/InputField";
 import SubmitButton from "@/app/components/auth/SubmitButton";
 import { useSignUpForm } from "@/app/hooks/auth/useSignUpForm";
-import { postSignUp } from "@/app/libs/axios/auth/postSignUp";
+import { postAuth } from "@/app/libs/axios/auth/postAuth";
 import { refinedSignUpSchema } from "@/app/libs/zod/auth/signUpSchema";
-import { SignUpCredentials } from "@/app/types/auth";
+import { PostAuthCredentials } from "@/app/types/axios/auth/postAuth";
 
 const SignUp: React.FC = () => {
   const {
@@ -18,12 +18,12 @@ const SignUp: React.FC = () => {
     handleSubmit,
     setError,
     formState: { errors, isValid }
-  } = useForm<SignUpCredentials>({
+  } = useForm<PostAuthCredentials>({
     resolver: zodResolver(refinedSignUpSchema),
     mode: "onChange"
   });
 
-  const { onSubmit, isLoading } = useSignUpForm(postSignUp, "/user/account", setError);
+  const { onSubmit, isLoading } = useSignUpForm(postAuth, "/user/account", setError);
 
   return (
     <Box flex="1" m="auto" maxW="md" boxShadow="md" p="12" rounded="md">
