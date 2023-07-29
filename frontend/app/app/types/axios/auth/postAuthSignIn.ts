@@ -1,5 +1,4 @@
 import { UserData } from "../../auth";
-import { CustomAxiosResponse } from "../customAxiosResponse";
 
 export interface PostAuthSignInCredentials {
   email: string;
@@ -16,15 +15,3 @@ export interface PostAuthSignInErrorData {
 }
 
 export type PostAuthSignInData = PostAuthSignInSuccessData | PostAuthSignInErrorData;
-
-export interface PostAuthSignInSuccessResponse extends CustomAxiosResponse {
-  data: PostAuthSignInSuccessData;
-}
-
-export interface PostAuthSignInErrorResponse extends CustomAxiosResponse {
-  data: PostAuthSignInErrorData;
-}
-
-export type PostAuthSignInResponse =
-  | PostAuthSignInSuccessResponse
-  | PostAuthSignInErrorResponse;
