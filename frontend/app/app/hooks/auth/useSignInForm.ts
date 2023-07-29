@@ -4,26 +4,26 @@ import { UseFormSetError } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 
 import { toastState } from "@/app/stores/atoms/toastState";
-import { SignInCredentials } from "@/app/types/auth";
+import { PostAuthSignInCredentials } from "@/app/types/axios/auth/postAuthSignIn";
 
 import { useCheckLogin } from "../useCheckLogin";
 
-type SignInFunction = (data: SignInCredentials) => Promise<void>;
+type SignInFunction = (data: PostAuthSignInCredentials) => Promise<void>;
 
 export const useSignInForm = (
-  signUpFunction: SignInFunction,
+  signInFunction: SignInFunction,
   onSuccessRoute: string,
-  setError: UseFormSetError<SignInCredentials>
+  setError: UseFormSetError<PostAuthSignInCredentials>
 ) => {
   const [isLoading, setIsLoading] = useState(false);
   const setToast = useSetRecoilState(toastState);
   const router = useRouter();
   const checkLoginStatus = useCheckLogin();
 
-  const onSubmit = async (data: SignInCredentials) => {
+  const onSubmit = async (data: PostAuthSignInCredentials) => {
     setIsLoading(true);
     try {
-      await signUpFunction(data);
+      await signInFunction(data);
       await checkLoginStatus();
       router.push(onSuccessRoute);
       setToast({
