@@ -1,22 +1,19 @@
 import axios from "axios";
 
-import {
-  PostAuthCredentials,
-  PostAuthErrorResponse,
-  PostAuthResponse
-} from "@/app/types/axios/auth/postAuth";
+import { PostAuthCredentials, PostAuthErrorData } from "@/app/types/axios/auth/postAuth";
+import { CustomAxiosResponse } from "@/app/types/axios/customAxiosResponse";
 
 import { saveAuthInfoFromHeader } from "../../cookie/saveAuthInfo";
 import api from "../api";
 
 export const postAuth = async (credentials: PostAuthCredentials): Promise<void> => {
   try {
-    const response: PostAuthResponse = await api.post("/auth", credentials);
+    const response: CustomAxiosResponse = await api.post("/auth", credentials);
     saveAuthInfoFromHeader(response);
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      const errorResponse = error.response as PostAuthErrorResponse;
-      const errorMessage = errorResponse.data.errors.fullMessages.join(", ");
+      const errorResponseData = error.response.data as PostAuthErrorData;
+      const errorMessage = errorResponseData.errors.fullMessages.join(", ");
       throw new Error(errorMessage);
     } else {
       throw error;
