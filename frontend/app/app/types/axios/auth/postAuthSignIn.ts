@@ -6,7 +6,9 @@ export interface PostAuthSignInCredentials {
   password: string;
 }
 
-export type PostAuthSignInSuccessData = UserData;
+export interface PostAuthSignInSuccessData {
+  data: UserData;
+}
 
 export interface PostAuthSignInErrorData {
   success: false;

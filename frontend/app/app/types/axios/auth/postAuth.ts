@@ -7,8 +7,9 @@ export interface PostAuthCredentials extends PostAuthSignInCredentials {
   name: string;
 }
 
-export interface PostAuthSuccessData extends UserData {
+export interface PostAuthSuccessData {
   status: "success";
+  data: UserData;
 }
 
 export interface PostAuthErrorData {
