@@ -9,9 +9,9 @@ export const useCheckLogin = () => {
 
   const checkLoginStatus = async () => {
     try {
-      const response = await getAuthSessions();
-      if (response.data.isLogin) {
-        setLogin({ isLogin: true, data: response.data.data });
+      const responseData = await getAuthSessions();
+      if (responseData.isLogin) {
+        setLogin({ isLogin: true, data: responseData.data });
       } else {
         setLogin({ isLogin: false, data: null });
       }
