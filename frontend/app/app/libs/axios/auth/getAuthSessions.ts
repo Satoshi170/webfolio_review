@@ -1,11 +1,11 @@
 import axios from "axios";
 
-import { GetAuthSessionsResponse } from "@/app/types/auth";
+import { GetAuthSessionsResponse } from "@/app/types/axios/auth/getAuthSessions";
 
 import { addAuthInfoToRequest } from "../../cookie/loadAuthInfo";
 import api from "../api";
 
-export const getSessions = async (): Promise<GetAuthSessionsResponse> => {
+export const getAuthSessions = async (): Promise<GetAuthSessionsResponse> => {
   try {
     const response = await api.get<GetAuthSessionsResponse>(
       "/auth/sessions",
