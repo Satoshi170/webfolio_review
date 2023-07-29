@@ -2,32 +2,30 @@ require 'rails_helper'
 
 RSpec.describe "Api::V1::Auth::Registrations", type: :request do
   describe "POST /auth" do
-    let(:valid_user_params) { attributes_for(:user, password_confirmation: :password) }
-    let(:existing_user_params) do
-      attributes_for(:user,
-        email: "existing@example.com",
-        password_confirmation: :password)
-    end
-    let(:mismatched_password_params) do
-      attributes_for(:user,
-        password: "password1",
-        password_confirmation: "password2")
-    end
-    let(:invalid_params) do
+    let(:valid_user_params) do
       {
+        name: "testuser",
         email: "test@example.com",
         password: "password",
         password_confirmation: "password",
-        invalid_param: "invalid",
       }
     end
+    let(:existing_user_params) { valid_user_params.merge(email: "test@existing.com") }
+    let(:invalid_params) { valid_user_params.merge(invalid: "invalid") }
 
     context "有効なパラメータが指定された場合" do
-      it "新しいユーザーを作成" do
+      it "新しいユーザーの作成に成功する" do
         post "/api/v1/auth", params: { registration: valid_user_params }
+
         expect(response).to have_http_status(:success)
-        expect(response.body).to include('"status":"success"')
-        expect(response.body).to include(valid_user_params[:email])
+        json_response = JSON.parse(response.body)
+        expect(json_response).to eq({
+          "status" => "success",
+          "data" => {
+            "name" => valid_user_params[:name],
+            "image" => valid_user_params[:image],
+          },
+        })
       end
     end
 
@@ -41,20 +39,15 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
           post "/api/v1/auth", params: { registration: existing_user_params }
 
           expect(response).to have_http_status(:unprocessable_entity)
-          expect(response.body).not_to include('"status":"success"')
-          expect(response.body).to include('"status":"error"')
-          expect(response.body).to include("Email has already been taken")
-        end
-      end
-
-      context "パスワードとパスワード確認が一致しない場合" do
-        it "エラーが発生する" do
-          post "/api/v1/auth", params: { registration: mismatched_password_params }
-
-          expect(response).to have_http_status(:unprocessable_entity)
-          expect(response.body).not_to include('"status":"success"')
-          expect(response.body).to include('"status":"error"')
-          expect(response.body).to include("Password confirmation doesn't match Password")
+          json_response = JSON.parse(response.body)
+          expect(json_response).to eq({
+            "status" => "error",
+            "data" => {},
+            "errors" => {
+              "email" => ["has already been taken"],
+              "full_messages" => ["Email has already been taken"],
+            },
+          })
         end
       end
 
@@ -63,8 +56,16 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
           post "/api/v1/auth", params: { registration: invalid_params }
 
           expect(response).to have_http_status(:success)
-          expect(response.body).to include('"status":"success"')
-          expect(response.body).not_to include(invalid_params[:invalid_param])
+          json_response = JSON.parse(response.body)
+          expect(json_response).to eq({
+            "status" => "success",
+            "data" => {
+              "name" => invalid_params[:name],
+              "image" => invalid_params[:image],
+            },
+          })
+          user = User.find_by(email: invalid_params[:email])
+          expect(user.attributes).not_to have_key('invalid')
         end
       end
     end
