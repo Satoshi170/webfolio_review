@@ -9,7 +9,13 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
         sign_in(email: user.email, password: user.password)
         expect(response).to have_http_status(:success)
         expect(response.headers).to include("access-token", "client", "expiry", "uid")
-        expect(response.body).to include(user.email)
+        json_response = JSON.parse(response.body)
+        expect(json_response).to eq({
+          "data" => {
+            "name" => user.name,
+            "image" => user.image,
+          },
+        })
       end
     end
 
@@ -17,8 +23,13 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
       it "エラーメッセージが返されること" do
         invalid_user_params = { email: user.email, password: "incorrect_password" }
         sign_in(invalid_user_params)
+        puts response.body
         expect(response).to have_http_status(:unauthorized)
-        expect(response.body).to include("Invalid login credentials. Please try again.")
+        json_response = JSON.parse(response.body)
+        expect(json_response).to eq({
+          "success" => false,
+          "errors" => ["Invalid login credentials. Please try again."],
+        })
       end
     end
   end
