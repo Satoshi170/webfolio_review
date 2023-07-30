@@ -7,13 +7,13 @@ import {
 } from "@/__tests__/helpers/zodTestHelpers";
 import { signUpValidationErrorMessages } from "@/app/constants/auth/signUp/Messages";
 import { refinedSignUpSchema } from "@/app/libs/zod/auth/signUpSchema";
-import { SignUpCredentials } from "@/app/types/auth";
+import { PostAuthCredentials } from "@/app/types/axios/auth/postAuth";
 
 const getSignUpErrorMessages = (
-  data: SignUpCredentials,
-  field: keyof SignUpCredentials
+  data: PostAuthCredentials,
+  field: keyof PostAuthCredentials
 ) => {
-  const props: getErrorMessagesProps<SignUpCredentials> = {
+  const props: getErrorMessagesProps<PostAuthCredentials> = {
     schema: refinedSignUpSchema,
     data,
     field

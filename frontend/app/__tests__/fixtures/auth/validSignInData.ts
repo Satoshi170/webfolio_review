@@ -1,6 +1,6 @@
-import { SignInCredentials } from "@/app/types/auth";
+import { PostAuthSignInCredentials } from "@/app/types/axios/auth/postAuthSignIn";
 
-export const validSignInData: SignInCredentials = {
+export const validSignInData: PostAuthSignInCredentials = {
   email: "test@example.com",
   password: "password"
 };
