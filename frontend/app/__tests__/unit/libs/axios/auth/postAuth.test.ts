@@ -12,16 +12,21 @@ describe("postAuth", () => {
   const errorMessage = "Error message";
   const networkError = "Network error";
 
+  const postAuthSuccessData: PostAuthSuccessData = {
+    status: "success",
+    data: userData
+  };
+
+  const postAuthErrorData: PostAuthErrorData = {
+    status: "error",
+    errors: { fullMessages: [errorMessage] }
+  };
+
   beforeEach(() => {
     jest.resetAllMocks();
   });
 
   it("リクエストに成功した時適切なレスポンスでsaveAuthInfoHeaderが呼び出される", async () => {
-    const postAuthSuccessData: PostAuthSuccessData = {
-      status: "success",
-      data: userData
-    };
-
     const mockResponse = {
       headers: {
         "access-token": "mockToken",
@@ -37,23 +42,18 @@ describe("postAuth", () => {
   });
 
   it("リクエストが失敗し、エラーがAxiosから発生した場合、適切なエラーメッセージがスローされる", async () => {
-    const postAuthErrorData: PostAuthErrorData = {
-      status: "error",
-      errors: { fullMessages: [errorMessage] }
-    };
-
     const mockErrorResponse = {
       response: { data: postAuthErrorData }
     };
 
-    mockAxios.isAxiosError.mockImplementation(() => true);
+    mockAxios.isAxiosError.mockReturnValue(true);
     mockApi.post.mockRejectedValue(mockErrorResponse);
     await expect(postAuth(validSignUpData)).rejects.toThrow(errorMessage);
   });
 
   it("リクエストが失敗し、エラーがAxios以外から発生した場合、元のエラーがスローされる", async () => {
     const mockError = new Error(networkError);
-    mockAxios.isAxiosError.mockImplementation(() => false);
+    mockAxios.isAxiosError.mockReturnValue(false);
     mockApi.post.mockRejectedValue(mockError);
     await expect(postAuth(validSignUpData)).rejects.toThrow(networkError);
   });
