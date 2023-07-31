@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_31_141105) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_31_141805) do
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -52,7 +52,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_31_141105) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.string "name"
-    t.string "image"
     t.string "email"
     t.text "tokens"
     t.datetime "created_at", null: false
