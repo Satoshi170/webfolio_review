@@ -13,7 +13,6 @@ const SubmitButton: React.FC<SubmitButtonProps> = ({ text, isLoading, isDisabled
     <Button
       mt="4"
       mx="auto"
-      display="block"
       width="full"
       colorScheme="messenger"
       type="submit"
