@@ -4,7 +4,7 @@ import { Flex, Link, Icon } from "@chakra-ui/react";
 import { TfiBell } from "react-icons/tfi";
 import { TiMessage } from "react-icons/ti";
 
-import DropDownUserMenu from "../elements/DropDownUserMenu";
+import DropDownUserMenu from "../organisms/DropDownUserMenu";
 
 const LoggedInHeaderRightSection: React.FC = () => {
   return (
