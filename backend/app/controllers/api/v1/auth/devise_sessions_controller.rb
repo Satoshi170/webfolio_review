@@ -4,4 +4,10 @@ class Api::V1::Auth::DeviseSessionsController < DeviseTokenAuth::SessionsControl
       data: resource_data(resource_json: @resource.as_json(only: [:name, :image])),
     }
   end
+
+  private
+
+  def resource_params
+    params.require(:devise_session).permit(*params_for_resource(:sign_in))
+  end
 end
