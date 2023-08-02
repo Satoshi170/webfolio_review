@@ -6,14 +6,10 @@ import { DeleteAuthSignOutData } from "@/app/types/axios/auth/deleteAuthSignOut"
 
 import { removeAuthInfo } from "../../cookie/removeAuthInfo";
 
-export const DeleteAuthSignOut = async (): Promise<DeleteAuthSignOutData> => {
+export const DeleteAuthSignOut = async (): Promise<void> => {
   try {
-    const response = await api.delete<DeleteAuthSignOutData>(
-      "/auth/sign_out",
-      addAuthInfoToRequest({})
-    );
+    await api.delete<DeleteAuthSignOutData>("/auth/sign_out", addAuthInfoToRequest({}));
     removeAuthInfo();
-    return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(error.message);
