@@ -7,12 +7,14 @@ import { loginState } from "../stores/atoms/loginState";
 
 export const useCheckLogin = () => {
   const setLogin = useSetRecoilState(loginState);
+  const defaultUserImage = "/defaultUserImage.png";
 
   const checkLoginStatus = useCallback(async () => {
     try {
       const responseData = await getAuthSessions();
       if (responseData.isLogin) {
-        setLogin({ isLogin: true, data: responseData.data });
+        const { name, image } = responseData.data;
+        setLogin({ isLogin: true, data: { name, image: image || defaultUserImage } });
       } else {
         setLogin({ isLogin: false, data: null });
       }

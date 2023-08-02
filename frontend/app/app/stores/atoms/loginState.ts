@@ -2,12 +2,18 @@ import { atom } from "recoil";
 
 import { UserData } from "@/app/types/auth";
 
-export interface Login {
-  isLogin: boolean;
-  data: UserData | null;
+export interface LoggedInState {
+  isLogin: true;
+  data: UserData;
+}
+export interface LoggedOutState {
+  isLogin: false;
+  data: null;
 }
 
-export const loginState = atom<Login>({
+export type LoginState = LoggedInState | LoggedOutState;
+
+export const loginState = atom<LoginState>({
   key: "loginState",
   default: { isLogin: false, data: null }
 });
