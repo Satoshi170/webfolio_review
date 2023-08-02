@@ -11,7 +11,7 @@ import {
 jest.mock("@/app/libs/cookie/saveAuthInfo");
 jest.mock("@/app/libs/axios/api", () => mockApi);
 
-describe("postAuth", () => {
+describe("postAuthSignIn", () => {
   const errorMessage = "Error message";
   const networkError = "Network error";
 
