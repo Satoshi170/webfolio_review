@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 
 import InputField from "@/app/components/auth/InputField";
 import SubmitButton from "@/app/components/auth/SubmitButton";
+import WithRedirectIfLoggedIn from "@/app/components/hoc/WithRedirectIfLoggedIn";
 import { useSignUpForm } from "@/app/hooks/auth/useSignUpForm";
 import { postAuth } from "@/app/libs/axios/auth/postAuth";
 import { refinedSignUpSchema } from "@/app/libs/zod/auth/signUpSchema";
@@ -70,4 +71,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default SignUp;
+export default WithRedirectIfLoggedIn(SignUp);
