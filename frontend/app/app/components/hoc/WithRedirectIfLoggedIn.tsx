@@ -12,7 +12,7 @@ const WithRedirectIfLoggedIn: (Component: NextPage<any>) => React.FC<any> = (
     const { isLogin } = useRecoilValue(loginState);
 
     if (isLogin) {
-      router.push("/");
+      router.replace("/");
       return null;
     }
     return <Component {...props} />;

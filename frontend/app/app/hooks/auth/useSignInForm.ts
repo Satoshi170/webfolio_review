@@ -25,7 +25,7 @@ export const useSignInForm = (
     try {
       await signInFunction(data);
       await checkLoginStatus();
-      router.push(onSuccessRoute);
+      router.replace(onSuccessRoute);
       setToast({
         message: "ログインに成功しました",
         status: "success",

@@ -12,8 +12,7 @@ const WithRedirectIfLoggedOut: (Component: NextPage<any>) => React.FC<any> = (
     const { isLogin } = useRecoilValue(loginState);
 
     if (!isLogin) {
-      router.push("/");
-      return null;
+      router.replace("/auth/sign_in");
     }
     return <Component {...props} />;
   };

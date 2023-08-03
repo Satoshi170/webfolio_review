@@ -2,20 +2,19 @@ import { useRouter } from "next/navigation";
 import { useSetRecoilState } from "recoil";
 
 import { DeleteAuthSignOut } from "@/app/libs/axios/auth/deleteAuthSignOut";
+import { loginState } from "@/app/stores/atoms/loginState";
 import { toastState } from "@/app/stores/atoms/toastState";
-
-import { useCheckLogin } from "../useCheckLogin";
 
 export const useSignOut = () => {
   const router = useRouter();
+  const setLogin = useSetRecoilState(loginState);
   const setToast = useSetRecoilState(toastState);
-  const checkLoginStatus = useCheckLogin();
 
   const logout = async () => {
     try {
       await DeleteAuthSignOut();
-      await checkLoginStatus();
-      router.push("/");
+      setLogin({ isLogin: false, data: null });
+      router.replace("/auth/sign_in");
       setToast({
         message: "ログアウトに成功しました",
         status: "success",

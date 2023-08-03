@@ -25,7 +25,7 @@ export const useSignUpForm = (
     try {
       await signUpFunction(data);
       await checkLoginStatus();
-      router.push(onSuccessRoute);
+      router.replace(onSuccessRoute);
       setToast({
         message: "アカウント作成に成功しました",
         status: "success",
