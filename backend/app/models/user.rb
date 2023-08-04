@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 class User < ActiveRecord::Base
-	has_one_attached :image
+  include UserUrlHelper
+  has_one_attached :image
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -12,7 +13,7 @@ class User < ActiveRecord::Base
     if image.attached?
       Rails.application.routes.url_helpers.rails_blob_url(image, only_path: false)
     else
-      "#{Rails.application.routes.default_url_options[:protocol]}://#{Rails.application.routes.default_url_options[:host]}:#{Rails.application.routes.default_url_options[:port]}/images/default_user_image.png"
+      default_user_image_url
     end
   end
 
