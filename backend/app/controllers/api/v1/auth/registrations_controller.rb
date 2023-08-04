@@ -5,7 +5,10 @@ class Api::V1::Auth::RegistrationsController < DeviseTokenAuth::RegistrationsCon
     if @resource.errors.any?
       {}
     else
-      response_data = opts[:resource_json] || @resource.as_json(only: [:name, :image])
+      response_data = opts[:resource_json] ||
+                      @resource.as_json(only: [:name]).merge(
+                        image: current_api_v1_user.image_url
+                      )
       response_data
     end
   end
@@ -17,6 +20,6 @@ class Api::V1::Auth::RegistrationsController < DeviseTokenAuth::RegistrationsCon
   end
 
   def account_update_params
-    params.permit(:name, :email)
+    params.require(:registration).permit(:name, :image)
   end
 end
