@@ -23,7 +23,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
           "status" => "success",
           "data" => {
             "name" => valid_user_params[:name],
-            "image" => valid_user_params[:image],
+            "image" => default_user_image_url,
           },
         })
       end
@@ -61,7 +61,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
             "status" => "success",
             "data" => {
               "name" => invalid_params[:name],
-              "image" => invalid_params[:image],
+              "image" => default_user_image_url,
             },
           })
           user = User.find_by(email: invalid_params[:email])

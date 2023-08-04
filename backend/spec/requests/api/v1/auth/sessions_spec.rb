@@ -1,9 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe "Api::V1::Auth::Sessions", type: :request do
-  let!(:user) { create(:user) }
-
   describe "POST /auth/sign_in" do
+    let!(:user) { create(:user) }
+
     context "正しい資格情報を使用した場合" do
       it "ユーザーがサインインし、認証ヘッダーが返されること" do
         sign_in(email: user.email, password: user.password)
@@ -13,7 +13,7 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
         expect(json_response).to eq({
           "data" => {
             "name" => user.name,
-            "image" => user.image,
+            "image" => user.image_url,
           },
         })
       end
@@ -34,6 +34,8 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
   end
 
   describe "DELETE /auth/sign_out" do
+    let!(:user) { create(:user) }
+
     context "既にログイン状態の場合" do
       it "ログアウトが成功すること" do
         sign_in(email: user.email, password: user.password)
@@ -67,6 +69,8 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
   end
 
   describe "GET /auth/sessions" do
+    let!(:user) { create(:user) }
+
     context "認証済みユーザーの場合" do
       it "成功のHTTPステータスとユーザー情報を返すこと" do
         auth_headers = sign_in({ email: user.email, password: user.password })
@@ -77,8 +81,8 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
         expect(json_response).to eq({
           "is_login" => true,
           "data" => {
-            "name" => "testname",
-            "image" => "testimage",
+            "name" => user.name,
+            "image" => user.image_url,
           },
         })
       end
