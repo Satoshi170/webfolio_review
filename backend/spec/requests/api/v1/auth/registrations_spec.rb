@@ -115,6 +115,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
     context "有効なパラメータが指定された場合" do
       it "ユーザの情報が更新されること" do
         patch "/api/v1/auth", headers: headers, params: new_params.to_json
+        puts new_params.to_json
         expect(response).to have_http_status(:success)
         expect(response.body).to include('"status":"success"')
         user.reload
@@ -130,6 +131,18 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
         expect(response.body).not_to include(invalid_params[:invalid_param])
         user.reload
         expect(user.name).to eq(new_params[:name])
+      end
+    end
+
+    context "認証情報が無効または存在しない場合" do
+      it "401エラーを返すこと" do
+        patch "/api/v1/auth",
+        headers: headers = {
+          'CONTENT_TYPE' => 'application/json',
+          'ACCEPT' => 'application/json'
+        },
+        params: new_params.to_json
+        expect(response).to have_http_status(:unauthorized)
       end
     end
   end
