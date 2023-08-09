@@ -2,7 +2,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { ImageFileSchema, PatchAuthSchema } from "@/app/libs/zod/auth/patchAuthSchema";
+import {
+  PatchAuthImageSchema,
+  PatchAuthNonImageSchema
+} from "@/app/libs/zod/auth/patchAuthSchema";
 import { PatchAuthParams } from "@/app/types/axios/auth/patchAuth";
 
 import { usePatchAuthOperation } from "../../operations/auth/usePatchAuthOperation";
@@ -19,7 +22,7 @@ export const useUpdateAccountForm = () => {
     reset,
     formState: { errors }
   } = useForm<PatchAuthParams>({
-    resolver: zodResolver(PatchAuthSchema),
+    resolver: zodResolver(PatchAuthNonImageSchema),
     mode: "onChange"
   });
 
@@ -79,7 +82,7 @@ export const useUpdateAccountForm = () => {
   };
 
   const validateImage = (file: File) => {
-    const result = ImageFileSchema.safeParse({ file: file });
+    const result = PatchAuthImageSchema.safeParse({ image: file });
     if (!result.success) {
       setError("image", {
         message: result.error.errors[0].message,

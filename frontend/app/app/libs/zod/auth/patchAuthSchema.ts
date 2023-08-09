@@ -2,8 +2,8 @@ import { z } from "zod";
 
 import { patchAuthValidationErrorMessages } from "@/app/constants/auth/patchAuth/Messages";
 
-export const ImageFileSchema = z.object({
-  file: z.object({
+export const PatchAuthImageSchema = z.object({
+  image: z.object({
     size: z.number().max(2 * 1024 * 1024, patchAuthValidationErrorMessages.imageTooLarge),
     type: z
       .string()
@@ -14,6 +14,6 @@ export const ImageFileSchema = z.object({
   })
 });
 
-export const PatchAuthSchema = z.object({
+export const PatchAuthNonImageSchema = z.object({
   name: z.string().max(25, patchAuthValidationErrorMessages.nameTooLong)
 });
