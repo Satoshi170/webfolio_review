@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { ImageFileSchema, PatchAuthSchema } from "@/app/libs/zod/auth/patchAuthSchema";
 import { PatchAuthParams } from "@/app/types/axios/auth/patchAuth";
 
-import { usePatchAuthSubmit } from "../../submits/auth/usePatchAuthSubmit";
+import { usePatchAuthOperation } from "../../operations/auth/usePatchAuthOperation";
 
 export const useUpdateAccountForm = () => {
   const {
@@ -26,7 +26,7 @@ export const useUpdateAccountForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState("");
-  const patchAuthSubmit = usePatchAuthSubmit();
+  const patchAuthOperation = usePatchAuthOperation();
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>): File | null => {
     if (!event.target.files) {
@@ -69,7 +69,7 @@ export const useUpdateAccountForm = () => {
     }
 
     try {
-      await patchAuthSubmit(params);
+      await patchAuthOperation(params);
       reset();
       setImageFile(null);
       setFileName("");

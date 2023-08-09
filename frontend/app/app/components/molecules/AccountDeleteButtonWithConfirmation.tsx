@@ -12,13 +12,13 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 
-import { useDeleteAuthSubmit } from "@/app/hooks/submits/auth/useDeleteAuthSubmit";
+import { useDeleteAuthOperation } from "@/app/hooks/operations/auth/useDeleteAuthOperation";
 
 const AccountDeleteButtonWithConfirmation: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const deleteAccount = useDeleteAuthSubmit();
+  const deleteAuthOperation = useDeleteAuthOperation();
   const handleConfirm = async () => {
-    await deleteAccount();
+    await deleteAuthOperation();
     onClose();
   };
 

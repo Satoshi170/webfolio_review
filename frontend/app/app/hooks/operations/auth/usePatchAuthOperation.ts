@@ -1,23 +1,24 @@
 import { useRouter } from "next/navigation";
 import { useSetRecoilState } from "recoil";
 
-import { deleteAuth } from "@/app/libs/axios/auth/deleteAuth";
+import { patchAuth } from "@/app/libs/axios/auth/patchAuth";
 import { toastState } from "@/app/stores/atoms/toastState";
+import { PatchAuthParams } from "@/app/types/axios/auth/patchAuth";
 
 import { useCheckLogin } from "../../useCheckLogin";
 
-export const useDeleteAuthSubmit = () => {
+export const usePatchAuthOperation = () => {
   const router = useRouter();
   const checkLoginStatus = useCheckLogin();
   const setToast = useSetRecoilState(toastState);
 
-  const deleteAuthSubmit = async () => {
+  const patchAuthOperation = async (params: PatchAuthParams) => {
     try {
-      await deleteAuth();
+      await patchAuth(params);
       await checkLoginStatus();
-      router.replace("/");
+      router.refresh();
       setToast({
-        message: "アカウントの削除に成功しました",
+        message: "アカウント情報の更新に成功しました",
         status: "success",
         timestamp: Date.now()
       });
@@ -32,5 +33,5 @@ export const useDeleteAuthSubmit = () => {
     }
   };
 
-  return deleteAuthSubmit;
+  return patchAuthOperation;
 };
