@@ -35,7 +35,7 @@ const SignOutButtonWithConfirmation: React.FC = () => {
       </Link>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent textAlign="center" w="full" m="auto">
           <ModalHeader>ログアウト確認</ModalHeader>
           <ModalCloseButton />
           <ModalBody>本当にログアウトしますか？</ModalBody>
