@@ -5,12 +5,12 @@ import { DeleteAuthSignOut } from "@/app/libs/axios/auth/deleteAuthSignOut";
 import { loginState } from "@/app/stores/atoms/loginState";
 import { toastState } from "@/app/stores/atoms/toastState";
 
-export const useSignOut = () => {
+export const useDeleteAuthSignOutOperation = () => {
   const router = useRouter();
   const setLogin = useSetRecoilState(loginState);
   const setToast = useSetRecoilState(toastState);
 
-  const logout = async () => {
+  const deleteAuthSignOutOperation = async () => {
     try {
       await DeleteAuthSignOut();
       setLogin({ isLogin: false, data: null });
@@ -31,5 +31,5 @@ export const useSignOut = () => {
     }
   };
 
-  return logout;
+  return deleteAuthSignOutOperation;
 };

@@ -13,11 +13,11 @@ import {
   useDisclosure
 } from "@chakra-ui/react";
 
-import { useSignOut } from "@/app/hooks/auth/useSignOut";
+import { useDeleteAuthSignOutOperation } from "@/app/hooks/operations/auth/useDeleteAuthSignOutOperation";
 
 const SignOutButtonWithConfirmation: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const signOut = useSignOut();
+  const signOut = useDeleteAuthSignOutOperation();
   const handleConfirm = async () => {
     await signOut();
     onClose();
