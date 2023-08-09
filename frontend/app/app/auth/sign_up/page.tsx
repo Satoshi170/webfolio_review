@@ -35,12 +35,14 @@ const SignUp: React.FC = () => {
         <InputField
           name="name"
           label="ユーザー名"
+          isRequired={true}
           register={register}
           error={errors.name}
         />
         <InputField
           name="email"
           label="メールアドレス"
+          isRequired={true}
           register={register}
           error={errors.email}
         />
@@ -48,6 +50,7 @@ const SignUp: React.FC = () => {
           name="password"
           label="パスワード"
           type="password"
+          isRequired={true}
           register={register}
           error={errors.password}
         />
@@ -55,6 +58,7 @@ const SignUp: React.FC = () => {
           name="passwordConfirmation"
           label="パスワード(再確認)"
           type="password"
+          isRequired={true}
           register={register}
           error={errors.passwordConfirmation}
         />

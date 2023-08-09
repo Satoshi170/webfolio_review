@@ -35,6 +35,7 @@ const SignIn: React.FC = () => {
         <InputField
           name="email"
           label="メールアドレス"
+          isRequired={true}
           register={register}
           error={errors.email}
         />
@@ -42,6 +43,7 @@ const SignIn: React.FC = () => {
           name="password"
           label="パスワード"
           type="password"
+          isRequired={true}
           register={register}
           error={errors.password}
         />
