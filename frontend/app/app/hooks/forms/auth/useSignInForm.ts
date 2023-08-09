@@ -1,31 +1,38 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { UseFormSetError } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 
+import { postAuthSignIn } from "@/app/libs/axios/auth/postAuthSignIn";
+import { signInSchema } from "@/app/libs/zod/auth/signInSchema";
 import { toastState } from "@/app/stores/atoms/toastState";
 import { PostAuthSignInCredentials } from "@/app/types/axios/auth/postAuthSignIn";
 
-import { useCheckLogin } from "../useCheckLogin";
+import { useCheckLogin } from "../../useCheckLogin";
 
-type SignInFunction = (data: PostAuthSignInCredentials) => Promise<void>;
+export const useSignInForm = () => {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors, isValid }
+  } = useForm<PostAuthSignInCredentials>({
+    resolver: zodResolver(signInSchema),
+    mode: "onChange"
+  });
 
-export const useSignInForm = (
-  signInFunction: SignInFunction,
-  onSuccessRoute: string,
-  setError: UseFormSetError<PostAuthSignInCredentials>
-) => {
   const [isLoading, setIsLoading] = useState(false);
   const setToast = useSetRecoilState(toastState);
   const router = useRouter();
   const checkLoginStatus = useCheckLogin();
 
-  const onSubmit = async (data: PostAuthSignInCredentials) => {
+  const onSubmit = async (params: PostAuthSignInCredentials) => {
     setIsLoading(true);
     try {
-      await signInFunction(data);
+      await postAuthSignIn(params);
       await checkLoginStatus();
-      router.replace(onSuccessRoute);
+      router.replace("/");
       setToast({
         message: "ログインに成功しました",
         status: "success",
@@ -51,5 +58,5 @@ export const useSignInForm = (
     }
   };
 
-  return { onSubmit, isLoading };
+  return { register, handleSubmit, errors, isValid, onSubmit, isLoading };
 };

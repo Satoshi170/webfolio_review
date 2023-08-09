@@ -1,30 +1,16 @@
 "use client";
 
 import { Box, Divider, Heading, Link, Text } from "@chakra-ui/react";
-import { zodResolver } from "@hookform/resolvers/zod";
 import NextLink from "next/link";
-import { useForm } from "react-hook-form";
 
 import InputField from "@/app/components/auth/InputField";
 import SubmitButton from "@/app/components/auth/SubmitButton";
 import WithRedirectIfLoggedIn from "@/app/components/hoc/WithRedirectIfLoggedIn";
-import { useSignInForm } from "@/app/hooks/auth/useSignInForm";
-import { postAuthSignIn } from "@/app/libs/axios/auth/postAuthSignIn";
-import { signInSchema } from "@/app/libs/zod/auth/signInSchema";
-import { PostAuthSignInCredentials } from "@/app/types/axios/auth/postAuthSignIn";
+import { useSignInForm } from "@/app/hooks/forms/auth/useSignInForm";
 
 const SignIn: React.FC = () => {
-  const {
-    register,
-    handleSubmit,
-    setError,
-    formState: { errors, isValid }
-  } = useForm<PostAuthSignInCredentials>({
-    resolver: zodResolver(signInSchema),
-    mode: "onChange"
-  });
-
-  const { onSubmit, isLoading } = useSignInForm(postAuthSignIn, "/", setError);
+  const { register, handleSubmit, errors, isValid, onSubmit, isLoading } =
+    useSignInForm();
 
   return (
     <Box flex="1" m="auto" maxW="md" boxShadow="md" p="12" rounded="md">
