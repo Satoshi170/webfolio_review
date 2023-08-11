@@ -17,7 +17,7 @@ const props: InputFieldProps<TestFormValues> = {
 describe("<InputField />", () => {
   it("正しく名前、ラベルが反映されること", () => {
     render(<InputField {...props} />);
-    const inputElement = screen.getByLabelText(/Test Input\*/i);
+    const inputElement = screen.getByLabelText(/Test Input/i);
     expect(inputElement).toBeInTheDocument();
     expect(inputElement).toHaveAttribute("id", "testInput");
   });
@@ -29,14 +29,14 @@ describe("<InputField />", () => {
 
   it("propsにtypeが含まれていない場合、デフォルトでtextタイプになること", () => {
     render(<InputField {...props} />);
-    const inputElement = screen.getByLabelText(/Test Input\*/i);
+    const inputElement = screen.getByLabelText(/Test Input/i);
     expect(inputElement).toHaveAttribute("type", "text");
   });
 
   it("propsにtypeにpasswordが指定された場合、passwordタイプになること", () => {
     const passwordProps = { ...props, type: "password" };
     render(<InputField {...passwordProps} />);
-    const inputElement = screen.getByLabelText(/Test Input\*/i);
+    const inputElement = screen.getByLabelText(/Test Input/i);
     expect(inputElement).toHaveAttribute("type", "password");
   });
 
