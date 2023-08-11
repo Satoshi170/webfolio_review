@@ -17,8 +17,7 @@ const InputField = <T extends FieldValues>({
   isRequired = false,
   type = "text",
   register,
-  error,
-  onChange = register(name).onChange
+  error
 }: InputFieldProps<T>) => {
   return (
     <FormControl isInvalid={!!error}>
@@ -30,7 +29,7 @@ const InputField = <T extends FieldValues>({
           </Text>
         )}
       </FormLabel>
-      <Input type={type} id={name as string} {...register(name)} onChange={onChange} />
+      <Input type={type} id={name as string} {...register(name)} />
       <FormErrorMessage>{error?.message}</FormErrorMessage>
     </FormControl>
   );
