@@ -1,6 +1,6 @@
 "use client";
 
-import { Image, Link } from "@chakra-ui/next-js";
+import { Image } from "@chakra-ui/next-js";
 import {
   HStack,
   Icon,
@@ -38,21 +38,11 @@ const DropDownUserMenu: React.FC = () => {
         </HStack>
       </MenuButton>
       <MenuList color="gray.800">
-        <MenuItem pr="0" py="0">
-          <Link
-            as={NextLink}
-            href="/user/account"
-            h="full"
-            w="full"
-            sx={{ "&:hover": { textDecoration: "none" } }}
-          >
-            アカウント設定
-          </Link>
+        <MenuItem as={NextLink} href="/user/account">
+          アカウント設定
         </MenuItem>
         <MenuDivider />
-        <MenuItem pr="0" py="0">
-          <SignOutButtonWithConfirmation />
-        </MenuItem>
+        <SignOutButtonWithConfirmation />
       </MenuList>
     </Menu>
   );

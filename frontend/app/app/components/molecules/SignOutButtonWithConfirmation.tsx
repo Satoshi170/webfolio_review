@@ -2,7 +2,7 @@
 
 import {
   Button,
-  Link,
+  MenuItem,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -25,14 +25,7 @@ const SignOutButtonWithConfirmation: React.FC = () => {
 
   return (
     <>
-      <Link
-        onClick={onOpen}
-        w="full"
-        h="full"
-        sx={{ "&:hover": { textDecoration: "none" } }}
-      >
-        ログアウト
-      </Link>
+      <MenuItem onClick={onOpen}>ログアウト</MenuItem>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent textAlign="center" w="full" m="auto">

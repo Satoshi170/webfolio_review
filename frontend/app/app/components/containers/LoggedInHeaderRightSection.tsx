@@ -8,11 +8,11 @@ import DropDownUserMenu from "../organisms/DropDownUserMenu";
 
 const LoggedInHeaderRightSection: React.FC = () => {
   return (
-    <Flex gap="4" data-testid="logged-in-header">
-      <Link>
+    <Flex gap="4">
+      <Link href="#">
         <Icon as={TiMessage} boxSize={12} />
       </Link>
-      <Link>
+      <Link href="#">
         <Icon as={TfiBell} boxSize={12} />
       </Link>
       <DropDownUserMenu />
