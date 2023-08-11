@@ -1,29 +1,45 @@
 import { render } from "@testing-library/react";
 import { RecoilRoot, MutableSnapshot, RecoilState } from "recoil";
 
+import { userData } from "@/__tests__/fixtures/auth/userData";
 import Header from "@/app/components/Header";
-import { loginState, Login } from "@/app/stores/atoms/loginState";
+import { loginState, LoginState } from "@/app/stores/atoms/loginState";
+
+jest.mock("@/app/components/containers/LoggedInHeaderRightSection", () => {
+  return function MockedLoggedInHeaderRightSection() {
+    return <div>Mocked Logged In</div>;
+  };
+});
+
+jest.mock("@/app/components/containers/LoggedOutHeaderRightSection", () => {
+  return function MockedLoggedOutHeaderRightSection() {
+    return <div>Mocked Logged Out</div>;
+  };
+});
 
 const initializeLoginState =
-  (state: RecoilState<Login>, value: Login) =>
+  (state: RecoilState<LoginState>, value: LoginState) =>
   ({ set }: MutableSnapshot) =>
     set(state, value);
 
 describe("<Header />", () => {
   it("isLoginがtrueの時LoggedInHeaderRightSectionが表示されていること", () => {
-    const { getByTestId } = render(
+    const { getByText } = render(
       <RecoilRoot
-        initializeState={initializeLoginState(loginState, { isLogin: true, data: null })}
+        initializeState={initializeLoginState(loginState, {
+          isLogin: true,
+          data: userData
+        })}
       >
         <Header />
       </RecoilRoot>
     );
 
-    expect(getByTestId("logged-in-header")).toBeInTheDocument();
+    expect(getByText("Mocked Logged In")).toBeInTheDocument();
   });
 
   it("isLoginがfalseの時LoggedOutHeaderRightSectionが表示されていること", () => {
-    const { getByTestId } = render(
+    const { getByText } = render(
       <RecoilRoot
         initializeState={initializeLoginState(loginState, { isLogin: false, data: null })}
       >
@@ -31,6 +47,6 @@ describe("<Header />", () => {
       </RecoilRoot>
     );
 
-    expect(getByTestId("logged-out-header")).toBeInTheDocument();
+    expect(getByText("Mocked Logged Out")).toBeInTheDocument();
   });
 });
