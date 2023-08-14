@@ -14,14 +14,14 @@ import { RxCross2 } from "react-icons/rx";
 import useInputImageField from "@/app/hooks/forms/useInputImageField";
 type HandleImageChangeType = (event: React.ChangeEvent<HTMLInputElement>) => File | null;
 
-type InputImageFieldProps<T extends FieldValues> = {
+export type InputImageFieldProps<T extends FieldValues> = {
   name: Path<T>;
   label: string;
   error?: FieldError;
   register: UseFormRegister<T>;
   onChange: HandleImageChangeType;
   resetImage: () => void;
-  fileName: string;
+  fileName: string | null;
 };
 
 const InputImageField = <T extends FieldValues>({
