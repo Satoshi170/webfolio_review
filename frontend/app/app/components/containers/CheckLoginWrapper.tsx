@@ -1,9 +1,10 @@
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
-import LoadingSpinner from "./containers/LoadingSpinner";
-import { useCheckLogin } from "../hooks/useCheckLogin";
-import { loadingState } from "../stores/atoms/loadingState";
+import { useCheckLogin } from "@/app/hooks/useCheckLogin";
+import { loadingState } from "@/app/stores/atoms/loadingState";
+
+import LoadingSpinner from "./LoadingSpinner";
 
 const CheckLoginWrapper = ({ children }: { children: React.ReactNode }) => {
   const checkLoginStatus = useCheckLogin();
