@@ -1,7 +1,7 @@
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Main from "./components/Main";
-import ToastWrapper from "./components/ToastWrapper";
+import ToastWrapper from "./components/containers/ToastWrapper";
 import { Providers } from "./providers";
 
 export const metadata = {

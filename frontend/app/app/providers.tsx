@@ -4,7 +4,7 @@ import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
 import { RecoilRoot } from "recoil";
 
-import CheckLoginWrapper from "./components/CheckLoginWrapper";
+import CheckLoginWrapper from "./components/containers/CheckLoginWrapper";
 import theme from "./theme/theme";
 
 export function Providers({ children }: { children: React.ReactNode }) {
