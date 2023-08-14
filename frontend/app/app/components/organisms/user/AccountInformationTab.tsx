@@ -4,14 +4,15 @@ import { Box, Heading, Spacer, Text } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 
 import { useUpdateAccountForm } from "@/app/hooks/forms/auth/useUpdateAccountForm";
-import { loginState } from "@/app/stores/atoms/loginState";
+import { LoggedInState, loginState } from "@/app/stores/atoms/loginState";
 
 import InputField from "../../auth/InputField";
 import InputImageField from "../../auth/InputImageField";
 import SubmitButton from "../../auth/SubmitButton";
 
 const AccountInformationTabPanel: React.FC = () => {
-  const { data } = useRecoilValue(loginState);
+  const loginStateValue = useRecoilValue(loginState);
+  const data = (loginStateValue as LoggedInState).data;
   const {
     register,
     handleSubmit,
@@ -23,10 +24,6 @@ const AccountInformationTabPanel: React.FC = () => {
     fileName,
     isFormValid
   } = useUpdateAccountForm();
-
-  if (!data) {
-    return null;
-  }
 
   return (
     <Box flex="1" m="auto" maxW="md" boxShadow="md" p="12" rounded="md">

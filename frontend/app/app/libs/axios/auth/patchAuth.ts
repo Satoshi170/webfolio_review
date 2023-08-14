@@ -31,7 +31,6 @@ export const patchAuth = async (
   }
   config = addAuthInfoToRequest(config || {});
   try {
-    console.log(data);
     await api.patch("/auth", data, config);
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
