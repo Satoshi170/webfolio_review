@@ -13,6 +13,7 @@ const WithRedirectIfLoggedOut: (Component: NextPage<any>) => React.FC<any> = (
 
     if (!isLogin) {
       router.replace("/auth/sign_in");
+      return null;
     }
     return <Component {...props} />;
   };
