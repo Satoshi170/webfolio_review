@@ -1,4 +1,4 @@
-import { MutableRefObject, useRef } from "react";
+import { MutableRefObject, useCallback, useRef } from "react";
 
 type UseImageInputReturnType = {
   fileInput: MutableRefObject<HTMLInputElement | null>;
@@ -8,9 +8,9 @@ type UseImageInputReturnType = {
 const useInputImageField = (): UseImageInputReturnType => {
   const fileInput = useRef<HTMLInputElement | null>(null);
 
-  const triggerFileSelect = () => {
+  const triggerFileSelect = useCallback(() => {
     fileInput.current && fileInput.current.click();
-  };
+  }, []);
 
   return { fileInput, triggerFileSelect };
 };
