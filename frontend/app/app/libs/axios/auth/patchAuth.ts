@@ -6,7 +6,7 @@ import {
   PatchAuthParamsBase
 } from "@/app/types/axios/auth/patchAuth";
 
-import { addAuthInfoToRequest } from "../../cookie/loadAuthInfo";
+import addAuthInfoToRequest from "../../cookie/loadAuthInfo";
 import api from "../api";
 
 export const patchAuth = async (

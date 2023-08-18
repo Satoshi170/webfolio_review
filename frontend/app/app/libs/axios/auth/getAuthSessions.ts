@@ -2,7 +2,7 @@ import axios from "axios";
 
 import { GetAuthSessionsData } from "@/app/types/axios/auth/getAuthSessions";
 
-import { addAuthInfoToRequest } from "../../cookie/loadAuthInfo";
+import addAuthInfoToRequest from "../../cookie/loadAuthInfo";
 import api from "../api";
 
 export const getAuthSessions = async (): Promise<GetAuthSessionsData> => {

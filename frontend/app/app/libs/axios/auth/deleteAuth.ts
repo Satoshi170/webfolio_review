@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import api from "@/app/libs/axios/api";
-import { addAuthInfoToRequest } from "@/app/libs/cookie/loadAuthInfo";
+import addAuthInfoToRequest from "@/app/libs/cookie/loadAuthInfo";
 import {
   DeleteAuthErrorData,
   DeleteAuthSuccessData
