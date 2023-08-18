@@ -1,4 +1,5 @@
-import { mockApi, mockAxios } from "@/__tests__/mocks/axios/api";
+import { mockApi, mockAxios, mockDelete } from "@/__tests__/mocks/axios/api";
+import { mockAddAuthInfoToRequest } from "@/__tests__/mocks/cookie/mockLoadAuthInfo";
 import { deleteAuth } from "@/app/libs/axios/auth/deleteAuth";
 import { removeAuthInfo } from "@/app/libs/cookie/removeAuthInfo";
 import {
@@ -7,6 +8,7 @@ import {
 } from "@/app/types/axios/auth/deleteAuth";
 
 jest.mock("@/app/libs/cookie/removeAuthInfo");
+jest.mock("@/app/libs/cookie/loadAuthInfo", () => mockAddAuthInfoToRequest);
 jest.mock("@/app/libs/axios/api", () => mockApi);
 
 describe("deleteAuth", () => {
@@ -28,7 +30,7 @@ describe("deleteAuth", () => {
   });
 
   it("リクエストに成功した時、removeAuthInfoが呼び出せれる", async () => {
-    mockApi.delete.mockResolvedValue(deleteAuthSuccessData);
+    mockDelete.mockResolvedValue(deleteAuthSuccessData);
     await deleteAuth();
     expect(removeAuthInfo).toHaveBeenCalled();
   });
@@ -39,14 +41,14 @@ describe("deleteAuth", () => {
     };
 
     mockAxios.isAxiosError.mockReturnValue(true);
-    mockApi.delete.mockRejectedValue(mockErrorResponse);
+    mockDelete.mockRejectedValue(mockErrorResponse);
     await expect(deleteAuth()).rejects.toThrow(errorMessage);
   });
 
   it("リクエストが失敗し、エラーがAxios以外から発生した場合、元のエラーがスローされる", async () => {
     const mockError = new Error(networkError);
     mockAxios.isAxiosError.mockReturnValue(false);
-    mockApi.delete.mockRejectedValue(mockError);
+    mockDelete.mockRejectedValue(mockError);
     await expect(deleteAuth()).rejects.toThrow(networkError);
   });
 });

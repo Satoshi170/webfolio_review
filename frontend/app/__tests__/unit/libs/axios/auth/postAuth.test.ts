@@ -1,6 +1,6 @@
 import { userData } from "@/__tests__/fixtures/auth/userData";
 import { validSignUpData } from "@/__tests__/fixtures/auth/validSignUpData";
-import { mockApi, mockAxios } from "@/__tests__/mocks/axios/api";
+import { mockApi, mockAxios, mockPost } from "@/__tests__/mocks/axios/api";
 import { postAuth } from "@/app/libs/axios/auth/postAuth";
 import { saveAuthInfoFromHeader } from "@/app/libs/cookie/saveAuthInfo";
 import { PostAuthErrorData, PostAuthSuccessData } from "@/app/types/axios/auth/postAuth";
@@ -36,7 +36,7 @@ describe("postAuth", () => {
       data: postAuthSuccessData
     };
 
-    mockApi.post.mockResolvedValue(mockResponse);
+    mockPost.mockResolvedValue(mockResponse);
     await postAuth(validSignUpData);
     expect(saveAuthInfoFromHeader).toHaveBeenCalledWith(mockResponse);
   });
@@ -47,14 +47,14 @@ describe("postAuth", () => {
     };
 
     mockAxios.isAxiosError.mockReturnValue(true);
-    mockApi.post.mockRejectedValue(mockErrorResponse);
+    mockPost.mockRejectedValue(mockErrorResponse);
     await expect(postAuth(validSignUpData)).rejects.toThrow(errorMessage);
   });
 
   it("リクエストが失敗し、エラーがAxios以外から発生した場合、元のエラーがスローされる", async () => {
     const mockError = new Error(networkError);
     mockAxios.isAxiosError.mockReturnValue(false);
-    mockApi.post.mockRejectedValue(mockError);
+    mockPost.mockRejectedValue(mockError);
     await expect(postAuth(validSignUpData)).rejects.toThrow(networkError);
   });
 });
