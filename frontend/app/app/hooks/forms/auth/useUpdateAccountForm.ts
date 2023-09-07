@@ -31,25 +31,22 @@ export const useUpdateAccountForm = () => {
   const [fileName, setFileName] = useState("");
   const patchAuthOperation = usePatchAuthOperation();
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>): File | null => {
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files) {
-      return null;
+      return;
     }
 
     const file = event.target.files[0];
     if (!file) {
-      return null;
+      return;
     }
 
     clearErrors("image");
-    if (validateImage(file)) {
+    if (isValidatedImage(file)) {
       setImageFile(file);
       setFileName(file.name);
       setValue("image", file);
-      return file;
     }
-
-    return null;
   };
 
   const resetImage = () => {
@@ -71,6 +68,11 @@ export const useUpdateAccountForm = () => {
       params.image = imageFile;
     }
 
+    if (Object.keys(params).length === 0) {
+      setIsLoading(false);
+      return;
+    }
+
     try {
       await patchAuthOperation(params);
       reset();
@@ -81,7 +83,7 @@ export const useUpdateAccountForm = () => {
     }
   };
 
-  const validateImage = (file: File) => {
+  const isValidatedImage = (file: File) => {
     const result = PatchAuthImageSchema.safeParse({ image: file });
     if (!result.success) {
       setError("image", {
@@ -101,6 +103,7 @@ export const useUpdateAccountForm = () => {
   return {
     register,
     handleSubmit,
+    setValue,
     getValues,
     errors,
     isLoading,
@@ -110,6 +113,7 @@ export const useUpdateAccountForm = () => {
     onSubmit,
     fileName,
     setFileName,
-    isFormValid
+    isFormValid,
+    setError
   };
 };
