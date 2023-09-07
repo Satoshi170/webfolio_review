@@ -13,19 +13,7 @@ import {
   PatchAuthImageSchema,
   PatchAuthNonImageSchema
 } from "@/app/libs/zod/auth/patchAuthSchema";
-import { PatchAuthParams, PatchAuthParamsBase } from "@/app/types/axios/auth/patchAuth";
-
-const getPatchAuthImageErrorMessages = (
-  data: PatchAuthParams,
-  field: keyof PatchAuthParams
-) => {
-  const props: getErrorMessagesProps<PatchAuthParams> = {
-    schema: PatchAuthImageSchema,
-    data,
-    field
-  };
-  return getErrorMessages(props);
-};
+import { PatchAuthParamsBase } from "@/app/types/axios/auth/patchAuth";
 
 const getPatchAuthNonImageErrorMessages = (
   data: PatchAuthParamsBase,
@@ -39,29 +27,39 @@ const getPatchAuthNonImageErrorMessages = (
   return getErrorMessages(props);
 };
 
+interface falseResult {
+  success: false;
+  error: ZodError;
+}
+
 describe("PatchAuthImageSchema", () => {
   it("imageが正しい形式の場合エラーをスローしない", () => {
-    expect(() => PatchAuthImageSchema.parse(validImageFile)).not.toThrow();
+    const result = PatchAuthImageSchema.safeParse({ image: validImageFile });
+    expect(result.success).toBe(true);
   });
 
   it("sizeが2MBより大きい場合正しいエラーメッセージをスローする", () => {
     const invalidSizeImageFile = {
       ...validImageFile,
-      image: { ...validImageFile.image, size: 2 * 1024 * 1024 + 1 } as File
+      size: 2 * 1024 * 1024 + 1
     };
-    expect(() => PatchAuthImageSchema.parse(invalidSizeImageFile)).toThrow(ZodError);
-    const imageErrors = getPatchAuthImageErrorMessages(invalidSizeImageFile, "image");
-    expect(imageErrors[0]).toBe(patchAuthValidationErrorMessages.imageTooLarge);
+    const result = PatchAuthImageSchema.safeParse({ image: invalidSizeImageFile });
+    expect(result.success).toBe(false);
+    expect((result as falseResult).error.errors[0].message).toBe(
+      patchAuthValidationErrorMessages.imageTooLarge
+    );
   });
 
   it("typeが指定されたものと違う場合正しいエラーメッセージをスローする", () => {
     const invalidTypeImageFile = {
       ...validImageFile,
-      image: { ...validImageFile.image, type: "image/gif" } as File
+      type: "image/gif"
     };
-    expect(() => PatchAuthImageSchema.parse(invalidTypeImageFile)).toThrow(ZodError);
-    const imageErrors = getPatchAuthImageErrorMessages(invalidTypeImageFile, "image");
-    expect(imageErrors[0]).toBe(patchAuthValidationErrorMessages.invalidImageType);
+    const result = PatchAuthImageSchema.safeParse({ image: invalidTypeImageFile });
+    expect(result.success).toBe(false);
+    expect((result as falseResult).error.errors[0].message).toBe(
+      patchAuthValidationErrorMessages.invalidImageType
+    );
   });
 });
 
