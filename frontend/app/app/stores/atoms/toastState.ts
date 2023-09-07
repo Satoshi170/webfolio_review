@@ -1,12 +1,12 @@
 import { atom } from "recoil";
 
-interface Toast {
+export interface ToastState {
   message: string;
   status: "success" | "error";
   timestamp: number | null;
 }
 
-export const toastState = atom<Toast>({
+export const toastState = atom<ToastState>({
   key: "toastState",
   default: {
     message: "",

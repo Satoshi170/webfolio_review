@@ -1,6 +1,10 @@
 import { act, renderHook } from "@testing-library/react";
-import * as recoil from "recoil";
+import { RecoilState } from "recoil";
 
+import {
+  mockSetLogin,
+  mockUseSetRecoilState
+} from "@/__tests__/mocks/recoil/mockUseSetRecoilState";
 import { useCheckLogin } from "@/app/hooks/useCheckLogin";
 import { getAuthSessions } from "@/app/libs/axios/auth/getAuthSessions";
 import {
@@ -8,11 +12,16 @@ import {
   GetAuthSessionsTrueData
 } from "@/app/types/axios/auth/getAuthSessions";
 
+jest.mock("recoil", () => ({
+  ...jest.requireActual<typeof import("recoil")>("recoil"),
+  useSetRecoilState: (atom: RecoilState<any>) => mockUseSetRecoilState(atom)
+}));
 jest.mock("@/app/libs/axios/auth/getAuthSessions");
-const mockSetLogin = jest.fn();
-jest.spyOn(recoil, "useSetRecoilState").mockReturnValue(mockSetLogin);
 
 describe("useCheckLogin", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
   afterAll(() => {
     jest.resetAllMocks();
   });
