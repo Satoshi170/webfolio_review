@@ -13,8 +13,11 @@ const DummyComponent: React.FC = () => {
 jest.mock("next/navigation", () => mockNavigation);
 
 describe("WithRedirectIfLoggedIn", () => {
-  beforeEach(() => {
-    replaceMock.mockClear();
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+  afterAll(() => {
+    jest.resetAllMocks();
   });
 
   it("isLoginがtrueの時リダイレクトされる", () => {
