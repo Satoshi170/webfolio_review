@@ -35,7 +35,7 @@ export const patchAuth = async (
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       const errorResponseData = error.response.data as PatchAuthErrorData;
-      const errorMessage = errorResponseData.errors.join(", ");
+      const errorMessage = errorResponseData.errors.fullMessages.join(", ");
       throw new Error(errorMessage);
     } else {
       throw error;

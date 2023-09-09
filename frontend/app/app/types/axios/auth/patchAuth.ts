@@ -13,7 +13,10 @@ export interface PatchAuthSuccessData {
   data: UserData;
 }
 export interface PatchAuthErrorData {
-  errors: string[];
+  status: "error";
+  errors: {
+    fullMessages: string[];
+  };
 }
 
 export type PatchAuthData = PatchAuthSuccessData | PatchAuthErrorData;
