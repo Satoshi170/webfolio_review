@@ -26,4 +26,6 @@ class User < ActiveRecord::Base
             length: { minimum: 6, too_short: 'Password is too short.' },
             on: [:create, :update],
             allow_blank: true
+  validates :image,
+            blob: { content_type: ['image/png', 'image/jpeg'], size_range: 0..2.megabytes }
 end

@@ -115,7 +115,6 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
     context "有効なパラメータが指定された場合" do
       it "ユーザの情報が更新されること" do
         patch "/api/v1/auth", headers: headers, params: new_params.to_json
-        puts new_params.to_json
         expect(response).to have_http_status(:success)
         expect(response.body).to include('"status":"success"')
         user.reload
