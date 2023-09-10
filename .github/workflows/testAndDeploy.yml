@@ -16,6 +16,12 @@ jobs:
         env:
           RAILS_ENV: test
 
+      - name: Set up DataBase
+        shell: bash
+        run: |
+          docker-compose exec -T backend /bin/bash -c "bundle exec rails db:create"
+          docker-compose exec -T backend /bin/bash -c "bundle exec rails db:migrate"
+
       - name: Run RSpec
         shell: bash
         run: docker-compose exec -T backend /bin/bash -c "bundle exec rspec"
