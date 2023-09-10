@@ -136,9 +136,9 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
     context "認証情報が無効または存在しない場合" do
       it "401エラーを返すこと" do
         patch "/api/v1/auth",
-        headers: headers = {
+        headers: {
           'CONTENT_TYPE' => 'application/json',
-          'ACCEPT' => 'application/json'
+          'ACCEPT' => 'application/json',
         },
         params: new_params.to_json
         expect(response).to have_http_status(:unauthorized)
