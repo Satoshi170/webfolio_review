@@ -18,7 +18,7 @@ jobs:
 
       - name: Run RSpec
         shell: bash
-        run: docker-compose exec backend /bin/bash -c "bundle exec rspec"
+        run: docker-compose exec -T backend /bin/bash -c "bundle exec rspec"
 
       - name: Run Rubocop
         shell: bash
