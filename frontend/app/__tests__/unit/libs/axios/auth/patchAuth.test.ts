@@ -11,7 +11,10 @@ describe("patchAuth", () => {
   const networkError = "Network error";
 
   const patchAuthErrorData: PatchAuthErrorData = {
-    errors: [errorMessage]
+    status: "error",
+    errors: {
+      fullMessages: [errorMessage]
+    }
   };
 
   const params = {
