@@ -5,7 +5,8 @@ const nextConfig = {
   },
   images: {
     domains: ["backend"]
-  }
+  },
+  output: "standalone"
 };
 
 module.exports = nextConfig;
