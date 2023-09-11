@@ -12,7 +12,7 @@ import { BiSolidCameraPlus } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 
 import useInputImageField from "@/app/hooks/forms/useInputImageField";
-type HandleImageChangeType = (event: React.ChangeEvent<HTMLInputElement>) => File | null;
+type HandleImageChangeType = (event: React.ChangeEvent<HTMLInputElement>) => void;
 
 export type InputImageFieldProps<T extends FieldValues> = {
   name: Path<T>;
