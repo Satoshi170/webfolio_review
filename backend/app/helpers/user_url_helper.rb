@@ -4,6 +4,10 @@ module UserUrlHelper
     host = Rails.application.routes.default_url_options[:host]
     port = Rails.application.routes.default_url_options[:port]
 
-    "#{protocol}://#{host}:#{port}/images/default_user_image.png"
+    if Rails.env.production?
+      "#{protocol}://#{host}/images/default_user_image.png"
+    else
+      "#{protocol}://#{host}:#{port}/images/default_user_image.png"
+    end
   end
 end
