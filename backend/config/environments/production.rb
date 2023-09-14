@@ -85,6 +85,4 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   Rails.application.routes.default_url_options = { protocol: 'https', host: 'backend.webfolio-review.com'}
-  config.hosts << 'webfolio-review.com'
-  config.hosts << 'backend.webfolio-review.com'
 end
