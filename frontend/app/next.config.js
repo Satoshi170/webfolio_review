@@ -4,7 +4,7 @@ const nextConfig = {
     dirs: ["app", "__tests__"]
   },
   images: {
-    domains: ["backend", process.env.NEXT_PUBLIC_API_ENDPOINT]
+    domains: ["backend", process.env.NEXT_PUBLIC_API_DOMAIN]
   },
   output: "standalone"
 };
