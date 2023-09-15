@@ -2,6 +2,7 @@ inherit_from:
   - .rubocop_airbnb.yml
 
 AllCops:
+  NewCops: enable
   Exclude:
     - "db/**/*"
     - "bin/*"
@@ -12,7 +13,6 @@ AllCops:
     - "lib/tasks/*"
     - "vendor/**/*"
     - "path/ruby"
-    - "test/**/*"
-    - "spec/**/*"
     - "config/**/*"
     - "Gemfile"
+    - "spec/spec_helper.rb"

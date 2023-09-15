@@ -1,0 +1,9 @@
+*.json
+*.md
+.next/
+node_modules/
+public/
+.prettierignore
+yarn.lock
+next.config.js
+jest.config.mjs
