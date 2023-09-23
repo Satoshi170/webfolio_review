@@ -53,19 +53,6 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
         expect(response.body).to include('"success":false')
       end
     end
-    # TODO:ログイン状態でないとアクセスできないエンドポイントを実装したときにコメントアウトを外す
-    # context "ログアウトに成功したとき" do
-    #   before do
-    #     sign_in(email: user.email, password: user.password)
-    #     @auth_headers = response.headers.slice("access-token", "client", "expiry", "uid")
-    #     sign_out(@auth_headers)
-    #   end
-
-    #   it "認証トークンが無効になり、アクセスが拒否されること" do
-    #     get "/api/v1/some_endpoint", headers: @auth_headers
-    #     expect(response).to have_http_status(:unauthorized)
-    #   end
-    # end
   end
 
   describe "GET /auth/sessions" do
