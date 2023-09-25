@@ -11,10 +11,8 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
         expect(response.headers).to include("access-token", "client", "expiry", "uid")
         json_response = JSON.parse(response.body)
         expect(json_response).to eq({
-          "data" => {
-            "name" => user.name,
-            "image" => user.image_url,
-          },
+          "success" => true,
+          "message" => "Signed in successfly",
         })
       end
     end
@@ -68,6 +66,7 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
         expect(json_response).to eq({
           "is_login" => true,
           "data" => {
+            "id" => user.id,
             "name" => user.name,
             "image" => user.image_url,
           },

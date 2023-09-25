@@ -19,13 +19,13 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
 
         expect(response).to have_http_status(:success)
         json_response = JSON.parse(response.body)
-        expect(json_response).to eq({
-          "status" => "success",
-          "data" => {
-            "name" => valid_user_params[:name],
-            "image" => default_user_image_url,
-          },
-        })
+        expect(json_response["status"]).to eq("success")
+        expect(json_response["data"]["name"]).to eq(valid_user_params[:name])
+        expect(json_response["data"]["image"]).to eq(default_user_image_url)
+
+        user_id = json_response["data"]["id"]
+        is_valid_id = User.exists?(id: user_id)
+        expect(is_valid_id).to be_truthy
       end
     end
 
@@ -57,13 +57,14 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
 
           expect(response).to have_http_status(:success)
           json_response = JSON.parse(response.body)
-          expect(json_response).to eq({
-            "status" => "success",
-            "data" => {
-              "name" => invalid_params[:name],
-              "image" => default_user_image_url,
-            },
-          })
+          expect(json_response["status"]).to eq("success")
+          expect(json_response["data"]["name"]).to eq(valid_user_params[:name])
+          expect(json_response["data"]["image"]).to eq(default_user_image_url)
+
+          user_id = json_response["data"]["id"]
+          is_valid_id = User.exists?(id: user_id)
+          expect(is_valid_id).to be_truthy
+
           user = User.find_by(email: invalid_params[:email])
           expect(user.attributes).not_to have_key('invalid')
         end
