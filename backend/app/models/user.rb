@@ -19,12 +19,12 @@ class User < ActiveRecord::Base
   end
 
   validates :name,
-            presence: { message: 'Name is required.' },
-            length: { minimum: 1, maximum: 25, too_long: 'Name is too long.' },
+            presence: true,
+            length: { maximum: 25 },
             on: [:create, :update]
 
   validates :password, :password_confirmation,
-            length: { minimum: 6, too_short: 'Password is too short.' },
+            length: { minimum: 6 },
             on: [:create, :update],
             allow_blank: true
   validates :image,
