@@ -17,7 +17,7 @@ import { postAuthSignIn } from "@/app/libs/axios/auth/postAuthSignIn";
 
 jest.mock("recoil", () => ({
   ...jest.requireActual<typeof import("recoil")>("recoil"),
-  useSetRecoilState: (atom: RecoilState<any>) => mockUseSetRecoilState(atom)
+  useSetRecoilState: (atom: RecoilState<unknown>) => mockUseSetRecoilState(atom)
 }));
 jest.mock("next/navigation", () => mockNavigation);
 jest.mock("react-hook-form", () => mockReactHookForm);
@@ -51,7 +51,7 @@ describe("useSignInForm", () => {
     const nonSpecificErrorMessage = "Error";
 
     describe("エラーメッセージがInvalid login credentials. Please try again.の時", () => {
-      it("setToastは呼び出されない", async () => {
+      it("setToastが呼び出される", async () => {
         (postAuthSignIn as jest.Mock).mockRejectedValue(new Error(specificErrorMessage));
         (useCheckLogin as jest.Mock).mockReturnValue(() => Promise.reject());
         const { result } = renderHook(() => useSignInForm(), { wrapper: RecoilRoot });
