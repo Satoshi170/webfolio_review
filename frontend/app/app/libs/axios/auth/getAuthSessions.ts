@@ -15,8 +15,7 @@ export const getAuthSessions = async (): Promise<GetAuthSessionsData> => {
   } catch (error) {
     if (axios.isAxiosError(error)) {
       throw new Error(error.message);
-    } else {
-      throw error;
     }
+    throw error;
   }
 };
