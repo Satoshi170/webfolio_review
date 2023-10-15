@@ -6,9 +6,9 @@ import { useRecoilValue } from "recoil";
 import { useUpdateAccountForm } from "@/app/hooks/forms/auth/useUpdateAccountForm";
 import { LoggedInState, loginState } from "@/app/stores/atoms/loginState";
 
-import InputField from "../../auth/InputField";
-import InputImageField from "../../auth/InputImageField";
-import SubmitButton from "../../auth/SubmitButton";
+import SubmitButton from "../../atoms/SubmitButton";
+import InputField from "../../molecules/fields/InputField";
+import InputImageField from "../../molecules/fields/InputImageField";
 
 const AccountInformationTabPanel: React.FC = () => {
   const loginStateValue = useRecoilValue(loginState);

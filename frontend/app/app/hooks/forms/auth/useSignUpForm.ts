@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 
 import { postAuth } from "@/app/libs/axios/auth/postAuth";
-import { refinedSignUpSchema } from "@/app/libs/zod/auth/signUpSchema";
+import { refinedSignUpSchema } from "@/app/libs/zod/formValidations/auth/signUpSchema";
 import { toastState } from "@/app/stores/atoms/toastState";
 import { PostAuthCredentials } from "@/app/types/axios/auth/postAuth";
 
