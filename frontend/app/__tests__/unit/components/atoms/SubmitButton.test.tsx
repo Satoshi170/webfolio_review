@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import SubmitButton from "@/app/components/auth/SubmitButton";
+import SubmitButton from "@/app/components/atoms/SubmitButton";
 
 describe("<SubmitButton />", () => {
   it("レンダリングされ、与えられたtextが表示される", () => {
