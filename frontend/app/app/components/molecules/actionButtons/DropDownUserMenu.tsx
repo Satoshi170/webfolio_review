@@ -1,6 +1,5 @@
 "use client";
 
-import { Image } from "@chakra-ui/next-js";
 import {
   HStack,
   Icon,
@@ -16,24 +15,17 @@ import { useRecoilValue } from "recoil";
 
 import { LoggedInState, loginState } from "@/app/stores/atoms/loginState";
 
-import SignOutButtonWithConfirmation from "../molecules/SignOutButtonWithConfirmation";
+import UserIcon from "../../atoms/user/UserIcon";
+import SignOutButtonWithConfirmation from "../../molecules/actionButtons/auth/SignOutButtonWithConfirmation";
 
-const DropDownUserMenu: React.FC = () => {
+const DropDownUserMenuButton: React.FC = () => {
   const { data } = useRecoilValue(loginState) as LoggedInState;
-  const userIcon = data.image;
 
   return (
     <Menu>
       <MenuButton p="0">
         <HStack>
-          <Image
-            src={userIcon}
-            alt="userImage"
-            width="55"
-            height="55"
-            borderRadius="full"
-            m="0"
-          />
+          <UserIcon image={data.image} name={data.name} diameter={55} />
           <Icon as={IoMdArrowDropdown} />
         </HStack>
       </MenuButton>
@@ -48,4 +40,4 @@ const DropDownUserMenu: React.FC = () => {
   );
 };
 
-export default DropDownUserMenu;
+export default DropDownUserMenuButton;
