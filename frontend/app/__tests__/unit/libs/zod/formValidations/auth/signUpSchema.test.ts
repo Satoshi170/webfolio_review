@@ -5,8 +5,8 @@ import {
   getErrorMessages,
   getErrorMessagesProps
 } from "@/__tests__/helpers/zodTestHelpers";
-import { signUpValidationErrorMessages } from "@/app/constants/auth/signUp/Messages";
-import { refinedSignUpSchema } from "@/app/libs/zod/auth/signUpSchema";
+import { signUpValidationErrorMessages } from "@/app/constants/errors/auth/signUp/Messages";
+import { refinedSignUpSchema } from "@/app/libs/zod/formValidations/auth/signUpSchema";
 import { PostAuthCredentials } from "@/app/types/axios/auth/postAuth";
 
 const getSignUpErrorMessages = (

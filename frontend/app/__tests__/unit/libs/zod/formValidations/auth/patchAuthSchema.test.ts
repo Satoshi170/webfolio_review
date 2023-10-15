@@ -8,11 +8,11 @@ import {
   getErrorMessages,
   getErrorMessagesProps
 } from "@/__tests__/helpers/zodTestHelpers";
-import { patchAuthValidationErrorMessages } from "@/app/constants/auth/patchAuth/Messages";
+import { patchAuthValidationErrorMessages } from "@/app/constants/errors/auth/patchAuth/Messages";
 import {
   PatchAuthImageSchema,
   PatchAuthNonImageSchema
-} from "@/app/libs/zod/auth/patchAuthSchema";
+} from "@/app/libs/zod/formValidations/auth/patchAuthSchema";
 import { PatchAuthParamsBase } from "@/app/types/axios/auth/patchAuth";
 
 const getPatchAuthNonImageErrorMessages = (
