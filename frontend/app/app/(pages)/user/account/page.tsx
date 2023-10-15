@@ -11,16 +11,17 @@ import {
   TabPanels,
   Tabs
 } from "@chakra-ui/react";
-import NextLink from "next/link";
+import { useRouter } from "next/navigation";
 
-import WithRedirectIfLoggedOut from "@/app/components/hoc/WithRedirectIfLoggedOut";
-import AccountDeleteButtonWithConfirmation from "@/app/components/molecules/AccountDeleteButtonWithConfirmation";
+import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
+import AccountDeleteButtonWithConfirmation from "@/app/components/molecules/actionButtons/auth/AccountDeleteButtonWithConfirmation";
 import AccountInformationTabPanel from "@/app/components/organisms/user/AccountInformationTab";
 
 const AccountPage: React.FC = () => {
+  const router = useRouter();
   return (
     <Box flex="1" mx="auto" boxShadow="md" p="12" rounded="md">
-      <Link as={NextLink} href="/" color="blue">
+      <Link as="button" onClick={() => router.back()} color="blue">
         ←戻る
       </Link>
       <Tabs isManual variant="enclosed" my="2">
