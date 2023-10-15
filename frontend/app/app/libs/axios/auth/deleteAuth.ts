@@ -1,5 +1,6 @@
 import axios from "axios";
 
+import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import api from "@/app/libs/axios/api";
 import addAuthInfoToRequest from "@/app/libs/cookie/loadAuthInfo";
 import {
@@ -8,6 +9,14 @@ import {
 } from "@/app/types/axios/auth/deleteAuth";
 
 import { removeAuthInfo } from "../../cookie/removeAuthInfo";
+import { UnauthorizedResponseDataSchema } from "../../zod/apiErrorResponses/auth/responseDataSchema";
+
+const generateErrorMessage = (responseData: DeleteAuthErrorData) => {
+  if (UnauthorizedResponseDataSchema.safeParse(responseData).success) {
+    return responseData.errors.join(", ");
+  }
+  return UNEXPECTED_ERROR_MESSAGE;
+};
 
 export const deleteAuth = async (): Promise<void> => {
   try {
@@ -15,11 +24,10 @@ export const deleteAuth = async (): Promise<void> => {
     removeAuthInfo();
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      const errorResponseData = error.response.data as DeleteAuthErrorData;
-      const errorMessage = errorResponseData.errors.join(", ");
+      const responseData = error.response.data as DeleteAuthErrorData;
+      const errorMessage = generateErrorMessage(responseData);
       throw new Error(errorMessage);
-    } else {
-      throw error;
     }
+    throw error;
   }
 };

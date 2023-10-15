@@ -1,10 +1,19 @@
 import axios from "axios";
 
+import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { PostAuthCredentials, PostAuthErrorData } from "@/app/types/axios/auth/postAuth";
 import { CustomAxiosResponse } from "@/app/types/axios/customAxiosResponse";
 
 import { saveAuthInfoFromHeader } from "../../cookie/saveAuthInfo";
+import { PostAuthFailedDataSchema } from "../../zod/apiErrorResponses/auth/postAuthDataSchema";
 import api from "../api";
+
+const generateErrorMessage = (responseData: PostAuthErrorData) => {
+  if (PostAuthFailedDataSchema.safeParse(responseData).success) {
+    return responseData.errors.fullMessages.join(", ");
+  }
+  return UNEXPECTED_ERROR_MESSAGE;
+};
 
 export const postAuth = async (credentials: PostAuthCredentials): Promise<void> => {
   try {
@@ -12,11 +21,10 @@ export const postAuth = async (credentials: PostAuthCredentials): Promise<void> 
     saveAuthInfoFromHeader(response);
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      const errorResponseData = error.response.data as PostAuthErrorData;
-      const errorMessage = errorResponseData.errors.fullMessages.join(", ");
+      const responseData = error.response.data as PostAuthErrorData;
+      const errorMessage = generateErrorMessage(responseData);
       throw new Error(errorMessage);
-    } else {
-      throw error;
     }
+    throw error;
   }
 };
