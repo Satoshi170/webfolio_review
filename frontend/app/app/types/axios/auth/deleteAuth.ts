@@ -1,10 +1,10 @@
+import { UnauthorizedResponseData } from "../../auth";
+
 export interface DeleteAuthSuccessData {
   status: "success";
   messages: string;
 }
 
-export interface DeleteAuthErrorData {
-  errors: string[];
-}
+export type DeleteAuthErrorData = UnauthorizedResponseData;
 
 export type DeleteAuthData = DeleteAuthSuccessData | DeleteAuthErrorData;
