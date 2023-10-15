@@ -1,17 +1,17 @@
 import { render } from "@testing-library/react";
 import { RecoilRoot, MutableSnapshot, RecoilState } from "recoil";
 
-import { userData } from "@/__tests__/fixtures/auth/userData";
-import Header from "@/app/components/Header";
+import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
+import Header from "@/app/components/organisms/Header";
 import { loginState, LoginState } from "@/app/stores/atoms/loginState";
 
-jest.mock("@/app/components/containers/LoggedInHeaderRightSection", () => {
+jest.mock("@/app/components/molecules/LoggedInHeaderRightSection", () => {
   return function MockedLoggedInHeaderRightSection() {
     return <div>Mocked Logged In</div>;
   };
 });
 
-jest.mock("@/app/components/containers/LoggedOutHeaderRightSection", () => {
+jest.mock("@/app/components/molecules/LoggedOutHeaderRightSection", () => {
   return function MockedLoggedOutHeaderRightSection() {
     return <div>Mocked Logged Out</div>;
   };
@@ -23,12 +23,20 @@ const initializeLoginState =
     set(state, value);
 
 describe("<Header />", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
+
   it("isLoginがtrueの時LoggedInHeaderRightSectionが表示されていること", () => {
     const { getByText } = render(
       <RecoilRoot
         initializeState={initializeLoginState(loginState, {
           isLogin: true,
-          data: userData
+          data: validUserData
         })}
       >
         <Header />

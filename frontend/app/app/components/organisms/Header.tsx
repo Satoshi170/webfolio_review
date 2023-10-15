@@ -3,9 +3,10 @@
 import { Box, Container, Flex, Heading } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 
-import LoggedInHeaderRightSection from "./containers/LoggedInHeaderRightSection";
-import LoggedOutHeaderRightSection from "./containers/LoggedOutHeaderRightSection";
-import { loginState } from "../stores/atoms/loginState";
+import { loginState } from "@/app/stores/atoms/loginState";
+
+import LoggedInHeaderRightSection from "../molecules/LoggedInHeaderRightSection";
+import LoggedOutHeaderRightSection from "../molecules/LoggedOutHeaderRightSection";
 
 const Header: React.FC = () => {
   const { isLogin } = useRecoilValue(loginState);

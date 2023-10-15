@@ -2,9 +2,9 @@
 
 import { Container } from "@chakra-ui/react";
 
-type Props = {
+interface Props {
   children: React.ReactNode;
-};
+}
 
 const Main: React.FC<Props> = ({ children }) => {
   return (
