@@ -2,6 +2,8 @@
 
 import { Heading } from "@chakra-ui/react";
 
-export default function Home() {
-  return <Heading>Jestの動作確認</Heading>;
-}
+const HomePage: React.FC = () => {
+  return <Heading>話題の投稿</Heading>;
+};
+
+export default HomePage;
