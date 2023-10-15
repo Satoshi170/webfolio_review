@@ -3,7 +3,7 @@ import { FieldError } from "react-hook-form";
 
 import InputImageField, {
   InputImageFieldProps
-} from "@/app/components/auth/InputImageField";
+} from "@/app/components/molecules/fields/InputImageField";
 
 interface TestImageFormValues {
   image: File;
@@ -30,6 +30,14 @@ const mockProps: InputImageFieldProps<TestImageFormValues> = {
 };
 
 describe("<InputImageField/>", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
+
   it("正しく名前、ラベルが反映されること", () => {
     render(<InputImageField {...mockProps} />);
     expect(screen.getByLabelText("Image Upload")).toBeInTheDocument();

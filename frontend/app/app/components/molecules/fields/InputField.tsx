@@ -1,7 +1,11 @@
-import { FormControl, FormErrorMessage, FormLabel, Input, Text } from "@chakra-ui/react";
+"use client";
+
+import { FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react";
 import { FieldError, FieldValues, Path, UseFormRegister } from "react-hook-form";
 
-export type InputFieldProps<T extends FieldValues> = {
+import RequiredAsterisk from "../../atoms/RequiredAsterisk";
+
+export interface InputFieldProps<T extends FieldValues> {
   name: Path<T>;
   label: string;
   isRequired?: boolean;
@@ -9,7 +13,7 @@ export type InputFieldProps<T extends FieldValues> = {
   register: UseFormRegister<T>;
   error?: FieldError;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-};
+}
 
 const InputField = <T extends FieldValues>({
   name,
@@ -23,11 +27,7 @@ const InputField = <T extends FieldValues>({
     <FormControl isInvalid={!!error}>
       <FormLabel htmlFor={name as string}>
         {label}
-        {isRequired && (
-          <Text as="span" color="red.500">
-            *
-          </Text>
-        )}
+        {isRequired && <RequiredAsterisk />}
       </FormLabel>
       <Input type={type} id={name as string} {...register(name)} />
       <FormErrorMessage>{error?.message}</FormErrorMessage>

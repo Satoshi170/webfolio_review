@@ -1,7 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import { FieldError } from "react-hook-form";
 
-import InputField, { InputFieldProps } from "@/app/components/auth/InputField";
+import InputField, {
+  InputFieldProps
+} from "@/app/components/molecules/fields/InputField";
 
 interface TestFormValues {
   testInput: string;
@@ -15,6 +17,14 @@ const props: InputFieldProps<TestFormValues> = {
 };
 
 describe("<InputField />", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
+
   it("正しく名前、ラベルが反映されること", () => {
     render(<InputField {...props} />);
     const inputElement = screen.getByLabelText(/Test Input/i);
