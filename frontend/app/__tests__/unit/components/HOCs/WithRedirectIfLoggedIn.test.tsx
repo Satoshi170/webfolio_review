@@ -1,9 +1,9 @@
 import { render } from "@testing-library/react";
 
-import { userData } from "@/__tests__/fixtures/auth/userData";
+import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
 import { mockNavigation, replaceMock } from "@/__tests__/mocks/mockNavigation";
 import mockRecoil from "@/__tests__/mocks/mockRecoil";
-import WithRedirectIfLoggedOut from "@/app/components/hoc/WithRedirectIfLoggedOut";
+import WithRedirectIfLoggedIn from "@/app/components/HOCs/WithRedirectIfLoggedIn";
 import { loginState } from "@/app/stores/atoms/loginState";
 
 const DummyComponent: React.FC = () => {
@@ -12,7 +12,7 @@ const DummyComponent: React.FC = () => {
 
 jest.mock("next/navigation", () => mockNavigation);
 
-describe("WithRedirectIfLoggedOut", () => {
+describe("WithRedirectIfLoggedIn", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -20,23 +20,23 @@ describe("WithRedirectIfLoggedOut", () => {
     jest.resetAllMocks();
   });
 
-  it("isLoginがfalseの時リダイレクトされる", () => {
-    const WrappedComponent = WithRedirectIfLoggedOut(DummyComponent);
+  it("isLoginがtrueの時リダイレクトされる", () => {
+    const WrappedComponent = WithRedirectIfLoggedIn(DummyComponent);
     render(
       mockRecoil(
-        [{ atom: loginState, value: { isLogin: false, data: null } }],
+        [{ atom: loginState, value: { isLogin: true, data: validUserData } }],
         <WrappedComponent />
       )
     );
 
-    expect(replaceMock).toHaveBeenCalledWith("/auth/sign_in");
+    expect(replaceMock).toHaveBeenCalledWith("/");
   });
 
-  it("isLoginがtrueの時コンポーネントがレンダリングされる", () => {
-    const WrappedComponent = WithRedirectIfLoggedOut(DummyComponent);
+  it("isLoginがfalseの時コンポーネントがレンダリングされる", () => {
+    const WrappedComponent = WithRedirectIfLoggedIn(DummyComponent);
     const { getByText } = render(
       mockRecoil(
-        [{ atom: loginState, value: { isLogin: true, data: userData } }],
+        [{ atom: loginState, value: { isLogin: false, data: null } }],
         <WrappedComponent />
       )
     );
