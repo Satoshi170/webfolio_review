@@ -3,9 +3,9 @@
 import { Box, Divider, Heading, Text, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 
-import InputField from "@/app/components/auth/InputField";
-import SubmitButton from "@/app/components/auth/SubmitButton";
-import WithRedirectIfLoggedIn from "@/app/components/hoc/WithRedirectIfLoggedIn";
+import WithRedirectIfLoggedIn from "@/app/components/HOCs/WithRedirectIfLoggedIn";
+import SubmitButton from "@/app/components/atoms/SubmitButton";
+import InputField from "@/app/components/molecules/fields/InputField";
 import { useSignUpForm } from "@/app/hooks/forms/auth/useSignUpForm";
 const SignUp: React.FC = () => {
   const { register, handleSubmit, errors, isValid, onSubmit, isLoading } =
