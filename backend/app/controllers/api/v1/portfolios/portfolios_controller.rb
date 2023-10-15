@@ -1,6 +1,7 @@
-class Api::V1::PortfoliosController < ApplicationController
+class Api::V1::Portfolios::PortfoliosController < ApplicationController
   before_action :authenticate_api_v1_user!, only: [:create, :update, :destroy]
   before_action :set_portfolio, only: [:show, :update, :destroy]
+  before_action :authorize_user_for_portfolio!, only: [:update, :destroy]
 
   def index
     portfolios = Portfolio.includes(user: { image_attachment: :blob }).all.order(updated_at: :desc)
@@ -25,7 +26,7 @@ class Api::V1::PortfoliosController < ApplicationController
       render json: {
                status: "error",
                message: "Failed to create portfolio",
-               errors: @portfolio.errors,
+               errors: @portfolio.errors.full_messages,
              },
              status: :unprocessable_entity
     end
@@ -51,7 +52,7 @@ class Api::V1::PortfoliosController < ApplicationController
       render json: {
                status: "error",
                message: "Failed to update portfolio",
-               errors: @portfolio.errors,
+               errors: @portfolio.errors.full_messages,
              },
              status: :unprocessable_entity
     end
@@ -61,7 +62,7 @@ class Api::V1::PortfoliosController < ApplicationController
     @portfolio.destroy
     render json: {
              status: "success",
-             message: "Portfolio deleted successfully",
+             message: "Portfolio destoried successfully",
            },
            status: :ok
   end
@@ -70,6 +71,18 @@ class Api::V1::PortfoliosController < ApplicationController
 
   def set_portfolio
     @portfolio = Portfolio.find(params[:id])
+  end
+
+  def authorize_user_for_portfolio!
+    unless current_api_v1_user == @portfolio.user
+      render json: {
+               status: "error",
+               message: "Failed to #{action_name} portfolio",
+               errors: ["Permission denied"],
+             },
+             status: :forbidden
+      nil
+    end
   end
 
   def portfolio_params

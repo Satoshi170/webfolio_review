@@ -90,7 +90,6 @@ RSpec.describe "Api::V1::Portfolios", type: :request do
   describe "PATCH /portfolios/:id" do
     let!(:portfolio) { create(:portfolio, user: user) }
     let(:new_params) { { title: "PatchTitle", content: "PatchContent" } }
-    let(:invalid_portfolio_params) { new_params.merge(invalid_param: "invalid") }
 
     context "サインイン状態の時" do
       let(:auth_headers) { sign_in({ email: user.email, password: user.password }) }
@@ -107,7 +106,22 @@ RSpec.describe "Api::V1::Portfolios", type: :request do
         end
       end
 
+      context "無効なパラメータが指定された場合" do
+        let(:toolong_title_portfolio_params) { new_params.merge(title: "") }
+        it "portfolioの情報が更新されないこと" do
+          expect do
+            patch "/api/v1/portfolios/#{portfolio.id}",
+            params: { portfolio: toolong_title_portfolio_params }, headers: auth_headers
+          end.not_to change { Portfolio.find(portfolio.id).attributes }
+
+          expect(response).to have_http_status(:unprocessable_entity)
+          json_response = JSON.parse(response.body)
+          expect(json_response["status"]).to eq("error")
+        end
+      end
+
       context "ストロングパラメータ以外のパラメータが指定された場合" do
+        let(:invalid_portfolio_params) { new_params.merge(invalid_param: "invalid") }
         it "未知のパラメータを無視しユーザー情報を更新" do
           patch "/api/v1/portfolios/#{portfolio.id}", params: { portfolio: new_params },
                                                       headers: auth_headers
