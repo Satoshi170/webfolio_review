@@ -21,7 +21,7 @@ import RenderLink from "@/app/libs/linkify/RenderLink";
 import { loginState } from "@/app/stores/atoms/loginState";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
-import UserIcon from "../../atoms/user/UserIcon";
+import UserIcon from "../../atoms/users/UserIcon";
 import OptionPostMenuButton from "../../molecules/actionButtons/post/OptionMenuButton";
 
 interface Props {
@@ -48,7 +48,7 @@ const PostCard: React.FC<Props> = ({ portfolioData, isLink = false }) => {
       <CardBody
         py="1"
         as={isLink ? NextLink : undefined}
-        href={isLink ? `/post/${id}` : undefined}
+        href={isLink ? `/posts/${id}` : undefined}
       >
         <Heading fontSize="xl">{title}</Heading>
         <Text fontSize="md" mt="3">

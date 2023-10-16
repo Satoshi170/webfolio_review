@@ -4,7 +4,7 @@ import { Box } from "@chakra-ui/react";
 import { Suspense } from "react";
 
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
-import PostCard from "@/app/components/organisms/post/PostCard";
+import PostCard from "@/app/components/organisms/posts/PostCard";
 import { useGetPortfoliosOperation } from "@/app/hooks/operations/portfolio/useGetPortfoliosOperation";
 
 const PostsPage: React.FC = () => {

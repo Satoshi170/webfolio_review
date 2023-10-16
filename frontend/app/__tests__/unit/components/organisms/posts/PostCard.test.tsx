@@ -4,7 +4,7 @@ import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
 import { validPortfolioData } from "@/__tests__/fixtures/portfolio/validPortfolioData";
 import { mockNavigation } from "@/__tests__/mocks/mockNavigation";
 import mockRecoil from "@/__tests__/mocks/mockRecoil";
-import PostCard from "@/app/components/organisms/post/PostCard";
+import PostCard from "@/app/components/organisms/posts/PostCard";
 import { loginState } from "@/app/stores/atoms/loginState";
 
 jest.mock("next/navigation", () => mockNavigation);

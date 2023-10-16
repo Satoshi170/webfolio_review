@@ -5,7 +5,7 @@ import Error from "next/error";
 import { usePathname } from "next/navigation";
 
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
-import PostCard from "@/app/components/organisms/post/PostCard";
+import PostCard from "@/app/components/organisms/posts/PostCard";
 import { useGetPortfoliosByIdOperation } from "@/app/hooks/operations/portfolio/useGetPortfoliosByIdOperation";
 
 const PostPageById: React.FC = () => {

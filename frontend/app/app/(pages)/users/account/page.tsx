@@ -15,7 +15,7 @@ import { useRouter } from "next/navigation";
 
 import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
 import AccountDeleteButtonWithConfirmation from "@/app/components/molecules/actionButtons/auth/AccountDeleteButtonWithConfirmation";
-import AccountInformationTabPanel from "@/app/components/organisms/user/AccountInformationTab";
+import AccountInformationTabPanel from "@/app/components/organisms/users/AccountInformationTab";
 
 const AccountPage: React.FC = () => {
   const router = useRouter();
