@@ -1,73 +1,38 @@
 "use client";
 
-import {
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Divider,
-  Flex,
-  Heading,
-  IconButton,
-  Stack,
-  Text
-} from "@chakra-ui/react";
-import Linkify from "linkify-react";
-import NextLink from "next/link";
-import { BiLike } from "react-icons/bi";
+import { Card } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 
-import RenderLink from "@/app/libs/linkify/RenderLink";
 import { loginState } from "@/app/stores/atoms/loginState";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
-import UserIcon from "../../atoms/users/UserIcon";
-import OptionPostMenuButton from "../../molecules/actionButtons/post/OptionMenuButton";
+import PostCardBody from "../../molecules/posts/PostCardBody";
+import PostCardFooter from "../../molecules/posts/PostCardFooter";
+import PostCardHeader from "../../molecules/posts/PostCardHeader";
 
+interface LinkOptions {
+  header?: boolean;
+  body?: boolean;
+}
 interface Props {
   portfolioData: PortfolioData;
-  isLink?: boolean;
+  linkOptions?: LinkOptions;
 }
 
-const PostCard: React.FC<Props> = ({ portfolioData, isLink = false }) => {
-  const { id, title, content, updatedAt, user } = portfolioData;
+const PostCard: React.FC<Props> = ({ portfolioData, linkOptions }) => {
+  const { user } = portfolioData;
   const { isLogin, data } = useRecoilValue(loginState);
   const isUserPost = isLogin ? data.id == user.id : false;
 
   return (
     <Card py="1" w="md">
-      <CardHeader>
-        <Flex>
-          <Flex flex="1" gap="4" alignItems="center" flexWrap="wrap">
-            <UserIcon image={user.image} name={user.name} diameter={39} />
-            <Heading fontSize="md">{user.name}</Heading>
-          </Flex>
-          {isUserPost && <OptionPostMenuButton portfolioData={portfolioData} />}
-        </Flex>
-      </CardHeader>
-      <CardBody
-        py="1"
-        as={isLink ? NextLink : undefined}
-        href={isLink ? `/posts/${id}` : undefined}
-      >
-        <Heading fontSize="xl">{title}</Heading>
-        <Text fontSize="md" mt="3">
-          <Linkify options={{ render: RenderLink }}>{content}</Linkify>
-        </Text>
-      </CardBody>
-      <CardFooter>
-        <Stack w="full">
-          <Divider />
-          <Flex justifyContent="space-between">
-            <Flex my="auto">
-              <IconButton aria-label="Send Like" icon={<BiLike />} variant="ghost" />
-            </Flex>
-            <Text fontSize="sm" color="blackAlpha.500" my="auto">
-              {updatedAt.toLocaleDateString()}
-            </Text>
-          </Flex>
-        </Stack>
-      </CardFooter>
+      <PostCardHeader
+        portfolioData={portfolioData}
+        isLink={linkOptions?.header}
+        isUserPost={isUserPost}
+      />
+      <PostCardBody portfolioData={portfolioData} isLink={linkOptions?.body} />
+      <PostCardFooter portfolioData={portfolioData} />
     </Card>
   );
 };
