@@ -3,7 +3,6 @@
 import {
   Box,
   Heading,
-  Link,
   Spacer,
   Tab,
   TabList,
@@ -11,19 +10,16 @@ import {
   TabPanels,
   Tabs
 } from "@chakra-ui/react";
-import { useRouter } from "next/navigation";
 
 import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
+import GoBackLink from "@/app/components/atoms/GoBackLink";
 import AccountDeleteButtonWithConfirmation from "@/app/components/molecules/actionButtons/auth/AccountDeleteButtonWithConfirmation";
 import AccountInformationTabPanel from "@/app/components/organisms/users/AccountInformationTab";
 
 const AccountPage: React.FC = () => {
-  const router = useRouter();
   return (
     <Box flex="1" mx="auto" boxShadow="md" p="12" rounded="md">
-      <Link as="button" onClick={() => router.back()} color="blue">
-        ←戻る
-      </Link>
+      <GoBackLink />
       <Tabs isManual variant="enclosed" my="2">
         <TabList>
           <Tab>アカウント設定</Tab>
