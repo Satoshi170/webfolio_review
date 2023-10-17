@@ -11,7 +11,7 @@ export const useGetPortfoliosByIdOperation = (pathname: string) => {
   const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(null);
   const [status, setStatus] = useState<number | null>(null);
   const setToast = useSetRecoilState(toastState);
-  const id = getIdOrTriggerNotFound({ pathname, routeKey: "post" });
+  const id = getIdOrTriggerNotFound({ pathname, routeKey: "posts" });
 
   useEffect(() => {
     const getPortfoliosByIdOperation = async (id: number) => {
@@ -31,5 +31,5 @@ export const useGetPortfoliosByIdOperation = (pathname: string) => {
     };
     void getPortfoliosByIdOperation(id);
   }, [id, setPortfolioData, setToast]);
-  return { status: status, portfolioData: portfolioData };
+  return { status, portfolioData };
 };
