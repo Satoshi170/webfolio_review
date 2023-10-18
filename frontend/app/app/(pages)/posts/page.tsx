@@ -14,7 +14,11 @@ const PostsPage: React.FC = () => {
     <Suspense fallback={<LoadingSpinner />}>
       <Box h="auto" m="auto" maxW="lg" alignItems="center">
         {portfoliosData.map((portfolioData, i) => (
-          <PostCard portfolioData={portfolioData} isLink={true} key={i} />
+          <PostCard
+            portfolioData={portfolioData}
+            linkOptions={{ header: true, body: true }}
+            key={i}
+          />
         ))}
       </Box>
     </Suspense>
