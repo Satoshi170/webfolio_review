@@ -26,60 +26,52 @@ describe("useGetPortfoliosByIdOperation", () => {
     jest.resetAllMocks();
   });
 
-  describe("useGetPortfoliosByIdOperation", () => {
-    const testPathname = "/post/1";
-    (getIdOrTriggerNotFound as jest.Mock).mockReturnValue(1);
+  const testPathname = "/post/1";
+  (getIdOrTriggerNotFound as jest.Mock).mockReturnValue(1);
 
-    describe("getPortfoliosByIdがエラーを返さない時", () => {
-      describe("statusが200の時", () => {
+  describe("getPortfoliosByIdがエラーを返さない時", () => {
+    describe("statusが200の時", () => {
+      it("返却されるportfolioDataはvalidPortfolioDataである", async () => {
         const mockResponse = { data: validPortfolioData };
-        it("返却されるportfolioDataはvalidPortfolioDataである", async () => {
-          (getPortfoliosById as jest.Mock).mockResolvedValue({
-            status: 200,
-            response: mockResponse
-          });
-          const { result } = renderHook(
-            () => useGetPortfoliosByIdOperation(testPathname),
-            {
-              wrapper: RecoilRoot
-            }
-          );
-          await waitFor(() => {
-            expect(result.current.status).toBe(200);
-            expect(result.current.portfolioData).toEqual(validPortfolioData);
-          });
+        (getPortfoliosById as jest.Mock).mockResolvedValue({
+          status: 200,
+          response: mockResponse
         });
-      });
-
-      describe("statusが200でない時", () => {
-        it("返却されるportfolioDataはnullである", async () => {
-          (getPortfoliosById as jest.Mock).mockResolvedValue({
-            status: 404,
-            response: null
-          });
-          const { result } = renderHook(
-            () => useGetPortfoliosByIdOperation(testPathname),
-            {
-              wrapper: RecoilRoot
-            }
-          );
-          await waitFor(() => {
-            expect(result.current.status).toBe(404);
-            expect(result.current.portfolioData).toBeNull();
-          });
+        const { result } = renderHook(() => useGetPortfoliosByIdOperation(testPathname), {
+          wrapper: RecoilRoot
+        });
+        await waitFor(() => {
+          expect(result.current.status).toBe(200);
+          expect(result.current.portfolioData).toEqual(validPortfolioData);
         });
       });
     });
 
-    describe("getPortfoliosByIdがエラーを返す時", () => {
-      it("setToastが呼び出される", async () => {
-        (getPortfoliosById as jest.Mock).mockRejectedValue(new Error("Error"));
-        renderHook(() => useGetPortfoliosByIdOperation(testPathname), {
+    describe("statusが200でない時", () => {
+      it("返却されるportfolioDataはnullである", async () => {
+        (getPortfoliosById as jest.Mock).mockResolvedValue({
+          status: 404,
+          response: null
+        });
+        const { result } = renderHook(() => useGetPortfoliosByIdOperation(testPathname), {
           wrapper: RecoilRoot
         });
         await waitFor(() => {
-          expect(mockSetToast).toHaveBeenCalled();
+          expect(result.current.status).toBe(404);
+          expect(result.current.portfolioData).toBeNull();
         });
+      });
+    });
+  });
+
+  describe("getPortfoliosByIdがエラーを返す時", () => {
+    it("setToastが呼び出される", async () => {
+      (getPortfoliosById as jest.Mock).mockRejectedValue(new Error("Error"));
+      renderHook(() => useGetPortfoliosByIdOperation(testPathname), {
+        wrapper: RecoilRoot
+      });
+      await waitFor(() => {
+        expect(mockSetToast).toHaveBeenCalled();
       });
     });
   });

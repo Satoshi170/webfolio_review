@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 interface Props {
   text?: string;
 }
+
 const GoBackLink: React.FC<Props> = ({ text = "戻る" }) => {
   const router = useRouter();
 
