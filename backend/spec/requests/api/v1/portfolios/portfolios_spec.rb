@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Api::V1::Portfolios", type: :request do
+RSpec.describe "Api::V1::Portfolios::Portfolios", type: :request do
   let!(:user) { create(:user) }
 
   describe "GET /portfolios" do
