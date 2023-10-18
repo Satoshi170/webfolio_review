@@ -1,6 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useSetRecoilState } from "recoil";
 
+import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { deleteAuth } from "@/app/libs/axios/auth/deleteAuth";
 import { toastState } from "@/app/stores/atoms/toastState";
 
@@ -22,8 +23,7 @@ export const useDeleteAuthOperation = () => {
         timestamp: Date.now()
       });
     } catch (e) {
-      const errorMessage =
-        e instanceof Error ? e.message : "予期せぬエラーが発生しました";
+      const errorMessage = e instanceof Error ? e.message : UNEXPECTED_ERROR_MESSAGE;
       setToast({
         message: errorMessage,
         status: "error",

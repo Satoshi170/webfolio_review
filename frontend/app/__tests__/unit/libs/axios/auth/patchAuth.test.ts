@@ -7,6 +7,14 @@ jest.mock("@/app/libs/cookie/loadAuthInfo", () => mockAddAuthInfoToRequest);
 jest.mock("@/app/libs/axios/api", () => mockApi);
 
 describe("patchAuth", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    jest.resetAllMocks();
+  });
+
   const errorMessage = "Error message";
   const networkError = "Network error";
 
@@ -21,10 +29,6 @@ describe("patchAuth", () => {
     image: new File([""], "fileName"),
     otherParam: "value"
   };
-
-  beforeEach(() => {
-    jest.resetAllMocks();
-  });
 
   it("imageが含まれる場合、FormDataとしてパラメータが送信される", async () => {
     mockPatch.mockResolvedValue({});

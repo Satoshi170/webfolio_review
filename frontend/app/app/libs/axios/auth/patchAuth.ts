@@ -1,13 +1,27 @@
 import axios, { AxiosRequestConfig } from "axios";
 
+import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
+import { UnauthorizedResponseData } from "@/app/types/auth";
 import {
   PatchAuthErrorData,
+  PatchAuthFailedData,
   PatchAuthParams,
   PatchAuthParamsBase
 } from "@/app/types/axios/auth/patchAuth";
 
 import addAuthInfoToRequest from "../../cookie/loadAuthInfo";
+import { PatchAuthFailedDataSchema } from "../../zod/apiErrorResponses/auth/patchAuthDataSchema";
+import { UnauthorizedResponseDataSchema } from "../../zod/apiErrorResponses/auth/responseDataSchema";
 import api from "../api";
+
+const generateErrorMessage = (responseData: PatchAuthErrorData) => {
+  if (UnauthorizedResponseDataSchema.safeParse(responseData).success) {
+    return (responseData as UnauthorizedResponseData).errors.join(", ");
+  } else if (PatchAuthFailedDataSchema.safeParse(responseData).success) {
+    return (responseData as PatchAuthFailedData).errors.fullMessages.join(", ");
+  }
+  return UNEXPECTED_ERROR_MESSAGE;
+};
 
 export const patchAuth = async (
   params: PatchAuthParams,
@@ -34,11 +48,10 @@ export const patchAuth = async (
     await api.patch("/auth", data, config);
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      const errorResponseData = error.response.data as PatchAuthErrorData;
-      const errorMessage = errorResponseData.errors.fullMessages.join(", ");
+      const responseData = error.response.data as PatchAuthErrorData;
+      const errorMessage = generateErrorMessage(responseData);
       throw new Error(errorMessage);
-    } else {
-      throw error;
     }
+    throw error;
   }
 };

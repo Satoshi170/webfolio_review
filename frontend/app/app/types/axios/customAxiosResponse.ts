@@ -6,6 +6,6 @@ interface CustomHeaders {
   uid: string;
 }
 
-export type CustomAxiosResponse<T = any> = AxiosResponse<T> & {
+export type CustomAxiosResponse<T = unknown> = AxiosResponse<T> & {
   headers: AxiosResponse<T>["headers"] & CustomHeaders;
 };

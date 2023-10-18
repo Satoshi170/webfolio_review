@@ -6,9 +6,7 @@ class Api::V1::Auth::RegistrationsController < DeviseTokenAuth::RegistrationsCon
       {}
     else
       response_data = opts[:resource_json] ||
-                      @resource.as_json(only: [:name]).merge(
-                        image: current_api_v1_user.image_url
-                      )
+      UserResource.new(current_api_v1_user).serializable_hash
       response_data
     end
   end

@@ -11,10 +11,8 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
         expect(response.headers).to include("access-token", "client", "expiry", "uid")
         json_response = JSON.parse(response.body)
         expect(json_response).to eq({
-          "data" => {
-            "name" => user.name,
-            "image" => user.image_url,
-          },
+          "success" => true,
+          "message" => "Signed in successfly",
         })
       end
     end
@@ -53,19 +51,6 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
         expect(response.body).to include('"success":false')
       end
     end
-    # TODO:ログイン状態でないとアクセスできないエンドポイントを実装したときにコメントアウトを外す
-    # context "ログアウトに成功したとき" do
-    #   before do
-    #     sign_in(email: user.email, password: user.password)
-    #     @auth_headers = response.headers.slice("access-token", "client", "expiry", "uid")
-    #     sign_out(@auth_headers)
-    #   end
-
-    #   it "認証トークンが無効になり、アクセスが拒否されること" do
-    #     get "/api/v1/some_endpoint", headers: @auth_headers
-    #     expect(response).to have_http_status(:unauthorized)
-    #   end
-    # end
   end
 
   describe "GET /auth/sessions" do
@@ -81,6 +66,7 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
         expect(json_response).to eq({
           "is_login" => true,
           "data" => {
+            "id" => user.id,
             "name" => user.name,
             "image" => user.image_url,
           },

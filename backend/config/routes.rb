@@ -11,6 +11,11 @@ Rails.application.routes.draw do
       namespace :auth do
         resources :sessions, only: [:index]
       end
+
+      scope module: "portfolios" do
+        resources :portfolios
+        resources :user_portfolios, only: [:index]
+      end
     end
   end
 end

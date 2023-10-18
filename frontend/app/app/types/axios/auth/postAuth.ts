@@ -1,3 +1,7 @@
+import { z } from "zod";
+
+import { PostAuthFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/postAuthDataSchema";
+
 import { PostAuthSignInCredentials } from "./postAuthSignIn";
 import { UserData } from "../../auth";
 
@@ -11,11 +15,6 @@ export interface PostAuthSuccessData {
   data: UserData;
 }
 
-export interface PostAuthErrorData {
-  status: "error";
-  errors: {
-    fullMessages: string[];
-  };
-}
-
+export type PostAuthFailedData = z.infer<typeof PostAuthFailedDataSchema>;
+export type PostAuthErrorData = PostAuthFailedData;
 export type PostAuthData = PostAuthSuccessData | PostAuthErrorData;

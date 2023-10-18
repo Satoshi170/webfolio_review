@@ -1,4 +1,6 @@
-import { UserData } from "../../auth";
+import { z } from "zod";
+
+import { PostAuthSignInFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/postAuthSignInDataSchema";
 
 export interface PostAuthSignInCredentials {
   email: string;
@@ -6,12 +8,10 @@ export interface PostAuthSignInCredentials {
 }
 
 export interface PostAuthSignInSuccessData {
-  data: UserData;
+  success: true;
+  message: string;
 }
 
-export interface PostAuthSignInErrorData {
-  success: false;
-  errors: string[];
-}
-
+export type PostAuthSignInFailedData = z.infer<typeof PostAuthSignInFailedDataSchema>;
+export type PostAuthSignInErrorData = PostAuthSignInFailedData;
 export type PostAuthSignInData = PostAuthSignInSuccessData | PostAuthSignInErrorData;

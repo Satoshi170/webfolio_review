@@ -17,7 +17,7 @@ import { postAuth } from "@/app/libs/axios/auth/postAuth";
 
 jest.mock("recoil", () => ({
   ...jest.requireActual<typeof import("recoil")>("recoil"),
-  useSetRecoilState: (atom: RecoilState<any>) => mockUseSetRecoilState(atom)
+  useSetRecoilState: (atom: RecoilState<unknown>) => mockUseSetRecoilState(atom)
 }));
 jest.mock("next/navigation", () => mockNavigation);
 jest.mock("react-hook-form", () => mockReactHookForm);

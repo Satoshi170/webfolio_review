@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { useSetRecoilState } from "recoil";
 
-import { DeleteAuthSignOut } from "@/app/libs/axios/auth/deleteAuthSignOut";
+import { deleteAuthSignOut } from "@/app/libs/axios/auth/deleteAuthSignOut";
 import { loginState } from "@/app/stores/atoms/loginState";
 import { toastState } from "@/app/stores/atoms/toastState";
 
@@ -12,7 +12,7 @@ export const useDeleteAuthSignOutOperation = () => {
 
   const deleteAuthSignOutOperation = async () => {
     try {
-      await DeleteAuthSignOut();
+      await deleteAuthSignOut();
       setLogin({ isLogin: false, data: null });
       router.replace("/auth/sign_in");
       setToast({

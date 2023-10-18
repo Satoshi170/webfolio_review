@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import {
   PatchAuthImageSchema,
   PatchAuthNonImageSchema
-} from "@/app/libs/zod/auth/patchAuthSchema";
+} from "@/app/libs/zod/formValidations/auth/patchAuthSchema";
 import { PatchAuthParams } from "@/app/types/axios/auth/patchAuth";
 
 import { usePatchAuthOperation } from "../../operations/auth/usePatchAuthOperation";
