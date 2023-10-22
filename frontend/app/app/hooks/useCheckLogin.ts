@@ -14,12 +14,15 @@ export const useCheckLogin = () => {
       const responseData = await getAuthSessions();
       if (responseData.isLogin) {
         const { id, name, image } = responseData.data;
-        setLogin({ isLogin: true, data: { id, name, image: image || defaultUserImage } });
+        setLogin({
+          isLogin: true,
+          userData: { id, name, image: image || defaultUserImage }
+        });
       } else {
-        setLogin({ isLogin: false, data: null });
+        setLogin({ isLogin: false, userData: null });
       }
     } catch (error) {
-      setLogin({ isLogin: false, data: null });
+      setLogin({ isLogin: false, userData: null });
     }
   }, [setLogin]);
 

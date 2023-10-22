@@ -33,7 +33,12 @@ describe("<PostCard/>", () => {
           const portfolioOwnerData = { ...validUserData, id: validPortfolioData.user.id };
           render(
             mockRecoil(
-              [{ atom: loginState, value: { isLogin: true, data: portfolioOwnerData } }],
+              [
+                {
+                  atom: loginState,
+                  value: { isLogin: true, userData: portfolioOwnerData }
+                }
+              ],
               <PostCard portfolioData={validPortfolioData} />
             )
           );
@@ -50,7 +55,9 @@ describe("<PostCard/>", () => {
           };
           render(
             mockRecoil(
-              [{ atom: loginState, value: { isLogin: true, data: nonOwnerUserData } }],
+              [
+                { atom: loginState, value: { isLogin: true, userData: nonOwnerUserData } }
+              ],
               <PostCard portfolioData={validPortfolioData} />
             )
           );
@@ -64,7 +71,7 @@ describe("<PostCard/>", () => {
       it("<OptionPostMenuButton />がレンダリングされない", () => {
         render(
           mockRecoil(
-            [{ atom: loginState, value: { isLogin: false, data: null } }],
+            [{ atom: loginState, value: { isLogin: false, userData: null } }],
             <PostCard portfolioData={validPortfolioData} />
           )
         );

@@ -36,7 +36,7 @@ describe("<Header />", () => {
       <RecoilRoot
         initializeState={initializeLoginState(loginState, {
           isLogin: true,
-          data: validUserData
+          userData: validUserData
         })}
       >
         <Header />
@@ -49,7 +49,10 @@ describe("<Header />", () => {
   it("isLoginがfalseの時LoggedOutHeaderRightSectionが表示されていること", () => {
     const { getByText } = render(
       <RecoilRoot
-        initializeState={initializeLoginState(loginState, { isLogin: false, data: null })}
+        initializeState={initializeLoginState(loginState, {
+          isLogin: false,
+          userData: null
+        })}
       >
         <Header />
       </RecoilRoot>

@@ -19,18 +19,18 @@ import UserIcon from "../../atoms/users/UserIcon";
 import SignOutButtonWithConfirmation from "../../molecules/actionButtons/auth/SignOutButtonWithConfirmation";
 
 const DropDownUserMenuButton: React.FC = () => {
-  const { data } = useRecoilValue(loginState) as LoggedInState;
+  const { userData } = useRecoilValue(loginState) as LoggedInState;
 
   return (
     <Menu>
       <MenuButton p="0">
         <HStack>
-          <UserIcon image={data.image} name={data.name} diameter={55} />
+          <UserIcon image={userData.image} name={userData.name} diameter={55} />
           <Icon as={IoMdArrowDropdown} />
         </HStack>
       </MenuButton>
       <MenuList color="gray.800">
-        <MenuItem as={NextLink} href={`/users/${data.id}/posts`}>
+        <MenuItem as={NextLink} href={`/users/${userData.id}/posts`}>
           自分の投稿
         </MenuItem>
         <MenuDivider />

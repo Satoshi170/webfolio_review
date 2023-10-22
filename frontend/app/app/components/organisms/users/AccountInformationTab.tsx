@@ -12,7 +12,7 @@ import InputImageField from "../../molecules/fields/InputImageField";
 
 const AccountInformationTabPanel: React.FC = () => {
   const loginStateValue = useRecoilValue(loginState);
-  const data = (loginStateValue as LoggedInState).data;
+  const data = (loginStateValue as LoggedInState).userData;
   const {
     register,
     handleSubmit,

@@ -13,7 +13,7 @@ export const useDeleteAuthSignOutOperation = () => {
   const deleteAuthSignOutOperation = async () => {
     try {
       await deleteAuthSignOut();
-      setLogin({ isLogin: false, data: null });
+      setLogin({ isLogin: false, userData: null });
       router.replace("/auth/sign_in");
       setToast({
         message: "ログアウトに成功しました",

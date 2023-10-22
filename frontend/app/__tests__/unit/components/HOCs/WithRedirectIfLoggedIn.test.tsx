@@ -24,7 +24,7 @@ describe("WithRedirectIfLoggedIn", () => {
     const WrappedComponent = WithRedirectIfLoggedIn(DummyComponent);
     render(
       mockRecoil(
-        [{ atom: loginState, value: { isLogin: true, data: validUserData } }],
+        [{ atom: loginState, value: { isLogin: true, userData: validUserData } }],
         <WrappedComponent />
       )
     );
@@ -36,7 +36,7 @@ describe("WithRedirectIfLoggedIn", () => {
     const WrappedComponent = WithRedirectIfLoggedIn(DummyComponent);
     const { getByText } = render(
       mockRecoil(
-        [{ atom: loginState, value: { isLogin: false, data: null } }],
+        [{ atom: loginState, value: { isLogin: false, userData: null } }],
         <WrappedComponent />
       )
     );
