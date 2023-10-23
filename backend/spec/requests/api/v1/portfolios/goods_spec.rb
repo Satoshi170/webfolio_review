@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Api::V1::Goods", type: :request do
+RSpec.describe "Api::V1::Portfolios::Goods", type: :request do
   let(:user) { create(:user) }
   let(:portfolio) { create(:portfolio) }
   let(:auth_headers) { sign_in({ email: user.email, password: user.password }) }
