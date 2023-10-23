@@ -1,9 +1,11 @@
 "use client";
 
-import { CardFooter, Divider, Flex, IconButton, Stack, Text } from "@chakra-ui/react";
-import { BiLike } from "react-icons/bi";
+import { CardFooter, Divider, Flex, Stack, Text } from "@chakra-ui/react";
 
+import { usePostOrDeletePortfoliosByIdGoodsOperation } from "@/app/hooks/operations/portfolio/good/usePostOrDeletePortfoliosByIdGoodsOperation";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+
+import LikeButton from "../actionButtons/LikeButton";
 
 interface Props {
   portfolioData: PortfolioData;
@@ -11,6 +13,8 @@ interface Props {
 
 const PostCardFooter: React.FC<Props> = ({ portfolioData }) => {
   const { updatedAt } = portfolioData;
+  const { isLiked, toggleLike } =
+    usePostOrDeletePortfoliosByIdGoodsOperation(portfolioData);
 
   return (
     <CardFooter>
@@ -18,7 +22,7 @@ const PostCardFooter: React.FC<Props> = ({ portfolioData }) => {
         <Divider />
         <Flex justifyContent="space-between">
           <Flex my="auto">
-            <IconButton aria-label="Send Like" icon={<BiLike />} variant="ghost" />
+            <LikeButton onClick={toggleLike} isLiked={isLiked} />
           </Flex>
           <Text fontSize="sm" color="blackAlpha.500" my="auto">
             {updatedAt.toLocaleDateString()}
