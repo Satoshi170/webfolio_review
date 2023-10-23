@@ -7,5 +7,6 @@ export const validPortfolioData: PortfolioData = {
   title: "testTitle",
   content: "testContent",
   updatedAt: new Date(),
-  user: validUserData
+  user: validUserData,
+  goods: [{ userId: 1 }, { userId: 2 }, { userId: 3 }]
 };
