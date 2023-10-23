@@ -18,6 +18,14 @@ jest.mock("@/app/components/molecules/posts/PostCardHeader", () => {
   return MockedPostCardHeader;
 });
 
+jest.mock("@/app/components/molecules/posts/PostCardFooter", () => {
+  const MockedPostCardFooter: React.FC = () => {
+    return <div>MockedPostCardFooter</div>;
+  };
+
+  return MockedPostCardFooter;
+});
+
 describe("<PostCard/>", () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -29,7 +37,7 @@ describe("<PostCard/>", () => {
   describe("isUserPost", () => {
     describe("isLoginがtrueの場合", () => {
       describe("data.idとportfolioData.user.idが一致する場合", () => {
-        it("<OptionPostMenuButton />がレンダリングされる", () => {
+        it("isUserPostはtrueである", () => {
           const portfolioOwnerData = { ...validUserData, id: validPortfolioData.user.id };
           render(
             mockRecoil(
@@ -48,7 +56,7 @@ describe("<PostCard/>", () => {
       });
 
       describe("data.idとportfolioData.user.idが一致しない場合", () => {
-        it("<OptionPostMenuButton />がレンダリングされない", () => {
+        it("isUserPostはfalseである", () => {
           const nonOwnerUserData = {
             ...validUserData,
             id: validPortfolioData.user.id + 1
@@ -68,7 +76,7 @@ describe("<PostCard/>", () => {
     });
 
     describe("isLoginがfalseの場合", () => {
-      it("<OptionPostMenuButton />がレンダリングされない", () => {
+      it("isUserPostはfalseである", () => {
         render(
           mockRecoil(
             [{ atom: loginState, value: { isLogin: false, userData: null } }],
