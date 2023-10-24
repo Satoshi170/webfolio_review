@@ -58,5 +58,12 @@ export const usePostOrDeletePortfoliosByIdGoodsOperation = (
     void debouncedToggle();
   };
 
-  return { isLiked, toggleLike ,isAlreadyLikedRef};
+  let totalLiked: number;
+  if (initialLiked) {
+    totalLiked = portfolioData.goods.length - Number(!isLiked);
+  } else {
+    totalLiked = portfolioData.goods.length + Number(isLiked);
+  }
+
+  return { isLiked, toggleLike, totalLiked };
 };

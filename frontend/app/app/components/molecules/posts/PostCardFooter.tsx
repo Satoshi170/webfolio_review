@@ -13,16 +13,17 @@ interface Props {
 
 const PostCardFooter: React.FC<Props> = ({ portfolioData }) => {
   const { updatedAt } = portfolioData;
-  const { isLiked, toggleLike } =
+  const { isLiked, toggleLike, totalLiked } =
     usePostOrDeletePortfoliosByIdGoodsOperation(portfolioData);
 
   return (
     <CardFooter>
       <Stack w="full">
         <Divider />
-        <Flex justifyContent="space-between">
-          <Flex my="auto">
+        <Flex justifyContent="space-between" alignItems="center">
+          <Flex alignItems="center">
             <LikeButton onClick={toggleLike} isLiked={isLiked} />
+            <Text>{totalLiked}</Text>
           </Flex>
           <Text fontSize="sm" color="blackAlpha.500" my="auto">
             {updatedAt.toLocaleDateString()}
