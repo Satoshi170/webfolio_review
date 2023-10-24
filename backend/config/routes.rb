@@ -17,6 +17,7 @@ Rails.application.routes.draw do
           resource :goods, only: [:create, :destroy]
         end
         resources :user_portfolios, only: [:index]
+        resources :latest_portfolios, only: [:index]
       end
     end
   end
