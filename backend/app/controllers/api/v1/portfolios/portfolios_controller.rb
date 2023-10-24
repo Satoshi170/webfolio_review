@@ -4,8 +4,14 @@ class Api::V1::Portfolios::PortfoliosController < ApplicationController
   before_action :authorize_user_for_portfolio!, only: [:update, :destroy]
 
   def index
-    portfolios = Portfolio.includes(:goods,
-user: { image_attachment: :blob }).all.order(updated_at: :desc)
+    portfolios = Portfolio.includes(:goods, user: { image_attachment: :blob })
+    if params[:id].present?
+      ids = params[:id].split(",")
+      portfolios = portfolios.where(id: ids)
+    else
+      portfolios = portfolios.order(updated_at: :desc)
+    end
+
     render json: {
              status: "success",
              message: "Loaded portfolios",

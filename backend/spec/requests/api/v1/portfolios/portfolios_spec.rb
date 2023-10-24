@@ -4,14 +4,33 @@ RSpec.describe "Api::V1::Portfolios::Portfolios", type: :request do
   let!(:user) { create(:user) }
 
   describe "GET /portfolios" do
-    let!(:portfolios) { create_list(:portfolio, 3, user: user) }
-    it "すべてのportfolioを取得する" do
-      get "/api/v1/portfolios"
+    let!(:portfolio1) { create(:portfolio, user: user) }
+    let!(:portfolio2) { create(:portfolio, user: user) }
+    let!(:portfolio3) { create(:portfolio, user: user) }
 
-      expect(response).to have_http_status(:ok)
-      json_response = JSON.parse(response.body)
-      expect(json_response["status"]).to eq("success")
-      expect(json_response["data"].length).to eq(3)
+    context "paramsが存在しない時" do
+      it "すべてのportfolioを返却する" do
+        get "/api/v1/portfolios"
+
+        expect(response).to have_http_status(:ok)
+        json_response = JSON.parse(response.body)
+        expect(json_response["status"]).to eq("success")
+        expect(json_response["data"].length).to eq(3)
+      end
+    end
+
+    context "paramsが存在する時" do
+      it "該当のidのportfolioだけを返却する" do
+        get "/api/v1/portfolios",  params: {id: [portfolio1.id, portfolio2.id] }
+
+        expect(response).to have_http_status(:ok)
+        json_response = JSON.parse(response.body)
+        expect(json_response["status"]).to eq("success")
+        expect(json_response["data"].length).to eq(2)
+
+        ids = json_response["data"].map { |portfolio| portfolio["id"] }
+        expect(ids).not_to include(portfolio3.id)
+      end
     end
   end
 
