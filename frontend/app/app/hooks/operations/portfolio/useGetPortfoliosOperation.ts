@@ -6,14 +6,14 @@ import { getPortfolios } from "@/app/libs/axios/portfolio/getPortfolios";
 import { portfolioDataState } from "@/app/stores/atoms/portfolioDataState";
 import { toastState } from "@/app/stores/atoms/toastState";
 
-export const useGetPortfoliosOperation = () => {
+export const useGetPortfoliosOperation = (ids?: number[]) => {
   const setToast = useSetRecoilState(toastState);
   const [PortfoliosData, setPortfoliosData] = useRecoilState(portfolioDataState);
 
   useEffect(() => {
     const getPortfoliosOperation = async () => {
       try {
-        const portfolios = await getPortfolios();
+        const portfolios = await getPortfolios(ids);
         setPortfoliosData(portfolios.data);
       } catch (e) {
         const errorMessage = e instanceof Error ? e.message : UNEXPECTED_ERROR_MESSAGE;

@@ -5,9 +5,10 @@ import { GetPortfoliosData } from "@/app/types/axios/portfolio/getPortfolios";
 
 import api from "../api";
 
-export const getPortfolios = async (): Promise<GetPortfoliosData> => {
+export const getPortfolios = async (ids?: number[]): Promise<GetPortfoliosData> => {
+  const params = ids ? { id: ids } : undefined;
   try {
-    const response = await api.get<GetPortfoliosData>("/portfolios");
+    const response = await api.get<GetPortfoliosData>("/portfolios", { params });
     return response.data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
