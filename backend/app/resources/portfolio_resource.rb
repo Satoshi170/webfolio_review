@@ -4,7 +4,7 @@ class PortfolioResource
   root_key :portfolio
 
   attributes :id, :title, :content, :updated_at
-  one :user, resource: UserResource
+  one :user, resource: UserWithoutGoodsResource
   many :goods do
     attributes :user_id
   end
