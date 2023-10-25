@@ -18,6 +18,7 @@ Rails.application.routes.draw do
         end
         resources :user_portfolios, only: [:index]
         resources :latest_portfolios, only: [:index]
+        resources :popular_portfolios, only: [:index]
       end
     end
   end
