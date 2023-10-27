@@ -1,6 +1,6 @@
 class Api::V1::Portfolios::LatestPortfoliosController < ApplicationController
   def index
-    portfolios = Portfolio.includes(user: { image_attachment: :blob })
+    portfolios = Portfolio.includes(:goods, user: { image_attachment: :blob })
                           .order(updated_at: :desc)
                           .limit(3)
 
