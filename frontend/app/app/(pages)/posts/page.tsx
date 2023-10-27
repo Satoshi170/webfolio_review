@@ -2,6 +2,7 @@
 
 import { Suspense } from "react";
 
+import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
 import PostCard from "@/app/components/organisms/posts/PostCard";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
@@ -25,4 +26,4 @@ const PostsPage: React.FC = () => {
   );
 };
 
-export default PostsPage;
+export default WithRedirectIfLoggedOut(PostsPage);
