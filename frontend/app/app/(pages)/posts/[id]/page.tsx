@@ -16,7 +16,11 @@ const PostPageById: React.FC = () => {
   const { status, portfolioData } = useGetPortfoliosByIdOperation(id);
 
   if (!status) {
-    return <LoadingSpinner />;
+    return (
+      <CenteredBox>
+        <LoadingSpinner />
+      </CenteredBox>
+    );
   }
 
   if (status === 200 && portfolioData) {

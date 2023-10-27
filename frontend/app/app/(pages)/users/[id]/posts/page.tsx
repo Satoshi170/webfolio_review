@@ -14,7 +14,11 @@ const Page: React.FC = () => {
   const { status, portfoliosData } = useGetUserPortfoliosByUserIdOperation(pathname);
 
   if (!status) {
-    return <LoadingSpinner />;
+    return (
+      <CenteredBox>
+        <LoadingSpinner />
+      </CenteredBox>
+    );
   }
 
   if (status === 200 && portfoliosData) {
