@@ -7,7 +7,8 @@ import WithRedirectIfLoggedIn from "@/app/components/HOCs/WithRedirectIfLoggedIn
 import SubmitButton from "@/app/components/atoms/SubmitButton";
 import InputField from "@/app/components/molecules/fields/InputField";
 import { useSignUpForm } from "@/app/hooks/forms/auth/useSignUpForm";
-const SignUp: React.FC = () => {
+
+const SignUpPage: React.FC = () => {
   const { register, handleSubmit, errors, isValid, onSubmit, isLoading } =
     useSignUpForm();
 
@@ -60,4 +61,4 @@ const SignUp: React.FC = () => {
   );
 };
 
-export default WithRedirectIfLoggedIn(SignUp);
+export default WithRedirectIfLoggedIn(SignUpPage);

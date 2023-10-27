@@ -9,7 +9,7 @@ import PostCard from "@/app/components/organisms/posts/PostCard";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 import { useGetUserPortfoliosByUserIdOperation } from "@/app/hooks/operations/portfolio/userPortfolio/useGetUserPortfoliosByUserIdOperation";
 
-const Page: React.FC = () => {
+const UserIdPostsPage: React.FC = () => {
   const pathname = usePathname();
   const { status, portfoliosData } = useGetUserPortfoliosByUserIdOperation(pathname);
 
@@ -35,4 +35,4 @@ const Page: React.FC = () => {
   }
 };
 
-export default Page;
+export default UserIdPostsPage;

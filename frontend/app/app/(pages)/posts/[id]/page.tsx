@@ -10,7 +10,7 @@ import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 import { useGetPortfoliosByIdOperation } from "@/app/hooks/operations/portfolio/useGetPortfoliosByIdOperation";
 import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
 
-const PostPageById: React.FC = () => {
+const PostsIdPage: React.FC = () => {
   const pathname = usePathname();
   const id = getIdOrTriggerNotFound({ pathname, routeKey: "posts" });
   const { status, portfolioData } = useGetPortfoliosByIdOperation(id);
@@ -35,4 +35,4 @@ const PostPageById: React.FC = () => {
   }
 };
 
-export default PostPageById;
+export default PostsIdPage;
