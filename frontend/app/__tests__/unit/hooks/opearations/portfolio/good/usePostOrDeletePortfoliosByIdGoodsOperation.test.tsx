@@ -111,6 +111,7 @@ describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
           );
 
           expect(result.current.isLiked).toBe(true);
+
           act(() => {
             result.current.toggleLike();
             jest.advanceTimersByTime(1500);
@@ -121,8 +122,10 @@ describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
             expect(mockDeleteGoods).toHaveBeenCalledTimes(1);
           });
 
-          result.current.toggleLike();
-          jest.advanceTimersByTime(1500);
+          act(() => {
+            result.current.toggleLike();
+            jest.advanceTimersByTime(1500);
+          });
 
           await waitFor(() => {
             expect(mockPostGoods).toHaveBeenCalledTimes(1);
@@ -145,16 +148,20 @@ describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
 
           expect(result.current.isLiked).toBe(false);
 
-          result.current.toggleLike();
-          jest.advanceTimersByTime(1500);
+          act(() => {
+            result.current.toggleLike();
+            jest.advanceTimersByTime(1500);
+          });
 
           await waitFor(() => {
             expect(mockPostGoods).toHaveBeenCalledTimes(1);
             expect(mockDeleteGoods).toHaveBeenCalledTimes(0);
           });
 
-          result.current.toggleLike();
-          jest.advanceTimersByTime(1500);
+          act(() => {
+            result.current.toggleLike();
+            jest.advanceTimersByTime(1500);
+          });
 
           await waitFor(() => {
             expect(mockPostGoods).toHaveBeenCalledTimes(1);
