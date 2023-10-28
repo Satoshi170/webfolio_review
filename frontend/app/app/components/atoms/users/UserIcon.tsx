@@ -9,14 +9,16 @@ interface UserIconProps {
 }
 const UserIcon: React.FC<UserIconProps> = ({ image, name, diameter }) => {
   return (
-    <Image
-      src={image}
-      alt={name}
-      width={diameter}
-      height={diameter}
-      borderRadius="full"
-      m="0"
-    />
+    image && (
+      <Image
+        src={image}
+        alt={name}
+        width={diameter}
+        height={diameter}
+        borderRadius="full"
+        m="0"
+      />
+    )
   );
 };
 
