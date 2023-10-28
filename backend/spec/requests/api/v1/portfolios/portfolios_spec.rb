@@ -21,7 +21,7 @@ RSpec.describe "Api::V1::Portfolios::Portfolios", type: :request do
 
     context "paramsが存在する時" do
       it "該当のidのportfolioだけを返却する" do
-        get "/api/v1/portfolios",  params: {id: [portfolio1.id, portfolio2.id] }
+        get "/api/v1/portfolios", params: { id: [portfolio1.id, portfolio2.id] }
 
         expect(response).to have_http_status(:ok)
         json_response = JSON.parse(response.body)

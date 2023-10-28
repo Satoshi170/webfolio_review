@@ -12,5 +12,4 @@ class UserResource
   many :goods do
     attributes :portfolio_id
   end
-
 end
