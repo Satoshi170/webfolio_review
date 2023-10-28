@@ -8,7 +8,7 @@ import SubmitButton from "@/app/components/atoms/SubmitButton";
 import InputField from "@/app/components/molecules/fields/InputField";
 import { useSignInForm } from "@/app/hooks/forms/auth/useSignInForm";
 
-const SignIn: React.FC = () => {
+const SignInPage: React.FC = () => {
   const { register, handleSubmit, errors, isValid, onSubmit, isLoading } =
     useSignInForm();
 
@@ -46,4 +46,4 @@ const SignIn: React.FC = () => {
   );
 };
 
-export default WithRedirectIfLoggedIn(SignIn);
+export default WithRedirectIfLoggedIn(SignInPage);

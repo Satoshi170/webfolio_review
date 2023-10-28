@@ -14,7 +14,7 @@ import {
 
 jest.mock("recoil", () => ({
   ...jest.requireActual<typeof import("recoil")>("recoil"),
-  useSetRecoilState: (atom: RecoilState<any>) => mockUseSetRecoilState(atom)
+  useSetRecoilState: (atom: RecoilState<unknown>) => mockUseSetRecoilState(atom)
 }));
 jest.mock("@/app/libs/axios/auth/getAuthSessions");
 
@@ -31,18 +31,21 @@ describe("useCheckLogin", () => {
       it("imageがnullではない時、適切なログイン状態を設定する", async () => {
         const mockData: GetAuthSessionsTrueData = {
           isLogin: true,
-          data: { name: "testuser", image: "testImage" }
+          data: { id: 1, name: "testuser", image: "testImage" }
         };
         (getAuthSessions as jest.Mock).mockResolvedValue(mockData);
         const { result } = renderHook(() => useCheckLogin());
         await act(() => result.current());
-        expect(mockSetLogin).toHaveBeenCalledWith(mockData);
+        expect(mockSetLogin).toHaveBeenCalledWith({
+          isLogin: mockData.isLogin,
+          userData: mockData.data
+        });
       });
 
       it("imageがnullの時imageにdefaultUserImageが設定される", async () => {
         const mockData = {
           isLogin: true,
-          data: { name: "testuser", image: null }
+          data: { id: 1, name: "testuser", image: null }
         };
         const defaultUserImage = "/defaultUserImage.png";
 
@@ -50,19 +53,19 @@ describe("useCheckLogin", () => {
         const { result } = renderHook(() => useCheckLogin());
         await act(() => result.current());
         expect(mockSetLogin).toHaveBeenCalledWith({
-          ...mockData,
-          data: { ...mockData.data, image: defaultUserImage }
+          isLogin: mockData.isLogin,
+          userData: { ...mockData.data, image: defaultUserImage }
         });
       });
     });
 
     describe("isLoginがfalseの時", () => {
-      it("dataはnullと設定される", async () => {
+      it("userDataはnullと設定される", async () => {
         const mockData: GetAuthSessionsFalseData = { isLogin: false };
         (getAuthSessions as jest.Mock).mockResolvedValue(mockData);
         const { result } = renderHook(() => useCheckLogin());
         await act(() => result.current());
-        expect(mockSetLogin).toHaveBeenCalledWith({ ...mockData, data: null });
+        expect(mockSetLogin).toHaveBeenCalledWith({ ...mockData, userData: null });
       });
     });
 
@@ -74,7 +77,7 @@ describe("useCheckLogin", () => {
         await act(async () => {
           await result.current();
         });
-        expect(mockSetLogin).toHaveBeenCalledWith({ isLogin: false, data: null });
+        expect(mockSetLogin).toHaveBeenCalledWith({ isLogin: false, userData: null });
       });
     });
   });

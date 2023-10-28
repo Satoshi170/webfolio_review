@@ -5,13 +5,11 @@ import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { getPortfoliosById } from "@/app/libs/axios/portfolio/getPortfoliosById";
 import { toastState } from "@/app/stores/atoms/toastState";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
-import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
 
-export const useGetPortfoliosByIdOperation = (pathname: string) => {
+export const useGetPortfoliosByIdOperation = (id: number) => {
   const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(null);
   const [status, setStatus] = useState<number | null>(null);
   const setToast = useSetRecoilState(toastState);
-  const id = getIdOrTriggerNotFound({ pathname, routeKey: "posts" });
 
   useEffect(() => {
     const getPortfoliosByIdOperation = async (id: number) => {

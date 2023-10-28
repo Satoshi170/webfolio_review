@@ -1,6 +1,7 @@
 "use client";
 
 import { Box, Container, Flex, Heading } from "@chakra-ui/react";
+import NextLink from "next/link";
 import { useRecoilValue } from "recoil";
 
 import { loginState } from "@/app/stores/atoms/loginState";
@@ -13,8 +14,8 @@ const Header: React.FC = () => {
   return (
     <Box as="nav" bg="gray.900" color="gray.50">
       <Container maxW="container.xl">
-        <Flex justify="space-between" py={{ base: 2.5, md: 3.5 }}>
-          <Heading as="h1" fontSize={{ base: "3xl", md: "5xl" }}>
+        <Flex justify="space-between" py={{ base: 1.0, md: 3.0 }} alignItems="center">
+          <Heading as={NextLink} href="/" fontSize={{ base: "2xl", md: "3xl" }}>
             Webfolio-Review
           </Heading>
           {isLogin ? <LoggedInHeaderRightSection /> : <LoggedOutHeaderRightSection />}

@@ -18,6 +18,14 @@ jest.mock("@/app/components/molecules/posts/PostCardHeader", () => {
   return MockedPostCardHeader;
 });
 
+jest.mock("@/app/components/molecules/posts/PostCardFooter", () => {
+  const MockedPostCardFooter: React.FC = () => {
+    return <div>MockedPostCardFooter</div>;
+  };
+
+  return MockedPostCardFooter;
+});
+
 describe("<PostCard/>", () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -29,11 +37,16 @@ describe("<PostCard/>", () => {
   describe("isUserPost", () => {
     describe("isLoginがtrueの場合", () => {
       describe("data.idとportfolioData.user.idが一致する場合", () => {
-        it("<OptionPostMenuButton />がレンダリングされる", () => {
+        it("isUserPostはtrueである", () => {
           const portfolioOwnerData = { ...validUserData, id: validPortfolioData.user.id };
           render(
             mockRecoil(
-              [{ atom: loginState, value: { isLogin: true, data: portfolioOwnerData } }],
+              [
+                {
+                  atom: loginState,
+                  value: { isLogin: true, userData: portfolioOwnerData }
+                }
+              ],
               <PostCard portfolioData={validPortfolioData} />
             )
           );
@@ -43,14 +56,16 @@ describe("<PostCard/>", () => {
       });
 
       describe("data.idとportfolioData.user.idが一致しない場合", () => {
-        it("<OptionPostMenuButton />がレンダリングされない", () => {
+        it("isUserPostはfalseである", () => {
           const nonOwnerUserData = {
             ...validUserData,
             id: validPortfolioData.user.id + 1
           };
           render(
             mockRecoil(
-              [{ atom: loginState, value: { isLogin: true, data: nonOwnerUserData } }],
+              [
+                { atom: loginState, value: { isLogin: true, userData: nonOwnerUserData } }
+              ],
               <PostCard portfolioData={validPortfolioData} />
             )
           );
@@ -61,10 +76,10 @@ describe("<PostCard/>", () => {
     });
 
     describe("isLoginがfalseの場合", () => {
-      it("<OptionPostMenuButton />がレンダリングされない", () => {
+      it("isUserPostはfalseである", () => {
         render(
           mockRecoil(
-            [{ atom: loginState, value: { isLogin: false, data: null } }],
+            [{ atom: loginState, value: { isLogin: false, userData: null } }],
             <PostCard portfolioData={validPortfolioData} />
           )
         );

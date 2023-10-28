@@ -8,4 +8,8 @@ class UserResource
   attribute :image do |user|
     user.image_url
   end
+
+  many :goods do
+    attributes :portfolio_id
+  end
 end

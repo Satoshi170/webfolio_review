@@ -1,5 +1,6 @@
 class Portfolio < ApplicationRecord
   belongs_to :user
+  has_many :goods
 
   validates :title,
             presence: true,

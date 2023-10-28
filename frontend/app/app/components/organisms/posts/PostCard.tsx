@@ -21,8 +21,8 @@ interface Props {
 
 const PostCard: React.FC<Props> = ({ portfolioData, linkOptions }) => {
   const { user } = portfolioData;
-  const { isLogin, data } = useRecoilValue(loginState);
-  const isUserPost = isLogin ? data.id == user.id : false;
+  const { isLogin, userData } = useRecoilValue(loginState);
+  const isUserPost = isLogin ? userData.id == user.id : false;
 
   return (
     <Card py="1" w="md">

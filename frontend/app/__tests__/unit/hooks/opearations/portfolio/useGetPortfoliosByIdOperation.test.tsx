@@ -8,7 +8,6 @@ import {
 } from "@/__tests__/mocks/recoil/mockUseSetRecoilState";
 import { useGetPortfoliosByIdOperation } from "@/app/hooks/operations/portfolio/useGetPortfoliosByIdOperation";
 import { getPortfoliosById } from "@/app/libs/axios/portfolio/getPortfoliosById";
-import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
 
 jest.mock("recoil", () => ({
   ...jest.requireActual<typeof import("recoil")>("recoil"),
@@ -26,9 +25,6 @@ describe("useGetPortfoliosByIdOperation", () => {
     jest.resetAllMocks();
   });
 
-  const testPathname = "/post/1";
-  (getIdOrTriggerNotFound as jest.Mock).mockReturnValue(1);
-
   describe("getPortfoliosByIdがエラーを返さない時", () => {
     describe("statusが200の時", () => {
       it("返却されるportfolioDataはvalidPortfolioDataである", async () => {
@@ -37,7 +33,7 @@ describe("useGetPortfoliosByIdOperation", () => {
           status: 200,
           response: mockResponse
         });
-        const { result } = renderHook(() => useGetPortfoliosByIdOperation(testPathname), {
+        const { result } = renderHook(() => useGetPortfoliosByIdOperation(1), {
           wrapper: RecoilRoot
         });
         await waitFor(() => {
@@ -53,7 +49,7 @@ describe("useGetPortfoliosByIdOperation", () => {
           status: 404,
           response: null
         });
-        const { result } = renderHook(() => useGetPortfoliosByIdOperation(testPathname), {
+        const { result } = renderHook(() => useGetPortfoliosByIdOperation(1), {
           wrapper: RecoilRoot
         });
         await waitFor(() => {
@@ -67,7 +63,7 @@ describe("useGetPortfoliosByIdOperation", () => {
   describe("getPortfoliosByIdがエラーを返す時", () => {
     it("setToastが呼び出される", async () => {
       (getPortfoliosById as jest.Mock).mockRejectedValue(new Error("Error"));
-      renderHook(() => useGetPortfoliosByIdOperation(testPathname), {
+      renderHook(() => useGetPortfoliosByIdOperation(1), {
         wrapper: RecoilRoot
       });
       await waitFor(() => {

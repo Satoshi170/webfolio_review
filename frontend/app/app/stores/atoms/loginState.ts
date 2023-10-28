@@ -4,16 +4,16 @@ import { UserData } from "@/app/types/auth";
 
 export interface LoggedInState {
   isLogin: true;
-  data: UserData;
+  userData: UserData;
 }
 export interface LoggedOutState {
   isLogin: false;
-  data: null;
+  userData: null;
 }
 
 export type LoginState = LoggedInState | LoggedOutState;
 
 export const loginState = atom<LoginState>({
   key: "loginState",
-  default: { isLogin: false, data: null }
+  default: { isLogin: false, userData: null }
 });
