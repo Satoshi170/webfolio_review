@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class User < ActiveRecord::Base
-  include UserUrlHelper
   has_one_attached :image
   has_many :portfolios
   has_many :goods
@@ -15,8 +14,6 @@ class User < ActiveRecord::Base
   def image_url
     if image.attached?
       Rails.application.routes.url_helpers.rails_blob_url(image, only_path: false)
-    else
-      default_user_image_url
     end
   end
 

@@ -21,7 +21,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
         json_response = JSON.parse(response.body)
         expect(json_response["status"]).to eq("success")
         expect(json_response["data"]["name"]).to eq(valid_user_params[:name])
-        expect(json_response["data"]["image"]).to eq(default_user_image_url)
+        expect(json_response["data"]["image"]).to be_nil
 
         user_id = json_response["data"]["id"]
         is_valid_id = User.exists?(id: user_id)
@@ -59,7 +59,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
           json_response = JSON.parse(response.body)
           expect(json_response["status"]).to eq("success")
           expect(json_response["data"]["name"]).to eq(valid_user_params[:name])
-          expect(json_response["data"]["image"]).to eq(default_user_image_url)
+          expect(json_response["data"]["image"]).to be_nil
 
           user_id = json_response["data"]["id"]
           is_valid_id = User.exists?(id: user_id)
