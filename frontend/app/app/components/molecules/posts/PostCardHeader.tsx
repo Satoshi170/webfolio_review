@@ -20,6 +20,7 @@ const PostCardHeader: React.FC<Props> = ({
   portfolioData
 }) => {
   const { user } = portfolioData;
+  const image = user.image || "/defaultUserImage.png";
 
   return (
     <CardHeader>
@@ -32,7 +33,7 @@ const PostCardHeader: React.FC<Props> = ({
           as={isLink ? NextLink : undefined}
           href={isLink ? `/users/${user.id}/posts` : undefined}
         >
-          <UserIcon image={user.image} name={user.name} diameter={39} />
+          <UserIcon image={image} name={user.name} diameter={39} />
           <Heading fontSize="md">{user.name}</Heading>
         </Flex>
         {isUserPost && <OptionPostMenuButton portfolioData={portfolioData} />}
