@@ -25,7 +25,7 @@ const PostCard: React.FC<Props> = ({ portfolioData, linkOptions }) => {
   const isUserPost = isLogin ? userData.id == user.id : false;
 
   return (
-    <Card py="1" w="md">
+    <Card py="1" maxW="md">
       <PostCardHeader
         portfolioData={portfolioData}
         isLink={linkOptions?.header}
