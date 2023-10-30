@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 import { useSetRecoilState } from "recoil";
 
@@ -7,14 +6,13 @@ import { deletePortfoliosById } from "@/app/libs/axios/portfolio/deletePortfolio
 import { toastState } from "@/app/stores/atoms/toastState";
 
 export const useDeletePortfoliosByIdOperation = () => {
-  const router = useRouter();
   const setToast = useSetRecoilState(toastState);
 
   const deletePortfoliosByIdOperation = useCallback(
     async (id: number) => {
       try {
         await deletePortfoliosById(id);
-        router.refresh();
+        window.location.reload();
         setToast({
           message: "投稿の削除に成功しました",
           status: "success",
@@ -29,7 +27,7 @@ export const useDeletePortfoliosByIdOperation = () => {
         });
       }
     },
-    [router, setToast]
+    [setToast]
   );
 
   return deletePortfoliosByIdOperation;
