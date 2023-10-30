@@ -20,7 +20,7 @@ const PostCardHeader: React.FC<Props> = ({
   portfolioData
 }) => {
   const { user } = portfolioData;
-  const image = user?.image || "/defaultUserImage.png";
+  const image = user.image || "/defaultUserImage.png";
 
   return (
     <CardHeader>
