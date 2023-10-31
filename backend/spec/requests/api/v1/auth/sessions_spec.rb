@@ -32,15 +32,44 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
   end
 
   describe "DELETE /auth/sign_out" do
-    let!(:user) { create(:user) }
-
+    let!(:user) { create(:user, role: "user") }
+    let!(:guest_user) { create(:user, role: "guest") }
     context "既にログイン状態の場合" do
-      it "ログアウトが成功すること" do
-        sign_in(email: user.email, password: user.password)
-        auth_headers = response.headers.slice("access-token", "client", "expiry", "uid")
-        sign_out(auth_headers)
-        expect(response).to have_http_status(:success)
-        expect(response.body).to include('"success":true')
+      context "roleがuserの場合" do
+        it "ログアウトが成功し削除はされないこと" do
+          sign_in(email: user.email, password: user.password)
+          auth_headers = response.headers.slice("access-token", "client", "expiry", "uid")
+          expect do
+            sign_out(auth_headers)
+          end.to change { User.count }.by(0)
+          expect(response).to have_http_status(:success)
+          expect(response.body).to include('"success":true')
+        end
+      end
+
+      context "roleがguestの場合" do
+        context "portfoliosが存在する時" do
+          let(:portfolio) { create(:portfolios, user: guest_user) }
+          it "ログアウトに成功し削除はされないこと" do
+            sign_in(email: user.email, password: user.password)
+            auth_headers = response.headers.slice("access-token", "client", "expiry", "uid")
+            expect do
+              sign_out(auth_headers)
+            end.to change { User.count }.by(0)
+            expect(response).to have_http_status(:success)
+            expect(response.body).to include('"success":true')
+          end
+        end
+
+        context "portfoliosが存在しない時" do
+          it "ログアウトに成功しguest_userが削除される" do
+            auth_headers = sign_in(email: guest_user.email, password: guest_user.password)
+            expect do
+              sign_out(auth_headers)
+            end.to change { User.count }.by(-1)
+            expect(response).to have_http_status(:success)
+          end
+        end
       end
     end
 
