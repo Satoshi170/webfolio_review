@@ -62,7 +62,7 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
 
         context "goodsが存在する時" do
           let(:portfolio) { create(:portfolio, user: user) }
-          let!(:good) { create(:good, user: guest_user, portfolio: portfolio)}
+          let!(:good) { create(:good, user: guest_user, portfolio: portfolio) }
           it "ログアウトに成功し削除はされないこと" do
             auth_headers = sign_in(email: guest_user.email, password: guest_user.password)
             expect do
