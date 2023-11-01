@@ -14,6 +14,8 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 
+import GuestLoginButton from "../../molecules/actionButtons/auth/GuestLoginButton";
+
 interface Props {
   isOpen: boolean;
   onClose: () => void;
@@ -33,6 +35,10 @@ const SignInAlertModal: React.FC<Props> = ({ isOpen, onClose }) => {
                 こちら
               </Link>
               からサインインしてください
+            </Text>
+            <Text>
+              または
+              <GuestLoginButton />
             </Text>
           </ModalBody>
           <ModalFooter>

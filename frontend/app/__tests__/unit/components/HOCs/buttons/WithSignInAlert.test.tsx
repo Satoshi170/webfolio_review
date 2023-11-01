@@ -5,6 +5,7 @@ import mockRecoil from "@/__tests__/mocks/mockRecoil";
 import WithSignInAlert from "@/app/components/HOCs/buttons/WithSignInAlert";
 import { loginState } from "@/app/stores/atoms/loginState";
 
+jest.mock("@/app/components/atoms/auth/SignInAlertModal");
 const mockOnClick = jest.fn();
 
 interface Props {
