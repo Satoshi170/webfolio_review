@@ -20,8 +20,12 @@ class Api::V1::Auth::DeviseSessionsController < DeviseTokenAuth::SessionsControl
   end
 
   def destroy_guest_user
-    if @saved_resource && @saved_resource.role == "guest" && @saved_resource.portfolios.blank?
-      @saved_resource.destroy
-    end
+    return unless @saved_resource
+
+    should_destroy = @saved_resource.role == "guest" &&
+                     @saved_resource.portfolios.blank? &&
+                     @saved_resource.goods.blank?
+
+    @saved_resource.destroy if should_destroy
   end
 end

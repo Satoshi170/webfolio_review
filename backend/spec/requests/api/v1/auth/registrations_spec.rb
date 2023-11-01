@@ -139,7 +139,6 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
       it "403エラーを返すこと" do
         sign_in({ email: guest_user.email, password: guest_user.password })
         patch "/api/v1/auth", headers: headers, params: new_params.to_json
-        puts response.body
         expect(response).to have_http_status(:forbidden)
         user.reload
         expect(user.name).not_to eq(new_params[:name])
