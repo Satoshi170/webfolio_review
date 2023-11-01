@@ -24,6 +24,8 @@ const AccountInformationTabPanel: React.FC = () => {
     fileName,
     isFormValid
   } = useUpdateAccountForm();
+  const isGuestUser = data.role == "guest";
+  const isDisabled = isGuestUser || !isFormValid();
 
   return (
     <Box flex="1" m="auto" maxW="md" boxShadow="md" p="12" rounded="md">
@@ -48,7 +50,15 @@ const AccountInformationTabPanel: React.FC = () => {
           resetImage={resetImage}
           fileName={fileName}
         />
-        <SubmitButton text="更新する" isLoading={isLoading} isDisabled={!isFormValid()} />
+        <SubmitButton text="更新する" isLoading={isLoading} isDisabled={isDisabled} />
+        {isGuestUser && (
+          <>
+            <Spacer my="4" />
+            <Text color="red.500" fontSize="sm">
+              ゲストユーザーはアカウント情報を更新できません
+            </Text>
+          </>
+        )}
       </form>
     </Box>
   );
