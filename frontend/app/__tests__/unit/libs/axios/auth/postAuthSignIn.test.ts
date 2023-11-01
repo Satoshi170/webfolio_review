@@ -65,7 +65,7 @@ describe("postAuthSignIn", () => {
         });
       });
       describe("レスポンスの型がPostAuthSignInErrorDataを満たさない場合", () => {
-        it("適切なエラーグローされる", async () => {
+        it("適切なエラーがスローされる", async () => {
           mockAxios.isAxiosError.mockReturnValue(true);
           mockPost.mockRejectedValue(mockUnexpectedResponse);
           await expect(postAuthSignIn(validSignInData)).rejects.toThrow(
