@@ -32,7 +32,7 @@ export const useSignUpForm = () => {
     try {
       await postAuth(params);
       await checkLoginStatus();
-      router.replace("/users/account");
+      router.replace("/");
       setToast({
         message: "アカウント作成に成功しました",
         status: "success",
