@@ -9,7 +9,10 @@ Rails.application.routes.draw do
       }
 
       namespace :auth do
-        resources :sessions, only: [:index]
+        devise_scope :api_v1_user do
+          post "/guest/sign_in", to: 'guest_sessions#create'
+          resources :sessions, only: [:index]
+        end
       end
 
       scope module: "portfolios" do

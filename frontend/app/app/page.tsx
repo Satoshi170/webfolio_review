@@ -3,21 +3,26 @@
 import { Heading } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { Suspense } from "react";
+import { useRecoilValue } from "recoil";
 
 import LoadingSpinner from "./components/atoms/LoadingSpinner";
 import SeeMoreButton from "./components/atoms/SeeMoreButton";
+import AboutSiteSection from "./components/organisms/AboutSiteSection";
 import PostCard from "./components/organisms/posts/PostCard";
 import CenteredBox from "./components/styledWrappers/CenteredBox";
 import { useGetPopularAndNewPortfoliosOperation } from "./hooks/operations/portfolio/useGetPopularAndNewPortfoliosOperation";
+import { loginState } from "./stores/atoms/loginState";
 
 const HomePage: React.FC = () => {
   const { latestPortfoliosData, popularPortfoliosData } =
     useGetPopularAndNewPortfoliosOperation();
   const router = useRouter();
+  const { isLogin } = useRecoilValue(loginState);
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
       <CenteredBox>
+        {!isLogin && <AboutSiteSection />}
         <Heading my="2">最近の投稿</Heading>
         {latestPortfoliosData.map((portfolioData, i) => (
           <PostCard

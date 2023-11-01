@@ -1,6 +1,6 @@
 class Portfolio < ApplicationRecord
   belongs_to :user
-  has_many :goods
+  has_many :goods, dependent: :delete_all
 
   validates :title,
             presence: true,

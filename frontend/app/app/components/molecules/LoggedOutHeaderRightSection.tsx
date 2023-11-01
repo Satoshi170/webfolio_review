@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Button,
   Flex,
   IconButton,
   Menu,
@@ -15,6 +14,9 @@ import {
 import NextLink from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
 
+import SignInButton from "./actionButtons/auth/SignInButton";
+import SignUpButton from "./actionButtons/auth/SignUpButton";
+
 const LoggedOutHeaderRightSection: React.FC = () => {
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
 
@@ -22,23 +24,9 @@ const LoggedOutHeaderRightSection: React.FC = () => {
     <Flex align="center">
       {isLargerThan768 ? (
         <>
-          <Button
-            as={NextLink}
-            href="/auth/sign_up"
-            colorScheme="messenger"
-            sx={{ "&:hover": { textDecoration: "none" } }}
-          >
-            新規登録
-          </Button>
+          <SignUpButton />
           <Spacer mx="1" />
-          <Button
-            as={NextLink}
-            href="/auth/sign_in"
-            colorScheme="messenger"
-            sx={{ "&:hover": { textDecoration: "none" } }}
-          >
-            サインイン
-          </Button>
+          <SignInButton />
         </>
       ) : (
         <Menu>

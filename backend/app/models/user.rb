@@ -2,13 +2,13 @@
 
 class User < ActiveRecord::Base
   has_one_attached :image
-  has_many :portfolios
-  has_many :goods
+  has_many :portfolios, dependent: :delete_all
+  has_many :goods, dependent: :delete_all
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+  :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
 
   def image_url
@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  enum role: { user: 0, guest: 1 }
   validates :name,
             presence: true,
             length: { maximum: 25 },

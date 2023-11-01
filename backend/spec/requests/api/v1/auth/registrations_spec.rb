@@ -106,6 +106,7 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
 
   describe "PATCH /auth" do
     let!(:user) { create(:user) }
+    let!(:guest_user) { create(:user, role: "guest") }
     let(:new_params) { { name: "newname" } }
     let(:invalid_params) { { name: "newname", invalid_param: "invalid" } }
 
@@ -131,6 +132,16 @@ RSpec.describe "Api::V1::Auth::Registrations", type: :request do
         expect(response.body).not_to include(invalid_params[:invalid_param])
         user.reload
         expect(user.name).to eq(new_params[:name])
+      end
+    end
+
+    context "ユーザーのroleがguestの場合" do
+      it "403エラーを返すこと" do
+        sign_in({ email: guest_user.email, password: guest_user.password })
+        patch "/api/v1/auth", headers: headers, params: new_params.to_json
+        expect(response).to have_http_status(:forbidden)
+        user.reload
+        expect(user.name).not_to eq(new_params[:name])
       end
     end
 

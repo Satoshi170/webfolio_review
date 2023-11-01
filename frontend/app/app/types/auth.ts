@@ -8,6 +8,7 @@ interface Good {
 export interface UserData {
   id: number;
   name: string;
+  role: "user" | "guest";
   image: string;
   goods: Good[];
 }
