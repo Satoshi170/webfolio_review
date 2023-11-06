@@ -1,5 +1,6 @@
 "use client";
 
+import { Text } from "@chakra-ui/react";
 import { Suspense } from "react";
 import { useRecoilValue } from "recoil";
 
@@ -14,6 +15,14 @@ const UserLikesPage: React.FC = () => {
   const { userData } = useRecoilValue(loginState) as LoggedInState;
   const ids = userData.goods.map((obj) => obj.portfolioId);
   const portfoliosData = useGetPortfoliosOperation(ids);
+
+  if (ids.length === 0) {
+    return (
+      <CenteredBox>
+        <Text>まだ投稿をいいねしていません</Text>
+      </CenteredBox>
+    );
+  }
 
   return (
     <Suspense fallback={<LoadingSpinner />}>
