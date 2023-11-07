@@ -23,7 +23,7 @@ RSpec.describe Portfolio, type: :model do
         expect(portfolio.errors[:content]).to include("can't be blank")
       end
 
-      it "titleの長さは255文字以内である必要がある" do
+      it "contentの長さは255文字以内である必要がある" do
         portfolio = Portfolio.new(content: 'a' * 256)
         expect(portfolio).not_to be_valid
         expect(portfolio.errors[:content]).to include("is too long (maximum is 255 characters)")
