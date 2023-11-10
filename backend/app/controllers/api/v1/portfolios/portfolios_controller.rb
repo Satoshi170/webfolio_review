@@ -88,7 +88,6 @@ class Api::V1::Portfolios::PortfoliosController < ApplicationController
                errors: ["Permission denied"],
              },
              status: :forbidden
-      nil
     end
   end
 
