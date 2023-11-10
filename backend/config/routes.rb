@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       scope module: "portfolios" do
         resources :portfolios do
           resource :goods, only: [:create, :destroy]
+          resources :comments, only: [:create, :update, :destroy]
         end
         resources :user_portfolios, only: [:index]
         resources :latest_portfolios, only: [:index]
