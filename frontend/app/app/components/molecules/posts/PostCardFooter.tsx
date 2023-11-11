@@ -22,8 +22,7 @@ const PostCardFooter: React.FC<Props> = ({ portfolioData }) => {
         <Divider />
         <Flex justifyContent="space-between" alignItems="center">
           <Flex alignItems="center">
-            <LikeButton onClick={toggleLike} isLiked={isLiked} />
-            <Text>{totalLiked}</Text>
+            <LikeButton onClick={toggleLike} isLiked={isLiked} totalLiked={totalLiked} />
           </Flex>
           <Text fontSize="sm" color="blackAlpha.500" my="auto">
             {updatedAt.toLocaleDateString()}

@@ -1,24 +1,27 @@
 "use client";
 
-import { IconButton } from "@chakra-ui/react";
+import { Button } from "@chakra-ui/react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 import WithSignInAlert from "../../HOCs/buttons/WithSignInAlert";
 
 interface Props {
   isLiked: boolean;
+  totalLiked: number;
   onClick: () => void;
 }
 
-const LikeButton: React.FC<Props> = ({ isLiked, onClick }) => {
+const LikeButton: React.FC<Props> = ({ isLiked, totalLiked, onClick }) => {
   return (
-    <IconButton
+    <Button
+      leftIcon={isLiked ? <AiFillHeart /> : <AiOutlineHeart />}
       aria-label="Send Like"
       onClick={onClick}
       variant="ghost"
-      icon={isLiked ? <AiFillHeart /> : <AiOutlineHeart />}
       color={isLiked ? "red" : "gray.500"}
-    />
+    >
+      {totalLiked}
+    </Button>
   );
 };
 
