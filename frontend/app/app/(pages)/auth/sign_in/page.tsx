@@ -1,11 +1,12 @@
 "use client";
 
-import { Box, Divider, Heading, Link, Text } from "@chakra-ui/react";
+import { Divider, Heading, Link, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 
 import WithRedirectIfLoggedIn from "@/app/components/HOCs/WithRedirectIfLoggedIn";
 import SubmitButton from "@/app/components/atoms/SubmitButton";
 import InputField from "@/app/components/molecules/fields/InputField";
+import RoundedCenteredBox from "@/app/components/styledWrappers/RoundedCenteredBox";
 import { useSignInForm } from "@/app/hooks/forms/auth/useSignInForm";
 
 const SignInPage: React.FC = () => {
@@ -13,7 +14,7 @@ const SignInPage: React.FC = () => {
     useSignInForm();
 
   return (
-    <Box flex="1" m="auto" maxW="md" boxShadow="md" p="12" rounded="md">
+    <RoundedCenteredBox>
       <Heading as="h2" textAlign="center" mb="4">
         ログイン
       </Heading>
@@ -42,7 +43,7 @@ const SignInPage: React.FC = () => {
           </Link>
         </Text>
       </form>
-    </Box>
+    </RoundedCenteredBox>
   );
 };
 
