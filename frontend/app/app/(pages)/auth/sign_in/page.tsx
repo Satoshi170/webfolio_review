@@ -4,7 +4,7 @@ import { Divider, Heading, Link, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 
 import WithRedirectIfLoggedIn from "@/app/components/HOCs/WithRedirectIfLoggedIn";
-import SubmitButton from "@/app/components/atoms/SubmitButton";
+import SubmitFullWideButton from "@/app/components/atoms/SubmitFullWideButton";
 import InputField from "@/app/components/molecules/fields/InputField";
 import RoundedCenteredBox from "@/app/components/styledWrappers/RoundedCenteredBox";
 import { useSignInForm } from "@/app/hooks/forms/auth/useSignInForm";
@@ -34,7 +34,11 @@ const SignInPage: React.FC = () => {
           register={register}
           error={errors.password}
         />
-        <SubmitButton text="ログイン" isLoading={isLoading} isDisabled={!isValid} />
+        <SubmitFullWideButton
+          text="ログイン"
+          isLoading={isLoading}
+          isDisabled={!isValid}
+        />
         <Divider my="4" />
         <Text>
           初めてのご利用ですか？新規登録は
