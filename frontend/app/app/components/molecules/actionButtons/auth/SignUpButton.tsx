@@ -1,19 +1,9 @@
 "use client";
 
-import { Button } from "@chakra-ui/react";
-import NextLink from "next/link";
+import BlueLinkButton from "@/app/components/atoms/BlueLinkButton";
 
 const SignUpButton: React.FC = () => {
-  return (
-    <Button
-      as={NextLink}
-      href="/auth/sign_up"
-      colorScheme="messenger"
-      sx={{ "&:hover": { textDecoration: "none" } }}
-    >
-      新規登録
-    </Button>
-  );
+  return <BlueLinkButton href="/auth_sign_up" text="新規登録" />;
 };
 
 export default SignUpButton;

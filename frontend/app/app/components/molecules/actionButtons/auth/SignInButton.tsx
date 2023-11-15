@@ -1,19 +1,9 @@
 "use client";
 
-import { Button } from "@chakra-ui/react";
-import NextLink from "next/link";
+import BlueLinkButton from "@/app/components/atoms/BlueLinkButton";
 
 const SignInButton: React.FC = () => {
-  return (
-    <Button
-      as={NextLink}
-      href="/auth/sign_in"
-      colorScheme="messenger"
-      sx={{ "&:hover": { textDecoration: "none" } }}
-    >
-      サインイン
-    </Button>
-  );
+  return <BlueLinkButton href="/auth_sign_in" text="サインイン" />;
 };
 
 export default SignInButton;
