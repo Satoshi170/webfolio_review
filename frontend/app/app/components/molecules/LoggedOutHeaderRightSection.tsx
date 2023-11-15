@@ -14,8 +14,8 @@ import {
 import NextLink from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-import SignInButton from "./actionButtons/auth/SignInButton";
-import SignUpButton from "./actionButtons/auth/SignUpButton";
+import SignInLinkButton from "./actionButtons/auth/SignInLinkButton";
+import SignUpLinkButton from "./actionButtons/auth/SignUpLinkButton";
 
 const LoggedOutHeaderRightSection: React.FC = () => {
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
@@ -24,9 +24,9 @@ const LoggedOutHeaderRightSection: React.FC = () => {
     <Flex align="center">
       {isLargerThan768 ? (
         <>
-          <SignUpButton />
+          <SignInLinkButton />
           <Spacer mx="1" />
-          <SignInButton />
+          <SignUpLinkButton />
         </>
       ) : (
         <Menu>
