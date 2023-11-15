@@ -2,8 +2,8 @@
 
 import { Flex } from "@chakra-ui/react";
 
-import CreatePostButtonWithModal from "./actionButtons/post/CreatePostButtonWithModal";
-import DropDownUserMenuButton from "../molecules/actionButtons/DropDownUserMenu";
+import CreatePostButtonWithModal from "../organisms/apiActionButtons/posts/CreatePostButtonWithModal";
+import DropDownUserMenuButton from "../organisms/users/DropDownUserMenu";
 
 const LoggedInHeaderRightSection: React.FC = () => {
   return (

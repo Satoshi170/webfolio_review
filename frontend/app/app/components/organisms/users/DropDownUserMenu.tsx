@@ -16,7 +16,7 @@ import { useRecoilValue } from "recoil";
 import { LoggedInState, loginState } from "@/app/stores/atoms/loginState";
 
 import UserIcon from "../../atoms/users/UserIcon";
-import SignOutButtonWithConfirmation from "../../molecules/actionButtons/auth/SignOutButtonWithConfirmation";
+import SignOutButtonWithConfirmation from "../apiActionButtons/auth/SignOutButtonWithConfirmation";
 
 const DropDownUserMenuButton: React.FC = () => {
   const { userData } = useRecoilValue(loginState) as LoggedInState;

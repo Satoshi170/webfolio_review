@@ -2,8 +2,8 @@
 
 import { VStack, Text } from "@chakra-ui/react";
 
-import GuestLoginButton from "../molecules/actionButtons/auth/GuestLoginButton";
-import SignUpButton from "../molecules/actionButtons/auth/SignUpButton";
+import GuestLoginButton from "./apiActionButtons/auth/GuestLoginButton";
+import SignUpLinkButton from "../molecules/actionButtons/auth/SignUpLinkButton";
 
 const AboutSiteSection: React.FC = () => {
   return (
@@ -14,7 +14,7 @@ const AboutSiteSection: React.FC = () => {
         ゲストログインを推奨します。`}
       </Text>
       <VStack my="3">
-        <SignUpButton />
+        <SignUpLinkButton />
         <GuestLoginButton />
       </VStack>
     </>
