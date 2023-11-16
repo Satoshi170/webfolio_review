@@ -1,19 +1,10 @@
 "use client";
 
-import {
-  Button,
-  MenuItem,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  useDisclosure
-} from "@chakra-ui/react";
+import { MenuItem, useDisclosure } from "@chakra-ui/react";
 
 import { useDeletePortfoliosByIdOperation } from "@/app/hooks/operations/portfolio/useDeletePortfoliosByIdOperation";
+
+import DeleteConfirmationModal from "../../modals/DeleteConfirmationModal";
 
 interface Props {
   id: number;
@@ -32,22 +23,14 @@ const DeletePortfoliosButtonWithConfirmation: React.FC<Props> = ({ id }) => {
       <MenuItem onClick={onOpen} color="red">
         削除
       </MenuItem>
-      <Modal isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay />
-        <ModalContent textAlign="center" w="full" m="auto">
-          <ModalHeader>投稿削除確認</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>本当に削除しますか？</ModalBody>
-          <ModalFooter>
-            <Button colorScheme="red" mr="3" onClick={handleConfirm}>
-              削除
-            </Button>
-            <Button variant="ghost" onClick={onClose}>
-              いいえ
-            </Button>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <DeleteConfirmationModal
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+        handleConfirm={handleConfirm}
+        headerTitle="投稿削除確認"
+        bodyContent="本当に削除しますか？"
+      />
     </>
   );
 };
