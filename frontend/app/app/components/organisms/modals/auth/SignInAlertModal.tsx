@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 
-import GuestLoginButton from "../../organisms/apiActionButtons/auth/GuestLoginButton";
+import GuestLoginButton from "../../apiActionButtons/auth/GuestLoginButton";
 
 interface Props {
   isOpen: boolean;

@@ -6,7 +6,7 @@ import { useRecoilValue } from "recoil";
 
 import { loginState } from "@/app/stores/atoms/loginState";
 
-import SignInAlertModal from "../../atoms/auth/SignInAlertModal";
+import SignInAlertModal from "../../organisms/modals/auth/SignInAlertModal";
 
 interface WithOnClick {
   onClick: () => void;
