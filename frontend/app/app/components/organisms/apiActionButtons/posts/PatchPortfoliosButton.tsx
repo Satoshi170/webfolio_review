@@ -13,11 +13,10 @@ import {
   Spacer
 } from "@chakra-ui/react";
 
+import InputField from "@/app/components/molecules/fields/InputField";
+import TextareaField from "@/app/components/molecules/fields/TextareaField";
 import { usePatchPortfoliosByIdForm } from "@/app/hooks/forms/portfolio/usePatchPortfoliosByIdForm";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
-
-import InputField from "../../fields/InputField";
-import TextareaField from "../../fields/TextareaField";
 
 interface Props {
   portfolioData: PortfolioData;
