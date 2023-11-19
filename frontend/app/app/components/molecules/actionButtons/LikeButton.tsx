@@ -19,6 +19,7 @@ const LikeButton: React.FC<Props> = ({ isLiked, totalLiked, onClick }) => {
       onClick={onClick}
       variant="ghost"
       color={isLiked ? "red" : "gray.500"}
+      p="1"
     >
       {totalLiked}
     </Button>
