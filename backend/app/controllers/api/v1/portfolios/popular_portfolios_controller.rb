@@ -1,6 +1,6 @@
 class Api::V1::Portfolios::PopularPortfoliosController < ApplicationController
   def index
-    portfolios = Portfolio.includes(:goods, user: { image_attachment: :blob }).
+    portfolios = Portfolio.includes(:goods, :comments, user: { image_attachment: :blob }).
       left_joins(:goods).
       group(:id).
       order('COUNT(goods.id) DESC').

@@ -2,7 +2,7 @@ class Api::V1::Portfolios::UserPortfoliosController < ApplicationController
   before_action :set_user_id, only: [:index]
 
   def index
-    portfolios = Portfolio.includes(:goods, user: { image_attachment: :blob }).
+    portfolios = Portfolio.includes(:goods, :comments, user: { image_attachment: :blob }).
       where(user_id: @user_id).
       all.order(updated_at: :desc)
 
