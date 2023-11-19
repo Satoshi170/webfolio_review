@@ -2,7 +2,7 @@ import { z } from "zod";
 
 import { PortfolioValidationErrorMessages } from "@/app/constants/errors/portfolio/Messages";
 
-export const PortfoliosSchema = z.object({
+export const PortfolioSchema = z.object({
   title: z
     .string()
     .min(1, PortfolioValidationErrorMessages.titleRequired)
