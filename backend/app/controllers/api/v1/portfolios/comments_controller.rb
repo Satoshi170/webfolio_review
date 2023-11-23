@@ -1,6 +1,6 @@
 class Api::V1::Portfolios::CommentsController < ApplicationController
+  before_action :set_comment, only: [:update, :destroy]
   before_action :authenticate_api_v1_user!, only: [:create, :update, :destroy]
-  before_action :set_commnet, only: [:update, :destroy]
   before_action :authorize_user_for_comment!, only: [:update, :destroy]
 
   def create
@@ -55,11 +55,12 @@ class Api::V1::Portfolios::CommentsController < ApplicationController
 
   private
 
-  def set_commnet
-    @comment = Comment.find_by!(params[:id])
+  def set_comment
+    @comment = Comment.find_by!(id: params[:id])
   end
 
   def authorize_user_for_comment!
+    puts @comment.id,@comment.content
     unless current_api_v1_user == @comment.user
       render json: {
                status: "error",
