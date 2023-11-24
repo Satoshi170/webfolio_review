@@ -56,11 +56,10 @@ class Api::V1::Portfolios::CommentsController < ApplicationController
   private
 
   def set_comment
-    @comment = Comment.find_by!(id: params[:id])
+    @comment = Comment.find(params[:id])
   end
 
   def authorize_user_for_comment!
-    puts @comment.id,@comment.content
     unless current_api_v1_user == @comment.user
       render json: {
                status: "error",
