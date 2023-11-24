@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Button,
   MenuItem,
   Modal,
   ModalBody,
@@ -13,6 +12,7 @@ import {
   Spacer
 } from "@chakra-ui/react";
 
+import SubmitButton from "@/app/components/atoms/SubmitButton";
 import InputField from "@/app/components/molecules/fields/InputField";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
 import { usePatchPortfoliosByIdForm } from "@/app/hooks/forms/portfolio/usePatchPortfoliosByIdForm";
@@ -66,15 +66,11 @@ const PatchPostsByIdButton: React.FC<Props> = ({ portfolioData }) => {
             />
           </ModalBody>
           <ModalFooter>
-            <Button
-              colorScheme="messenger"
-              mr="3"
+            <SubmitButton
               isDisabled={!isFormValid}
               isLoading={isLoading}
-              type="submit"
-            >
-              修正する
-            </Button>
+              text="修正する"
+            />
           </ModalFooter>
         </ModalContent>
       </Modal>
