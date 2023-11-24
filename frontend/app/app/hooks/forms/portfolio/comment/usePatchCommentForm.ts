@@ -55,7 +55,7 @@ export const usePatchCommentForm = (portfolioId: number, commentData: CommentDat
     console.log(commentData);
     await formSubmit(e);
     onClose();
-    // window.location.reload();
+    window.location.reload();
   };
 
   return {
