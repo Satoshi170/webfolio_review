@@ -6,7 +6,7 @@ import {
   getErrorMessagesProps
 } from "@/__tests__/helpers/zodTestHelpers";
 import { PortfolioValidationErrorMessages } from "@/app/constants/errors/portfolio/Messages";
-import { PortfoliosSchema } from "@/app/libs/zod/formValidations/portfolio/portfoliosSchema";
+import { PortfolioSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioSchema";
 import { PostPortfoliosParams } from "@/app/types/axios/portfolio/postPortfolios";
 
 const getPostPortfolioErrorMessages = (
@@ -14,29 +14,29 @@ const getPostPortfolioErrorMessages = (
   field: keyof PostPortfoliosParams
 ) => {
   const props: getErrorMessagesProps<PostPortfoliosParams> = {
-    schema: PortfoliosSchema,
+    schema: PortfolioSchema,
     data,
     field
   };
   return getErrorMessages(props);
 };
 
-describe("signUpSchema", () => {
+describe("PortfolioSchema", () => {
   it("全て正しい形式の場合エラーをスローしない", () => {
-    expect(() => PortfoliosSchema.parse(validPostPortfoliosData)).not.toThrow();
+    expect(() => PortfolioSchema.parse(validPostPortfoliosData)).not.toThrow();
   });
 
   describe("title", () => {
     it("titleが入力されていない時、正しいエラーメッセージをスローする", () => {
       const invalidTitleData = { ...validPostPortfoliosData, title: "" };
-      expect(() => PortfoliosSchema.parse(invalidTitleData)).toThrow(ZodError);
+      expect(() => PortfolioSchema.parse(invalidTitleData)).toThrow(ZodError);
       const titleErrors = getPostPortfolioErrorMessages(invalidTitleData, "title");
       expect(titleErrors[0]).toBe(PortfolioValidationErrorMessages.titleRequired);
     });
 
     it("titleが26文字以上の時、正しいエラーメッセージをスローする", () => {
       const invalidTitleData = { ...validPostPortfoliosData, title: "a".repeat(26) };
-      expect(() => PortfoliosSchema.parse(invalidTitleData)).toThrow(ZodError);
+      expect(() => PortfolioSchema.parse(invalidTitleData)).toThrow(ZodError);
       const titleErrors = getPostPortfolioErrorMessages(invalidTitleData, "title");
       expect(titleErrors[0]).toBe(PortfolioValidationErrorMessages.titleTooLong);
     });
@@ -45,14 +45,14 @@ describe("signUpSchema", () => {
   describe("content", () => {
     it("contentが入力されていない時、正しいエラーメッセージをスローする", () => {
       const invalidContentData = { ...validPostPortfoliosData, content: "" };
-      expect(() => PortfoliosSchema.parse(invalidContentData)).toThrow(ZodError);
+      expect(() => PortfolioSchema.parse(invalidContentData)).toThrow(ZodError);
       const contentErrors = getPostPortfolioErrorMessages(invalidContentData, "content");
       expect(contentErrors[0]).toBe(PortfolioValidationErrorMessages.contentRequired);
     });
 
-    it("contentが501文字以上の時、正しいエラーメッセージをスローする", () => {
-      const invalidContentData = { ...validPostPortfoliosData, content: "a".repeat(501) };
-      expect(() => PortfoliosSchema.parse(invalidContentData)).toThrow(ZodError);
+    it("contentが256文字以上の時、正しいエラーメッセージをスローする", () => {
+      const invalidContentData = { ...validPostPortfoliosData, content: "a".repeat(256) };
+      expect(() => PortfolioSchema.parse(invalidContentData)).toThrow(ZodError);
       const contentErrors = getPostPortfolioErrorMessages(invalidContentData, "content");
       expect(contentErrors[0]).toBe(PortfolioValidationErrorMessages.contentTooLong);
     });

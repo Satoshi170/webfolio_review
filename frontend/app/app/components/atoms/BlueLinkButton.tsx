@@ -2,18 +2,22 @@
 
 import { Button } from "@chakra-ui/react";
 import NextLink from "next/link";
+interface Props {
+  href: string;
+  text: string;
+}
 
-const SignInButton: React.FC = () => {
+const MessengerLinkButton: React.FC<Props> = ({ href, text }) => {
   return (
     <Button
       as={NextLink}
-      href="/auth/sign_in"
+      href={href}
       colorScheme="messenger"
       sx={{ "&:hover": { textDecoration: "none" } }}
     >
-      サインイン
+      {text}
     </Button>
   );
 };
 
-export default SignInButton;
+export default MessengerLinkButton;

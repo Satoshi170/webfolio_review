@@ -4,7 +4,7 @@ class Api::V1::Portfolios::PortfoliosController < ApplicationController
   before_action :authorize_user_for_portfolio!, only: [:update, :destroy]
 
   def index
-    portfolios = Portfolio.includes(:goods, user: { image_attachment: :blob })
+    portfolios = Portfolio.includes(:goods, :comments, user: { image_attachment: :blob })
     if params[:id].present?
       ids = params[:id].split(",")
       portfolios = portfolios.where(id: ids)
@@ -88,7 +88,6 @@ class Api::V1::Portfolios::PortfoliosController < ApplicationController
                errors: ["Permission denied"],
              },
              status: :forbidden
-      nil
     end
   end
 

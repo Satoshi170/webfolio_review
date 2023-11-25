@@ -6,7 +6,7 @@ import { useSetRecoilState } from "recoil";
 
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { patchPortfoliosById } from "@/app/libs/axios/portfolio/patchPortfoliosById";
-import { PortfoliosSchema } from "@/app/libs/zod/formValidations/portfolio/portfoliosSchema";
+import { PortfolioSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioSchema";
 import { toastState } from "@/app/stores/atoms/toastState";
 import { PatchPortfoliosByIdParams } from "@/app/types/axios/portfolio/patchPortfoliosById";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
@@ -18,7 +18,7 @@ export const usePatchPortfoliosByIdForm = (portfolioData: PortfolioData) => {
     watch,
     formState: { errors, isValid }
   } = useForm({
-    resolver: zodResolver(PortfoliosSchema),
+    resolver: zodResolver(PortfolioSchema),
     mode: "onChange",
     defaultValues: {
       title: portfolioData.title,

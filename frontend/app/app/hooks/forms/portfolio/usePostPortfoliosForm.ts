@@ -6,7 +6,7 @@ import { useSetRecoilState } from "recoil";
 
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { postPortfolios } from "@/app/libs/axios/portfolio/postPortfolios";
-import { PortfoliosSchema } from "@/app/libs/zod/formValidations/portfolio/portfoliosSchema";
+import { PortfolioSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioSchema";
 import { toastState } from "@/app/stores/atoms/toastState";
 import { PostPortfoliosParams } from "@/app/types/axios/portfolio/postPortfolios";
 
@@ -16,7 +16,7 @@ export const usePostPortfoliosForm = () => {
     handleSubmit,
     formState: { errors, isValid }
   } = useForm<PostPortfoliosParams>({
-    resolver: zodResolver(PortfoliosSchema),
+    resolver: zodResolver(PortfolioSchema),
     mode: "onChange"
   });
   const { isOpen, onOpen, onClose } = useDisclosure();

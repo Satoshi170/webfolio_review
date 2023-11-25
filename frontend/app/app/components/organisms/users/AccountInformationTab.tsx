@@ -1,14 +1,15 @@
 "use client";
 
-import { Box, Heading, Spacer, Text } from "@chakra-ui/react";
+import { Heading, Spacer, Text } from "@chakra-ui/react";
 import { useRecoilValue } from "recoil";
 
 import { useUpdateAccountForm } from "@/app/hooks/forms/auth/useUpdateAccountForm";
 import { LoggedInState, loginState } from "@/app/stores/atoms/loginState";
 
-import SubmitButton from "../../atoms/SubmitButton";
+import SubmitFullWideButton from "../../atoms/SubmitFullWideButton";
 import InputField from "../../molecules/fields/InputField";
 import InputImageField from "../../molecules/fields/InputImageField";
+import RoundedCenteredBox from "../../styledWrappers/RoundedCenteredBox";
 
 const AccountInformationTabPanel: React.FC = () => {
   const loginStateValue = useRecoilValue(loginState);
@@ -28,7 +29,7 @@ const AccountInformationTabPanel: React.FC = () => {
   const isDisabled = isGuestUser || !isFormValid();
 
   return (
-    <Box flex="1" m="auto" maxW="md" boxShadow="md" p="12" rounded="md">
+    <RoundedCenteredBox>
       <Heading as="h2" textAlign="center" mb="4">
         アカウント情報
       </Heading>
@@ -50,7 +51,11 @@ const AccountInformationTabPanel: React.FC = () => {
           resetImage={resetImage}
           fileName={fileName}
         />
-        <SubmitButton text="更新する" isLoading={isLoading} isDisabled={isDisabled} />
+        <SubmitFullWideButton
+          text="更新する"
+          isLoading={isLoading}
+          isDisabled={isDisabled}
+        />
         {isGuestUser && (
           <>
             <Spacer my="4" />
@@ -60,7 +65,7 @@ const AccountInformationTabPanel: React.FC = () => {
           </>
         )}
       </form>
-    </Box>
+    </RoundedCenteredBox>
   );
 };
 

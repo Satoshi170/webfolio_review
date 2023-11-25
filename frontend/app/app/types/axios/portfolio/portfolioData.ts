@@ -1,3 +1,4 @@
+import { CommentData } from "./comment/comment";
 import { UserData } from "../../auth";
 
 interface Good {
@@ -11,4 +12,5 @@ export interface PortfolioData {
   updatedAt: Date;
   user: UserData;
   goods: Good[];
+  comments: CommentData[];
 }

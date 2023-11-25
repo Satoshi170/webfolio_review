@@ -2,22 +2,19 @@
 
 import { Button } from "@chakra-ui/react";
 
-interface SubmitButtonProps {
+interface Props {
   text: string;
   isLoading: boolean;
   isDisabled: boolean;
 }
 
-const SubmitButton: React.FC<SubmitButtonProps> = ({ text, isLoading, isDisabled }) => {
+const SubmitButton: React.FC<Props> = ({ text, isLoading, isDisabled }) => {
   return (
     <Button
-      mt="4"
-      mx="auto"
-      width="full"
       colorScheme="messenger"
-      type="submit"
-      isLoading={isLoading}
       isDisabled={isDisabled}
+      isLoading={isLoading}
+      type="submit"
     >
       {text}
     </Button>

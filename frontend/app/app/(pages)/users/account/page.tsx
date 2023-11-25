@@ -4,7 +4,7 @@ import { Box, Spacer, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui
 
 import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
-import AccountDeleteButtonWithConfirmation from "@/app/components/molecules/actionButtons/auth/AccountDeleteButtonWithConfirmation";
+import AccountDeleteButtonWithConfirmation from "@/app/components/organisms/apiActionButtons/auth/AccountDeleteButtonWithConfirmation";
 import AccountInformationTabPanel from "@/app/components/organisms/users/AccountInformationTab";
 
 const UserAccountPage: React.FC = () => {

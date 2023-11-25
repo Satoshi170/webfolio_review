@@ -6,7 +6,7 @@ import NextLink from "next/link";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 import UserIcon from "../../atoms/users/UserIcon";
-import OptionPostMenuButton from "../actionButtons/post/OptionMenuButton";
+import OptionPostMenuButton from "../../organisms/apiActionButtons/posts/OptionMenuButton";
 
 interface Props {
   isLink?: boolean;

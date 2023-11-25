@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_one_attached :image
   has_many :portfolios, dependent: :delete_all
   has_many :goods, dependent: :delete_all
+  has_many :comments, dependent: :delete_all
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

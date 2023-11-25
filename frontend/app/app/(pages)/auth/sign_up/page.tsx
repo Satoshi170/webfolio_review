@@ -1,11 +1,12 @@
 "use client";
 
-import { Box, Divider, Heading, Text, Link } from "@chakra-ui/react";
+import { Divider, Heading, Text, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
 
 import WithRedirectIfLoggedIn from "@/app/components/HOCs/WithRedirectIfLoggedIn";
-import SubmitButton from "@/app/components/atoms/SubmitButton";
+import SubmitFullWideButton from "@/app/components/atoms/SubmitFullWideButton";
 import InputField from "@/app/components/molecules/fields/InputField";
+import RoundedCenteredBox from "@/app/components/styledWrappers/RoundedCenteredBox";
 import { useSignUpForm } from "@/app/hooks/forms/auth/useSignUpForm";
 
 const SignUpPage: React.FC = () => {
@@ -13,7 +14,7 @@ const SignUpPage: React.FC = () => {
     useSignUpForm();
 
   return (
-    <Box flex="1" m="auto" maxW="md" boxShadow="md" p="12" rounded="md">
+    <RoundedCenteredBox>
       <Heading as="h2" textAlign="center" mb="4">
         アカウント作成
       </Heading>
@@ -48,7 +49,11 @@ const SignUpPage: React.FC = () => {
           register={register}
           error={errors.passwordConfirmation}
         />
-        <SubmitButton text="登録する" isLoading={isLoading} isDisabled={!isValid} />
+        <SubmitFullWideButton
+          text="登録する"
+          isLoading={isLoading}
+          isDisabled={!isValid}
+        />
         <Divider my="4" />
         <Text>
           すでにアカウントをお持ちですか？
@@ -57,7 +62,7 @@ const SignUpPage: React.FC = () => {
           </Link>
         </Text>
       </form>
-    </Box>
+    </RoundedCenteredBox>
   );
 };
 
