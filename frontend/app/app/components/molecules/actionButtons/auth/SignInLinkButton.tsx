@@ -3,7 +3,7 @@
 import BlueLinkButton from "@/app/components/atoms/BlueLinkButton";
 
 const SignInLinkButton: React.FC = () => {
-  return <BlueLinkButton href="/auth_sign_in" text="サインイン" />;
+  return <BlueLinkButton href="/auth/sign_in" text="サインイン" />;
 };
 
 export default SignInLinkButton;
