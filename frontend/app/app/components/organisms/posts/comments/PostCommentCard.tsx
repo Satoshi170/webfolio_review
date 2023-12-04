@@ -15,7 +15,7 @@ const PostCommentCard: React.FC = () => {
   const isUserComment = isLogin ? commentData.user.id == userData.id : false;
 
   return (
-    <Card rounded="none">
+    <Card w={{ base: "auto", md: "md" }} rounded="none">
       <PostCommentCardHeader isUserComment={isUserComment} />
       <Spacer my="-3" />
       <PostCommentCardBody />
