@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
         Webfolio-Review
       </Link>
       <Text fontSize={{ base: "xs", md: "sm" }} padding={{ base: 1.0, md: 2.0 }}>
-        ©{yearRange}
+        ©{yearRange} Satoshi Inao
       </Text>
     </Box>
   );
