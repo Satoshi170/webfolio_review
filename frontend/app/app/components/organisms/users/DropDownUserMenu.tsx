@@ -38,6 +38,10 @@ const DropDownUserMenuButton: React.FC = () => {
           いいねした投稿
         </MenuItem>
         <MenuDivider />
+        <MenuItem as={NextLink} href="/users/comments">
+          コメントした投稿
+        </MenuItem>
+        <MenuDivider />
         <MenuItem as={NextLink} href="/users/account">
           アカウント設定
         </MenuItem>
