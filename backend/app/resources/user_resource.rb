@@ -12,4 +12,8 @@ class UserResource
   many :goods do
     attributes :portfolio_id
   end
+
+  many :comments do
+    attributes :portfolio_id, :content, :updated_at
+  end
 end
