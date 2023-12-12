@@ -14,6 +14,10 @@ class UserResource
   end
 
   many :comments do
-    attributes :portfolio_id, :content, :updated_at
+    attributes :content, :updated_at
+
+    one :portfolio do
+      attributes :id, :title
+    end
   end
 end
