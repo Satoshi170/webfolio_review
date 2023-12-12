@@ -5,10 +5,14 @@ interface Good {
   portfolioId: number;
 }
 
+interface Portfolio {
+  id: number;
+  title: string;
+}
 interface Comment {
-  portfolioId: number;
   content: string;
   updatedAt: Date;
+  portfolio: Portfolio;
 }
 
 export interface UserData {
