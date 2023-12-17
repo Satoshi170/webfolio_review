@@ -7,7 +7,7 @@ RSpec.describe "Api::V1::Portfolios::Comments", type: :request do
   let(:auth_user1_headers) { sign_in({ email: user1.email, password: user1.password }) }
   let(:auth_user2_headers) { sign_in({ email: user2.email, password: user2.password }) }
   let(:valid_comment_params) do
-    { content: "testContent" }
+    { content: "testContent", tag_ids: [1, 2] }
   end
   let(:invalid_comment_params) { valid_comment_params.merge(content: "") }
 
@@ -51,7 +51,7 @@ RSpec.describe "Api::V1::Portfolios::Comments", type: :request do
   end
 
   describe "PATCH /comments/:id" do
-    let!(:comment) { create(:comment, user: user1, portfolio: portfolio) }
+    let!(:comment) { create(:comment, user: user1, portfolio: portfolio, tag_ids: [1]) }
     context "headerが適切な場合" do
       context "有効なパラメータが指定された場合" do
         it "commnetの更新に成功する" do
@@ -62,6 +62,7 @@ RSpec.describe "Api::V1::Portfolios::Comments", type: :request do
           expect(response).to have_http_status(:success)
           comment.reload
           expect(comment.content).to eq(valid_comment_params[:content])
+          expect(comment.tags.pluck(:id)).to eq(valid_comment_params[:tag_ids])
         end
       end
 
@@ -74,6 +75,7 @@ RSpec.describe "Api::V1::Portfolios::Comments", type: :request do
           expect(response).to have_http_status(:unprocessable_entity)
           comment.reload
           expect(comment.content).not_to eq(valid_comment_params[:content])
+          expect(comment.tags.pluck(:id)).not_to eq(valid_comment_params[:tag_ids])
         end
       end
     end
