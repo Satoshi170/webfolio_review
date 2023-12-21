@@ -12,7 +12,6 @@ class Api::V1::Portfolios::CommentsController < ApplicationController
     @comment = Comment.new(comment_params_with_user_and_portfolio)
 
     if @comment.save
-      set_tag_ids
       render json: {
                status: "success",
                message: "Comment created successfully",
@@ -59,12 +58,6 @@ class Api::V1::Portfolios::CommentsController < ApplicationController
 
   def set_comment
     @comment = Comment.find(params[:id])
-  end
-
-  def set_tag_ids
-    if comment_params[:tag_ids]
-      @comment.tags = Tag.where(id: comment_params[:tag_ids])
-    end
   end
 
   def update_tag_ids
