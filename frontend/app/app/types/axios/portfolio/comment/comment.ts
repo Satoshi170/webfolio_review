@@ -1,11 +1,19 @@
 import { UserData } from "@/app/types/auth";
 
-export interface CommentParams {
+export interface PostCommentParams {
   content: string;
+  tagIds?: number[];
 }
 
-export interface CommentData extends CommentParams {
+interface tagData {
   id: number;
+  name: string;
+}
+
+export interface CommentData {
+  id: number;
+  content: string;
   updatedAt: Date;
+  tags: tagData[];
   user: UserData;
 }
