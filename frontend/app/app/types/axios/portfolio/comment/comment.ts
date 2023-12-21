@@ -5,6 +5,10 @@ export interface PostCommentParams {
   tagIds?: number[];
 }
 
+export interface PostCommentFormParams extends Omit<PostCommentParams, "tagIds"> {
+  tagIds: string[];
+}
+
 interface tagData {
   id: number;
   name: string;
