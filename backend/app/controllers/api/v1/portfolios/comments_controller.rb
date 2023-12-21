@@ -11,8 +11,7 @@ class Api::V1::Portfolios::CommentsController < ApplicationController
 
     @comment = Comment.new(comment_params_with_user_and_portfolio)
 
-    if @comment.valid?
-      @comment.save
+    if @comment.save
       set_tag_ids
       render json: {
                status: "success",
@@ -63,14 +62,16 @@ class Api::V1::Portfolios::CommentsController < ApplicationController
   end
 
   def set_tag_ids
-    @comment.tags = Tag.where(id: comment_params[:tag_ids]) if comment_params[:tag_ids]
+    if comment_params[:tag_ids]
+      @comment.tags = Tag.where(id: comment_params[:tag_ids])
+    end
   end
 
   def update_tag_ids
+    return unless comment_params.key(:tag_ids)
+
     if comment_params[:tag_ids].blank?
       @comment.tag.destroy.all
-    else
-      set_tag_ids
     end
   end
 
