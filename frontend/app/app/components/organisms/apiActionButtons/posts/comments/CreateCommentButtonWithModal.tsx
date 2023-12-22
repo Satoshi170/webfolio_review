@@ -15,6 +15,7 @@ import {
 
 import SubmitButton from "@/app/components/atoms/SubmitButton";
 import CommentButton from "@/app/components/molecules/actionButtons/CommentButton";
+import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
 import PostCardBody from "@/app/components/molecules/posts/PostCardBody";
 import PostCardHeader from "@/app/components/molecules/posts/PostCardHeader";
@@ -28,6 +29,8 @@ interface Props {
 const CreateCommentButtonWithModal: React.FC<Props> = ({ portfolioData }) => {
   const {
     register,
+    control,
+    tagOptions,
     isLoading,
     isValid,
     errors,
@@ -59,6 +62,13 @@ const CreateCommentButtonWithModal: React.FC<Props> = ({ portfolioData }) => {
                       register={register}
                       error={errors.content}
                       isRequired={true}
+                    />
+                    <SelectBoxField
+                      name="tagIds"
+                      label="タグ"
+                      control={control}
+                      options={tagOptions}
+                      isMulti
                     />
                     <SubmitButton
                       text="コメントする"
