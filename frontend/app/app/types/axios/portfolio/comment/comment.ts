@@ -9,7 +9,7 @@ export interface PostCommentFormParams extends Omit<PostCommentParams, "tagIds">
   tagIds: string[];
 }
 
-interface tagData {
+export interface CommentTagData {
   id: number;
   name: string;
 }
@@ -18,6 +18,6 @@ export interface CommentData {
   id: number;
   content: string;
   updatedAt: Date;
-  tags: tagData[];
+  tags: CommentTagData[];
   user: UserData;
 }
