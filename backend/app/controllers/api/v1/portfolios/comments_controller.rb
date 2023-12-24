@@ -61,7 +61,7 @@ class Api::V1::Portfolios::CommentsController < ApplicationController
   end
 
   def update_tag_ids
-    return unless comment_params.key(:tag_ids)
+    return unless comment_params.key?(:tag_ids)
 
     if comment_params[:tag_ids].blank?
       @comment.tag.destroy.all
