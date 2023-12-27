@@ -64,7 +64,7 @@ class Api::V1::Portfolios::CommentsController < ApplicationController
     return unless comment_params.key?(:tag_ids)
 
     if comment_params[:tag_ids].blank?
-      @comment.tag.destroy.all
+      @comment.tags.destroy_all
     end
   end
 
