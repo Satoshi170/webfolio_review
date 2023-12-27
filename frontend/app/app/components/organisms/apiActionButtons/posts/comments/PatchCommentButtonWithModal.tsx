@@ -12,6 +12,7 @@ import {
 } from "@chakra-ui/react";
 
 import SubmitButton from "@/app/components/atoms/SubmitButton";
+import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
 import { useCommentData } from "@/app/hooks/datas/useCommentData";
 import { usePortfolioData } from "@/app/hooks/datas/usePortfolioData";
@@ -23,6 +24,9 @@ const PatchCommentButtonWithModal: React.FC = () => {
 
   const {
     register,
+    control,
+    defaultTagIdsValue,
+    tagOptions,
     errors,
     isFormValid,
     handleFormSubmit,
@@ -53,6 +57,14 @@ const PatchCommentButtonWithModal: React.FC = () => {
               register={register}
               error={errors.content}
               isRequired={true}
+            />
+            <SelectBoxField
+              name="tagIds"
+              label="タグ"
+              control={control}
+              options={tagOptions}
+              defaultValue={defaultTagIdsValue}
+              isMulti
             />
           </ModalBody>
           <ModalFooter>
