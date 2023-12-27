@@ -19,6 +19,7 @@ interface Props<T extends FieldValues> {
   isRequired?: true;
   error?: FieldError;
   control: Control<T>;
+  defaultValue?: Option[];
 }
 
 const SelectBoxField = <T extends FieldValues>({
@@ -28,7 +29,8 @@ const SelectBoxField = <T extends FieldValues>({
   isMulti = undefined,
   control,
   options,
-  error
+  error,
+  defaultValue = undefined
 }: Props<T>) => {
   return (
     <Controller
@@ -44,6 +46,7 @@ const SelectBoxField = <T extends FieldValues>({
             options={options}
             isMulti={isMulti}
             isSearchable
+            defaultValue={defaultValue}
             value={options.find((item) => item.value === field.value)}
             onChange={(newVal) => {
               field.onChange(newVal.map((item) => item.value));
