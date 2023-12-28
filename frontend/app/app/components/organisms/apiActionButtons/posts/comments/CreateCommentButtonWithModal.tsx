@@ -43,10 +43,10 @@ const CreateCommentButtonWithModal: React.FC<Props> = ({ portfolioData }) => {
   return (
     <>
       <CommentButton totalCommented={portfolioData.comments.length} onClick={onOpen} />
-      <Modal isOpen={isOpen} onClose={onClose} size="lg">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>コメントする</ModalHeader>
+          <ModalHeader textAlign="center">コメントする</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Card>

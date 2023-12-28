@@ -39,16 +39,10 @@ const PatchCommentButtonWithModal: React.FC = () => {
   return (
     <>
       <MenuItem onClick={onOpen}>修正する</MenuItem>
-      <Modal isOpen={isOpen} onClose={onClose} size="lg">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
         <ModalOverlay />
-        <ModalContent
-          as="form"
-          onSubmit={handleFormSubmit}
-          textAlign="center"
-          w="full"
-          m="auto"
-        >
-          <ModalHeader>コメントを修正する</ModalHeader>
+        <ModalContent as="form" onSubmit={handleFormSubmit}>
+          <ModalHeader textAlign="center">コメントを修正する</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <TextareaField
@@ -63,8 +57,8 @@ const PatchCommentButtonWithModal: React.FC = () => {
               label="タグ"
               control={control}
               options={tagOptions}
-              defaultValue={defaultTagIdsValue}
               isMulti
+              defaultValue={defaultTagIdsValue}
             />
           </ModalBody>
           <ModalFooter>
