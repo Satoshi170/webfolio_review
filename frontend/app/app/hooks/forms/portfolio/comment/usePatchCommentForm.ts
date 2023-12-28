@@ -84,7 +84,7 @@ export const usePatchCommentForm = (portfolioId: number, commentData: CommentDat
   const handleFormSubmit = async (e: FormEvent) => {
     await formSubmit(e);
     onClose();
-    // window.location.reload();
+    window.location.reload();
   };
 
   const tagOptions = tagDatas.map((item) => ({
