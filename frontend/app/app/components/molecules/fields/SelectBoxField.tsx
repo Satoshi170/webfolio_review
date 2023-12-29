@@ -1,14 +1,15 @@
 "use client";
 
 import { FormErrorMessage, FormLabel } from "@chakra-ui/react";
+import { Select } from "chakra-react-select";
 import { Control, Controller, FieldError, FieldValues, Path } from "react-hook-form";
-import Select from "react-select";
 
 import RequiredAsterisk from "../../atoms/RequiredAsterisk";
 
 interface Option {
   value: string;
   label: string;
+  colorTheme?: string;
 }
 
 interface Props<T extends FieldValues> {
