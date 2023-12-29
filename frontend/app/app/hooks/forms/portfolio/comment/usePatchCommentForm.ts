@@ -5,7 +5,6 @@ import { FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSetRecoilState } from "recoil";
 
-import { tagDatas } from "@/app/constants/datas/tags";
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { patchPortfoliosByIdComments } from "@/app/libs/axios/portfolio/comment/patchPortfoliosByIdCommentsById";
 import { PortfolioCommentSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioCommentSchema";
@@ -87,16 +86,10 @@ export const usePatchCommentForm = (portfolioId: number, commentData: CommentDat
     window.location.reload();
   };
 
-  const tagOptions = tagDatas.map((item) => ({
-    value: String(item.tagId),
-    label: item.name
-  }));
-
   return {
     register,
     control,
     defaultTagIdsValue,
-    tagOptions,
     errors,
     isLoading,
     isFormValid,
