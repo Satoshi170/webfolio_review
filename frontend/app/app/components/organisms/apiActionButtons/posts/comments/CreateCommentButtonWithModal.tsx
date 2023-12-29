@@ -21,6 +21,7 @@ import PostCardBody from "@/app/components/molecules/posts/PostCardBody";
 import PostCardHeader from "@/app/components/molecules/posts/PostCardHeader";
 import { usePostCommentForm } from "@/app/hooks/forms/portfolio/comment/usePostCommentForm";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import { commentTagOptions } from "@/app/utils/themes/posts/comments/commentTagOptions";
 
 interface Props {
   portfolioData: PortfolioData;
@@ -30,7 +31,6 @@ const CreateCommentButtonWithModal: React.FC<Props> = ({ portfolioData }) => {
   const {
     register,
     control,
-    tagOptions,
     isLoading,
     isValid,
     errors,
@@ -67,7 +67,7 @@ const CreateCommentButtonWithModal: React.FC<Props> = ({ portfolioData }) => {
                       name="tagIds"
                       label="タグ"
                       control={control}
-                      options={tagOptions}
+                      options={commentTagOptions}
                       isMulti
                     />
                     <SubmitButton

@@ -17,6 +17,7 @@ import TextareaField from "@/app/components/molecules/fields/TextareaField";
 import { useCommentData } from "@/app/hooks/datas/useCommentData";
 import { usePortfolioData } from "@/app/hooks/datas/usePortfolioData";
 import { usePatchCommentForm } from "@/app/hooks/forms/portfolio/comment/usePatchCommentForm";
+import { commentTagOptions } from "@/app/utils/themes/posts/comments/commentTagOptions";
 
 const PatchCommentButtonWithModal: React.FC = () => {
   const portfolioData = usePortfolioData();
@@ -26,7 +27,6 @@ const PatchCommentButtonWithModal: React.FC = () => {
     register,
     control,
     defaultTagIdsValue,
-    tagOptions,
     errors,
     isFormValid,
     handleFormSubmit,
@@ -56,7 +56,7 @@ const PatchCommentButtonWithModal: React.FC = () => {
               name="tagIds"
               label="タグ"
               control={control}
-              options={tagOptions}
+              options={commentTagOptions}
               isMulti
               defaultValue={defaultTagIdsValue}
             />

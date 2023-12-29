@@ -3,7 +3,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { tagDatas } from "@/app/constants/datas/tags";
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { useSetToast } from "@/app/hooks/recoil/useSetToast";
 import { postPortfoliosByIdComments } from "@/app/libs/axios/portfolio/comment/postPortfoliosByIdComments";
@@ -45,15 +44,9 @@ export const usePostCommentForm = (id: number) => {
     window.location.reload();
   };
 
-  const tagOptions = tagDatas.map((item) => ({
-    value: String(item.tagId),
-    label: item.name
-  }));
-
   return {
     register,
     control,
-    tagOptions,
     errors,
     isLoading,
     isValid,
