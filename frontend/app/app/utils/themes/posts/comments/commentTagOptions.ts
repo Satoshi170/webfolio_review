@@ -3,5 +3,5 @@ import tagStyles from "@/app/theme/commentTagStyles";
 
 export const commentTagOptions = tagDatas.map((tagData) => {
   const colorScheme = tagStyles[tagData.name];
-  return { value: String(tagData.tagId), label: tagData.name, colorScheme };
+  return { value: String(tagData.id), label: tagData.name, colorScheme };
 });

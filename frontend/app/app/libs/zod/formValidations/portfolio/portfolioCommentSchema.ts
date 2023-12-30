@@ -4,7 +4,7 @@ import { tagDatas } from "@/app/constants/datas/tags";
 import { INVALID_OPERATION_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { CommentValidationErrorMessages } from "@/app/constants/errors/portfolio/comments/Messages";
 
-const validTagIds: number[] = tagDatas.map((item) => item.tagId);
+const validTagIds: number[] = tagDatas.map((item) => item.id);
 
 const tagIdSchema = z
   .string()
