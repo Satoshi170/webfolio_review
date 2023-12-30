@@ -2,15 +2,15 @@
 
 import { Tag } from "@chakra-ui/react";
 
+import commentTagStyles from "@/app/theme/commentTagStyles";
 import { CommentTagData } from "@/app/types/axios/portfolio/comment/comment";
-import { getColorForTagId } from "@/app/utils/themes/posts/comments/getColorForTagId";
 
 interface Props {
   tag: CommentTagData;
 }
 
 const PostCommentTag: React.FC<Props> = ({ tag }) => {
-  const color = getColorForTagId(tag.id);
+  const color = commentTagStyles[tag.name];
 
   return (
     <Tag size="sm" variant="solid" colorScheme={color}>
