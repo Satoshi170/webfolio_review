@@ -1,3 +1,4 @@
+import { tagDatas } from "@/app/constants/datas/tags";
 import { UserData } from "@/app/types/auth";
 
 export interface PostCommentParams {
@@ -9,10 +10,7 @@ export interface PostCommentFormParams extends Omit<PostCommentParams, "tagIds">
   tagIds: string[];
 }
 
-export interface CommentTagData {
-  id: number;
-  name: string;
-}
+export type CommentTagData = (typeof tagDatas)[number];
 
 export interface CommentData {
   id: number;
