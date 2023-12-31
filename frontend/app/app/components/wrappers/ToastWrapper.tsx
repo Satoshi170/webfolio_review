@@ -2,13 +2,12 @@
 
 import { useToast } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
-import { useRecoilValue } from "recoil";
 
-import { toastState } from "@/app/stores/atoms/toastState";
+import { useGetToastState } from "@/app/hooks/recoil/toastState/useGetToastState";
 
 const ToastWrapper: React.FC = () => {
   const toast = useToast();
-  const { status, message, timestamp } = useRecoilValue(toastState);
+  const { status, message, timestamp } = useGetToastState();
   const toastIdRef = useRef<string | number | undefined>(undefined);
 
   useEffect(() => {
