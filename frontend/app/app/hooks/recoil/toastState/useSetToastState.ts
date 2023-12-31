@@ -3,7 +3,7 @@ import { useSetRecoilState } from "recoil";
 
 import { toastState } from "@/app/stores/atoms/toastState";
 
-export const useSetToast = () => {
+export const useSetToastState = () => {
   const setToast = useSetRecoilState(toastState);
 
   const setSuccessToast = useCallback(
