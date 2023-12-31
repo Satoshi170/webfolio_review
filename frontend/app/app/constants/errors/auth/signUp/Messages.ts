@@ -3,6 +3,7 @@ export const signUpValidationErrorMessages = {
   nameTooLong: "ユーザー名は25文字以内である必要があります",
   emailRequired: "メールアドレスは必須です",
   invalidEmail: "無効なメールアドレス形式です",
+  usedEmail: "このメールアドレスはすでに使用されています",
   passwordRequired: "パスワードは必須です",
   passwordTooShort: "パスワードは6文字以上である必要があります",
   passwordConfirmationRequired: "パスワードをもう一度入力してください",
