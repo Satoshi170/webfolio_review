@@ -1,24 +1,22 @@
 import { act, renderHook } from "@testing-library/react";
-import { RecoilRoot, RecoilState } from "recoil";
+import { RecoilRoot } from "recoil";
 
 import { validSignUpData } from "@/__tests__/fixtures/auth/validSignUpData";
+import {
+  mockSetErrorToast,
+  mockSetSuccessToast,
+  mockUseSetToastState
+} from "@/__tests__/mocks/hooks/recoil/toastState/mockUseSetToastState";
 import { mockNavigation, replaceMock } from "@/__tests__/mocks/mockNavigation";
 import {
   mockReactHookForm,
   mockSetError
 } from "@/__tests__/mocks/reactHookForm/mockReactHookForm";
-import {
-  mockSetToast,
-  mockUseSetRecoilState
-} from "@/__tests__/mocks/recoil/mockUseSetRecoilState";
 import { useSignUpForm } from "@/app/hooks/forms/auth/useSignUpForm";
 import { useCheckLogin } from "@/app/hooks/useCheckLogin";
 import { postAuth } from "@/app/libs/axios/auth/postAuth";
 
-jest.mock("recoil", () => ({
-  ...jest.requireActual<typeof import("recoil")>("recoil"),
-  useSetRecoilState: (atom: RecoilState<unknown>) => mockUseSetRecoilState(atom)
-}));
+jest.mock("@/app/hooks/recoil/toastState/useSetToastState", () => mockUseSetToastState);
 jest.mock("next/navigation", () => mockNavigation);
 jest.mock("react-hook-form", () => mockReactHookForm);
 jest.mock("@/app/hooks/useCheckLogin");
@@ -41,7 +39,7 @@ describe("useSignUpForm", () => {
         await result.current.onSubmit(validSignUpData);
       });
       expect(replaceMock).toHaveBeenCalled();
-      expect(mockSetToast).toHaveBeenCalled();
+      expect(mockSetSuccessToast).toHaveBeenCalled();
       expect(mockSetError).not.toHaveBeenCalled();
     });
   });
@@ -59,7 +57,7 @@ describe("useSignUpForm", () => {
           await result.current.onSubmit(validSignUpData);
         });
         expect(replaceMock).not.toHaveBeenCalled();
-        expect(mockSetToast).not.toHaveBeenCalled();
+        expect(mockSetErrorToast).not.toHaveBeenCalled();
         expect(mockSetError).toHaveBeenCalled();
       });
     });
@@ -73,12 +71,7 @@ describe("useSignUpForm", () => {
           await result.current.onSubmit(validSignUpData);
         });
         expect(replaceMock).not.toHaveBeenCalled();
-        expect(mockSetToast).toHaveBeenCalledWith({
-          message: nonSpecificErrorMessage,
-          status: "error",
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-          timestamp: expect.any(Number)
-        });
+        expect(mockSetErrorToast).toHaveBeenCalledWith(nonSpecificErrorMessage);
         expect(mockSetError).not.toHaveBeenCalled();
       });
     });
