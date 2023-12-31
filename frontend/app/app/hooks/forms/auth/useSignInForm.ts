@@ -3,6 +3,7 @@ import { useRouter } from "next/navigation";
 import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 
+import { signInValidationErrorMessages } from "@/app/constants/errors/auth/signIn/Messages";
 import { postAuthSignIn } from "@/app/libs/axios/auth/postAuthSignIn";
 import { signInSchema } from "@/app/libs/zod/formValidations/auth/signInSchema";
 import { PostAuthSignInCredentials } from "@/app/types/axios/auth/postAuthSignIn";
@@ -40,7 +41,7 @@ export const useSignInForm = () => {
         if (errorMessage.includes("Invalid login credentials. Please try again.")) {
           setError("password", {
             type: "manual",
-            message: "メールアドレスまたはパスワードが違います"
+            message: signInValidationErrorMessages.invalidParams
           });
         } else {
           setErrorToast(errorMessage);
