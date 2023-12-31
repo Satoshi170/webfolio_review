@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useSetRecoilState } from "recoil";
 
 import { toastState } from "@/app/stores/atoms/toastState";
@@ -5,12 +6,19 @@ import { toastState } from "@/app/stores/atoms/toastState";
 export const useSetToast = () => {
   const setToast = useSetRecoilState(toastState);
 
-  const setSuccessToast = (message: string) => {
-    setToast({ message: message, status: "success", timestamp: Date.now() });
-  };
+  const setSuccessToast = useCallback(
+    (message: string) => {
+      setToast({ message, status: "success", timestamp: Date.now() });
+    },
+    [setToast]
+  );
 
-  const setErrorToast = (message: string) => {
-    setToast({ message: message, status: "error", timestamp: Date.now() });
-  };
+  const setErrorToast = useCallback(
+    (message: string) => {
+      setToast({ message, status: "error", timestamp: Date.now() });
+    },
+    [setToast]
+  );
+
   return { setSuccessToast, setErrorToast };
 };
