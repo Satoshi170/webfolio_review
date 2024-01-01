@@ -26,7 +26,7 @@ const AccountInformationTabPanel: React.FC = () => {
     isFormValid
   } = useUpdateAccountForm();
   const isGuestUser = data.role == "guest";
-  const isDisabled = isGuestUser || !isFormValid();
+  const isDisabled = isGuestUser || !isFormValid;
 
   return (
     <RoundedCenteredBox>
