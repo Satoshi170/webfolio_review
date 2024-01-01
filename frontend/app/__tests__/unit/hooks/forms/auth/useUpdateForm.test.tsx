@@ -130,7 +130,7 @@ describe("useUpdateAccountForm", () => {
           result.current.setError("name", { message: "Error", type: "manual" });
         });
 
-        expect(result.current.isFormValid()).toBe(false);
+        expect(result.current.isFormValid).toBe(false);
       });
     });
 
@@ -143,7 +143,7 @@ describe("useUpdateAccountForm", () => {
             result.current.imageFile = null;
           });
 
-          expect(result.current.isFormValid()).toBe(false);
+          expect(result.current.isFormValid).toBe(false);
         });
       });
 
@@ -155,7 +155,7 @@ describe("useUpdateAccountForm", () => {
             result.current.imageFile = null;
           });
 
-          expect(result.current.isFormValid()).toBe(true);
+          expect(result.current.isFormValid).toBe(true);
         });
       });
     });
