@@ -1,22 +1,12 @@
 import { fireEvent, render } from "@testing-library/react";
 
 import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
-import mockRecoil from "@/__tests__/mocks/mockRecoil";
 import WithSignInAlert from "@/app/components/HOCs/buttons/WithSignInAlert";
-import { loginState } from "@/app/stores/atoms/loginState";
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
 jest.mock("@/app/components/organisms/modals/auth/SignInAlertModal");
+jest.mock("@/app/hooks/recoil/loginState/useGetLoginState");
 const mockOnClick = jest.fn();
-
-interface Props {
-  onClick: () => void;
-  text: string;
-}
-
-const DummyButtonComponent: React.FC<Props> = ({ onClick, text }) => {
-  return <button onClick={onClick}>{text}</button>;
-};
-const DummyWrappedComponent = WithSignInAlert(DummyButtonComponent);
 
 describe("WithSignInAlert", () => {
   afterEach(() => {
@@ -26,13 +16,25 @@ describe("WithSignInAlert", () => {
     jest.resetAllMocks();
   });
 
+  interface Props {
+    onClick: () => void;
+    text: string;
+  }
+
+  const DummyButtonComponent: React.FC<Props> = ({ onClick, text }) => {
+    return <button onClick={onClick}>{text}</button>;
+  };
+
+  const DummyWrappedComponent = WithSignInAlert(DummyButtonComponent);
+
   describe("isLoginがtrueの時", () => {
     it("クリックした時にmockOnClickが呼び出される", () => {
+      (useGetLoginState as jest.Mock).mockReturnValue({
+        isLogin: true,
+        userData: validUserData
+      });
       const { getByText } = render(
-        mockRecoil(
-          [{ atom: loginState, value: { isLogin: true, userData: validUserData } }],
-          <DummyWrappedComponent onClick={mockOnClick} text="test" />
-        )
+        <DummyWrappedComponent onClick={mockOnClick} text="test" />
       );
       fireEvent.click(getByText("test"));
       expect(mockOnClick).toHaveBeenCalled();
@@ -41,11 +43,10 @@ describe("WithSignInAlert", () => {
 
   describe("isLoginがfalseの時", () => {
     it("クリックした時にmockOnClickが呼び出されない", () => {
+      (useGetLoginState as jest.Mock).mockReturnValue({ isLogin: false, userData: null });
+
       const { getByText } = render(
-        mockRecoil(
-          [{ atom: loginState, value: { isLogin: false, userData: null } }],
-          <DummyWrappedComponent onClick={mockOnClick} text="test" />
-        )
+        <DummyWrappedComponent onClick={mockOnClick} text="test" />
       );
       fireEvent.click(getByText("test"));
       expect(mockOnClick).not.toHaveBeenCalled();
