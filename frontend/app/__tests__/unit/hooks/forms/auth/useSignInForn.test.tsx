@@ -1,5 +1,4 @@
 import { act, renderHook } from "@testing-library/react";
-import { RecoilRoot } from "recoil";
 
 import { validSignInData } from "@/__tests__/fixtures/auth/validSignInData";
 import {
@@ -34,7 +33,7 @@ describe("useSignInForm", () => {
     it("setErrorは呼び出されない", async () => {
       (postAuthSignIn as jest.Mock).mockResolvedValue(undefined);
       (useCheckLogin as jest.Mock).mockReturnValue(() => Promise.resolve());
-      const { result } = renderHook(() => useSignInForm(), { wrapper: RecoilRoot });
+      const { result } = renderHook(() => useSignInForm());
       await act(async () => {
         await result.current.onSubmit(validSignInData);
       });
@@ -52,7 +51,7 @@ describe("useSignInForm", () => {
       it("setToastが呼び出される", async () => {
         (postAuthSignIn as jest.Mock).mockRejectedValue(new Error(specificErrorMessage));
         (useCheckLogin as jest.Mock).mockReturnValue(() => Promise.reject());
-        const { result } = renderHook(() => useSignInForm(), { wrapper: RecoilRoot });
+        const { result } = renderHook(() => useSignInForm());
         await act(async () => {
           await result.current.onSubmit(validSignInData);
         });
@@ -68,7 +67,7 @@ describe("useSignInForm", () => {
           new Error(nonSpecificErrorMessage)
         );
         (useCheckLogin as jest.Mock).mockReturnValue(() => Promise.reject());
-        const { result } = renderHook(() => useSignInForm(), { wrapper: RecoilRoot });
+        const { result } = renderHook(() => useSignInForm());
         await act(async () => {
           await result.current.onSubmit(validSignInData);
         });
