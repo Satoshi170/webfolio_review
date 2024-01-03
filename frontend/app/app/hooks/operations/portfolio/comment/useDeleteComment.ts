@@ -1,33 +1,24 @@
 import { useCallback } from "react";
-import { useSetRecoilState } from "recoil";
 
-import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
+import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { deletePortfoliosByIdComments } from "@/app/libs/axios/portfolio/comment/deletePortfoliosByIdCommentsById";
-import { toastState } from "@/app/stores/atoms/toastState";
+import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
 export const useDeleteComment = () => {
-  const setToast = useSetRecoilState(toastState);
+  const { setSuccessToast, setErrorToast } = useSetToastState();
 
   const deleteComment = useCallback(
     async (portfolioId: number, commentId: number) => {
       try {
         await deletePortfoliosByIdComments(portfolioId, commentId);
         window.location.reload();
-        setToast({
-          message: "コメントの削除に成功しました",
-          status: "success",
-          timestamp: Date.now()
-        });
+        setSuccessToast("コメントの削除に成功しました");
       } catch (e) {
-        const errorMessage = e instanceof Error ? e.message : UNEXPECTED_ERROR_MESSAGE;
-        setToast({
-          message: errorMessage,
-          status: "error",
-          timestamp: Date.now()
-        });
+        const errorMessage = resolveErrorMessage(e);
+        setErrorToast(errorMessage);
       }
     },
-    [setToast]
+    [setSuccessToast, setErrorToast]
   );
 
   return deleteComment;
