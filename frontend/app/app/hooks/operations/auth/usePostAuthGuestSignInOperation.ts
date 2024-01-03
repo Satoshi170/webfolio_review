@@ -1,36 +1,28 @@
 import { useRouter } from "next/navigation";
-import { useSetRecoilState } from "recoil";
+import { useCallback } from "react";
 
-import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { postAuthGuestSignIn } from "@/app/libs/axios/auth/postAuthGuestSignIn";
-import { toastState } from "@/app/stores/atoms/toastState";
+import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
+import { useSetToastState } from "../../recoil/toastState/useSetToastState";
 import { useCheckLogin } from "../../useCheckLogin";
 
 export const usePostAuthGuestSignInOperation = () => {
   const router = useRouter();
   const checkLoginStatus = useCheckLogin();
-  const setToast = useSetRecoilState(toastState);
+  const { setSuccessToast, setErrorToast } = useSetToastState();
 
-  const postAuthGuestSignInOperation = async () => {
+  const postAuthGuestSignInOperation = useCallback(async () => {
     try {
       await postAuthGuestSignIn();
       await checkLoginStatus();
       router.replace("/");
-      setToast({
-        message: "ゲストログインに成功しました",
-        status: "success",
-        timestamp: Date.now()
-      });
+      setSuccessToast("ゲストログインに成功しました");
     } catch (e) {
-      const errorMessage = e instanceof Error ? e.message : UNEXPECTED_ERROR_MESSAGE;
-      setToast({
-        message: errorMessage,
-        status: "error",
-        timestamp: Date.now()
-      });
+      const errorMessage = resolveErrorMessage(e);
+      setErrorToast(errorMessage);
     }
-  };
+  }, [router, setErrorToast, setSuccessToast, checkLoginStatus]);
 
   return postAuthGuestSignInOperation;
 };
