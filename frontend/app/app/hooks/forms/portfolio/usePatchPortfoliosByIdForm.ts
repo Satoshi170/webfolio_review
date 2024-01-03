@@ -2,14 +2,14 @@ import { useDisclosure } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
 
-import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { patchPortfoliosById } from "@/app/libs/axios/portfolio/patchPortfoliosById";
 import { PortfolioSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioSchema";
-import { toastState } from "@/app/stores/atoms/toastState";
 import { PatchPortfoliosByIdParams } from "@/app/types/axios/portfolio/patchPortfoliosById";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
+
+import { useSetToastState } from "../../recoil/toastState/useSetToastState";
 
 export const usePatchPortfoliosByIdForm = (portfolioData: PortfolioData) => {
   const {
@@ -25,8 +25,9 @@ export const usePatchPortfoliosByIdForm = (portfolioData: PortfolioData) => {
       content: portfolioData.content
     }
   });
-
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const { setSuccessToast, setErrorToast } = useSetToastState();
+  const [isLoading, setIsLoading] = useState(false);
 
   const isChange = !(
     watch("title") == portfolioData.title && watch("content") == portfolioData.content
@@ -34,25 +35,14 @@ export const usePatchPortfoliosByIdForm = (portfolioData: PortfolioData) => {
 
   const isFormValid = isChange && isValid;
 
-  const [isLoading, setIsLoading] = useState(false);
-  const setToast = useSetRecoilState(toastState);
-
   const onSubmit = async (params: PatchPortfoliosByIdParams) => {
     setIsLoading(true);
     try {
       await patchPortfoliosById(portfolioData.id, params);
-      setToast({
-        message: "更新に成功しました",
-        status: "success",
-        timestamp: Date.now()
-      });
+      setSuccessToast("更新に成功しました");
     } catch (e) {
-      const errorMessage = e instanceof Error ? e.message : UNEXPECTED_ERROR_MESSAGE;
-      setToast({
-        message: errorMessage,
-        status: "error",
-        timestamp: Date.now()
-      });
+      const errorMessage = resolveErrorMessage(e);
+      setErrorToast(errorMessage);
     } finally {
       setIsLoading(false);
     }
