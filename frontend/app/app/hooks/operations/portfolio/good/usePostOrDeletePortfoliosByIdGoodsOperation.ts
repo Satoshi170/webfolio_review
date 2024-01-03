@@ -1,19 +1,17 @@
 import useDebouncedCallback from "beautiful-react-hooks/useDebouncedCallback";
 import { useRef, useState } from "react";
-import { useRecoilValue, useSetRecoilState } from "recoil";
 
-import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
+import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { deletePortfoliosByIdGoods } from "@/app/libs/axios/portfolio/good/deletePortfoliosByIdGoods";
 import { postPortfoliosByIdGoods } from "@/app/libs/axios/portfolio/good/postPortfoliosByIdGoods";
-import { loginState } from "@/app/stores/atoms/loginState";
-import { toastState } from "@/app/stores/atoms/toastState";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 export const usePostOrDeletePortfoliosByIdGoodsOperation = (
   portfolioData: PortfolioData
 ) => {
-  const { userData, isLogin } = useRecoilValue(loginState);
-  const setToast = useSetRecoilState(toastState);
+  const { isLogin, userData } = useGetLoginState();
+  const { setUnexpectedErrorToast } = useSetToastState();
 
   const initialLiked = isLogin
     ? portfolioData.goods.some((good) => good.userId === userData.id)
@@ -39,16 +37,12 @@ export const usePostOrDeletePortfoliosByIdGoodsOperation = (
         }
         isAlreadyLikedRef.current = !isAlreadyLikedRef.current;
       } catch (e) {
-        setToast({
-          message: UNEXPECTED_ERROR_MESSAGE,
-          status: "error",
-          timestamp: Date.now()
-        });
+        setUnexpectedErrorToast();
       } finally {
         clickCountRef.current = 0;
       }
     },
-    [setToast, portfolioData],
+    [setUnexpectedErrorToast, portfolioData],
     1000
   );
 

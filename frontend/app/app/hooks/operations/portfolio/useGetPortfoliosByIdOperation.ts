@@ -1,16 +1,14 @@
 import { useEffect, useState } from "react";
-import { useSetRecoilState } from "recoil";
 
-import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { getPortfoliosById } from "@/app/libs/axios/portfolio/getPortfoliosById";
-import { toastState } from "@/app/stores/atoms/toastState";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+
+import { useSetToastState } from "../../recoil/toastState/useSetToastState";
 
 export const useGetPortfoliosByIdOperation = (id: number) => {
   const [portfolioData, setPortfolioData] = useState<PortfolioData | null>(null);
   const [status, setStatus] = useState<number | null>(null);
-  const setToast = useSetRecoilState(toastState);
-
+  const { setUnexpectedErrorToast } = useSetToastState();
   useEffect(() => {
     const getPortfoliosByIdOperation = async (id: number) => {
       try {
@@ -20,14 +18,11 @@ export const useGetPortfoliosByIdOperation = (id: number) => {
         }
         setStatus(status);
       } catch (e) {
-        setToast({
-          message: UNEXPECTED_ERROR_MESSAGE,
-          status: "error",
-          timestamp: Date.now()
-        });
+        setUnexpectedErrorToast();
       }
     };
     void getPortfoliosByIdOperation(id);
-  }, [id, setPortfolioData, setToast]);
+  }, [id, setPortfolioData, setUnexpectedErrorToast]);
+
   return { status, portfolioData };
 };
