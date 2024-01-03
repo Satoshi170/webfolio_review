@@ -3,7 +3,6 @@
 import { Heading } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
 import { Suspense } from "react";
-import { useRecoilValue } from "recoil";
 
 import LoadingSpinner from "./components/atoms/LoadingSpinner";
 import SeeMoreButton from "./components/atoms/SeeMoreButton";
@@ -11,13 +10,13 @@ import AboutSiteSection from "./components/organisms/AboutSiteSection";
 import PostCard from "./components/organisms/posts/PostCard";
 import CenteredBox from "./components/styledWrappers/CenteredBox";
 import { useGetPopularAndNewPortfoliosOperation } from "./hooks/operations/portfolio/useGetPopularAndNewPortfoliosOperation";
-import { loginState } from "./stores/atoms/loginState";
+import { useGetLoginState } from "./hooks/recoil/loginState/useGetLoginState";
 
 const HomePage: React.FC = () => {
   const { latestPortfoliosData, popularPortfoliosData } =
     useGetPopularAndNewPortfoliosOperation();
   const router = useRouter();
-  const { isLogin } = useRecoilValue(loginState);
+  const { isLogin } = useGetLoginState();
 
   return (
     <Suspense fallback={<LoadingSpinner />}>

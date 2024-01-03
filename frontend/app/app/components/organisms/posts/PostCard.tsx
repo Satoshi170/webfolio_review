@@ -1,9 +1,8 @@
 "use client";
 
 import { Card } from "@chakra-ui/react";
-import { useRecoilValue } from "recoil";
 
-import { loginState } from "@/app/stores/atoms/loginState";
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 import PostCardBody from "../../molecules/posts/PostCardBody";
@@ -20,7 +19,7 @@ interface Props {
 }
 
 const PostCard: React.FC<Props> = ({ portfolioData, linkOptions }) => {
-  const { isLogin, userData } = useRecoilValue(loginState);
+  const { isLogin, userData } = useGetLoginState();
   if (!portfolioData || !portfolioData.user) {
     return null;
   }

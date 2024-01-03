@@ -1,10 +1,10 @@
 import { render } from "@testing-library/react";
-import { RecoilRoot, MutableSnapshot, RecoilState } from "recoil";
 
 import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
 import Header from "@/app/components/organisms/Header";
-import { loginState, LoginState } from "@/app/stores/atoms/loginState";
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
+jest.mock("@/app/hooks/recoil/loginState/useGetLoginState");
 jest.mock("@/app/components/molecules/LoggedInHeaderRightSection", () => {
   return function MockedLoggedInHeaderRightSection() {
     return <div>Mocked Logged In</div>;
@@ -17,11 +17,6 @@ jest.mock("@/app/components/molecules/LoggedOutHeaderRightSection", () => {
   };
 });
 
-const initializeLoginState =
-  (state: RecoilState<LoginState>, value: LoginState) =>
-  ({ set }: MutableSnapshot) =>
-    set(state, value);
-
 describe("<Header />", () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -32,31 +27,21 @@ describe("<Header />", () => {
   });
 
   it("isLoginがtrueの時LoggedInHeaderRightSectionが表示されていること", () => {
-    const { getByText } = render(
-      <RecoilRoot
-        initializeState={initializeLoginState(loginState, {
-          isLogin: true,
-          userData: validUserData
-        })}
-      >
-        <Header />
-      </RecoilRoot>
-    );
+    (useGetLoginState as jest.Mock).mockReturnValue({
+      isLogin: true,
+      userData: validUserData
+    });
+    const { getByText } = render(<Header />);
 
     expect(getByText("Mocked Logged In")).toBeInTheDocument();
   });
 
   it("isLoginがfalseの時LoggedOutHeaderRightSectionが表示されていること", () => {
-    const { getByText } = render(
-      <RecoilRoot
-        initializeState={initializeLoginState(loginState, {
-          isLogin: false,
-          userData: null
-        })}
-      >
-        <Header />
-      </RecoilRoot>
-    );
+    (useGetLoginState as jest.Mock).mockReturnValue({
+      isLogin: false,
+      userData: null
+    });
+    const { getByText } = render(<Header />);
 
     expect(getByText("Mocked Logged Out")).toBeInTheDocument();
   });

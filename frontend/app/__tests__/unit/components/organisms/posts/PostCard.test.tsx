@@ -2,10 +2,10 @@ import { render, screen } from "@testing-library/react";
 
 import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
 import { validPortfolioData } from "@/__tests__/fixtures/portfolio/validPortfolioData";
-import mockRecoil from "@/__tests__/mocks/mockRecoil";
 import PostCard from "@/app/components/organisms/posts/PostCard";
-import { loginState } from "@/app/stores/atoms/loginState";
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
+jest.mock("@/app/hooks/recoil/loginState/useGetLoginState");
 jest.mock("@/app/components/molecules/posts/PostCardHeader", () => {
   interface Props {
     isUserPost: boolean;
@@ -39,17 +39,12 @@ describe("<PostCard/>", () => {
       describe("data.idとportfolioData.user.idが一致する場合", () => {
         it("isUserPostはtrueである", () => {
           const portfolioOwnerData = { ...validUserData, id: validPortfolioData.user.id };
-          render(
-            mockRecoil(
-              [
-                {
-                  atom: loginState,
-                  value: { isLogin: true, userData: portfolioOwnerData }
-                }
-              ],
-              <PostCard portfolioData={validPortfolioData} />
-            )
-          );
+          (useGetLoginState as jest.Mock).mockReturnValue({
+            isLogin: true,
+            userData: portfolioOwnerData
+          });
+
+          render(<PostCard portfolioData={validPortfolioData} />);
           const headerElement = screen.getByTestId("mockedPostCardHeader");
           expect(headerElement.getAttribute("data-isuserpost")).toBe("true");
         });
@@ -61,14 +56,13 @@ describe("<PostCard/>", () => {
             ...validUserData,
             id: validPortfolioData.user.id + 1
           };
-          render(
-            mockRecoil(
-              [
-                { atom: loginState, value: { isLogin: true, userData: nonOwnerUserData } }
-              ],
-              <PostCard portfolioData={validPortfolioData} />
-            )
-          );
+
+          (useGetLoginState as jest.Mock).mockReturnValue({
+            isLogin: true,
+            userData: nonOwnerUserData
+          });
+
+          render(<PostCard portfolioData={validPortfolioData} />);
           const headerElement = screen.getByTestId("mockedPostCardHeader");
           expect(headerElement.getAttribute("data-isuserpost")).toBe("false");
         });
@@ -77,12 +71,12 @@ describe("<PostCard/>", () => {
 
     describe("isLoginがfalseの場合", () => {
       it("isUserPostはfalseである", () => {
-        render(
-          mockRecoil(
-            [{ atom: loginState, value: { isLogin: false, userData: null } }],
-            <PostCard portfolioData={validPortfolioData} />
-          )
-        );
+        (useGetLoginState as jest.Mock).mockReturnValue({
+          isLogin: false,
+          userData: null
+        });
+
+        render(<PostCard portfolioData={validPortfolioData} />);
         const headerElement = screen.getByTestId("mockedPostCardHeader");
         expect(headerElement.getAttribute("data-isuserpost")).toBe("false");
       });

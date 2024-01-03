@@ -2,17 +2,18 @@
 
 import { Text } from "@chakra-ui/react";
 import { Suspense } from "react";
-import { useRecoilValue } from "recoil";
 
 import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
 import PostCard from "@/app/components/organisms/posts/PostCard";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 import { useGetPortfoliosOperation } from "@/app/hooks/operations/portfolio/useGetPortfoliosOperation";
-import { LoggedInState, loginState } from "@/app/stores/atoms/loginState";
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
+import { LoggedInState } from "@/app/stores/atoms/loginState";
 
 const UserLikesPage: React.FC = () => {
-  const { userData } = useRecoilValue(loginState) as LoggedInState;
+  const { userData } = useGetLoginState() as LoggedInState;
+
   const ids = userData.goods.map((obj) => obj.portfolioId);
   const portfoliosData = useGetPortfoliosOperation(ids);
 

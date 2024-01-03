@@ -11,15 +11,18 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { IoMdArrowDropdown } from "react-icons/io";
-import { useRecoilValue } from "recoil";
 
-import { LoggedInState, loginState } from "@/app/stores/atoms/loginState";
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
 import UserIcon from "../../atoms/users/UserIcon";
 import SignOutButtonWithConfirmation from "../apiActionButtons/auth/SignOutButtonWithConfirmation";
 
 const DropDownUserMenuButton: React.FC = () => {
-  const { userData } = useRecoilValue(loginState) as LoggedInState;
+  const { isLogin, userData } = useGetLoginState();
+
+  if (!isLogin) {
+    return null;
+  }
 
   return (
     <Menu>
