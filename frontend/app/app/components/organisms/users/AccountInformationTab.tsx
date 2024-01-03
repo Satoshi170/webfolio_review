@@ -1,10 +1,9 @@
 "use client";
 
 import { Heading, Spacer, Text } from "@chakra-ui/react";
-import { useRecoilValue } from "recoil";
 
 import { useUpdateAccountForm } from "@/app/hooks/forms/auth/useUpdateAccountForm";
-import { LoggedInState, loginState } from "@/app/stores/atoms/loginState";
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
 import SubmitFullWideButton from "../../atoms/SubmitFullWideButton";
 import InputField from "../../molecules/fields/InputField";
@@ -12,8 +11,8 @@ import InputImageField from "../../molecules/fields/InputImageField";
 import RoundedCenteredBox from "../../styledWrappers/RoundedCenteredBox";
 
 const AccountInformationTabPanel: React.FC = () => {
-  const loginStateValue = useRecoilValue(loginState);
-  const data = (loginStateValue as LoggedInState).userData;
+  const { isLogin, userData } = useGetLoginState();
+
   const {
     register,
     handleSubmit,
@@ -25,7 +24,12 @@ const AccountInformationTabPanel: React.FC = () => {
     fileName,
     isFormValid
   } = useUpdateAccountForm();
-  const isGuestUser = data.role == "guest";
+
+  if (!isLogin) {
+    return null;
+  }
+
+  const isGuestUser = userData.role == "guest";
   const isDisabled = isGuestUser || !isFormValid;
 
   return (
@@ -34,7 +38,7 @@ const AccountInformationTabPanel: React.FC = () => {
         アカウント情報
       </Heading>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <Text>現在のユーザー名: {data.name}</Text>
+        <Text>現在のユーザー名: {userData.name}</Text>
         <InputField
           name="name"
           label="新しいユーザー名"

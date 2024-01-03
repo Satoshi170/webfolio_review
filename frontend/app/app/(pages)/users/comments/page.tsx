@@ -2,16 +2,20 @@
 
 import { Box, Card, CardBody, CardFooter, Flex, Spacer, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { useRecoilValue } from "recoil";
 
 import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import UpdatedDateText from "@/app/components/atoms/texts/UpdatedDateText";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
-import { LoggedInState, loginState } from "@/app/stores/atoms/loginState";
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
 const UserCommentsPage: React.FC = () => {
-  const { userData } = useRecoilValue(loginState) as LoggedInState;
+  const { isLogin, userData } = useGetLoginState();
+
+  if (!isLogin) {
+    return null;
+  }
+
   const commentDatas = userData.comments;
 
   if (commentDatas.length === 0) {

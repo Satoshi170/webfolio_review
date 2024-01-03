@@ -1,16 +1,15 @@
 "use client";
 
 import { Card, Spacer } from "@chakra-ui/react";
-import { useRecoilValue } from "recoil";
 
 import PostCommentCardBody from "@/app/components/molecules/posts/comments/PostCommentCardBody";
 import PostCommentCardFooter from "@/app/components/molecules/posts/comments/PostCommentCardFooter";
 import PostCommentCardHeader from "@/app/components/molecules/posts/comments/PostCommentCardHeader";
 import { useCommentData } from "@/app/hooks/datas/useCommentData";
-import { loginState } from "@/app/stores/atoms/loginState";
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
 const PostCommentCard: React.FC = () => {
-  const { isLogin, userData } = useRecoilValue(loginState);
+  const { isLogin, userData } = useGetLoginState();
   const commentData = useCommentData();
   const isUserComment = isLogin ? commentData.user.id == userData.id : false;
 
