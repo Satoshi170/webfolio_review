@@ -1,5 +1,4 @@
 import { act, renderHook } from "@testing-library/react";
-import { RecoilRoot } from "recoil";
 
 import { validSignUpData } from "@/__tests__/fixtures/auth/validSignUpData";
 import {
@@ -34,7 +33,7 @@ describe("useSignUpForm", () => {
     it("setErrorは呼び出されない", async () => {
       (postAuth as jest.Mock).mockResolvedValue(undefined);
       (useCheckLogin as jest.Mock).mockReturnValue(() => Promise.resolve());
-      const { result } = renderHook(() => useSignUpForm(), { wrapper: RecoilRoot });
+      const { result } = renderHook(() => useSignUpForm());
       await act(async () => {
         await result.current.onSubmit(validSignUpData);
       });
@@ -52,7 +51,7 @@ describe("useSignUpForm", () => {
       it("setToastは呼び出されない", async () => {
         (postAuth as jest.Mock).mockRejectedValue(new Error(specificErrorMessage));
         (useCheckLogin as jest.Mock).mockReturnValue(() => Promise.reject());
-        const { result } = renderHook(() => useSignUpForm(), { wrapper: RecoilRoot });
+        const { result } = renderHook(() => useSignUpForm());
         await act(async () => {
           await result.current.onSubmit(validSignUpData);
         });
@@ -66,7 +65,7 @@ describe("useSignUpForm", () => {
       it("setErrorは呼び出されない", async () => {
         (postAuth as jest.Mock).mockRejectedValue(new Error(nonSpecificErrorMessage));
         (useCheckLogin as jest.Mock).mockReturnValue(() => Promise.reject());
-        const { result } = renderHook(() => useSignUpForm(), { wrapper: RecoilRoot });
+        const { result } = renderHook(() => useSignUpForm());
         await act(async () => {
           await result.current.onSubmit(validSignUpData);
         });
