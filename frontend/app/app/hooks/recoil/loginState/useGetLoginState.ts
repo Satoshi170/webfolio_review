@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { loginState } from "@/app/stores/atoms/loginState";
 
 export const useGetLoginState = () => {
-  const { userData, isLogin } = useRecoilValue(loginState);
+  const state = useRecoilValue(loginState);
 
-  return { userData, isLogin };
+  return state;
 };
