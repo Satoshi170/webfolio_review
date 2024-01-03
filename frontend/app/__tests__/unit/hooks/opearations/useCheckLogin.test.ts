@@ -1,10 +1,10 @@
 import { act, renderHook } from "@testing-library/react";
-import { RecoilState } from "recoil";
 
+import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
 import {
-  mockSetLogin,
-  mockUseSetRecoilState
-} from "@/__tests__/mocks/recoil/mockUseSetRecoilState";
+  mockSetLoginState,
+  mockUseSetLoginState
+} from "@/__tests__/mocks/hooks/recoil/loginState/mockUseSetLoginState";
 import { useCheckLogin } from "@/app/hooks/useCheckLogin";
 import { getAuthSessions } from "@/app/libs/axios/auth/getAuthSessions";
 import {
@@ -12,11 +12,8 @@ import {
   GetAuthSessionsTrueData
 } from "@/app/types/axios/auth/getAuthSessions";
 
-jest.mock("recoil", () => ({
-  ...jest.requireActual<typeof import("recoil")>("recoil"),
-  useSetRecoilState: (atom: RecoilState<unknown>) => mockUseSetRecoilState(atom)
-}));
 jest.mock("@/app/libs/axios/auth/getAuthSessions");
+jest.mock("@/app/hooks/recoil/loginState/useSetLoginState", () => mockUseSetLoginState);
 
 describe("useCheckLogin", () => {
   afterEach(() => {
@@ -31,12 +28,12 @@ describe("useCheckLogin", () => {
       it("imageがnullではない時、適切なログイン状態を設定する", async () => {
         const mockData: GetAuthSessionsTrueData = {
           isLogin: true,
-          data: { id: 1, name: "testuser", image: "testImage" }
+          data: { ...validUserData, image: "testImage" }
         };
         (getAuthSessions as jest.Mock).mockResolvedValue(mockData);
         const { result } = renderHook(() => useCheckLogin());
         await act(() => result.current());
-        expect(mockSetLogin).toHaveBeenCalledWith({
+        expect(mockSetLoginState).toHaveBeenCalledWith({
           isLogin: mockData.isLogin,
           userData: mockData.data
         });
@@ -45,14 +42,14 @@ describe("useCheckLogin", () => {
       it("imageがnullの時imageにdefaultUserImageが設定される", async () => {
         const mockData = {
           isLogin: true,
-          data: { id: 1, name: "testuser", image: null }
+          data: { ...validUserData, image: null }
         };
         const defaultUserImage = "/defaultUserImage.png";
 
         (getAuthSessions as jest.Mock).mockResolvedValue(mockData);
         const { result } = renderHook(() => useCheckLogin());
         await act(() => result.current());
-        expect(mockSetLogin).toHaveBeenCalledWith({
+        expect(mockSetLoginState).toHaveBeenCalledWith({
           isLogin: mockData.isLogin,
           userData: { ...mockData.data, image: defaultUserImage }
         });
@@ -65,7 +62,7 @@ describe("useCheckLogin", () => {
         (getAuthSessions as jest.Mock).mockResolvedValue(mockData);
         const { result } = renderHook(() => useCheckLogin());
         await act(() => result.current());
-        expect(mockSetLogin).toHaveBeenCalledWith({ ...mockData, userData: null });
+        expect(mockSetLoginState).toHaveBeenCalledWith({ ...mockData, userData: null });
       });
     });
 
@@ -77,7 +74,10 @@ describe("useCheckLogin", () => {
         await act(async () => {
           await result.current();
         });
-        expect(mockSetLogin).toHaveBeenCalledWith({ isLogin: false, userData: null });
+        expect(mockSetLoginState).toHaveBeenCalledWith({
+          isLogin: false,
+          userData: null
+        });
       });
     });
   });
