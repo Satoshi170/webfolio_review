@@ -22,6 +22,7 @@ jobs:
         run: |
           docker-compose exec -T backend /bin/bash -c "bundle exec rails db:create RAILS_ENV=test"
           docker-compose exec -T backend /bin/bash -c "bundle exec rails db:migrate RAILS_ENV=test"
+          docker-compose exec -T backend /bin/bash -c "bundle exec rails db:seed RAILS_ENV=test"
 
       - name: Run RSpec
         shell: bash
