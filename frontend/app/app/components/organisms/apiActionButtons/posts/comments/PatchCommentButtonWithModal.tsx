@@ -12,10 +12,12 @@ import {
 } from "@chakra-ui/react";
 
 import SubmitButton from "@/app/components/atoms/SubmitButton";
+import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
 import { useCommentData } from "@/app/hooks/datas/useCommentData";
 import { usePortfolioData } from "@/app/hooks/datas/usePortfolioData";
 import { usePatchCommentForm } from "@/app/hooks/forms/portfolio/comment/usePatchCommentForm";
+import { commentTagOptions } from "@/app/utils/themes/posts/comments/commentTagOptions";
 
 const PatchCommentButtonWithModal: React.FC = () => {
   const portfolioData = usePortfolioData();
@@ -23,6 +25,8 @@ const PatchCommentButtonWithModal: React.FC = () => {
 
   const {
     register,
+    control,
+    defaultTagIdsValue,
     errors,
     isFormValid,
     handleFormSubmit,
@@ -35,16 +39,10 @@ const PatchCommentButtonWithModal: React.FC = () => {
   return (
     <>
       <MenuItem onClick={onOpen}>修正する</MenuItem>
-      <Modal isOpen={isOpen} onClose={onClose} size="lg">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
         <ModalOverlay />
-        <ModalContent
-          as="form"
-          onSubmit={handleFormSubmit}
-          textAlign="center"
-          w="full"
-          m="auto"
-        >
-          <ModalHeader>コメントを修正する</ModalHeader>
+        <ModalContent as="form" onSubmit={handleFormSubmit}>
+          <ModalHeader textAlign="center">コメントを修正する</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <TextareaField
@@ -53,6 +51,14 @@ const PatchCommentButtonWithModal: React.FC = () => {
               register={register}
               error={errors.content}
               isRequired={true}
+            />
+            <SelectBoxField
+              name="tagIds"
+              label="タグ"
+              control={control}
+              options={commentTagOptions}
+              isMulti
+              defaultValue={defaultTagIdsValue}
             />
           </ModalBody>
           <ModalFooter>

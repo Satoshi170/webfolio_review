@@ -1,5 +1,6 @@
 import { z } from "zod";
 
+import { CommentTagData } from "./axios/portfolio/comment/comment";
 import { UnauthorizedResponseDataSchema } from "../libs/zod/apiErrorResponses/auth/responseDataSchema";
 interface Good {
   portfolioId: number;
@@ -11,6 +12,7 @@ interface Portfolio {
 }
 interface Comment {
   content: string;
+  tags: CommentTagData[];
   updatedAt: Date;
   portfolio: Portfolio;
 }

@@ -1,6 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 import { RecoilState } from "recoil";
 
+import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
 import {
   mockSetLogin,
   mockUseSetRecoilState
@@ -31,7 +32,7 @@ describe("useCheckLogin", () => {
       it("imageがnullではない時、適切なログイン状態を設定する", async () => {
         const mockData: GetAuthSessionsTrueData = {
           isLogin: true,
-          data: { id: 1, name: "testuser", image: "testImage" }
+          data: validUserData
         };
         (getAuthSessions as jest.Mock).mockResolvedValue(mockData);
         const { result } = renderHook(() => useCheckLogin());

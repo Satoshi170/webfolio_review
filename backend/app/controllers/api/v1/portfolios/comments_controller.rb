@@ -9,9 +9,9 @@ class Api::V1::Portfolios::CommentsController < ApplicationController
       portfolio_id: params[:portfolio_id],
     })
 
-    comment = Comment.new(comment_params_with_user_and_portfolio)
+    @comment = Comment.new(comment_params_with_user_and_portfolio)
 
-    if comment.save
+    if @comment.save
       render json: {
                status: "success",
                message: "Comment created successfully",
@@ -21,7 +21,7 @@ class Api::V1::Portfolios::CommentsController < ApplicationController
       render json: {
                status: "error",
                message: "Failed to create comment",
-               errors: comment.errors.full_messages,
+               errors: @comment.errors.full_messages,
              },
              status: :unprocessable_entity
     end
@@ -29,6 +29,7 @@ class Api::V1::Portfolios::CommentsController < ApplicationController
 
   def update
     if @comment.update(comment_params)
+      update_tag_ids
       render json: {
                status: "success",
                message: "Comment updated successfully",
@@ -59,6 +60,14 @@ class Api::V1::Portfolios::CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
   end
 
+  def update_tag_ids
+    return unless comment_params.key?(:tag_ids)
+
+    if comment_params[:tag_ids].blank?
+      @comment.tags.destroy_all
+    end
+  end
+
   def authorize_user_for_comment!
     unless current_api_v1_user == @comment.user
       render json: {
@@ -71,6 +80,6 @@ class Api::V1::Portfolios::CommentsController < ApplicationController
   end
 
   def comment_params
-    params.require(:comment).permit(:content)
+    params.require(:comment).permit(:content, tag_ids: [])
   end
 end

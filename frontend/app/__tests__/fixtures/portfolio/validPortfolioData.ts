@@ -8,5 +8,14 @@ export const validPortfolioData: PortfolioData = {
   content: "testContent",
   updatedAt: new Date(),
   user: validUserData,
-  goods: [{ userId: 1 }, { userId: 2 }, { userId: 3 }]
+  goods: [{ userId: 1 }, { userId: 2 }, { userId: 3 }],
+  comments: [
+    {
+      id: 1,
+      content: "testComment",
+      updatedAt: new Date(),
+      tags: [],
+      user: validUserData
+    }
+  ]
 };
