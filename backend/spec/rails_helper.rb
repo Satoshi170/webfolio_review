@@ -1,6 +1,8 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 require 'support/auth_helpers'
+require 'database_cleaner/active_record'
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 # Prevent database truncation if the environment is production
@@ -63,4 +65,9 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
   config.include FactoryBot::Syntax::Methods
   config.include AuthHelpers
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+    Rails.application.load_seed
+  end
 end
