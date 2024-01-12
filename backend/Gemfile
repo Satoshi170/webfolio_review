@@ -55,6 +55,10 @@ group :development do
   # gem "spring"
 end
 
+group :test do
+  gem 'database_cleaner-active_record'
+end
+
 group :production do
   gem 'aws-sdk-s3'
 end
