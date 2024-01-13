@@ -1,36 +1,28 @@
 import { useRouter } from "next/navigation";
-import { useSetRecoilState } from "recoil";
+import { useCallback } from "react";
 
-import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { deleteAuth } from "@/app/libs/axios/auth/deleteAuth";
-import { toastState } from "@/app/stores/atoms/toastState";
+import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
+import { useSetToastState } from "../../recoil/toastState/useSetToastState";
 import { useCheckLogin } from "../../useCheckLogin";
 
 export const useDeleteAuthOperation = () => {
   const router = useRouter();
   const checkLoginStatus = useCheckLogin();
-  const setToast = useSetRecoilState(toastState);
+  const { setSuccessToast, setErrorToast } = useSetToastState();
 
-  const deleteAuthOperation = async () => {
+  const deleteAuthOperation = useCallback(async () => {
     try {
       await deleteAuth();
       await checkLoginStatus();
       router.replace("/");
-      setToast({
-        message: "アカウントの削除に成功しました",
-        status: "success",
-        timestamp: Date.now()
-      });
+      setSuccessToast("アカウントの削除に成功しました");
     } catch (e) {
-      const errorMessage = e instanceof Error ? e.message : UNEXPECTED_ERROR_MESSAGE;
-      setToast({
-        message: errorMessage,
-        status: "error",
-        timestamp: Date.now()
-      });
+      const errorMessage = resolveErrorMessage(e);
+      setErrorToast(errorMessage);
     }
-  };
+  }, [checkLoginStatus, router, setErrorToast, setSuccessToast]);
 
   return deleteAuthOperation;
 };

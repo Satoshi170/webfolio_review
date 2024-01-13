@@ -1,35 +1,28 @@
 import { useRouter } from "next/navigation";
-import { useSetRecoilState } from "recoil";
+import { useCallback } from "react";
 
 import { deleteAuthSignOut } from "@/app/libs/axios/auth/deleteAuthSignOut";
-import { loginState } from "@/app/stores/atoms/loginState";
-import { toastState } from "@/app/stores/atoms/toastState";
+import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
+
+import { useSetLoginState } from "../../recoil/loginState/useSetLoginState";
+import { useSetToastState } from "../../recoil/toastState/useSetToastState";
 
 export const useDeleteAuthSignOutOperation = () => {
   const router = useRouter();
-  const setLogin = useSetRecoilState(loginState);
-  const setToast = useSetRecoilState(toastState);
+  const { setLoginState } = useSetLoginState();
+  const { setSuccessToast, setErrorToast } = useSetToastState();
 
-  const deleteAuthSignOutOperation = async () => {
+  const deleteAuthSignOutOperation = useCallback(async () => {
     try {
       await deleteAuthSignOut();
-      setLogin({ isLogin: false, userData: null });
+      setLoginState({ isLogin: false, userData: null });
       router.replace("/auth/sign_in");
-      setToast({
-        message: "ログアウトに成功しました",
-        status: "success",
-        timestamp: Date.now()
-      });
+      setSuccessToast("ログアウトに成功しました");
     } catch (e) {
-      const errorMessage =
-        e instanceof Error ? e.message : "予期せぬエラーが発生しました";
-      setToast({
-        message: errorMessage,
-        status: "error",
-        timestamp: Date.now()
-      });
+      const errorMessage = resolveErrorMessage(e);
+      setErrorToast(errorMessage);
     }
-  };
+  }, [router, setErrorToast, setSuccessToast, setLoginState]);
 
   return deleteAuthSignOutOperation;
 };

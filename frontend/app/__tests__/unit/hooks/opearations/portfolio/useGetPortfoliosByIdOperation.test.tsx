@@ -1,21 +1,16 @@
 import { renderHook, waitFor } from "@testing-library/react";
-import { RecoilRoot, RecoilState } from "recoil";
 
 import { validPortfolioData } from "@/__tests__/fixtures/portfolio/validPortfolioData";
 import {
-  mockSetToast,
-  mockUseSetRecoilState
-} from "@/__tests__/mocks/recoil/mockUseSetRecoilState";
+  mockSetUnexpectedErrorToast,
+  mockUseSetToastState
+} from "@/__tests__/mocks/hooks/recoil/toastState/mockUseSetToastState";
 import { useGetPortfoliosByIdOperation } from "@/app/hooks/operations/portfolio/useGetPortfoliosByIdOperation";
 import { getPortfoliosById } from "@/app/libs/axios/portfolio/getPortfoliosById";
 
-jest.mock("recoil", () => ({
-  ...jest.requireActual<typeof import("recoil")>("recoil"),
-  useSetRecoilState: (atom: RecoilState<unknown>) => mockUseSetRecoilState(atom)
-}));
-
 jest.mock("@/app/libs/axios/portfolio/getPortfoliosById");
 jest.mock("@/app/utils/getIdOrTriggerNotFound");
+jest.mock("@/app/hooks/recoil/toastState/useSetToastState", () => mockUseSetToastState);
 
 describe("useGetPortfoliosByIdOperation", () => {
   afterEach(() => {
@@ -33,9 +28,7 @@ describe("useGetPortfoliosByIdOperation", () => {
           status: 200,
           response: mockResponse
         });
-        const { result } = renderHook(() => useGetPortfoliosByIdOperation(1), {
-          wrapper: RecoilRoot
-        });
+        const { result } = renderHook(() => useGetPortfoliosByIdOperation(1));
         await waitFor(() => {
           expect(result.current.status).toBe(200);
           expect(result.current.portfolioData).toEqual(validPortfolioData);
@@ -49,9 +42,7 @@ describe("useGetPortfoliosByIdOperation", () => {
           status: 404,
           response: null
         });
-        const { result } = renderHook(() => useGetPortfoliosByIdOperation(1), {
-          wrapper: RecoilRoot
-        });
+        const { result } = renderHook(() => useGetPortfoliosByIdOperation(1));
         await waitFor(() => {
           expect(result.current.status).toBe(404);
           expect(result.current.portfolioData).toBeNull();
@@ -63,11 +54,9 @@ describe("useGetPortfoliosByIdOperation", () => {
   describe("getPortfoliosByIdがエラーを返す時", () => {
     it("setToastが呼び出される", async () => {
       (getPortfoliosById as jest.Mock).mockRejectedValue(new Error("Error"));
-      renderHook(() => useGetPortfoliosByIdOperation(1), {
-        wrapper: RecoilRoot
-      });
+      renderHook(() => useGetPortfoliosByIdOperation(1));
       await waitFor(() => {
-        expect(mockSetToast).toHaveBeenCalled();
+        expect(mockSetUnexpectedErrorToast).toHaveBeenCalled();
       });
     });
   });

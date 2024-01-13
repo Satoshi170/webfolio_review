@@ -1,19 +1,19 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { equals, identity, sortBy } from "ramda";
-import { FormEvent, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useSetRecoilState } from "recoil";
 
-import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
+import { equals, identity, sortBy } from "ramda";
+import { FormEvent, useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
+
+import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { patchPortfoliosByIdComments } from "@/app/libs/axios/portfolio/comment/patchPortfoliosByIdCommentsById";
 import { PortfolioCommentSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioCommentSchema";
-import { toastState } from "@/app/stores/atoms/toastState";
 import {
   CommentData,
   PostCommentFormParams,
   PostCommentParams
 } from "@/app/types/axios/portfolio/comment/comment";
+import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
 export const usePatchCommentForm = (portfolioId: number, commentData: CommentData) => {
   const defaultTagIdsValue = commentData.tags.map((item) => ({
@@ -37,7 +37,7 @@ export const usePatchCommentForm = (portfolioId: number, commentData: CommentDat
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
-  const setToast = useSetRecoilState(toastState);
+  const { setSuccessToast, setErrorToast } = useSetToastState();
 
   const isChange = () => {
     const isContentChanged = !(watch("content") == commentData.content);
@@ -53,38 +53,36 @@ export const usePatchCommentForm = (portfolioId: number, commentData: CommentDat
 
   const isFormValid = isChange() && isValid;
 
-  const onSubmit = async (params: PostCommentFormParams) => {
-    setIsLoading(true);
-    const transformedParamsByZod = params as unknown as PostCommentParams;
-    try {
-      await patchPortfoliosByIdComments(
+  const onSubmit = useCallback(
+    async (params: PostCommentFormParams) => {
+      setIsLoading(true);
+      const transformedParamsByZod = params as unknown as PostCommentParams;
+      try {
+        await patchPortfoliosByIdComments(
         portfolioId,
         commentData.id,
         transformedParamsByZod
       );
-      setToast({
-        message: "コメントの更新に成功しました",
-        status: "success",
-        timestamp: Date.now()
-      });
-    } catch (e) {
-      const errorMessage = e instanceof Error ? e.message : UNEXPECTED_ERROR_MESSAGE;
-      setToast({
-        message: errorMessage,
-        status: "error",
-        timestamp: Date.now()
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  };
+        setSuccessToast("コメントの更新に成功しました");
+      } catch (e) {
+        const errorMessage = resolveErrorMessage(e);
+        setErrorToast(errorMessage);
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [commentData.id, portfolioId, setErrorToast, setSuccessToast]
+  );
 
   const formSubmit = handleSubmit(onSubmit);
-  const handleFormSubmit = async (e: FormEvent) => {
-    await formSubmit(e);
-    onClose();
-    window.location.reload();
-  };
+  const handleFormSubmit = useCallback(
+    async (e: FormEvent) => {
+      await formSubmit(e);
+      onClose();
+      window.location.reload();
+    },
+    [formSubmit, onClose]
+  );
 
   return {
     register,

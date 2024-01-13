@@ -2,9 +2,8 @@
 
 import { useDisclosure } from "@chakra-ui/react";
 import { ComponentType } from "react";
-import { useRecoilValue } from "recoil";
 
-import { loginState } from "@/app/stores/atoms/loginState";
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
 import SignInAlertModal from "../../organisms/modals/auth/SignInAlertModal";
 
@@ -17,7 +16,7 @@ const WithSignInAlert = <P extends WithOnClick>(
 ): React.FC<P> => {
   const AlertIfLoggedOut: React.FC<P> = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { isLogin } = useRecoilValue(loginState);
+    const { isLogin } = useGetLoginState();
     const handleClick = (originalOnClick: () => void) => {
       isLogin ? originalOnClick() : onOpen();
     };

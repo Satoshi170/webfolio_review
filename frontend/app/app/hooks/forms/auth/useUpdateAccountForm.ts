@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import {
@@ -31,29 +31,47 @@ export const useUpdateAccountForm = () => {
   const [fileName, setFileName] = useState("");
   const patchAuthOperation = usePatchAuthOperation();
 
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (!event.target.files) {
-      return;
-    }
+  const isValidatedImage = useCallback(
+    (file: File) => {
+      const result = PatchAuthImageSchema.safeParse({ image: file });
+      if (!result.success) {
+        setError("image", {
+          message: result.error.errors[0].message,
+          type: "manual"
+        });
+        return false;
+      }
+      return true;
+    },
+    [setError]
+  );
 
-    const file = event.target.files[0];
-    if (!file) {
-      return;
-    }
+  const handleImageChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      if (!event.target.files) {
+        return;
+      }
 
-    clearErrors("image");
-    if (isValidatedImage(file)) {
-      setImageFile(file);
-      setFileName(file.name);
-      setValue("image", file);
-    }
-  };
+      const file = event.target.files[0];
+      if (!file) {
+        return;
+      }
 
-  const resetImage = () => {
+      clearErrors("image");
+      if (isValidatedImage(file)) {
+        setImageFile(file);
+        setFileName(file.name);
+        setValue("image", file);
+      }
+    },
+    [clearErrors, isValidatedImage, setValue]
+  );
+
+  const resetImage = useCallback(() => {
     setImageFile(null);
     setValue("image", undefined);
     setFileName("");
-  };
+  }, [setValue]);
 
   const onSubmit = async () => {
     setIsLoading(true);
@@ -83,28 +101,17 @@ export const useUpdateAccountForm = () => {
     }
   };
 
-  const isValidatedImage = (file: File) => {
-    const result = PatchAuthImageSchema.safeParse({ image: file });
-    if (!result.success) {
-      setError("image", {
-        message: result.error.errors[0].message,
-        type: "manual"
-      });
-      return false;
-    }
-    return true;
-  };
+  const watchedName = watch("name");
 
-  const isFormValid = () => {
-    const watchedName = watch("name");
+  const isFormValid = useMemo(() => {
     return !(errors.name || errors.image) && !!(watchedName || imageFile);
-  };
+  }, [errors, imageFile, watchedName]);
 
   return {
     register,
     handleSubmit,
-    setValue,
     getValues,
+    setValue,
     errors,
     isLoading,
     imageFile,

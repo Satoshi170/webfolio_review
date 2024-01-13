@@ -4,7 +4,7 @@ import { FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
-import { useSetToast } from "@/app/hooks/recoil/useSetToast";
+import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { postPortfoliosByIdComments } from "@/app/libs/axios/portfolio/comment/postPortfoliosByIdComments";
 import { PortfolioCommentSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioCommentSchema";
 import { PostCommentParams } from "@/app/types/axios/portfolio/comment/comment";
@@ -22,7 +22,7 @@ export const usePostCommentForm = (id: number) => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
-  const { setSuccessToast, setErrorToast } = useSetToast();
+  const { setSuccessToast, setErrorToast } = useSetToastState();
 
   const onSubmit = async (params: PostCommentParams) => {
     setIsLoading(true);

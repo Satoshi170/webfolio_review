@@ -1,37 +1,32 @@
 import { useRouter } from "next/navigation";
-import { useSetRecoilState } from "recoil";
+import { useCallback } from "react";
 
 import { patchAuth } from "@/app/libs/axios/auth/patchAuth";
-import { toastState } from "@/app/stores/atoms/toastState";
 import { PatchAuthParams } from "@/app/types/axios/auth/patchAuth";
+import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
+import { useSetToastState } from "../../recoil/toastState/useSetToastState";
 import { useCheckLogin } from "../../useCheckLogin";
 
 export const usePatchAuthOperation = () => {
   const router = useRouter();
+  const { setSuccessToast, setErrorToast } = useSetToastState();
   const checkLoginStatus = useCheckLogin();
-  const setToast = useSetRecoilState(toastState);
 
-  const patchAuthOperation = async (params: PatchAuthParams) => {
-    try {
-      await patchAuth(params);
-      await checkLoginStatus();
-      router.refresh();
-      setToast({
-        message: "アカウント情報の更新に成功しました",
-        status: "success",
-        timestamp: Date.now()
-      });
-    } catch (e) {
-      const errorMessage =
-        e instanceof Error ? e.message : "予期せぬエラーが発生しました";
-      setToast({
-        message: errorMessage,
-        status: "error",
-        timestamp: Date.now()
-      });
-    }
-  };
+  const patchAuthOperation = useCallback(
+    async (params: PatchAuthParams) => {
+      try {
+        await patchAuth(params);
+        await checkLoginStatus();
+        router.refresh();
+        setSuccessToast("アカウント情報の更新に成功しました");
+      } catch (e) {
+        const errorMessage = resolveErrorMessage(e);
+        setErrorToast(errorMessage);
+      }
+    },
+    [checkLoginStatus, router, setErrorToast, setSuccessToast]
+  );
 
   return patchAuthOperation;
 };

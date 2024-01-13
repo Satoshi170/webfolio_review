@@ -2,15 +2,15 @@
 
 import { Box, Container, Flex, Heading } from "@chakra-ui/react";
 import NextLink from "next/link";
-import { useRecoilValue } from "recoil";
 
-import { loginState } from "@/app/stores/atoms/loginState";
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
 import LoggedInHeaderRightSection from "../molecules/LoggedInHeaderRightSection";
 import LoggedOutHeaderRightSection from "../molecules/LoggedOutHeaderRightSection";
 
 const Header: React.FC = () => {
-  const { isLogin } = useRecoilValue(loginState);
+  const { isLogin } = useGetLoginState();
+
   return (
     <Box as="nav" bg="gray.900" color="gray.50">
       <Container maxW="container.xl">
