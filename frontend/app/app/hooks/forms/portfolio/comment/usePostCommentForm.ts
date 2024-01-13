@@ -7,14 +7,15 @@ import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { postPortfoliosByIdComments } from "@/app/libs/axios/portfolio/comment/postPortfoliosByIdComments";
 import { PortfolioCommentSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioCommentSchema";
-import { CommentParams } from "@/app/types/axios/portfolio/comment/comment";
+import { PostCommentParams } from "@/app/types/axios/portfolio/comment/comment";
 
 export const usePostCommentForm = (id: number) => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isValid }
-  } = useForm<CommentParams>({
+  } = useForm<PostCommentParams>({
     resolver: zodResolver(PortfolioCommentSchema),
     mode: "onChange"
   });
@@ -23,7 +24,7 @@ export const usePostCommentForm = (id: number) => {
   const [isLoading, setIsLoading] = useState(false);
   const { setSuccessToast, setErrorToast } = useSetToastState();
 
-  const onSubmit = async (params: CommentParams) => {
+  const onSubmit = async (params: PostCommentParams) => {
     setIsLoading(true);
     try {
       await postPortfoliosByIdComments(id, params);
@@ -45,6 +46,7 @@ export const usePostCommentForm = (id: number) => {
 
   return {
     register,
+    control,
     errors,
     isLoading,
     isValid,

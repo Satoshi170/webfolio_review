@@ -15,11 +15,13 @@ import {
 
 import SubmitButton from "@/app/components/atoms/SubmitButton";
 import CommentButton from "@/app/components/molecules/actionButtons/CommentButton";
+import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
 import PostCardBody from "@/app/components/molecules/posts/PostCardBody";
 import PostCardHeader from "@/app/components/molecules/posts/PostCardHeader";
 import { usePostCommentForm } from "@/app/hooks/forms/portfolio/comment/usePostCommentForm";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import { commentTagOptions } from "@/app/utils/themes/posts/comments/commentTagOptions";
 
 interface Props {
   portfolioData: PortfolioData;
@@ -28,6 +30,7 @@ interface Props {
 const CreateCommentButtonWithModal: React.FC<Props> = ({ portfolioData }) => {
   const {
     register,
+    control,
     isLoading,
     isValid,
     errors,
@@ -40,10 +43,10 @@ const CreateCommentButtonWithModal: React.FC<Props> = ({ portfolioData }) => {
   return (
     <>
       <CommentButton totalCommented={portfolioData.comments.length} onClick={onOpen} />
-      <Modal isOpen={isOpen} onClose={onClose} size="lg">
+      <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>コメントする</ModalHeader>
+          <ModalHeader textAlign="center">コメントする</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
             <Card>
@@ -59,6 +62,13 @@ const CreateCommentButtonWithModal: React.FC<Props> = ({ portfolioData }) => {
                       register={register}
                       error={errors.content}
                       isRequired={true}
+                    />
+                    <SelectBoxField
+                      name="tagIds"
+                      label="タグ"
+                      control={control}
+                      options={commentTagOptions}
+                      isMulti
                     />
                     <SubmitButton
                       text="コメントする"

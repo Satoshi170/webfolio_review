@@ -1,11 +1,22 @@
 "use client";
 
-import { Box, Card, CardBody, CardFooter, Flex, Spacer, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Card,
+  CardBody,
+  CardFooter,
+  Divider,
+  Flex,
+  Spacer,
+  Stack,
+  Text
+} from "@chakra-ui/react";
 import NextLink from "next/link";
 
 import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import UpdatedDateText from "@/app/components/atoms/texts/UpdatedDateText";
+import PostCommentTags from "@/app/components/molecules/posts/comments/PostCommentTags";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
@@ -39,9 +50,13 @@ const UserCommentsPage: React.FC = () => {
             </Box>
           </CardBody>
           <CardFooter>
-            <Flex justifyContent="flex-end" w="full">
-              <UpdatedDateText date={commentData.updatedAt} />
-            </Flex>
+            <Stack w="full">
+              <Divider />
+              <Flex justifyContent="space-between" direction="row-reverse" w="full">
+                <UpdatedDateText date={commentData.updatedAt} />
+                <PostCommentTags tags={commentData.tags} />
+              </Flex>
+            </Stack>
           </CardFooter>
         </Card>
       ))}

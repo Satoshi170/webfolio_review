@@ -28,7 +28,7 @@ describe("useCheckLogin", () => {
       it("imageがnullではない時、適切なログイン状態を設定する", async () => {
         const mockData: GetAuthSessionsTrueData = {
           isLogin: true,
-          data: { ...validUserData, image: "testImage" }
+          data: validUserData
         };
         (getAuthSessions as jest.Mock).mockResolvedValue(mockData);
         const { result } = renderHook(() => useCheckLogin());
