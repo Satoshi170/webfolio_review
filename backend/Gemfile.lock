@@ -275,6 +275,7 @@ DEPENDENCIES
   devise_token_auth
   factory_bot_rails
   mysql2 (~> 0.5)
+  nokogiri
   puma (~> 5.0)
   rack-cors
   rails (~> 7.0.5)
