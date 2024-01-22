@@ -13,11 +13,11 @@ interface MetaDataLinkCardProps {
 }
 
 const LinkCardWithMetaData: React.FC<MetaDataLinkCardProps> = ({ url }) => {
-  const { data, error, isLoading } = useGetURLMetaData(url);
+  const { URLMetaData, error, isLoading } = useGetURLMetaData(url);
 
-  if (error || !data || !data.title) return <Link href={url}>{url}</Link>;
+  if (error || !URLMetaData || !URLMetaData.title) return <Link href={url}>{url}</Link>;
 
-  const { title, description, image, favicon } = data;
+  const { title, description, image, favicon } = URLMetaData;
 
   return (
     <Box
