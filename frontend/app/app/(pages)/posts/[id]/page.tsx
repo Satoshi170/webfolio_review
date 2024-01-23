@@ -10,16 +10,27 @@ import PostCommentCard from "@/app/components/organisms/posts/comments/PostComme
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 import { CommentContext } from "@/app/hooks/datas/useCommentData";
 import { PortfolioContext } from "@/app/hooks/datas/usePortfolioData";
-import { useGetPortfoliosByIdOperation } from "@/app/hooks/operations/portfolio/useGetPortfoliosByIdOperation";
+import { useGetPortfoliosById } from "@/app/hooks/swr/portfolio/useGetPortfoliosById";
 import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
 
 const PostsIdPage: React.FC = () => {
   const pathname = usePathname();
   const id = getIdOrTriggerNotFound({ pathname, routeKey: "posts" });
-  const { status, portfolioData } = useGetPortfoliosByIdOperation(id);
-  const comments = portfolioData?.comments;
+  const { portfolioData, error, errorStatus, isLoading } = useGetPortfoliosById(id);
 
-  if (!status) {
+  if (errorStatus) {
+    return <Error statusCode={errorStatus} />;
+  }
+
+  if (error) {
+    return (
+      <CenteredBox>
+        <GoBackLink />
+      </CenteredBox>
+    );
+  }
+
+  if (isLoading) {
     return (
       <CenteredBox>
         <LoadingSpinner />
@@ -27,7 +38,9 @@ const PostsIdPage: React.FC = () => {
     );
   }
 
-  if (status === 200 && portfolioData) {
+  if (portfolioData) {
+    const comments = portfolioData.comments;
+
     return (
       <CenteredBox>
         <PortfolioContext.Provider value={portfolioData}>
@@ -43,8 +56,6 @@ const PostsIdPage: React.FC = () => {
         </PortfolioContext.Provider>
       </CenteredBox>
     );
-  } else {
-    return <Error statusCode={status} />;
   }
 };
 
