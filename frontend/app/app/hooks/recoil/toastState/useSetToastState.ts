@@ -1,7 +1,10 @@
 import { useCallback } from "react";
 import { useSetRecoilState } from "recoil";
 
-import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
+import {
+  SERVER_ERROR_MESSAGE,
+  UNEXPECTED_ERROR_MESSAGE
+} from "@/app/constants/errors/Messages";
 import { toastState } from "@/app/stores/atoms/toastState";
 
 export const useSetToastState = () => {
@@ -25,5 +28,9 @@ export const useSetToastState = () => {
     setErrorToast(UNEXPECTED_ERROR_MESSAGE);
   }, [setErrorToast]);
 
-  return { setSuccessToast, setErrorToast, setUnexpectedErrorToast };
+  const setSeverErrorToast = useCallback(() => {
+    setErrorToast(SERVER_ERROR_MESSAGE);
+  }, [setErrorToast]);
+
+  return { setSuccessToast, setErrorToast, setUnexpectedErrorToast, setSeverErrorToast };
 };
