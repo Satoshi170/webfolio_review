@@ -26,4 +26,10 @@ export interface UserData {
   comments: Comment[];
 }
 
+export interface UserDataWithoutGoodsAndComments {
+  id: number;
+  name: string;
+  image: string;
+}
+
 export type UnauthorizedResponseData = z.infer<typeof UnauthorizedResponseDataSchema>;
