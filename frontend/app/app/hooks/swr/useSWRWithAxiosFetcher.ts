@@ -5,17 +5,29 @@ import api from "@/app/libs/axios/api";
 
 import { useSetToastState } from "../recoil/toastState/useSetToastState";
 
+type Endpoint = string;
+type EndpointWithParamsArray = [Endpoint, unknown];
+type EndpointOrArray = Endpoint | EndpointWithParamsArray;
+
 export const useSWRWithAxiosFetcher = <T>(
-  endPoint: string,
+  EndpointOrArray: EndpointOrArray,
   options?: SWRConfiguration
 ) => {
   const { setSeverErrorToast } = useSetToastState();
-  const fetcher = async (endPoint: string) => {
-    const response = await api.get<T>(endPoint);
+
+  const fetcher = async (EndpointOrArray: EndpointOrArray) => {
+    const isArray = Array.isArray(EndpointOrArray);
+    const endpoint = isArray ? EndpointOrArray[0] : EndpointOrArray;
+    const params = isArray ? EndpointOrArray[1] : undefined;
+
+    const response = params
+      ? await api.get<T>(endpoint, { params })
+      : await api.get<T>(endpoint);
+
     return response.data;
   };
 
-  const { data, error, ...other } = useSWR<T, unknown>(endPoint, fetcher, options);
+  const { data, error, ...other } = useSWR<T, unknown>(EndpointOrArray, fetcher, options);
   let errorStatus: number | null = null;
 
   if (error) {
