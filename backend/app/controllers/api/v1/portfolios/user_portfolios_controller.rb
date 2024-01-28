@@ -2,16 +2,19 @@ class Api::V1::Portfolios::UserPortfoliosController < ApplicationController
   before_action :set_user_id, only: [:index]
 
   def index
-    portfolios = Portfolio.includes(:goods, :comments, user: { image_attachment: :blob }).
-      where(user_id: @user_id).
-      all.order(updated_at: :desc)
+    user = User.includes(:portfolios, { portfolios: [:goods, :comments] }, image_attachment: :blob).
+      find_by(id: @user_id)
 
-    render json: {
-             status: "success",
-             message: "Loaded portfolios",
-             data: PortfolioResource.new(portfolios).serializable_hash,
-           },
-           status: :ok
+    if user.nil?
+      render json: { status: "error", message: "User can't find" }, status: :not_found
+    else
+      render json: {
+               status: "success",
+               message: "Loaded portfolios",
+               data: Portfolios::UserPortfolioResource.new(user).serializable_hash,
+             },
+             status: :ok
+    end
   end
 
   private
