@@ -25,6 +25,10 @@ Rails.application.routes.draw do
         resources :latest_portfolios, only: [:index]
         resources :popular_portfolios, only: [:index]
       end
+
+      namespace :me do
+        resources :liked_portfolios, only: [:index]
+      end
     end
   end
 end
