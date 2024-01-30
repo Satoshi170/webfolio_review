@@ -1,47 +1,65 @@
 "use client";
 
-import { Heading } from "@chakra-ui/react";
+import { Heading, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
-import { Suspense } from "react";
 
 import LoadingSpinner from "./components/atoms/LoadingSpinner";
 import SeeMoreButton from "./components/atoms/SeeMoreButton";
 import AboutSiteSection from "./components/organisms/AboutSiteSection";
 import PostCard from "./components/organisms/posts/PostCard";
 import CenteredBox from "./components/styledWrappers/CenteredBox";
-import { useGetPopularAndNewPortfoliosOperation } from "./hooks/operations/portfolio/useGetPopularAndNewPortfoliosOperation";
 import { useGetLoginState } from "./hooks/recoil/loginState/useGetLoginState";
+import { useGetLatestPortfolios } from "./hooks/swr/portfolio/latestPortfolio/useGetLatestPortfolios";
+import { useGetPopularPortfolios } from "./hooks/swr/portfolio/popularPortfolio/useGetPopularPortfolios";
 
 const HomePage: React.FC = () => {
-  const { latestPortfoliosData, popularPortfoliosData } =
-    useGetPopularAndNewPortfoliosOperation();
+  const {
+    popularPortfoliosData,
+    error: error1,
+    isLoading: isLoading1
+  } = useGetPopularPortfolios();
+  const {
+    latestPortfoliosData,
+    error: error2,
+    isLoading: isLoading2
+  } = useGetLatestPortfolios();
   const router = useRouter();
   const { isLogin } = useGetLoginState();
 
-  return (
-    <Suspense fallback={<LoadingSpinner />}>
+  if (isLoading1 || isLoading2) {
+    return (
       <CenteredBox>
-        {!isLogin && <AboutSiteSection />}
-        <Heading my="2">最近の投稿</Heading>
-        {latestPortfoliosData.map((portfolioData, i) => (
-          <PostCard
-            portfolioData={portfolioData}
-            linkOptions={{ header: true, body: true }}
-            key={i}
-          />
-        ))}
-        <SeeMoreButton onClick={() => router.push("/posts")} />
-        <Heading my="2">話題の投稿</Heading>
-        {popularPortfoliosData.map((portfolioData, i) => (
-          <PostCard
-            portfolioData={portfolioData}
-            linkOptions={{ header: true, body: true }}
-            key={i}
-          />
-        ))}
-        <SeeMoreButton onClick={() => router.push("/posts")} />
+        <LoadingSpinner />
       </CenteredBox>
-    </Suspense>
+    );
+  }
+
+  if (error1 || error2 || !latestPortfoliosData || !popularPortfoliosData) {
+    return <Text>データの取得に失敗しました</Text>;
+  }
+
+  return (
+    <CenteredBox>
+      {!isLogin && <AboutSiteSection />}
+      <Heading my="2">最近の投稿</Heading>
+      {latestPortfoliosData.map((portfolioData, i) => (
+        <PostCard
+          portfolioData={portfolioData}
+          linkOptions={{ header: true, body: true }}
+          key={i}
+        />
+      ))}
+      <SeeMoreButton onClick={() => router.push("/posts")} />
+      <Heading my="2">話題の投稿</Heading>
+      {popularPortfoliosData.map((portfolioData, i) => (
+        <PostCard
+          portfolioData={portfolioData}
+          linkOptions={{ header: true, body: true }}
+          key={i}
+        />
+      ))}
+      <SeeMoreButton onClick={() => router.push("/posts")} />
+    </CenteredBox>
   );
 };
 
