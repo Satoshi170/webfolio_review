@@ -4,7 +4,7 @@ import { useRecoilState } from "recoil";
 import { useCheckLogin } from "@/app/hooks/useCheckLogin";
 import { loadingState } from "@/app/stores/atoms/loadingState";
 
-import LoadingSpinner from "../atoms/LoadingSpinner";
+import FullPageLoadingSpinner from "../atoms/FullPageLoadingSpinner";
 
 interface Props {
   children: React.ReactNode;
@@ -19,7 +19,7 @@ const CheckLoginWrapper: React.FC<Props> = ({ children }) => {
     checkLoginStatus().finally(() => setIsLoading(false));
   }, [checkLoginStatus, setIsLoading]);
 
-  return isLoading ? <LoadingSpinner /> : <>{children}</>;
+  return isLoading ? <FullPageLoadingSpinner /> : <>{children}</>;
 };
 
 export default CheckLoginWrapper;

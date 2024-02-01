@@ -2,9 +2,9 @@
 
 import { Flex, Spinner } from "@chakra-ui/react";
 
-const LoadingSpinner = () => {
+const FullPageLoadingSpinner = () => {
   return (
-    <Flex h="full" justifyContent="center" alignItems="center">
+    <Flex h="100vh" justifyContent="center" alignItems="center">
       <Spinner
         thickness="4px"
         speed="0.65s"
@@ -16,4 +16,4 @@ const LoadingSpinner = () => {
   );
 };
 
-export default LoadingSpinner;
+export default FullPageLoadingSpinner;
