@@ -10,11 +10,13 @@ class Portfolio < ApplicationRecord
 
   validates :title,
             presence: true,
-            length: { maximum: 25 },
-            on: [:create, :update]
+            length: { maximum: 25 }
 
   validates :content,
-  presence: true,
-  length: { maximum: 255 },
-  on: [:create, :update]
+            presence: true,
+            length: { maximum: 255 }
+
+  validates :portfolio_site_url,
+            presence: true,
+            url: true
 end
