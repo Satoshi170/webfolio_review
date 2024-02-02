@@ -19,4 +19,7 @@ class Portfolio < ApplicationRecord
   validates :portfolio_site_url,
             presence: true,
             url: true
+
+  validates :repository_url,
+            url: { allow_nil: true }
 end
