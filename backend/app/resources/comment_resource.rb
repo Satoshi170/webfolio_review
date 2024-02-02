@@ -6,5 +6,5 @@ class CommentResource
   attributes :id, :content, :updated_at
 
   many :tags, resource: TagResource
-  one :user, resource: UserWithoutGoodsResource
+  one :user, resource: Users::UserWithoutGoodsResource
 end
