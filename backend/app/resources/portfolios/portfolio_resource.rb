@@ -11,5 +11,5 @@ class Portfolios::PortfolioResource
     attributes :user_id
   end
 
-  many :comments, resource: CommentResource
+  many :comments, resource: Comments::CommentResource
 end
