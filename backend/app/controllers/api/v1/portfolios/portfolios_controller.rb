@@ -87,6 +87,6 @@ class Api::V1::Portfolios::PortfoliosController < ApplicationController
   end
 
   def portfolio_params
-    params.require(:portfolio).permit(:title, :content)
+    params.require(:portfolio).permit(:title, :content, :operation_status)
   end
 end
