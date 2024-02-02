@@ -1,4 +1,4 @@
-class CommentResource
+class Comments::CommentResource
   include Alba::Resource
 
   root_key :good
