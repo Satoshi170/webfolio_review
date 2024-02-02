@@ -16,7 +16,7 @@ class Users::UserResource
   many :comments do
     attributes :content, :updated_at
 
-    many :tags, resource: TagResource
+    many :tags, resource: Comments::TagResource
     one :portfolio do
       attributes :id, :title
     end

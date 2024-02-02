@@ -1,4 +1,4 @@
-class TagResource
+class Comments::TagResource
   include Alba::Resource
 
   root_key :tag
