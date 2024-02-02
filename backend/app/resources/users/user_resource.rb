@@ -1,4 +1,4 @@
-class Users::UserWithoutGoodsResource
+class Users::UserResource
   include Alba::Resource
 
   root_key :user
