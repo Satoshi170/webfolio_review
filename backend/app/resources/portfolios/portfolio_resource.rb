@@ -5,7 +5,7 @@ class Portfolios::PortfolioResource
 
   attributes :id, :title, :content, :updated_at
 
-  one :user, resource: UserWithoutGoodsResource
+  one :user, resource: Users::UserWithoutGoodsResource
 
   many :goods do
     attributes :user_id
