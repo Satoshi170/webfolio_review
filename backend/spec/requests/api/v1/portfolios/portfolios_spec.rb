@@ -20,7 +20,12 @@ RSpec.describe "Api::V1::Portfolios::Portfolios", type: :request do
 
   describe "POST /portfolios" do
     let(:valid_portfolio_params) do
-      { title: "testTitle", content: "testContent", operation_status: "0" }
+      {
+        title: "testTitle",
+        content: "testContent",
+        operation_status: "0",
+        portfolio_site_url: "http://example.com",
+      }
     end
     let(:invalid_portfolio_params) { valid_portfolio_params.merge(title: "") }
     let(:invalid_portfolio_operation_status_params) do

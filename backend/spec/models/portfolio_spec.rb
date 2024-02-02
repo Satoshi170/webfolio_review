@@ -38,5 +38,13 @@ RSpec.describe Portfolio, type: :model do
         expect(portfolio.errors[:operation_status]).to include("is not included in the list")
       end
     end
+
+    describe "portfolio_site_url" do
+      it "portfolio_site_urlが存在する必要がある" do
+        portfolio = Portfolio.new(portfolio_site_url: nil)
+        expect(portfolio).not_to be_valid
+        expect(portfolio.errors[:portfolio_site_url]).to include("can't be blank")
+      end
+    end
   end
 end
