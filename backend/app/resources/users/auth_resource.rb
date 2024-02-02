@@ -1,4 +1,4 @@
-class Users::UserResource
+class Users::AuthResource
   include Alba::Resource
 
   root_key :user
