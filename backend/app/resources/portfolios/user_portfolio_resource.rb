@@ -5,5 +5,5 @@ class Portfolios::UserPortfolioResource
     UserWithoutGoodsResource.new(resource).serializable_hash
   end
 
-  many :portfolios, resource: PortfolioResource
+  many :portfolios, resource: Portfolios::PortfolioResource
 end
