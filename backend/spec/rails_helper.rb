@@ -2,6 +2,7 @@
 require 'spec_helper'
 require 'support/auth_helpers'
 require 'database_cleaner/active_record'
+require 'validate_url/rspec_matcher'
 
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
