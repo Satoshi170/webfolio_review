@@ -25,6 +25,7 @@ RSpec.describe "Api::V1::Portfolios::Portfolios", type: :request do
         content: "testContent",
         operation_status: "0",
         portfolio_site_url: "http://example.com",
+        repository_url: "http://example.com",
       }
     end
     let(:invalid_portfolio_params) { valid_portfolio_params.merge(title: "") }
