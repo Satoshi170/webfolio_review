@@ -4,5 +4,5 @@ class GoodResource
   root_key :good
 
   one :user, resource: UserResource
-  one :portfolio, resource: PortfolioResource
+  one :portfolio, resource: Portfolios::PortfolioResource
 end

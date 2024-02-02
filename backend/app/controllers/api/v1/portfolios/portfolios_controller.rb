@@ -10,7 +10,7 @@ class Api::V1::Portfolios::PortfoliosController < ApplicationController
     render json: {
              status: "success",
              message: "Loaded portfolios",
-             data: PortfolioResource.new(portfolios).serializable_hash,
+             data: Portfolios::PortfolioResource.new(portfolios).serializable_hash,
            },
            status: :ok
   end
@@ -38,7 +38,7 @@ class Api::V1::Portfolios::PortfoliosController < ApplicationController
     render json: {
              status: "success",
              message: "Loaded the portfolio",
-             data: PortfolioResource.new(@portfolio).serializable_hash,
+             data: Portfolios::PortfolioResource.new(@portfolio).serializable_hash,
            },
            status: :ok
   end

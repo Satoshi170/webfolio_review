@@ -1,4 +1,4 @@
-class PortfolioResource
+class Portfolios::PortfolioResource
   include Alba::Resource
 
   root_key :portfolio

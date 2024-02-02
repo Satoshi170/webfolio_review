@@ -9,7 +9,7 @@ class Api::V1::Portfolios::PopularPortfoliosController < ApplicationController
     render json: {
              status: "success",
              message: "Loaded portfolios",
-             data: PortfolioResource.new(portfolios).serializable_hash,
+             data: Portfolios::PortfolioResource.new(portfolios).serializable_hash,
            },
            status: :ok
   end
