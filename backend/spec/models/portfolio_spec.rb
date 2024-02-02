@@ -29,5 +29,14 @@ RSpec.describe Portfolio, type: :model do
         expect(portfolio.errors[:content]).to include("is too long (maximum is 255 characters)")
       end
     end
+
+    describe "operation_status" do
+      it "operation_statusは範囲内の数値である必要がある" do
+        invalid_operation_status = 3
+        portfolio = Portfolio.new(operation_status: invalid_operation_status)
+        expect(portfolio).not_to be_valid
+        expect(portfolio.errors[:operation_status]).to include("is not included in the list")
+      end
+    end
   end
 end

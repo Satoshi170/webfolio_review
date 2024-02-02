@@ -20,9 +20,12 @@ RSpec.describe "Api::V1::Portfolios::Portfolios", type: :request do
 
   describe "POST /portfolios" do
     let(:valid_portfolio_params) do
-      { title: "testTitle", content: "testContent" }
+      { title: "testTitle", content: "testContent", operation_status: "0" }
     end
     let(:invalid_portfolio_params) { valid_portfolio_params.merge(title: "") }
+    let(:invalid_portfolio_operation_status_params) do
+      valid_portfolio_params.merge(operation_status: 3)
+    end
 
     context "サインイン状態の時" do
       let(:auth_headers) { sign_in({ email: user.email, password: user.password }) }
@@ -48,15 +51,29 @@ RSpec.describe "Api::V1::Portfolios::Portfolios", type: :request do
       end
 
       context "無効なパラメータが指定された場合" do
-        it "エラーが発生しデータベースに保存されない" do
-          expect do
-            post "/api/v1/portfolios", params: { portfolio: invalid_portfolio_params },
-                                       headers: auth_headers
-          end.to change(Portfolio, :count).by(0)
+        context "operation_statusに不正な値が指定された場合" do
+          it "エラーが発生しデータベースに保存されない" do
+            expect do
+              post "/api/v1/portfolios",
+              params: { portfolio: invalid_portfolio_operation_status_params },
+              headers: auth_headers
+            end.to change(Portfolio, :count).by(0)
 
-          expect(response).to have_http_status(:unprocessable_entity)
-          json_response = JSON.parse(response.body)
-          expect(json_response["status"]).to eq("error")
+            expect(response).to have_http_status(:unprocessable_entity)
+          end
+        end
+
+        context "Modelレベルでバリデーションエラーが発生した場合" do
+          it "エラーが発生しデータベースに保存されない" do
+            expect do
+              post "/api/v1/portfolios", params: { portfolio: invalid_portfolio_params },
+                                         headers: auth_headers
+            end.to change(Portfolio, :count).by(0)
+
+            expect(response).to have_http_status(:unprocessable_entity)
+            json_response = JSON.parse(response.body)
+            expect(json_response["status"]).to eq("error")
+          end
         end
       end
     end
