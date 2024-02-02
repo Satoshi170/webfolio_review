@@ -7,7 +7,7 @@ class Api::V1::Auth::RegistrationsController < DeviseTokenAuth::RegistrationsCon
       {}
     else
       response_data = opts[:resource_json] ||
-      UserResource.new(current_api_v1_user).serializable_hash
+      Users::UserResource.new(current_api_v1_user).serializable_hash
       response_data
     end
   end

@@ -3,7 +3,7 @@ class Api::V1::Auth::SessionsController < ApplicationController
     if current_api_v1_user
       render json: {
         is_login: true,
-        data: UserResource.new(current_api_v1_user).serializable_hash,
+        data: Users::UserResource.new(current_api_v1_user).serializable_hash,
       }
     else
       render json: { is_login: false }

@@ -3,6 +3,6 @@ class GoodResource
 
   root_key :good
 
-  one :user, resource: UserResource
+  one :user, resource: Users::UserResource
   one :portfolio, resource: Portfolios::PortfolioResource
 end
