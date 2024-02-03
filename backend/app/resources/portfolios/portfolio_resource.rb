@@ -3,7 +3,13 @@ class Portfolios::PortfolioResource
 
   root_key :portfolio
 
-  attributes :id, :title, :content, :updated_at
+  attributes :id,
+             :title,
+             :content,
+             :operation_status,
+             :portfolio_site_url,
+             :repository_url,
+             :updated_at
 
   one :user, resource: Users::UserResource
 
