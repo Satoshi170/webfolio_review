@@ -52,10 +52,10 @@ const SelectBoxField = <T extends FieldValues>({
       name={name}
       render={({ field: { onChange, onBlur, ref, value } }) => (
         <FormControl id={name} isRequired={isRequired} isInvalid={!!error}>
-          <FormLabel>{label}</FormLabel>
+          <FormLabel htmlFor={name as string}>{label}</FormLabel>
           <Select<Option, typeof isMulti, GroupBase<Option>>
             isMulti={isMulti}
-            name={name}
+            name={name as string}
             options={options}
             placeholder={placeholder}
             onBlur={onBlur}
