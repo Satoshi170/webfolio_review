@@ -1,60 +1,89 @@
 "use client";
 
-import { FormErrorMessage, FormLabel } from "@chakra-ui/react";
-import { Select } from "chakra-react-select";
-import { Control, Controller, FieldError, FieldValues, Path } from "react-hook-form";
+import { FormControl, FormErrorMessage, FormLabel } from "@chakra-ui/react";
+import {
+  GroupBase,
+  MultiValue,
+  OptionBase,
+  Select,
+  SingleValue
+} from "chakra-react-select";
+import {
+  Control,
+  Controller,
+  FieldError,
+  FieldValues,
+  Merge,
+  Path
+} from "react-hook-form";
 
-import RequiredAsterisk from "../../atoms/RequiredAsterisk";
-
-interface Option {
-  value: string;
+import { getErrorMessageForMultiSelect } from "@/app/utils/getErrorMessageForMultiSelectBox";
+interface Option extends OptionBase {
   label: string;
-  colorTheme?: string;
+  value: string;
 }
 
 interface Props<T extends FieldValues> {
   name: Path<T>;
   label: string;
   options: Option[];
-  isMulti?: true;
-  isRequired?: true;
-  error?: FieldError;
+  placeholder: string;
   control: Control<T>;
-  defaultValue?: Option[];
+  error: Merge<FieldError, (FieldError | undefined)[]> | undefined;
+  isMulti?: boolean;
+  isRequired?: boolean;
 }
 
 const SelectBoxField = <T extends FieldValues>({
   name,
   label,
-  isRequired = undefined,
-  isMulti = undefined,
-  control,
   options,
+  placeholder,
+  control,
   error,
-  defaultValue = undefined
+  isRequired = false,
+  isMulti = false
 }: Props<T>) => {
+  const errorMessage = getErrorMessageForMultiSelect(error);
+
   return (
     <Controller
-      name={name}
       control={control}
-      render={({ field }) => (
-        <>
-          <FormLabel>
-            {label}
-            {isRequired && <RequiredAsterisk />}
-          </FormLabel>
-          <Select
-            options={options}
+      name={name}
+      render={({ field: { onChange, onBlur, ref, value } }) => (
+        <FormControl id={name} isRequired={isRequired} isInvalid={!!error}>
+          <FormLabel>{label}</FormLabel>
+          <Select<Option, typeof isMulti, GroupBase<Option>>
             isMulti={isMulti}
+            name={name}
+            options={options}
+            placeholder={placeholder}
+            onBlur={onBlur}
+            ref={ref}
+            value={
+              isMulti
+                ? options.filter((option) =>
+                    Array.isArray(value)
+                      ? (value as string[]).includes(option.value)
+                      : false
+                  )
+                : options.find((option) => option.value === value)
+            }
+            onChange={
+              isMulti
+                ? (newValue) => {
+                    const values = (newValue as MultiValue<Option>).map((x) => x.value);
+                    onChange(values);
+                  }
+                : (newValue) => {
+                    const value = (newValue as SingleValue<Option>)?.value;
+                    onChange(value);
+                  }
+            }
             isSearchable
-            defaultValue={defaultValue}
-            value={options.find((item) => item.value === field.value)}
-            onChange={(newVal) => {
-              field.onChange(newVal.map((item) => item.value));
-            }}
           />
-          <FormErrorMessage>{error?.message}</FormErrorMessage>
-        </>
+          <FormErrorMessage>{errorMessage && errorMessage}</FormErrorMessage>
+        </FormControl>
       )}
     ></Controller>
   );

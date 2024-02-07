@@ -26,7 +26,6 @@ const PatchCommentButtonWithModal: React.FC = () => {
   const {
     register,
     control,
-    defaultTagIdsValue,
     errors,
     isFormValid,
     handleFormSubmit,
@@ -55,10 +54,11 @@ const PatchCommentButtonWithModal: React.FC = () => {
             <SelectBoxField
               name="tagIds"
               label="タグ"
-              control={control}
               options={commentTagOptions}
+              placeholder="タグを選択(任意)"
+              control={control}
+              error={errors.tagIds}
               isMulti
-              defaultValue={defaultTagIdsValue}
             />
           </ModalBody>
           <ModalFooter>
