@@ -17,11 +17,12 @@ type HandleImageChangeType = (event: React.ChangeEvent<HTMLInputElement>) => voi
 export interface InputImageFieldProps<T extends FieldValues> {
   name: Path<T>;
   label: string;
-  error?: FieldError;
-  register: UseFormRegister<T>;
-  onChange: HandleImageChangeType;
-  resetImage: () => void;
   fileName: string | null;
+  onChange: HandleImageChangeType;
+  register: UseFormRegister<T>;
+  resetImage: () => void;
+  error?: FieldError;
+  isRequired?: boolean;
 }
 
 const InputImageField = <T extends FieldValues>({
@@ -31,13 +32,14 @@ const InputImageField = <T extends FieldValues>({
   register,
   onChange,
   resetImage,
-  fileName
+  fileName,
+  isRequired = false
 }: InputImageFieldProps<T>) => {
   const { fileInput, triggerFileSelect } = useInputImageField();
   const { ref, ...rest } = register(name);
 
   return (
-    <FormControl isInvalid={!!error}>
+    <FormControl isInvalid={!!error} isRequired={isRequired}>
       <FormLabel htmlFor={name as string}>{label}</FormLabel>
       <Button
         onClick={triggerFileSelect}
