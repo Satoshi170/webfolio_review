@@ -17,7 +17,8 @@ export const usePostCommentForm = (id: number) => {
     formState: { errors, isValid }
   } = useForm<PostCommentParams>({
     resolver: zodResolver(PortfolioCommentSchema),
-    mode: "onChange"
+    mode: "onChange",
+    defaultValues: { tagIds: [] }
   });
 
   const { isOpen, onOpen, onClose } = useDisclosure();
