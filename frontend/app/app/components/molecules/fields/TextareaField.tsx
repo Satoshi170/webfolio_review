@@ -20,7 +20,7 @@ const TextareaField = <T extends FieldValues>({
 }: TextareaFieldProps<T>) => {
   return (
     <FormControl isInvalid={!!error} isRequired={isRequired}>
-      <FormLabel>{label}</FormLabel>
+      <FormLabel htmlFor={name as string}>{label}</FormLabel>
       <Textarea id={name as string} {...register(name)} h="200px"></Textarea>
       <FormErrorMessage>{error?.message}</FormErrorMessage>
     </FormControl>
