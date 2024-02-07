@@ -66,8 +66,10 @@ const CreateCommentButtonWithModal: React.FC<Props> = ({ portfolioData }) => {
                     <SelectBoxField
                       name="tagIds"
                       label="タグ"
-                      control={control}
                       options={commentTagOptions}
+                      placeholder="タグを選択(任意)"
+                      control={control}
+                      error={errors.tagIds}
                       isMulti
                     />
                     <SubmitButton
