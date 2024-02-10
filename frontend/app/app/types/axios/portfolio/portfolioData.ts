@@ -15,7 +15,7 @@ export interface PortfolioData {
   content: string;
   operationStatus: OperationStatus;
   portfolioSiteUrl: string;
-  repositoryUrl: string;
+  repositoryUrl: string | null;
   updatedAt: Date;
   user: UserData;
   goods: Good[];
