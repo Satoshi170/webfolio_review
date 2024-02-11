@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 
+import { getValueByLabel } from "@/app/constants/datas/portfolios/operationStatuses";
 import { patchPortfoliosById } from "@/app/libs/axios/portfolio/patchPortfoliosById";
 import { PortfolioSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioSchema";
 import { PatchPortfoliosByIdParams } from "@/app/types/axios/portfolio/patchPortfoliosById";
@@ -12,7 +13,9 @@ import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 import { useSetToastState } from "../../recoil/toastState/useSetToastState";
 
 export const usePatchPortfoliosByIdForm = (portfolioData: PortfolioData) => {
+  const defaultOperationStatusValue = getValueByLabel(portfolioData.operationStatus);
   const {
+    control,
     register,
     handleSubmit,
     watch,
@@ -22,7 +25,10 @@ export const usePatchPortfoliosByIdForm = (portfolioData: PortfolioData) => {
     mode: "onChange",
     defaultValues: {
       title: portfolioData.title,
-      content: portfolioData.content
+      content: portfolioData.content,
+      operationStatus: defaultOperationStatusValue,
+      portfolioSiteUrl: portfolioData.portfolioSiteUrl,
+      repositoryUrl: portfolioData.repositoryUrl
     }
   });
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -30,7 +36,11 @@ export const usePatchPortfoliosByIdForm = (portfolioData: PortfolioData) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const isChange = !(
-    watch("title") == portfolioData.title && watch("content") == portfolioData.content
+    watch("title") == portfolioData.title &&
+    watch("content") == portfolioData.content &&
+    watch("operationStatus") == defaultOperationStatusValue &&
+    watch("portfolioSiteUrl") == portfolioData.portfolioSiteUrl &&
+    watch("repositoryUrl") == portfolioData.repositoryUrl
   );
 
   const isFormValid = isChange && isValid;
@@ -56,6 +66,7 @@ export const usePatchPortfoliosByIdForm = (portfolioData: PortfolioData) => {
   };
 
   return {
+    control,
     register,
     errors,
     isFormValid,

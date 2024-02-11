@@ -13,7 +13,9 @@ import {
 } from "@chakra-ui/react";
 
 import InputField from "@/app/components/molecules/fields/InputField";
+import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
+import { operationStatusOptions } from "@/app/constants/datas/portfolios/operationStatuses";
 import { usePostPortfoliosForm } from "@/app/hooks/forms/portfolio/usePostPortfoliosForm";
 
 const CreatePostButtonWithModal: React.FC = () => {
@@ -21,6 +23,7 @@ const CreatePostButtonWithModal: React.FC = () => {
     onClose,
     onOpen,
     isOpen,
+    control,
     register,
     errors,
     isValid,
@@ -59,6 +62,27 @@ const CreatePostButtonWithModal: React.FC = () => {
               register={register}
               error={errors.content}
               isRequired={true}
+            />
+            <InputField
+              name="portfolioSiteUrl"
+              label="ポートフォリオサイトURL"
+              register={register}
+              error={errors.portfolioSiteUrl}
+              isRequired={true}
+            />
+            <SelectBoxField
+              name="operationStatus"
+              label="運用状況"
+              options={operationStatusOptions}
+              placeholder="pick"
+              control={control}
+              error={errors.operationStatus}
+            />
+            <InputField
+              name="repositoryUrl"
+              label="リポジトリURL"
+              register={register}
+              error={errors.repositoryUrl}
             />
           </ModalBody>
           <ModalFooter>

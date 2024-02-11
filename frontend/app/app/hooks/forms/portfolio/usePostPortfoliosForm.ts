@@ -12,12 +12,20 @@ import { useSetToastState } from "../../recoil/toastState/useSetToastState";
 
 export const usePostPortfoliosForm = () => {
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors, isValid }
   } = useForm<PostPortfoliosParams>({
     resolver: zodResolver(PortfolioSchema),
-    mode: "onChange"
+    mode: "onChange",
+    defaultValues: {
+      title: "",
+      content: "",
+      operationStatus: "0",
+      portfolioSiteUrl: "",
+      repositoryUrl: null
+    }
   });
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { setSuccessToast, setErrorToast } = useSetToastState();
@@ -44,6 +52,7 @@ export const usePostPortfoliosForm = () => {
   };
 
   return {
+    control,
     register,
     errors,
     isValid,
