@@ -14,7 +14,9 @@ import {
 
 import SubmitButton from "@/app/components/atoms/SubmitButton";
 import InputField from "@/app/components/molecules/fields/InputField";
+import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
+import { operationStatusOptions } from "@/app/constants/datas/portfolios/operationStatuses";
 import { usePatchPortfoliosByIdForm } from "@/app/hooks/forms/portfolio/usePatchPortfoliosByIdForm";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
@@ -24,6 +26,7 @@ interface Props {
 
 const PatchPostsByIdButton: React.FC<Props> = ({ portfolioData }) => {
   const {
+    control,
     register,
     errors,
     isFormValid,
@@ -63,6 +66,27 @@ const PatchPostsByIdButton: React.FC<Props> = ({ portfolioData }) => {
               register={register}
               error={errors.content}
               isRequired={true}
+            />
+            <InputField
+              name="portfolioSiteUrl"
+              label="ポートフォリオサイトURL"
+              register={register}
+              error={errors.portfolioSiteUrl}
+              isRequired={true}
+            />
+            <SelectBoxField
+              name="operationStatus"
+              label="運用状況"
+              options={operationStatusOptions}
+              placeholder="pick"
+              control={control}
+              error={errors.operationStatus}
+            />
+            <InputField
+              name="repositoryUrl"
+              label="リポジトリURL"
+              register={register}
+              error={errors.repositoryUrl}
             />
           </ModalBody>
           <ModalFooter>

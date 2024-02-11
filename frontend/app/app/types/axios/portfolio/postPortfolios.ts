@@ -7,6 +7,9 @@ import { UnauthorizedResponseData } from "../../auth";
 export interface PostPortfoliosParams {
   title: string;
   content: string;
+  operationStatus: string;
+  portfolioSiteUrl: string;
+  repositoryUrl: string | null;
 }
 
 export interface PostPortfoliosSuccessData {
