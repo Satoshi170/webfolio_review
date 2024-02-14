@@ -15,8 +15,8 @@ import {
 import SubmitButton from "@/app/components/atoms/SubmitButton";
 import InputField from "@/app/components/molecules/fields/InputField";
 import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
+import { operationStatusOptions } from "@/app/components/molecules/fields/SelectBoxField/options/operationStatusOptions";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
-import { operationStatusOptions } from "@/app/constants/datas/portfolios/operationStatuses";
 import { usePatchPortfoliosByIdForm } from "@/app/hooks/forms/portfolio/usePatchPortfoliosByIdForm";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 

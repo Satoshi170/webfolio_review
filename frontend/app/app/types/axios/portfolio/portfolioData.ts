@@ -1,4 +1,4 @@
-import { operationStatuses } from "@/app/constants/datas/portfolios/operationStatuses";
+import { candidateOperationStatusData } from "@/app/constants/datas/portfolios/operationStatuses";
 
 import { CommentData } from "./comment/comment";
 import { UserData } from "../../auth";
@@ -7,7 +7,7 @@ interface Good {
   userId: number;
 }
 
-type OperationStatus = (typeof operationStatuses)[number]["value"];
+type OperationStatus = keyof typeof candidateOperationStatusData;
 
 export interface PortfolioData {
   id: number;
