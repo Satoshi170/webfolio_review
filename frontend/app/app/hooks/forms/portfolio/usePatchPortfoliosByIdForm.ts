@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormEvent, useState } from "react";
 import { useForm } from "react-hook-form";
 
-import { getValueByLabel } from "@/app/constants/datas/portfolios/operationStatuses";
+import { candidateOperationStatusData } from "@/app/constants/datas/portfolios/operationStatuses";
 import { patchPortfoliosById } from "@/app/libs/axios/portfolio/patchPortfoliosById";
 import { PortfolioSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioSchema";
 import { PatchPortfoliosByIdParams } from "@/app/types/axios/portfolio/patchPortfoliosById";
@@ -13,7 +13,8 @@ import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 import { useSetToastState } from "../../recoil/toastState/useSetToastState";
 
 export const usePatchPortfoliosByIdForm = (portfolioData: PortfolioData) => {
-  const defaultOperationStatusValue = getValueByLabel(portfolioData.operationStatus);
+  const defaultOperationStatusValue =
+    candidateOperationStatusData[portfolioData.operationStatus].toString();
   const {
     control,
     register,
