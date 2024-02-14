@@ -16,7 +16,10 @@ class Users::AuthResource
   many :comments do
     attributes :content, :updated_at
 
-    many :tags, resource: Comments::TagResource
+    attribute :tags do |comment|
+      comment.tags.map(&:name)
+    end
+
     one :portfolio do
       attributes :id, :title
     end

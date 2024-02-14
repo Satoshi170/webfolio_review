@@ -5,6 +5,9 @@ class Comments::CommentResource
 
   attributes :id, :content, :updated_at
 
-  many :tags, resource: Comments::TagResource
+  attribute :tags do |comment|
+    comment.tags.map(&:name)
+  end
+
   one :user, resource: Users::UserResource
 end
