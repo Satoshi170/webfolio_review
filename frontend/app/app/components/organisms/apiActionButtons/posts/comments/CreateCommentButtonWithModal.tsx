@@ -16,12 +16,12 @@ import {
 import SubmitButton from "@/app/components/atoms/SubmitButton";
 import CommentButton from "@/app/components/molecules/actionButtons/CommentButton";
 import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
+import { commentTagOptions } from "@/app/components/molecules/fields/SelectBoxField/options/commentTagOptions";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
 import PostCardBody from "@/app/components/molecules/posts/PostCardBody";
 import PostCardHeader from "@/app/components/molecules/posts/PostCardHeader";
 import { usePostCommentForm } from "@/app/hooks/forms/portfolio/comment/usePostCommentForm";
 import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
-import { commentTagOptions } from "@/app/utils/themes/posts/comments/commentTagOptions";
 
 interface Props {
   portfolioData: PortfolioData;

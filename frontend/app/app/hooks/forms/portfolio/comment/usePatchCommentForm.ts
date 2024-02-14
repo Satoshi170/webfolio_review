@@ -4,6 +4,7 @@ import { equals, identity, sortBy } from "ramda";
 import { FormEvent, useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 
+import { candidateTagData } from "@/app/constants/datas/portfolios/comments/tags";
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { patchPortfoliosByIdComments } from "@/app/libs/axios/portfolio/comment/patchPortfoliosByIdCommentsById";
 import { PortfolioCommentSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioCommentSchema";
@@ -15,13 +16,7 @@ import {
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
 export const usePatchCommentForm = (portfolioId: number, commentData: CommentData) => {
-  const defaultTagIdsValue = commentData.tags.map((item) => ({
-    value: String(item.id),
-    label: item.name
-  }));
-
-  const defaultTagIds = commentData.tags.map((item) => String(item.id));
-
+  const defaultTagIds = commentData.tags.map((item) => candidateTagData[item].toString());
   const {
     register,
     handleSubmit,
@@ -58,10 +53,10 @@ export const usePatchCommentForm = (portfolioId: number, commentData: CommentDat
       const transformedParamsByZod = params as unknown as PostCommentParams;
       try {
         await patchPortfoliosByIdComments(
-        portfolioId,
-        commentData.id,
-        transformedParamsByZod
-      );
+          portfolioId,
+          commentData.id,
+          transformedParamsByZod
+        );
         setSuccessToast("コメントの更新に成功しました");
       } catch (e) {
         const errorMessage = resolveErrorMessage(e);
@@ -86,7 +81,6 @@ export const usePatchCommentForm = (portfolioId: number, commentData: CommentDat
   return {
     register,
     control,
-    defaultTagIdsValue,
     errors,
     isLoading,
     isFormValid,

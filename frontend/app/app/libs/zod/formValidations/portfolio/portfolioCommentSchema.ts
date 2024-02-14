@@ -1,10 +1,10 @@
 import { z } from "zod";
 
-import { tagDatas } from "@/app/constants/datas/tags";
+import { candidateTagData } from "@/app/constants/datas/portfolios/comments/tags";
 import { INVALID_OPERATION_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { CommentValidationErrorMessages } from "@/app/constants/errors/portfolio/comments/Messages";
 
-const validTagIds: number[] = tagDatas.map((item) => item.id);
+const validTagIds: number[] = Object.values(candidateTagData);
 
 const tagIdSchema = z
   .string()
