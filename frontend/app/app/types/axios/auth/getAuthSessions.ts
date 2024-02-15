@@ -1,4 +1,4 @@
-import { UserData } from "../../auth";
+import type { UserData } from "../../auth";
 
 export interface GetAuthSessionsTrueData {
   isLogin: true;

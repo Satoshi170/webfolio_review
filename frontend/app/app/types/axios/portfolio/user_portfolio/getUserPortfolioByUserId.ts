@@ -1,6 +1,6 @@
-import { UserDataWithoutGoodsAndComments } from "@/app/types/auth";
+import type { PortfolioData } from "../portfolioData";
+import type { UserDataWithoutGoodsAndComments } from "@/app/types/auth";
 
-import { PortfolioData } from "../portfolioData";
 
 export interface GetUserPortfoliosResponseData {
   user: UserDataWithoutGoodsAndComments;

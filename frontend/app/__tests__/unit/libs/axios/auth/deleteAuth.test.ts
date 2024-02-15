@@ -5,7 +5,8 @@ import { mockAddAuthInfoToRequest } from "@/__tests__/mocks/cookie/mockLoadAuthI
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { deleteAuth } from "@/app/libs/axios/auth/deleteAuth";
 import { removeAuthInfo } from "@/app/libs/cookie/removeAuthInfo";
-import { DeleteAuthSuccessData } from "@/app/types/axios/auth/deleteAuth";
+
+import type { DeleteAuthSuccessData } from "@/app/types/axios/auth/deleteAuth";
 
 jest.mock("@/app/libs/cookie/removeAuthInfo");
 jest.mock("@/app/libs/cookie/loadAuthInfo", () => mockAddAuthInfoToRequest);

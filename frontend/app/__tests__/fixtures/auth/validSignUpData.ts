@@ -1,4 +1,4 @@
-import { PostAuthCredentials } from "@/app/types/axios/auth/postAuth";
+import type { PostAuthCredentials } from "@/app/types/axios/auth/postAuth";
 
 export const validSignUpData: PostAuthCredentials = {
   name: "testuser",

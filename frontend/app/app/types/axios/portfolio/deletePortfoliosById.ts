@@ -1,4 +1,4 @@
-import { UnauthorizedResponseData } from "../../auth";
+import type { UnauthorizedResponseData } from "../../auth";
 
 export interface DeletePortfoliosByIdSuccessData {
   status: "success";

@@ -1,6 +1,6 @@
 import { candidateOperationStatusData } from "@/app/constants/datas/portfolios/operationStatuses";
 
-import { MapOptions, Option } from "./types";
+import type { MapOptions, Option } from "./types";
 
 const operationStatusMappingOptions: MapOptions<typeof candidateOperationStatusData> = {
   active: { label: "active", value: candidateOperationStatusData.active.toString() },

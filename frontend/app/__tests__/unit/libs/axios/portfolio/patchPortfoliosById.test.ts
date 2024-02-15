@@ -5,7 +5,8 @@ import { mockApi, mockAxios, mockPatch } from "@/__tests__/mocks/axios/api";
 import { mockAddAuthInfoToRequest } from "@/__tests__/mocks/cookie/mockLoadAuthInfo";
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { patchPortfoliosById } from "@/app/libs/axios/portfolio/patchPortfoliosById";
-import {
+
+import type {
   PatchPortfoliosByIdFailedData,
   PatchPortfoliosByIdSuccessData
 } from "@/app/types/axios/portfolio/patchPortfoliosById";

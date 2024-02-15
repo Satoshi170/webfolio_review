@@ -1,15 +1,17 @@
 import axios from "axios";
 
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
-import {
-  PostAuthSignInCredentials,
-  PostAuthSignInErrorData
-} from "@/app/types/axios/auth/postAuthSignIn";
-import { CustomAxiosResponse } from "@/app/types/axios/customAxiosResponse";
+
 
 import { saveAuthInfoFromHeader } from "../../cookie/saveAuthInfo";
 import { PostAuthSignInFailedDataSchema } from "../../zod/apiErrorResponses/auth/postAuthSignInDataSchema";
 import api from "../api";
+
+import type {
+  PostAuthSignInCredentials,
+  PostAuthSignInErrorData
+} from "@/app/types/axios/auth/postAuthSignIn";
+import type { CustomAxiosResponse } from "@/app/types/axios/customAxiosResponse";
 
 const generateErrorMessage = (responseData: PostAuthSignInErrorData) => {
   if (PostAuthSignInFailedDataSchema.safeParse(responseData).success) {

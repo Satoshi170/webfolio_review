@@ -3,13 +3,15 @@ import axios from "axios";
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import api from "@/app/libs/axios/api";
 import addAuthInfoToRequest from "@/app/libs/cookie/loadAuthInfo";
-import {
-  DeleteAuthErrorData,
-  DeleteAuthSuccessData
-} from "@/app/types/axios/auth/deleteAuth";
+
 
 import { removeAuthInfo } from "../../cookie/removeAuthInfo";
 import { UnauthorizedResponseDataSchema } from "../../zod/apiErrorResponses/auth/responseDataSchema";
+
+import type {
+  DeleteAuthErrorData,
+  DeleteAuthSuccessData
+} from "@/app/types/axios/auth/deleteAuth";
 
 const generateErrorMessage = (responseData: DeleteAuthErrorData) => {
   if (UnauthorizedResponseDataSchema.safeParse(responseData).success) {

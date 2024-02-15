@@ -1,7 +1,7 @@
-import { candidateOperationStatusData } from "@/app/constants/datas/portfolios/operationStatuses";
 
-import { CommentData } from "./comment/comment";
-import { UserData } from "../../auth";
+import type { CommentData } from "./comment/comment";
+import type { UserData } from "../../auth";
+import type { candidateOperationStatusData } from "@/app/constants/datas/portfolios/operationStatuses";
 
 interface Good {
   userId: number;

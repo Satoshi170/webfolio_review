@@ -1,9 +1,10 @@
 import axios from "axios";
 
-import { GetAuthSessionsData } from "@/app/types/axios/auth/getAuthSessions";
 
 import addAuthInfoToRequest from "../../cookie/loadAuthInfo";
 import api from "../api";
+
+import type { GetAuthSessionsData } from "@/app/types/axios/auth/getAuthSessions";
 
 export const getAuthSessions = async (): Promise<GetAuthSessionsData> => {
   try {

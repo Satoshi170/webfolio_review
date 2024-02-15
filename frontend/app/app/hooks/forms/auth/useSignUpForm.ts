@@ -6,11 +6,12 @@ import { useForm } from "react-hook-form";
 import { signUpValidationErrorMessages } from "@/app/constants/errors/auth/signUp/Messages";
 import { postAuth } from "@/app/libs/axios/auth/postAuth";
 import { refinedSignUpSchema } from "@/app/libs/zod/formValidations/auth/signUpSchema";
-import { PostAuthCredentials } from "@/app/types/axios/auth/postAuth";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
 import { useSetToastState } from "../../recoil/toastState/useSetToastState";
 import { useCheckLogin } from "../../useCheckLogin";
+
+import type { PostAuthCredentials } from "@/app/types/axios/auth/postAuth";
 
 export const useSignUpForm = () => {
   const {

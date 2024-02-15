@@ -4,7 +4,8 @@ import { mockApi, mockAxios, mockDelete } from "@/__tests__/mocks/axios/api";
 import { mockAddAuthInfoToRequest } from "@/__tests__/mocks/cookie/mockLoadAuthInfo";
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { deletePortfoliosById } from "@/app/libs/axios/portfolio/deletePortfoliosById";
-import { DeletePortfoliosByIdSuccessData } from "@/app/types/axios/portfolio/deletePortfoliosById";
+
+import type { DeletePortfoliosByIdSuccessData } from "@/app/types/axios/portfolio/deletePortfoliosById";
 
 jest.mock("@/app/libs/cookie/loadAuthInfo", () => mockAddAuthInfoToRequest);
 jest.mock("@/app/libs/axios/api", () => mockApi);

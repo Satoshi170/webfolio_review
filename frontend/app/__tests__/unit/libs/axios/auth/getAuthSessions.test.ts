@@ -2,7 +2,8 @@ import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
 import { mockApi, mockAxios, mockGet } from "@/__tests__/mocks/axios/api";
 import { mockAddAuthInfoToRequest } from "@/__tests__/mocks/cookie/mockLoadAuthInfo";
 import { getAuthSessions } from "@/app/libs/axios/auth/getAuthSessions";
-import { GetAuthSessionsData } from "@/app/types/axios/auth/getAuthSessions";
+
+import type { GetAuthSessionsData } from "@/app/types/axios/auth/getAuthSessions";
 
 jest.mock("@/app/libs/cookie/loadAuthInfo", () => mockAddAuthInfoToRequest);
 jest.mock("@/app/libs/axios/api", () => mockApi);

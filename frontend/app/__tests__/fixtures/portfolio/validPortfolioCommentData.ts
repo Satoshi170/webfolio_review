@@ -1,4 +1,4 @@
-import { PostCommentFormParams } from "@/app/types/axios/portfolio/comment/comment";
+import type { PostCommentFormParams } from "@/app/types/axios/portfolio/comment/comment";
 
 export const validPortfolioCommentData: PostCommentFormParams = {
   content: "testContent",

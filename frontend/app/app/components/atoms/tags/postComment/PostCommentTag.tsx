@@ -2,9 +2,9 @@
 
 import { Tag } from "@chakra-ui/react";
 
-import { CommentTagData } from "@/app/types/axios/portfolio/comment/comment";
-
 import { postCommentTagStyles } from "../../tags/postComment/theme/styleMap";
+
+import type { CommentTagData } from "@/app/types/axios/portfolio/comment/comment";
 
 interface Props {
   tag: CommentTagData;

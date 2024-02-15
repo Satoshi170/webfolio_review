@@ -4,7 +4,8 @@ import { mockAddAuthInfoToRequest } from "@/__tests__/mocks/cookie/mockLoadAuthI
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { deleteAuthSignOut } from "@/app/libs/axios/auth/deleteAuthSignOut";
 import { removeAuthInfo } from "@/app/libs/cookie/removeAuthInfo";
-import {
+
+import type {
   DeleteAuthSignOutFailedData,
   DeleteAuthSignOutSuccessData
 } from "@/app/types/axios/auth/deleteAuthSignOut";

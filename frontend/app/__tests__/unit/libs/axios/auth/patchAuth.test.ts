@@ -1,7 +1,8 @@
 import { mockApi, mockAxios, mockPatch } from "@/__tests__/mocks/axios/api";
 import { mockAddAuthInfoToRequest } from "@/__tests__/mocks/cookie/mockLoadAuthInfo";
 import { patchAuth } from "@/app/libs/axios/auth/patchAuth";
-import { PatchAuthErrorData } from "@/app/types/axios/auth/patchAuth";
+
+import type { PatchAuthErrorData } from "@/app/types/axios/auth/patchAuth";
 
 jest.mock("@/app/libs/cookie/loadAuthInfo", () => mockAddAuthInfoToRequest);
 jest.mock("@/app/libs/axios/api", () => mockApi);

@@ -1,4 +1,4 @@
-import { PostPortfoliosParams } from "@/app/types/axios/portfolio/postPortfolios";
+import type { PostPortfoliosParams } from "@/app/types/axios/portfolio/postPortfolios";
 
 export const validPostPortfoliosData: PostPortfoliosParams = {
   title: "testTitle",

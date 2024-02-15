@@ -70,6 +70,10 @@
         }
       }
     ],
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      { "prefer": "type-imports", "fixStyle": "separate-type-imports" }
+    ],
     "@typescript-eslint/no-misused-promises": [
       2,
       {
@@ -86,10 +90,12 @@
         "jest/globals": true
       },
       "extends": ["plugin:jest/recommended", "plugin:jest/style"],
-      "plugins": ["jest"],
+      "plugins": ["jest", "@typescript-eslint"],
       "rules": {
         "jest/consistent-test-it": ["error", { "fn": "it" }],
-        "jest/require-top-level-describe": ["error"]
+        "jest/require-top-level-describe": ["error"],
+        "@typescript-eslint/no-explicit-any": "warn",
+        "@typescript-eslint/no-unsafe-assignment": "warn"
       }
     }
   ],

@@ -1,6 +1,6 @@
 import { candidateTagData } from "@/app/constants/datas/portfolios/comments/tags";
 
-import { MapOptions, Option } from "./types";
+import type { MapOptions, Option } from "./types";
 
 const commentTagMappingOptions: MapOptions<typeof candidateTagData> = {
   "bug report": {

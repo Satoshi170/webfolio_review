@@ -2,12 +2,15 @@ import { ZodError } from "zod";
 
 import { validSignUpData } from "@/__tests__/fixtures/auth/validSignUpData";
 import {
-  getErrorMessages,
-  getErrorMessagesProps
+  getErrorMessages
 } from "@/__tests__/helpers/zodTestHelpers";
 import { signUpValidationErrorMessages } from "@/app/constants/errors/auth/signUp/Messages";
 import { refinedSignUpSchema } from "@/app/libs/zod/formValidations/auth/signUpSchema";
-import { PostAuthCredentials } from "@/app/types/axios/auth/postAuth";
+
+import type {
+  getErrorMessagesProps
+} from "@/__tests__/helpers/zodTestHelpers";
+import type { PostAuthCredentials } from "@/app/types/axios/auth/postAuth";
 
 const getSignUpErrorMessages = (
   data: PostAuthCredentials,

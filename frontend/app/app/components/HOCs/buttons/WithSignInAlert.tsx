@@ -1,11 +1,13 @@
 "use client";
 
 import { useDisclosure } from "@chakra-ui/react";
-import { ComponentType } from "react";
+
 
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
 import SignInAlertModal from "../../organisms/modals/auth/SignInAlertModal";
+
+import type { ComponentType } from "react";
 
 interface WithOnClick {
   onClick: () => void;

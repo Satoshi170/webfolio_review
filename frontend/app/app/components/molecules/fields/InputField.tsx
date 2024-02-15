@@ -1,7 +1,8 @@
 "use client";
 
 import { FormControl, FormErrorMessage, FormLabel, Input } from "@chakra-ui/react";
-import { FieldError, FieldValues, Path, UseFormRegister } from "react-hook-form";
+
+import type { FieldError, FieldValues, Path, UseFormRegister } from "react-hook-form";
 
 export interface InputFieldProps<T extends FieldValues> {
   name: Path<T>;

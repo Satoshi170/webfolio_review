@@ -5,7 +5,8 @@ import Linkify from "linkify-react";
 import NextLink from "next/link";
 
 import RenderLink from "@/app/libs/linkify/RenderLink";
-import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+
+import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 interface Props {
   isLink?: boolean;

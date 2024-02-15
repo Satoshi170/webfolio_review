@@ -6,11 +6,12 @@ import { useForm } from "react-hook-form";
 import { signInValidationErrorMessages } from "@/app/constants/errors/auth/signIn/Messages";
 import { postAuthSignIn } from "@/app/libs/axios/auth/postAuthSignIn";
 import { signInSchema } from "@/app/libs/zod/formValidations/auth/signInSchema";
-import { PostAuthSignInCredentials } from "@/app/types/axios/auth/postAuthSignIn";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
 import { useSetToastState } from "../../recoil/toastState/useSetToastState";
 import { useCheckLogin } from "../../useCheckLogin";
+
+import type { PostAuthSignInCredentials } from "@/app/types/axios/auth/postAuthSignIn";
 
 export const useSignInForm = () => {
   const {

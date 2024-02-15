@@ -18,7 +18,8 @@ import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
 import { operationStatusOptions } from "@/app/components/molecules/fields/SelectBoxField/options/operationStatusOptions";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
 import { usePatchPortfoliosByIdForm } from "@/app/hooks/forms/portfolio/usePatchPortfoliosByIdForm";
-import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+
+import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 interface Props {
   portfolioData: PortfolioData;

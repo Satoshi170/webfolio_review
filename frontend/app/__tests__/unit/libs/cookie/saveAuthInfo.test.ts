@@ -1,7 +1,8 @@
 import Cookies from "js-cookie";
 
 import { saveAuthInfoFromHeader } from "@/app/libs/cookie/saveAuthInfo";
-import { CustomAxiosResponse } from "@/app/types/axios/customAxiosResponse";
+
+import type { CustomAxiosResponse } from "@/app/types/axios/customAxiosResponse";
 
 jest.mock("js-cookie");
 
@@ -16,7 +17,6 @@ describe("saveAuthInfoFromHeader", () => {
       data: {},
       status: 0,
       statusText: "OK",
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       config: {} as any
     };
 

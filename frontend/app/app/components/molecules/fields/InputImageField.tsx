@@ -7,11 +7,12 @@ import {
   FormLabel,
   Input
 } from "@chakra-ui/react";
-import { FieldError, FieldValues, Path, UseFormRegister } from "react-hook-form";
 import { BiSolidCameraPlus } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 
 import useInputImageField from "@/app/hooks/forms/useInputImageField";
+
+import type { FieldError, FieldValues, Path, UseFormRegister } from "react-hook-form";
 type HandleImageChangeType = (event: React.ChangeEvent<HTMLInputElement>) => void;
 
 export interface InputImageFieldProps<T extends FieldValues> {

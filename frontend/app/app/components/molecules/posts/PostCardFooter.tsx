@@ -3,10 +3,12 @@
 import { CardFooter, Divider, Flex, Stack, Text } from "@chakra-ui/react";
 
 import { usePostOrDeletePortfoliosByIdGoodsOperation } from "@/app/hooks/operations/portfolio/good/usePostOrDeletePortfoliosByIdGoodsOperation";
-import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+
 
 import CreateCommentButtonWithModal from "../../organisms/apiActionButtons/posts/comments/CreateCommentButtonWithModal";
 import LikeButton from "../actionButtons/LikeButton";
+
+import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 interface Props {
   portfolioData: PortfolioData;

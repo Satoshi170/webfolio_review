@@ -5,7 +5,8 @@ import { mockApi, mockAxios, mockPost } from "@/__tests__/mocks/axios/api";
 import { mockAddAuthInfoToRequest } from "@/__tests__/mocks/cookie/mockLoadAuthInfo";
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { postPortfolios } from "@/app/libs/axios/portfolio/postPortfolios";
-import {
+
+import type {
   PostPortfoliosFailedData,
   PostPortfoliosSuccessData
 } from "@/app/types/axios/portfolio/postPortfolios";

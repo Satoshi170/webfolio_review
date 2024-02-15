@@ -1,6 +1,6 @@
 import { atom } from "recoil";
 
-import { UserData } from "@/app/types/auth";
+import type { UserData } from "@/app/types/auth";
 
 export interface LoggedInState {
   isLogin: true;

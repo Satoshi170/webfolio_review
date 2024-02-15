@@ -3,7 +3,8 @@ import { mockApi, mockAxios, mockPost } from "@/__tests__/mocks/axios/api";
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { postAuthGuestSignIn } from "@/app/libs/axios/auth/postAuthGuestSignIn";
 import { saveAuthInfoFromHeader } from "@/app/libs/cookie/saveAuthInfo";
-import {
+
+import type {
   PostAuthSignInErrorData,
   PostAuthSignInSuccessData
 } from "@/app/types/axios/auth/postAuthSignIn";

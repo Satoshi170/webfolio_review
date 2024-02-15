@@ -6,9 +6,11 @@ import {
   PatchAuthImageSchema,
   PatchAuthNonImageSchema
 } from "@/app/libs/zod/formValidations/auth/patchAuthSchema";
-import { PatchAuthParams } from "@/app/types/axios/auth/patchAuth";
 
 import { usePatchAuthOperation } from "../../operations/auth/usePatchAuthOperation";
+
+import type { PatchAuthParams } from "@/app/types/axios/auth/patchAuth";
+
 
 export const useUpdateAccountForm = () => {
   const {

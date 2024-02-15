@@ -21,7 +21,8 @@ import TextareaField from "@/app/components/molecules/fields/TextareaField";
 import PostCardBody from "@/app/components/molecules/posts/PostCardBody";
 import PostCardHeader from "@/app/components/molecules/posts/PostCardHeader";
 import { usePostCommentForm } from "@/app/hooks/forms/portfolio/comment/usePostCommentForm";
-import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+
+import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 interface Props {
   portfolioData: PortfolioData;

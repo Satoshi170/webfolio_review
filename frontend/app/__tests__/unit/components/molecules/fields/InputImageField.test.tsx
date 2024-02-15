@@ -1,9 +1,12 @@
 import { render, screen } from "@testing-library/react";
-import { FieldError } from "react-hook-form";
 
-import InputImageField, {
+import InputImageField from "@/app/components/molecules/fields/InputImageField";
+
+import type {
   InputImageFieldProps
 } from "@/app/components/molecules/fields/InputImageField";
+import type { FieldError } from "react-hook-form";
+
 
 interface TestImageFormValues {
   image: File;
