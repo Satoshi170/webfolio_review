@@ -1,12 +1,11 @@
-import { NextPage } from "next";
 import { useRouter } from "next/navigation";
 
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
-const WithRedirectIfLoggedIn: (Component: NextPage<any>) => React.FC<any> = (
-  Component
-) => {
-  const RedirectIfLoggedIn: React.FC<any> = (props) => {
+import type { NextPage } from "next";
+
+const WithRedirectIfLoggedIn = (Component: NextPage) => {
+  const RedirectIfLoggedIn = () => {
     const router = useRouter();
     const { isLogin } = useGetLoginState();
 
@@ -14,7 +13,7 @@ const WithRedirectIfLoggedIn: (Component: NextPage<any>) => React.FC<any> = (
       router.replace("/");
       return null;
     }
-    return <Component {...props} />;
+    return <Component />;
   };
 
   return RedirectIfLoggedIn;
