@@ -16,7 +16,7 @@ const CheckLoginWrapper: React.FC<Props> = ({ children }) => {
 
   useEffect(() => {
     setIsLoading(true);
-    checkLoginStatus().finally(() => setIsLoading(false));
+    void checkLoginStatus().finally(() => setIsLoading(false));
   }, [checkLoginStatus, setIsLoading]);
 
   return isLoading ? <FullPageLoadingSpinner /> : <>{children}</>;
