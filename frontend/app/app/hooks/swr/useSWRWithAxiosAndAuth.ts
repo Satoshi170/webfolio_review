@@ -1,10 +1,12 @@
 import { isAxiosError } from "axios";
-import useSWR, { SWRConfiguration } from "swr";
+import useSWR from "swr";
 
 import api from "@/app/libs/axios/api";
 import addAuthInfoToRequest from "@/app/libs/cookie/loadAuthInfo";
 
 import { useSetToastState } from "../recoil/toastState/useSetToastState";
+
+import type { SWRConfiguration } from "swr";
 
 export const useSWRWithAxiosAndAuth = <T>(
   endpoint: string,

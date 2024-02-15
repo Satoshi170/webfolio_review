@@ -1,6 +1,7 @@
-import { GetUserPortfoliosResponse } from "@/app/types/axios/portfolio/user_portfolio/getUserPortfolioByUserId";
-
 import { useSWRWithAxiosFetcher } from "../../useSWRWithAxiosFetcher";
+
+import type { GetUserPortfoliosResponse } from "@/app/types/axios/portfolio/user_portfolio/getUserPortfolioByUserId";
+
 
 export const useGetUserPortfoliosByUserId = (userId: number) => {
   const endPoint = "/user_portfolios";

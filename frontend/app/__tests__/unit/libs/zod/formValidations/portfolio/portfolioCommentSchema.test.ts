@@ -2,13 +2,16 @@ import { ZodError } from "zod";
 
 import { validPortfolioCommentData } from "@/__tests__/fixtures/portfolio/validPortfolioCommentData";
 import {
-  getErrorMessages,
-  getErrorMessagesProps
+  getErrorMessages
 } from "@/__tests__/helpers/zodTestHelpers";
 import { INVALID_OPERATION_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { CommentValidationErrorMessages } from "@/app/constants/errors/portfolio/comments/Messages";
 import { PortfolioCommentSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioCommentSchema";
-import { PostCommentFormParams } from "@/app/types/axios/portfolio/comment/comment";
+
+import type {
+  getErrorMessagesProps
+} from "@/__tests__/helpers/zodTestHelpers";
+import type { PostCommentFormParams } from "@/app/types/axios/portfolio/comment/comment";
 
 const getValidationErrorMessages = (
   data: PostCommentFormParams,

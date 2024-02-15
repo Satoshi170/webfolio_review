@@ -3,10 +3,11 @@
 import { IconButton, Menu, MenuButton, MenuList } from "@chakra-ui/react";
 import { AiOutlineMore } from "react-icons/ai";
 
-import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 import DeletePortfoliosButtonWithConfirmation from "./DeletePortfoliosButtonWithConfirmation";
 import PatchPostsByIdButton from "./PatchPortfoliosButton";
+
+import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 interface Props {
   portfolioData: PortfolioData;

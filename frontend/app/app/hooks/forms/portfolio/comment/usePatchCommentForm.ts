@@ -1,19 +1,21 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { equals, identity, sortBy } from "ramda";
-import { FormEvent, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { candidateTagData } from "@/app/constants/datas/portfolios/comments/tags";
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { patchPortfoliosByIdComments } from "@/app/libs/axios/portfolio/comment/patchPortfoliosByIdCommentsById";
 import { PortfolioCommentSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioCommentSchema";
-import {
+import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
+
+import type {
   CommentData,
   PostCommentFormParams,
   PostCommentParams
 } from "@/app/types/axios/portfolio/comment/comment";
-import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
+import type { FormEvent} from "react";
 
 export const usePatchCommentForm = (portfolioId: number, commentData: CommentData) => {
   const defaultTagIds = commentData.tags.map((item) => candidateTagData[item].toString());

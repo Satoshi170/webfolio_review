@@ -1,9 +1,12 @@
 import { render, screen } from "@testing-library/react";
-import { FieldError } from "react-hook-form";
 
-import InputField, {
+import InputField from "@/app/components/molecules/fields/InputField";
+
+import type {
   InputFieldProps
 } from "@/app/components/molecules/fields/InputField";
+import type { FieldError } from "react-hook-form";
+
 
 interface TestFormValues {
   testInput: string;

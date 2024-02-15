@@ -1,4 +1,4 @@
-import { PatchAuthParams, PatchAuthParamsBase } from "@/app/types/axios/auth/patchAuth";
+import type { PatchAuthParams, PatchAuthParamsBase } from "@/app/types/axios/auth/patchAuth";
 
 export const validImageFile: PatchAuthParams = {
   name: "example.png",

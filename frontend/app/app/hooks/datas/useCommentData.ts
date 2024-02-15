@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-import { CommentData } from "@/app/types/axios/portfolio/comment/comment";
+import type { CommentData } from "@/app/types/axios/portfolio/comment/comment";
 
 export const CommentContext = createContext<CommentData | null>(null);
 

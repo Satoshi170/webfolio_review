@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-import { CustomAxiosResponse } from "@/app/types/axios/customAxiosResponse";
+import type { CustomAxiosResponse } from "@/app/types/axios/customAxiosResponse";
 
 export const saveAuthInfoFromHeader = (response: CustomAxiosResponse) => {
   const token = response.headers["access-token"];

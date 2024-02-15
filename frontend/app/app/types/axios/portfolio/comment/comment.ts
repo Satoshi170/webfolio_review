@@ -1,5 +1,5 @@
-import { candidateTagData } from "@/app/constants/datas/portfolios/comments/tags";
-import { UserData } from "@/app/types/auth";
+import type { candidateTagData } from "@/app/constants/datas/portfolios/comments/tags";
+import type { UserData } from "@/app/types/auth";
 
 export interface PostCommentParams {
   content: string;

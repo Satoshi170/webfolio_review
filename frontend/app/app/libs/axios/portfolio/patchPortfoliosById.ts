@@ -1,18 +1,20 @@
 import axios from "axios";
 
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
-import { UnauthorizedResponseData } from "@/app/types/auth";
-import {
-  PatchPortfoliosByIdErrorData,
-  PatchPortfoliosByIdFailedData,
-  PatchPortfoliosByIdParams,
-  PatchPortfoliosByIdSuccessData
-} from "@/app/types/axios/portfolio/patchPortfoliosById";
+
 
 import addAuthInfoToRequest from "../../cookie/loadAuthInfo";
 import { UnauthorizedResponseDataSchema } from "../../zod/apiErrorResponses/auth/responseDataSchema";
 import { PatchPortfoliosByIdFailedDataSchema } from "../../zod/apiErrorResponses/portfolio/patchPortfoliosByIdDataSchema";
 import api from "../api";
+
+import type { UnauthorizedResponseData } from "@/app/types/auth";
+import type {
+  PatchPortfoliosByIdErrorData,
+  PatchPortfoliosByIdFailedData,
+  PatchPortfoliosByIdParams,
+  PatchPortfoliosByIdSuccessData
+} from "@/app/types/axios/portfolio/patchPortfoliosById";
 
 const generateErrorMessage = (responseData: PatchPortfoliosByIdErrorData) => {
   if (UnauthorizedResponseDataSchema.safeParse(responseData).success) {

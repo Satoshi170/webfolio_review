@@ -1,6 +1,8 @@
 "use client";
 
-import { Link, LinkProps } from "@chakra-ui/react";
+import { Link } from "@chakra-ui/react";
+
+import type { LinkProps } from "@chakra-ui/react";
 
 const CustomLink = (props: LinkProps): JSX.Element => {
   const { href, children, ...other } = props;

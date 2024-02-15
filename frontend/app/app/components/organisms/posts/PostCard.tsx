@@ -3,11 +3,13 @@
 import { Card } from "@chakra-ui/react";
 
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
-import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+
 
 import PostCardBody from "../../molecules/posts/PostCardBody";
 import PostCardFooter from "../../molecules/posts/PostCardFooter";
 import PostCardHeader from "../../molecules/posts/PostCardHeader";
+
+import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 interface LinkOptions {
   header?: boolean;

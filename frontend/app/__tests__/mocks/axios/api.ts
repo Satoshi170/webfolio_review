@@ -1,4 +1,6 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
+import axios from "axios";
+
+import type { AxiosInstance, AxiosRequestConfig } from "axios";
 
 export const mockPost = jest.fn().mockResolvedValue({ data: {}, headers: {} });
 export const mockGet = jest.fn().mockResolvedValue({ data: {}, headers: {} });

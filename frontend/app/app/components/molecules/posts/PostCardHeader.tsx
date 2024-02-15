@@ -3,10 +3,11 @@
 import { CardHeader, Flex, Heading } from "@chakra-ui/react";
 import NextLink from "next/link";
 
-import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 import UserIcon from "../../atoms/users/UserIcon";
 import OptionPostMenuButton from "../../organisms/apiActionButtons/posts/OptionMenuButton";
+
+import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 interface Props {
   isLink?: boolean;

@@ -1,18 +1,21 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
-import { UnauthorizedResponseData } from "@/app/types/auth";
-import {
-  PatchAuthErrorData,
-  PatchAuthFailedData,
-  PatchAuthParams,
-  PatchAuthParamsBase
-} from "@/app/types/axios/auth/patchAuth";
+
 
 import addAuthInfoToRequest from "../../cookie/loadAuthInfo";
 import { PatchAuthFailedDataSchema } from "../../zod/apiErrorResponses/auth/patchAuthDataSchema";
 import { UnauthorizedResponseDataSchema } from "../../zod/apiErrorResponses/auth/responseDataSchema";
 import api from "../api";
+
+import type { UnauthorizedResponseData } from "@/app/types/auth";
+import type {
+  PatchAuthErrorData,
+  PatchAuthFailedData,
+  PatchAuthParams,
+  PatchAuthParamsBase
+} from "@/app/types/axios/auth/patchAuth";
+import type { AxiosRequestConfig } from "axios";
 
 const generateErrorMessage = (responseData: PatchAuthErrorData) => {
   if (UnauthorizedResponseDataSchema.safeParse(responseData).success) {

@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 export const PortfolioContext = createContext<PortfolioData | null>(null);
 

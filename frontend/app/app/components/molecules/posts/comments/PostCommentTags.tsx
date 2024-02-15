@@ -3,7 +3,8 @@
 import { HStack } from "@chakra-ui/react";
 
 import PostCommentTag from "@/app/components/atoms/tags/postComment/PostCommentTag";
-import { CommentTagData } from "@/app/types/axios/portfolio/comment/comment";
+
+import type { CommentTagData } from "@/app/types/axios/portfolio/comment/comment";
 
 interface Props {
   tags: CommentTagData[];

@@ -1,4 +1,4 @@
-import { UserData } from "@/app/types/auth";
+import type { UserData } from "@/app/types/auth";
 
 export const validUserData: UserData = {
   id: 1,

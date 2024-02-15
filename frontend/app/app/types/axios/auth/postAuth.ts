@@ -1,9 +1,9 @@
-import { z } from "zod";
 
-import { PostAuthFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/postAuthDataSchema";
 
-import { PostAuthSignInCredentials } from "./postAuthSignIn";
-import { UserData } from "../../auth";
+import type { PostAuthSignInCredentials } from "./postAuthSignIn";
+import type { UserData } from "../../auth";
+import type { PostAuthFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/postAuthDataSchema";
+import type { z } from "zod";
 
 export interface PostAuthCredentials extends PostAuthSignInCredentials {
   passwordConfirmation: string;

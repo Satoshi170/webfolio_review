@@ -2,8 +2,7 @@ import { ZodError } from "zod";
 
 import { validPostPortfoliosData } from "@/__tests__/fixtures/portfolio/validPostPortfolioData";
 import {
-  getErrorMessages,
-  getErrorMessagesProps
+  getErrorMessages
 } from "@/__tests__/helpers/zodTestHelpers";
 import {
   INVALID_OPERATION_ERROR_MESSAGE,
@@ -11,7 +10,11 @@ import {
 } from "@/app/constants/errors/Messages";
 import { PortfolioValidationErrorMessages } from "@/app/constants/errors/portfolio/Messages";
 import { PortfolioSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioSchema";
-import { PostPortfoliosParams } from "@/app/types/axios/portfolio/postPortfolios";
+
+import type {
+  getErrorMessagesProps
+} from "@/__tests__/helpers/zodTestHelpers";
+import type { PostPortfoliosParams } from "@/app/types/axios/portfolio/postPortfolios";
 
 const getPostPortfolioErrorMessages = (
   data: PostPortfoliosParams,

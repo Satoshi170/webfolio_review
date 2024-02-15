@@ -1,7 +1,7 @@
-import { z } from "zod";
 
-import { CommentTagData } from "./axios/portfolio/comment/comment";
-import { UnauthorizedResponseDataSchema } from "../libs/zod/apiErrorResponses/auth/responseDataSchema";
+import type { CommentTagData } from "./axios/portfolio/comment/comment";
+import type { UnauthorizedResponseDataSchema } from "../libs/zod/apiErrorResponses/auth/responseDataSchema";
+import type { z } from "zod";
 interface Good {
   portfolioId: number;
 }

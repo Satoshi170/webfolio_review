@@ -1,4 +1,4 @@
-import { FieldError, Merge } from "react-hook-form";
+import type { FieldError, Merge } from "react-hook-form";
 
 export const getErrorMessageForMultiSelect = (
   error: Merge<FieldError, (FieldError | undefined)[]> | undefined

@@ -1,4 +1,4 @@
-import { UnauthorizedResponseData } from "@/app/types/auth";
+import type { UnauthorizedResponseData } from "@/app/types/auth";
 
 const mockUnauthorizedResponseData: UnauthorizedResponseData = {
   errors: ["unauthorized"]

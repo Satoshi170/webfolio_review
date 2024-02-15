@@ -1,13 +1,15 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { postPortfoliosByIdComments } from "@/app/libs/axios/portfolio/comment/postPortfoliosByIdComments";
 import { PortfolioCommentSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioCommentSchema";
-import { PostCommentParams } from "@/app/types/axios/portfolio/comment/comment";
+
+import type { PostCommentParams } from "@/app/types/axios/portfolio/comment/comment";
+import type { FormEvent} from "react";
 
 export const usePostCommentForm = (id: number) => {
   const {

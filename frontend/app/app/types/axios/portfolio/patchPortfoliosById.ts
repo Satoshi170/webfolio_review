@@ -1,8 +1,8 @@
-import { z } from "zod";
+import type { UnauthorizedResponseData } from "../../auth";
+import type { PatchPortfoliosByIdFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/portfolio/patchPortfoliosByIdDataSchema";
+import type { z } from "zod";
 
-import { PatchPortfoliosByIdFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/portfolio/patchPortfoliosByIdDataSchema";
 
-import { UnauthorizedResponseData } from "../../auth";
 
 export interface PatchPortfoliosByIdParams {
   title?: string;

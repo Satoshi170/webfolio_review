@@ -1,5 +1,6 @@
-import { AxiosRequestConfig } from "axios";
 import Cookies from "js-cookie";
+
+import type { AxiosRequestConfig } from "axios";
 
 const addAuthInfoToRequest = (config: AxiosRequestConfig) => {
   const token = Cookies.get("access-token");

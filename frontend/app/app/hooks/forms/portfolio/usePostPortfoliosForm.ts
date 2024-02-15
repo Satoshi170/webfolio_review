@@ -1,14 +1,16 @@
 import { useDisclosure } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FormEvent, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { postPortfolios } from "@/app/libs/axios/portfolio/postPortfolios";
 import { PortfolioSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioSchema";
-import { PostPortfoliosParams } from "@/app/types/axios/portfolio/postPortfolios";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
 import { useSetToastState } from "../../recoil/toastState/useSetToastState";
+
+import type { PostPortfoliosParams } from "@/app/types/axios/portfolio/postPortfolios";
+import type { FormEvent} from "react";
 
 export const usePostPortfoliosForm = () => {
   const {

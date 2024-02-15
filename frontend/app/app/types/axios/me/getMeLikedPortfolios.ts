@@ -1,4 +1,4 @@
-import { PortfolioData } from "../portfolio/portfolioData";
+import type { PortfolioData } from "../portfolio/portfolioData";
 
 export interface GetMeLikedPortfolios {
   status: "success";

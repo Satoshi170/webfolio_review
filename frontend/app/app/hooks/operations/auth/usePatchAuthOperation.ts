@@ -2,11 +2,12 @@ import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 
 import { patchAuth } from "@/app/libs/axios/auth/patchAuth";
-import { PatchAuthParams } from "@/app/types/axios/auth/patchAuth";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
 import { useSetToastState } from "../../recoil/toastState/useSetToastState";
 import { useCheckLogin } from "../../useCheckLogin";
+
+import type { PatchAuthParams } from "@/app/types/axios/auth/patchAuth";
 
 export const usePatchAuthOperation = () => {
   const router = useRouter();

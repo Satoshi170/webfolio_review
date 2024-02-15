@@ -1,9 +1,11 @@
 import { isAxiosError } from "axios";
-import useSWR, { SWRConfiguration } from "swr";
+import useSWR from "swr";
 
 import api from "@/app/libs/axios/api";
 
 import { useSetToastState } from "../recoil/toastState/useSetToastState";
+
+import type { SWRConfiguration } from "swr";
 
 type Endpoint = string;
 type EndpointWithParamsArray = [Endpoint, unknown];

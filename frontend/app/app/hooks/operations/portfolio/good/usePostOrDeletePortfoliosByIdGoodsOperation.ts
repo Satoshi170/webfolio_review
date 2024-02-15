@@ -5,7 +5,8 @@ import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { deletePortfoliosByIdGoods } from "@/app/libs/axios/portfolio/good/deletePortfoliosByIdGoods";
 import { postPortfoliosByIdGoods } from "@/app/libs/axios/portfolio/good/postPortfoliosByIdGoods";
-import { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+
+import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 export const usePostOrDeletePortfoliosByIdGoodsOperation = (
   portfolioData: PortfolioData

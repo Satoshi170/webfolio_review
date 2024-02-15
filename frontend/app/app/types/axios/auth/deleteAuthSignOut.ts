@@ -1,6 +1,6 @@
-import { z } from "zod";
+import type { DeleteAuthSignOutFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/deleteAuthSignOutDataSchema";
+import type { z } from "zod";
 
-import { DeleteAuthSignOutFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/deleteAuthSignOutDataSchema";
 
 export interface DeleteAuthSignOutSuccessData {
   success: true;
