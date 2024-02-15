@@ -4,7 +4,6 @@ import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import api from "@/app/libs/axios/api";
 import addAuthInfoToRequest from "@/app/libs/cookie/loadAuthInfo";
 
-
 import { removeAuthInfo } from "../../cookie/removeAuthInfo";
 import { DeleteAuthSignOutFailedDataSchema } from "../../zod/apiErrorResponses/auth/deleteAuthSignOutDataSchema";
 

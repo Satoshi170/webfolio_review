@@ -1,8 +1,8 @@
 "use client";
 
-import { CardHeader, Flex, Heading } from "@chakra-ui/react";
 import NextLink from "next/link";
 
+import { CardHeader, Flex, Heading } from "@chakra-ui/react";
 
 import UserIcon from "../../atoms/users/UserIcon";
 import OptionPostMenuButton from "../../organisms/apiActionButtons/posts/OptionMenuButton";

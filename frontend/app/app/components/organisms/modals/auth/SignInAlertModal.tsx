@@ -1,5 +1,7 @@
 "use client";
 
+import NextLink from "next/link";
+
 import { Link } from "@chakra-ui/next-js";
 import {
   Button,
@@ -12,7 +14,6 @@ import {
   ModalOverlay,
   Text
 } from "@chakra-ui/react";
-import NextLink from "next/link";
 
 import GuestLoginButton from "../../apiActionButtons/auth/GuestLoginButton";
 

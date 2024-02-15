@@ -1,7 +1,8 @@
 "use client";
 
-import { Heading, Text } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
+
+import { Heading, Text } from "@chakra-ui/react";
 
 import LoadingSpinner from "./components/atoms/LoadingSpinner";
 import SeeMoreButton from "./components/atoms/SeeMoreButton";

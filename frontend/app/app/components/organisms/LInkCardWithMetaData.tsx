@@ -1,7 +1,8 @@
 "use client";
 
-import { Box, HStack, Heading, SkeletonText, Text, VStack } from "@chakra-ui/react";
 import Link from "next/link";
+
+import { Box, HStack, Heading, SkeletonText, Text, VStack } from "@chakra-ui/react";
 
 import { useGetURLMetaData } from "@/app/hooks/swr/useGetMetaData";
 

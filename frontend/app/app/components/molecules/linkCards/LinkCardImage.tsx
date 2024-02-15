@@ -1,7 +1,8 @@
 "use client";
 
-import { Box, Image } from "@chakra-ui/react";
 import { useState } from "react";
+
+import { Box, Image } from "@chakra-ui/react";
 
 interface LinkCardImageProps {
   image: string | null;

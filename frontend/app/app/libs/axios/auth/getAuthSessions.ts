@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 import addAuthInfoToRequest from "../../cookie/loadAuthInfo";
 import api from "../api";
 

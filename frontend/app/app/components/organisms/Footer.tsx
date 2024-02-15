@@ -1,7 +1,8 @@
 "use client";
 
-import { Box, Text, Link } from "@chakra-ui/react";
 import NextLink from "next/link";
+
+import { Box, Text, Link } from "@chakra-ui/react";
 
 const Footer: React.FC = () => {
   const now = new Date();

@@ -1,5 +1,5 @@
-import { useRouter } from "next/navigation";
 import { useCallback } from "react";
+import { useRouter } from "next/navigation";
 
 import { patchAuth } from "@/app/libs/axios/auth/patchAuth";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";

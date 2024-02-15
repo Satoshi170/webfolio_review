@@ -4,7 +4,6 @@ import { Card } from "@chakra-ui/react";
 
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
-
 import PostCardBody from "../../molecules/posts/PostCardBody";
 import PostCardFooter from "../../molecules/posts/PostCardFooter";
 import PostCardHeader from "../../molecules/posts/PostCardHeader";

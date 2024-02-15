@@ -2,8 +2,6 @@ import type { UnauthorizedResponseData } from "../../auth";
 import type { PostPortfoliosFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/portfolio/postPortfoliosDataSchema";
 import type { z } from "zod";
 
-
-
 export interface PostPortfoliosParams {
   title: string;
   content: string;

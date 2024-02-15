@@ -2,11 +2,11 @@
 
 import { Card, Spacer } from "@chakra-ui/react";
 
+import { useCommentData } from "@/app/hooks/datas/useCommentData";
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 import PostCommentCardBody from "@/app/components/molecules/posts/comments/PostCommentCardBody";
 import PostCommentCardFooter from "@/app/components/molecules/posts/comments/PostCommentCardFooter";
 import PostCommentCardHeader from "@/app/components/molecules/posts/comments/PostCommentCardHeader";
-import { useCommentData } from "@/app/hooks/datas/useCommentData";
-import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
 const PostCommentCard: React.FC = () => {
   const { isLogin, userData } = useGetLoginState();

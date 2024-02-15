@@ -1,5 +1,7 @@
 "use client";
 
+import NextLink from "next/link";
+
 import {
   HStack,
   Icon,
@@ -9,7 +11,6 @@ import {
   MenuItem,
   MenuList
 } from "@chakra-ui/react";
-import NextLink from "next/link";
 import { IoMdArrowDropdown } from "react-icons/io";
 
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";

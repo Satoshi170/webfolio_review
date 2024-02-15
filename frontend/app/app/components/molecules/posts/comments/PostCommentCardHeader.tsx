@@ -2,9 +2,9 @@
 
 import { CardHeader, Flex, Heading } from "@chakra-ui/react";
 
+import { useCommentData } from "@/app/hooks/datas/useCommentData";
 import UserIcon from "@/app/components/atoms/users/UserIcon";
 import OptionCommentMenuButton from "@/app/components/organisms/apiActionButtons/posts/comments/OptionCommentMenuButton";
-import { useCommentData } from "@/app/hooks/datas/useCommentData";
 
 interface Props {
   isUserComment?: boolean;

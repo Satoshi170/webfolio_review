@@ -1,7 +1,8 @@
 "use client";
 
-import { Link } from "@chakra-ui/react";
 import { useRouter } from "next/navigation";
+
+import { Link } from "@chakra-ui/react";
 
 interface Props {
   text?: string;

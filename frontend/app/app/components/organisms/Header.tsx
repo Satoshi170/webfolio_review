@@ -1,7 +1,8 @@
 "use client";
 
-import { Box, Container, Flex, Heading } from "@chakra-ui/react";
 import NextLink from "next/link";
+
+import { Box, Container, Flex, Heading } from "@chakra-ui/react";
 
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 

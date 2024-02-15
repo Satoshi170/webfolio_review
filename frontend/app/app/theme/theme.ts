@@ -1,5 +1,6 @@
-import { extendTheme } from "@chakra-ui/react";
 import { Inter } from "next/font/google";
+
+import { extendTheme } from "@chakra-ui/react";
 
 const inter = Inter({ subsets: ["latin"] });
 const theme = extendTheme({

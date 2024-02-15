@@ -1,6 +1,6 @@
 import { useCallback, useRef } from "react";
 
-import type { MutableRefObject} from "react";
+import type { MutableRefObject } from "react";
 
 type UseImageInputReturnType = {
   fileInput: MutableRefObject<HTMLInputElement | null>;

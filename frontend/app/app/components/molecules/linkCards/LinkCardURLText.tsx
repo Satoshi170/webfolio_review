@@ -1,7 +1,8 @@
 "use client";
 
-import { Flex, Image, Text } from "@chakra-ui/react";
 import { useState } from "react";
+
+import { Flex, Image, Text } from "@chakra-ui/react";
 
 interface Props {
   favicon: string | null;

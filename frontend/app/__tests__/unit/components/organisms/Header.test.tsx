@@ -1,8 +1,8 @@
 import { render } from "@testing-library/react";
 
 import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
-import Header from "@/app/components/organisms/Header";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
+import Header from "@/app/components/organisms/Header";
 
 jest.mock("@/app/hooks/recoil/loginState/useGetLoginState");
 jest.mock("@/app/components/molecules/LoggedInHeaderRightSection", () => {
