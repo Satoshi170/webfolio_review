@@ -17,6 +17,7 @@
   },
   "plugins": ["import", "@typescript-eslint", "jest"],
   "rules": {
+    "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
     "import/newline-after-import": "error",
