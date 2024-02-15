@@ -4,18 +4,14 @@ import {
   validImageFile,
   validNonImageParams
 } from "@/__tests__/fixtures/auth/validPatchAuthData";
-import {
-  getErrorMessages
-} from "@/__tests__/helpers/zodTestHelpers";
+import { getErrorMessages } from "@/__tests__/helpers/zodTestHelpers";
 import { patchAuthValidationErrorMessages } from "@/app/constants/errors/auth/patchAuth/Messages";
 import {
   PatchAuthImageSchema,
   PatchAuthNonImageSchema
 } from "@/app/libs/zod/formValidations/auth/patchAuthSchema";
 
-import type {
-  getErrorMessagesProps
-} from "@/__tests__/helpers/zodTestHelpers";
+import type { getErrorMessagesProps } from "@/__tests__/helpers/zodTestHelpers";
 import type { PatchAuthParamsBase } from "@/app/types/axios/auth/patchAuth";
 
 const getPatchAuthNonImageErrorMessages = (

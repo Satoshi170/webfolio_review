@@ -1,8 +1,9 @@
 "use client";
 
+import NextLink from "next/link";
+
 import { CardBody, Heading, Text } from "@chakra-ui/react";
 import Linkify from "linkify-react";
-import NextLink from "next/link";
 
 import RenderLink from "@/app/libs/linkify/RenderLink";
 

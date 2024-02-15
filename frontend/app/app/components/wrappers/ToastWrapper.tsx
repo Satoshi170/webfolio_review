@@ -1,7 +1,8 @@
 "use client";
 
-import { useToast } from "@chakra-ui/react";
 import { useEffect, useRef } from "react";
+
+import { useToast } from "@chakra-ui/react";
 
 import { useGetToastState } from "@/app/hooks/recoil/toastState/useGetToastState";
 

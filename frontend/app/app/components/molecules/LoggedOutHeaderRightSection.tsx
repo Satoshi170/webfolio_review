@@ -1,5 +1,7 @@
 "use client";
 
+import NextLink from "next/link";
+
 import {
   Flex,
   IconButton,
@@ -11,7 +13,6 @@ import {
   Spacer,
   useMediaQuery
 } from "@chakra-ui/react";
-import NextLink from "next/link";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 import SignInLinkButton from "./actionButtons/auth/SignInLinkButton";

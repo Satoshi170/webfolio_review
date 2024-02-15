@@ -2,8 +2,8 @@ import { render, screen } from "@testing-library/react";
 
 import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
 import { validPortfolioData } from "@/__tests__/fixtures/portfolio/validPortfolioData";
-import PostCard from "@/app/components/organisms/posts/PostCard";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
+import PostCard from "@/app/components/organisms/posts/PostCard";
 
 jest.mock("@/app/hooks/recoil/loginState/useGetLoginState");
 jest.mock("@/app/components/molecules/posts/PostCardHeader", () => {

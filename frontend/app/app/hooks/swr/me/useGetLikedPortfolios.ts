@@ -2,7 +2,6 @@ import { useSWRWithAxiosAndAuth } from "../useSWRWithAxiosAndAuth";
 
 import type { GetMeLikedPortfolios } from "@/app/types/axios/me/getMeLikedPortfolios";
 
-
 export const useGetLikedPortfolios = () => {
   const endpoint = "/me/liked_portfolios";
   const { responseData, ...other } = useSWRWithAxiosAndAuth<GetMeLikedPortfolios>(

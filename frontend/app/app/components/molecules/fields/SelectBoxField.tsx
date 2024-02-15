@@ -1,28 +1,14 @@
 "use client";
 
 import { FormControl, FormErrorMessage, FormLabel } from "@chakra-ui/react";
-import {
-  Select
-} from "chakra-react-select";
-import {
-  Controller
-} from "react-hook-form";
+import { Select } from "chakra-react-select";
+import { Controller } from "react-hook-form";
 
 import { getErrorMessageForMultiSelect } from "@/app/utils/getErrorMessageForMultiSelectBox";
 
-import type {
-  GroupBase,
-  MultiValue,
-  OptionBase,
-  SingleValue
-} from "chakra-react-select";
-import type {
-  Control,
-  FieldError,
-  FieldValues,
-  Merge,
-  Path
-} from "react-hook-form";
+import type { GroupBase, MultiValue, OptionBase, SingleValue } from "chakra-react-select";
+import type { Control, FieldError, FieldValues, Merge, Path } from "react-hook-form";
+
 interface Option extends OptionBase {
   label: string;
   value: string;

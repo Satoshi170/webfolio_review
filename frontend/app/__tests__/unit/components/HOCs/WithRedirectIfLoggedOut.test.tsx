@@ -2,8 +2,8 @@ import { render } from "@testing-library/react";
 
 import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
 import { mockNavigation, replaceMock } from "@/__tests__/mocks/mockNavigation";
-import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
+import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
 
 jest.mock("next/navigation", () => mockNavigation);
 jest.mock("@/app/hooks/recoil/loginState/useGetLoginState");

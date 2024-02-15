@@ -2,12 +2,12 @@
 
 import { Text } from "@chakra-ui/react";
 
+import { useGetLikedPortfolios } from "@/app/hooks/swr/me/useGetLikedPortfolios";
 import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
 import PostCard from "@/app/components/organisms/posts/PostCard";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
-import { useGetLikedPortfolios } from "@/app/hooks/swr/me/useGetLikedPortfolios";
 
 const UserLikesPage: React.FC = () => {
   const { portfoliosData, error, isLoading } = useGetLikedPortfolios();

@@ -3,7 +3,6 @@
 import { IconButton, Menu, MenuButton, MenuList } from "@chakra-ui/react";
 import { AiOutlineMore } from "react-icons/ai";
 
-
 import DeletePortfoliosButtonWithConfirmation from "./DeletePortfoliosButtonWithConfirmation";
 import PatchPostsByIdButton from "./PatchPortfoliosButton";
 

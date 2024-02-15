@@ -1,8 +1,8 @@
 import { fireEvent, render } from "@testing-library/react";
 
 import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
-import WithSignInAlert from "@/app/components/HOCs/buttons/WithSignInAlert";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
+import WithSignInAlert from "@/app/components/HOCs/buttons/WithSignInAlert";
 
 jest.mock("@/app/components/organisms/modals/auth/SignInAlertModal");
 jest.mock("@/app/hooks/recoil/loginState/useGetLoginState");

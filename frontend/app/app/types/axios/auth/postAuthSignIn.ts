@@ -1,7 +1,6 @@
 import type { PostAuthSignInFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/postAuthSignInDataSchema";
 import type { z } from "zod";
 
-
 export interface PostAuthSignInCredentials {
   email: string;
   password: string;

@@ -19,6 +19,7 @@
   "rules": {
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off",
+    "import/newline-after-import": "error",
     "import/order": [
       "error",
       {
@@ -31,38 +32,31 @@
           "type",
           "index"
         ],
+        "distinctGroup": false,
         "newlines-between": "always",
-        "pathGroupsExcludedImportTypes": ["builtin"],
+        "pathGroupsExcludedImportTypes": ["builtin", "type"],
         "pathGroups": [
           {
-            "pattern": "@/utils/**",
-            "group": "internal",
+            "pattern": "react",
+            "group": "builtin",
             "position": "before"
           },
           {
-            "pattern": "@/libs/**",
-            "group": "internal",
-            "position": "before"
+            "pattern": "next",
+            "group": "builtin"
           },
           {
-            "pattern": "@/hooks/**",
-            "group": "internal",
-            "position": "before"
+            "pattern": "next/**",
+            "group": "builtin"
           },
           {
-            "pattern": "@/components/**",
+            "pattern": "@/app/components/**",
             "group": "internal",
-            "position": "before"
+            "position": "after"
           },
           {
-            "pattern": "@/const/**",
-            "group": "internal",
-            "position": "before"
-          },
-          {
-            "pattern": "@/types/**",
-            "group": "internal",
-            "position": "before"
+            "pattern": "@/app/public/**",
+            "group": "object"
           }
         ],
         "alphabetize": {

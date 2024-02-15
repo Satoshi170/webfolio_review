@@ -4,7 +4,10 @@ import { mockApi, mockAxios, mockPost } from "@/__tests__/mocks/axios/api";
 import { postAuth } from "@/app/libs/axios/auth/postAuth";
 import { saveAuthInfoFromHeader } from "@/app/libs/cookie/saveAuthInfo";
 
-import type { PostAuthErrorData, PostAuthSuccessData } from "@/app/types/axios/auth/postAuth";
+import type {
+  PostAuthErrorData,
+  PostAuthSuccessData
+} from "@/app/types/axios/auth/postAuth";
 
 jest.mock("@/app/libs/cookie/saveAuthInfo");
 jest.mock("@/app/libs/axios/api", () => mockApi);

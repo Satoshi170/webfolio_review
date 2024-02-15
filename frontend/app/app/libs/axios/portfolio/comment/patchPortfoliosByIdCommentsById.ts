@@ -4,7 +4,6 @@ import api from "../../api";
 
 import type { PostCommentParams } from "@/app/types/axios/portfolio/comment/comment";
 
-
 export const patchPortfoliosByIdComments = async (
   portfolioId: number,
   commentId: number,

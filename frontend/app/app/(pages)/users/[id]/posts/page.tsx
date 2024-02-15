@@ -1,15 +1,16 @@
 "use client";
 
-import { Text } from "@chakra-ui/react";
 import Error from "next/error";
 import { usePathname } from "next/navigation";
 
+import { Text } from "@chakra-ui/react";
+
+import { useGetUserPortfoliosByUserId } from "@/app/hooks/swr/portfolio/userPortfolio/useGetUserPortfoliosByUserId";
+import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
 import PostCard from "@/app/components/organisms/posts/PostCard";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
-import { useGetUserPortfoliosByUserId } from "@/app/hooks/swr/portfolio/userPortfolio/useGetUserPortfoliosByUserId";
-import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
 
 const UserIdPostsPage: React.FC = () => {
   const pathname = usePathname();

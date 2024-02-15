@@ -1,5 +1,3 @@
-
-
 import type { PostAuthSignInCredentials } from "./postAuthSignIn";
 import type { UserData } from "../../auth";
 import type { PostAuthFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/postAuthDataSchema";

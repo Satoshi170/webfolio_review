@@ -2,8 +2,6 @@ import type { UnauthorizedResponseData, UserData } from "../../auth";
 import type { PatchAuthFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/patchAuthDataSchema";
 import type { z } from "zod";
 
-
-
 export interface PatchAuthParamsBase {
   name?: string;
 }

@@ -1,5 +1,7 @@
 "use client";
 
+import NextLink from "next/link";
+
 import {
   Box,
   Card,
@@ -11,14 +13,13 @@ import {
   Stack,
   Text
 } from "@chakra-ui/react";
-import NextLink from "next/link";
 
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import UpdatedDateText from "@/app/components/atoms/texts/UpdatedDateText";
 import PostCommentTags from "@/app/components/molecules/posts/comments/PostCommentTags";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
-import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
 const UserCommentsPage: React.FC = () => {
   const { isLogin, userData } = useGetLoginState();

@@ -1,14 +1,15 @@
 "use client";
 
-import { Center, Divider, Heading, Link, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 
+import { Center, Divider, Heading, Link, Text } from "@chakra-ui/react";
+
+import { useSignInForm } from "@/app/hooks/forms/auth/useSignInForm";
 import WithRedirectIfLoggedIn from "@/app/components/HOCs/WithRedirectIfLoggedIn";
 import SubmitFullWideButton from "@/app/components/atoms/SubmitFullWideButton";
 import InputField from "@/app/components/molecules/fields/InputField";
 import GuestLoginButton from "@/app/components/organisms/apiActionButtons/auth/GuestLoginButton";
 import RoundedCenteredBox from "@/app/components/styledWrappers/RoundedCenteredBox";
-import { useSignInForm } from "@/app/hooks/forms/auth/useSignInForm";
 
 const SignInPage: React.FC = () => {
   const { register, handleSubmit, errors, isValid, onSubmit, isLoading } =

@@ -2,7 +2,6 @@ import axios from "axios";
 
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 
-
 import addAuthInfoToRequest from "../../cookie/loadAuthInfo";
 import { PatchAuthFailedDataSchema } from "../../zod/apiErrorResponses/auth/patchAuthDataSchema";
 import { UnauthorizedResponseDataSchema } from "../../zod/apiErrorResponses/auth/responseDataSchema";

@@ -1,5 +1,6 @@
-import useDebouncedCallback from "beautiful-react-hooks/useDebouncedCallback";
 import { useRef, useState } from "react";
+
+import useDebouncedCallback from "beautiful-react-hooks/useDebouncedCallback";
 
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
