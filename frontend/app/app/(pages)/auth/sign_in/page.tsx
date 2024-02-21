@@ -4,54 +4,28 @@ import NextLink from "next/link";
 
 import { Center, Divider, Heading, Link, Text } from "@chakra-ui/react";
 
-import { useSignInForm } from "@/app/hooks/forms/auth/useSignInForm";
+import SignInForm from "@/app/features/auth/signIn/SignInForm";
 import WithRedirectIfLoggedIn from "@/app/components/HOCs/WithRedirectIfLoggedIn";
-import SubmitFullWideButton from "@/app/components/atoms/SubmitFullWideButton";
-import InputField from "@/app/components/molecules/fields/InputField";
 import GuestLoginButton from "@/app/components/organisms/apiActionButtons/auth/GuestLoginButton";
 import RoundedCenteredBox from "@/app/components/styledWrappers/RoundedCenteredBox";
 
 const SignInPage: React.FC = () => {
-  const { register, handleSubmit, errors, isValid, onSubmit, isLoading } =
-    useSignInForm();
-
   return (
     <RoundedCenteredBox>
       <Heading as="h2" textAlign="center" mb="4">
         ログイン
       </Heading>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <InputField
-          name="email"
-          label="メールアドレス"
-          isRequired={true}
-          register={register}
-          error={errors.email}
-        />
-        <InputField
-          name="password"
-          label="パスワード"
-          type="password"
-          isRequired={true}
-          register={register}
-          error={errors.password}
-        />
-        <SubmitFullWideButton
-          text="ログイン"
-          isLoading={isLoading}
-          isDisabled={!isValid}
-        />
-        <Divider my="4" />
-        <Text>
-          初めてのご利用ですか？新規登録は
-          <Link as={NextLink} href="/auth/sign_up" color="blue">
-            こちら
-          </Link>
-        </Text>
-        <Center>
-          <GuestLoginButton />
-        </Center>
-      </form>
+      <SignInForm />
+      <Divider my="4" />
+      <Text>
+        初めてのご利用ですか？新規登録は
+        <Link as={NextLink} href="/auth/sign_up" color="blue">
+          こちら
+        </Link>
+      </Text>
+      <Center>
+        <GuestLoginButton />
+      </Center>
     </RoundedCenteredBox>
   );
 };
