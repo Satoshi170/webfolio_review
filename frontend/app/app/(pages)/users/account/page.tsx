@@ -2,9 +2,9 @@
 
 import { Box, Spacer, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 
+import DeleteAccountButtonWithModal from "@/app/features/auth/deleteAccount/DeleteAccountButtonWithModal";
 import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
-import AccountDeleteButtonWithConfirmation from "@/app/components/organisms/apiActionButtons/auth/AccountDeleteButtonWithConfirmation";
 import AccountInformationTabPanel from "@/app/components/organisms/users/AccountInformationTab";
 
 const UserAccountPage: React.FC = () => {
@@ -19,7 +19,7 @@ const UserAccountPage: React.FC = () => {
           <TabPanel textAlign="center">
             <AccountInformationTabPanel />
             <Spacer my="5" />
-            <AccountDeleteButtonWithConfirmation />
+            <DeleteAccountButtonWithModal />
           </TabPanel>
         </TabPanels>
       </Tabs>

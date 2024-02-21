@@ -2,15 +2,15 @@
 
 import { Button, useDisclosure } from "@chakra-ui/react";
 
-import { useDeleteAuthOperation } from "@/app/hooks/operations/auth/useDeleteAuthOperation";
+import DeleteConfirmationModal from "@/app/components/organisms/modals/DeleteConfirmationModal";
 
-import DeleteConfirmationModal from "../../modals/DeleteConfirmationModal";
+import { useDeleteAccount } from "./useDeleteAccount";
 
-const AccountDeleteButtonWithConfirmation: React.FC = () => {
+const DeleteAccountButtonWithModal: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const deleteAuthOperation = useDeleteAuthOperation();
+  const deleteAccountOperation = useDeleteAccount();
   const handleConfirm = async () => {
-    await deleteAuthOperation();
+    await deleteAccountOperation();
     onClose();
   };
 
@@ -31,4 +31,4 @@ const AccountDeleteButtonWithConfirmation: React.FC = () => {
   );
 };
 
-export default AccountDeleteButtonWithConfirmation;
+export default DeleteAccountButtonWithModal;
