@@ -3,7 +3,7 @@
 import { Button } from "@chakra-ui/react";
 import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
-import WithSignInAlert from "../../HOCs/buttons/WithSignInAlert";
+import WithSignInAlert from "@/app/features/auth/accessControl/button/WithSignInAlert";
 
 interface Props {
   isLiked: boolean;

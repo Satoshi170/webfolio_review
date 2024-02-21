@@ -4,7 +4,7 @@ import { useDisclosure } from "@chakra-ui/react";
 
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
-import SignInAlertModal from "../../organisms/modals/auth/SignInAlertModal";
+import SignInAlertModal from "./sections/SignInAlertModal";
 
 import type { ComponentType } from "react";
 

@@ -2,7 +2,7 @@
 
 import { Button } from "@chakra-ui/react";
 
-import WithSignInAlert from "../HOCs/buttons/WithSignInAlert";
+import WithSignInAlert from "@/app/features/auth/accessControl/button/WithSignInAlert";
 
 interface Props {
   onClick: () => void;
