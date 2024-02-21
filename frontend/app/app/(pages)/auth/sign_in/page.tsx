@@ -4,7 +4,7 @@ import NextLink from "next/link";
 
 import { Center, Divider, Heading, Link, Text } from "@chakra-ui/react";
 
-import WithRedirectIfLoggedIn from "@/app/features/auth/accessControl/WithRedirectIfLoggedIn";
+import WithRedirectIfLoggedIn from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedIn";
 import GuestLoginButton from "@/app/features/auth/guestLogin/GuestLoginButton";
 import SignInForm from "@/app/features/auth/signIn/SignInForm";
 import RoundedCenteredBox from "@/app/components/styledWrappers/RoundedCenteredBox";

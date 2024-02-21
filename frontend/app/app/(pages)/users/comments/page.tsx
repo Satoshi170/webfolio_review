@@ -14,7 +14,7 @@ import {
   Text
 } from "@chakra-ui/react";
 
-import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/WithRedirectIfLoggedOut";
+import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedOut";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import UpdatedDateText from "@/app/components/atoms/texts/UpdatedDateText";
