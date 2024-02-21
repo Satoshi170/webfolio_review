@@ -5,12 +5,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
-import { useCheckLogin } from "@/app/hooks/useCheckLogin";
 import { postAuthSignIn } from "@/app/libs/axios/auth/postAuthSignIn";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
 import { signInValidationErrorMessages } from "./messages";
 import { signInSchema } from "./signInSchema";
+import { useCheckLogin } from "../userSession/useCheckLogin";
 
 import type { PostAuthSignInCredentials } from "@/app/types/axios/auth/postAuthSignIn";
 

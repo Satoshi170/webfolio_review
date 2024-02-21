@@ -4,7 +4,7 @@ import { CacheProvider } from "@chakra-ui/next-js";
 import { ChakraProvider } from "@chakra-ui/react";
 import { RecoilRoot } from "recoil";
 
-import CheckLoginWrapper from "./components/wrappers/CheckLoginWrapper";
+import CheckLoginWrapper from "./features/auth/userSession/CheckLoginWrapper";
 import theme from "./theme/theme";
 
 interface Props {

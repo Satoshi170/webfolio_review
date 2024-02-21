@@ -1,8 +1,7 @@
 import { useCallback } from "react";
 
+import { useSetLoginState } from "@/app/hooks/recoil/loginState/useSetLoginState";
 import { getAuthSessions } from "@/app/libs/axios/auth/getAuthSessions";
-
-import { useSetLoginState } from "./recoil/loginState/useSetLoginState";
 
 export const useCheckLogin = () => {
   const { setLoginState } = useSetLoginState();

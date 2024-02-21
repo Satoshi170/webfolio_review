@@ -15,6 +15,7 @@ export const useSignOut = () => {
     try {
       await deleteAuthSignOut();
       setLoginState({ isLogin: false, userData: null });
+
       router.replace("/auth/sign_in");
       setSuccessToast("ログアウトに成功しました");
     } catch (e) {
