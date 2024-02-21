@@ -2,8 +2,8 @@
 
 import { Box, Spacer, Tab, TabList, TabPanel, TabPanels, Tabs } from "@chakra-ui/react";
 
+import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/WithRedirectIfLoggedOut";
 import DeleteAccountButtonWithModal from "@/app/features/auth/deleteAccount/DeleteAccountButtonWithModal";
-import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import AccountInformationTabPanel from "@/app/components/organisms/users/AccountInformationTab";
 

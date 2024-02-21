@@ -4,8 +4,8 @@ import NextLink from "next/link";
 
 import { Divider, Heading, Text, Link } from "@chakra-ui/react";
 
+import WithRedirectIfLoggedIn from "@/app/features/auth/accessControl/WithRedirectIfLoggedIn";
 import SignUpForm from "@/app/features/auth/signUp/SignUpForm";
-import WithRedirectIfLoggedIn from "@/app/components/HOCs/WithRedirectIfLoggedIn";
 import RoundedCenteredBox from "@/app/components/styledWrappers/RoundedCenteredBox";
 
 const SignUpPage: React.FC = () => {
