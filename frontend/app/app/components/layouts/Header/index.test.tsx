@@ -2,16 +2,17 @@ import { render } from "@testing-library/react";
 
 import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
-import Header from "@/app/components/organisms/Header";
+
+import Header from ".";
 
 jest.mock("@/app/hooks/recoil/loginState/useGetLoginState");
-jest.mock("@/app/components/molecules/LoggedInHeaderRightSection", () => {
+jest.mock("./rightSections/loggedIn", () => {
   return function MockedLoggedInHeaderRightSection() {
     return <div>Mocked Logged In</div>;
   };
 });
 
-jest.mock("@/app/components/molecules/LoggedOutHeaderRightSection", () => {
+jest.mock("./rightSections/loggedOut", () => {
   return function MockedLoggedOutHeaderRightSection() {
     return <div>Mocked Logged Out</div>;
   };

@@ -6,8 +6,8 @@ import { Box, Container, Flex, Heading } from "@chakra-ui/react";
 
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
-import LoggedInHeaderRightSection from "../molecules/LoggedInHeaderRightSection";
-import LoggedOutHeaderRightSection from "../molecules/LoggedOutHeaderRightSection";
+import LoggedInHeaderRightSection from "./rightSections/loggedIn";
+import LoggedOutHeaderRightSection from "./rightSections/loggedOut";
 
 const Header: React.FC = () => {
   const { isLogin } = useGetLoginState();
