@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { signUpValidationErrorMessages } from "@/app/constants/errors/auth/signUp/Messages";
+import { signUpValidationErrorMessages } from "./messages";
 
 const signUpSchema = z.object({
   name: z

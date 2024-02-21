@@ -4,13 +4,13 @@ import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { signUpValidationErrorMessages } from "@/app/constants/errors/auth/signUp/Messages";
+import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
+import { useCheckLogin } from "@/app/hooks/useCheckLogin";
 import { postAuth } from "@/app/libs/axios/auth/postAuth";
-import { refinedSignUpSchema } from "@/app/libs/zod/formValidations/auth/signUpSchema";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
-import { useSetToastState } from "../../recoil/toastState/useSetToastState";
-import { useCheckLogin } from "../../useCheckLogin";
+import { signUpValidationErrorMessages } from "./messages";
+import { refinedSignUpSchema } from "./signUpSchema";
 
 import type { PostAuthCredentials } from "@/app/types/axios/auth/postAuth";
 
