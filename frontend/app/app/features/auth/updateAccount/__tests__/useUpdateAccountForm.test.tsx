@@ -1,16 +1,11 @@
 import { act, renderHook } from "@testing-library/react";
 
 import { validImageFile } from "@/__tests__/fixtures/auth/validPatchAuthData";
-import {
-  mockPatchAuthOperation,
-  mockUsePatchAuthOperation
-} from "@/__tests__/mocks/hooks/operations/mockUsePatchAuthOperation";
-import { useUpdateAccountForm } from "@/app/hooks/forms/auth/useUpdateAccountForm";
 
-jest.mock(
-  "@/app/hooks/operations/auth/usePatchAuthOperation",
-  () => mockUsePatchAuthOperation
-);
+import { mockUpdateAccount, mockUseUpdateAccount } from "./mocks/mockUseUpdateAccount";
+import { useUpdateAccountForm } from "../useUpdateAccountForm";
+
+jest.mock("../useUpdateAccount", () => mockUseUpdateAccount);
 
 describe("useUpdateAccountForm", () => {
   afterEach(() => {
@@ -99,7 +94,7 @@ describe("useUpdateAccountForm", () => {
           result.current.setValue("name", "testuser");
           await result.current.onSubmit();
         });
-        expect(mockPatchAuthOperation).toHaveBeenCalled();
+        expect(mockUpdateAccount).toHaveBeenCalled();
       });
     });
 
@@ -117,7 +112,7 @@ describe("useUpdateAccountForm", () => {
           expect(result.current.imageFile).toBeNull();
           await result.current.onSubmit();
         });
-        expect(mockPatchAuthOperation).not.toHaveBeenCalled();
+        expect(mockUpdateAccount).not.toHaveBeenCalled();
       });
     });
   });

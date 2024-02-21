@@ -1,20 +1,19 @@
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 
+import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
+import { useCheckLogin } from "@/app/hooks/useCheckLogin";
 import { patchAuth } from "@/app/libs/axios/auth/patchAuth";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
-import { useSetToastState } from "../../recoil/toastState/useSetToastState";
-import { useCheckLogin } from "../../useCheckLogin";
-
 import type { PatchAuthParams } from "@/app/types/axios/auth/patchAuth";
 
-export const usePatchAuthOperation = () => {
+export const useUpdateAccount = () => {
   const router = useRouter();
   const { setSuccessToast, setErrorToast } = useSetToastState();
   const checkLoginStatus = useCheckLogin();
 
-  const patchAuthOperation = useCallback(
+  const updateAccount = useCallback(
     async (params: PatchAuthParams) => {
       try {
         await patchAuth(params);
@@ -29,5 +28,5 @@ export const usePatchAuthOperation = () => {
     [checkLoginStatus, router, setErrorToast, setSuccessToast]
   );
 
-  return patchAuthOperation;
+  return { updateAccount };
 };
