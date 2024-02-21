@@ -5,8 +5,9 @@ import {
   mockSetLoginState,
   mockUseSetLoginState
 } from "@/__tests__/mocks/hooks/recoil/loginState/mockUseSetLoginState";
-import { useCheckLogin } from "@/app/hooks/useCheckLogin";
 import { getAuthSessions } from "@/app/libs/axios/auth/getAuthSessions";
+
+import { useCheckLogin } from "../useCheckLogin";
 
 import type {
   GetAuthSessionsFalseData,

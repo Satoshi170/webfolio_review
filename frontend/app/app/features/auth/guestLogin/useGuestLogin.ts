@@ -2,9 +2,10 @@ import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
-import { useCheckLogin } from "@/app/hooks/useCheckLogin";
 import { postAuthGuestSignIn } from "@/app/libs/axios/auth/postAuthGuestSignIn";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
+
+import { useCheckLogin } from "../userSession/useCheckLogin";
 
 export const useGuestLogin = () => {
   const router = useRouter();

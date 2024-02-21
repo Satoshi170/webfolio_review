@@ -11,16 +11,16 @@ import {
   mockReactHookForm,
   mockSetError
 } from "@/__tests__/mocks/reactHookForm/mockReactHookForm";
-import { useCheckLogin } from "@/app/hooks/useCheckLogin";
 import { postAuth } from "@/app/libs/axios/auth/postAuth";
 
+import { useCheckLogin } from "../../userSession/useCheckLogin";
 import { useSignUpForm } from "../useSignUpForm";
 
 jest.mock("@/app/hooks/recoil/toastState/useSetToastState", () => mockUseSetToastState);
 jest.mock("next/navigation", () => mockNavigation);
 jest.mock("react-hook-form", () => mockReactHookForm);
-jest.mock("@/app/hooks/useCheckLogin");
 jest.mock("@/app/libs/axios/auth/postAuth");
+jest.mock("../../userSession/useCheckLogin");
 
 describe("useSignUpForm", () => {
   afterEach(() => {

@@ -2,10 +2,10 @@ import { useEffect } from "react";
 
 import { useRecoilState } from "recoil";
 
-import { useCheckLogin } from "@/app/hooks/useCheckLogin";
 import { loadingState } from "@/app/stores/atoms/loadingState";
+import FullPageLoadingSpinner from "@/app/components/atoms/FullPageLoadingSpinner";
 
-import FullPageLoadingSpinner from "../atoms/FullPageLoadingSpinner";
+import { useCheckLogin } from "./useCheckLogin";
 
 interface Props {
   children: React.ReactNode;

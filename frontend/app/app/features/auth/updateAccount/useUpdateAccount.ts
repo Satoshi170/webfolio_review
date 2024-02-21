@@ -2,9 +2,10 @@ import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
-import { useCheckLogin } from "@/app/hooks/useCheckLogin";
 import { patchAuth } from "@/app/libs/axios/auth/patchAuth";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
+
+import { useCheckLogin } from "../userSession/useCheckLogin";
 
 import type { PatchAuthParams } from "@/app/types/axios/auth/patchAuth";
 
