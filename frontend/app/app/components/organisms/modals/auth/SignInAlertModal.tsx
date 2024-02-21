@@ -15,7 +15,7 @@ import {
   Text
 } from "@chakra-ui/react";
 
-import GuestLoginButton from "../../apiActionButtons/auth/GuestLoginButton";
+import GuestLoginButton from "@/app/features/auth/guestLogin/GuestLoginButton";
 
 interface Props {
   isOpen: boolean;

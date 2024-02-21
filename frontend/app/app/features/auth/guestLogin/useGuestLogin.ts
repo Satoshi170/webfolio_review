@@ -1,18 +1,17 @@
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 
+import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
+import { useCheckLogin } from "@/app/hooks/useCheckLogin";
 import { postAuthGuestSignIn } from "@/app/libs/axios/auth/postAuthGuestSignIn";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
-import { useSetToastState } from "../../recoil/toastState/useSetToastState";
-import { useCheckLogin } from "../../useCheckLogin";
-
-export const usePostAuthGuestSignInOperation = () => {
+export const useGuestLogin = () => {
   const router = useRouter();
   const checkLoginStatus = useCheckLogin();
   const { setSuccessToast, setErrorToast } = useSetToastState();
 
-  const postAuthGuestSignInOperation = useCallback(async () => {
+  const GuestLoginOperation = useCallback(async () => {
     try {
       await postAuthGuestSignIn();
       await checkLoginStatus();
@@ -24,5 +23,5 @@ export const usePostAuthGuestSignInOperation = () => {
     }
   }, [router, setErrorToast, setSuccessToast, checkLoginStatus]);
 
-  return postAuthGuestSignInOperation;
+  return GuestLoginOperation;
 };
