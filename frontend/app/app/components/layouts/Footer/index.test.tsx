@@ -1,6 +1,6 @@
 import { render } from "@testing-library/react";
 
-import Footer from "@/app/components/organisms/Footer";
+import Footer from ".";
 
 describe("<Footer />", () => {
   beforeEach(() => {
