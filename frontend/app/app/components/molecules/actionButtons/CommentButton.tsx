@@ -3,7 +3,7 @@
 import { Button } from "@chakra-ui/react";
 import { BiComment } from "react-icons/bi";
 
-import WithSignInAlert from "../../HOCs/buttons/WithSignInAlert";
+import WithSignInAlert from "@/app/features/auth/accessControl/button/WithSignInAlert";
 
 interface Props {
   onClick: () => void;
