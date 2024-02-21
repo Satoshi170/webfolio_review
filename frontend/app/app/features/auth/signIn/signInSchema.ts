@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { signInValidationErrorMessages } from "@/app/constants/errors/auth/signIn/Messages";
+import { signInValidationErrorMessages } from "./messages";
 
 export const signInSchema = z.object({
   email: z

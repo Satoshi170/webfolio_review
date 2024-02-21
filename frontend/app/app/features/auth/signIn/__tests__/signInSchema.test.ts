@@ -2,8 +2,9 @@ import { ZodError } from "zod";
 
 import { validSignInData } from "@/__tests__/fixtures/auth/validSignInData";
 import { getErrorMessages } from "@/__tests__/helpers/zodTestHelpers";
-import { signInValidationErrorMessages } from "@/app/constants/errors/auth/signIn/Messages";
-import { signInSchema } from "@/app/libs/zod/formValidations/auth/signInSchema";
+
+import { signInValidationErrorMessages } from "../messages";
+import { signInSchema } from "../signInSchema";
 
 import type { getErrorMessagesProps } from "@/__tests__/helpers/zodTestHelpers";
 import type { PostAuthSignInCredentials } from "@/app/types/axios/auth/postAuthSignIn";
