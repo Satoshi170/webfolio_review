@@ -1,18 +1,17 @@
 import { useCallback } from "react";
 import { useRouter } from "next/navigation";
 
+import { useSetLoginState } from "@/app/hooks/recoil/loginState/useSetLoginState";
+import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { deleteAuthSignOut } from "@/app/libs/axios/auth/deleteAuthSignOut";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
-import { useSetLoginState } from "../../recoil/loginState/useSetLoginState";
-import { useSetToastState } from "../../recoil/toastState/useSetToastState";
-
-export const useDeleteAuthSignOutOperation = () => {
+export const useSignOut = () => {
   const router = useRouter();
   const { setLoginState } = useSetLoginState();
   const { setSuccessToast, setErrorToast } = useSetToastState();
 
-  const deleteAuthSignOutOperation = useCallback(async () => {
+  const signOutOperation = useCallback(async () => {
     try {
       await deleteAuthSignOut();
       setLoginState({ isLogin: false, userData: null });
@@ -24,5 +23,5 @@ export const useDeleteAuthSignOutOperation = () => {
     }
   }, [router, setErrorToast, setSuccessToast, setLoginState]);
 
-  return deleteAuthSignOutOperation;
+  return signOutOperation;
 };
