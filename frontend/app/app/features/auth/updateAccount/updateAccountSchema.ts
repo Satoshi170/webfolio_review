@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-import { patchAuthValidationErrorMessages } from "@/app/constants/errors/auth/patchAuth/Messages";
+import { patchAuthValidationErrorMessages } from "./messages";
 
 export const PatchAuthImageSchema = z.object({
   image: z.object({

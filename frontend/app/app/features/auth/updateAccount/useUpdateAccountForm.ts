@@ -3,12 +3,8 @@ import { useCallback, useMemo, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import {
-  PatchAuthImageSchema,
-  PatchAuthNonImageSchema
-} from "@/app/libs/zod/formValidations/auth/patchAuthSchema";
-
-import { usePatchAuthOperation } from "../../operations/auth/usePatchAuthOperation";
+import { PatchAuthImageSchema, PatchAuthNonImageSchema } from "./updateAccountSchema";
+import { useUpdateAccount } from "./useUpdateAccount";
 
 import type { PatchAuthParams } from "@/app/types/axios/auth/patchAuth";
 
@@ -31,7 +27,7 @@ export const useUpdateAccountForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [fileName, setFileName] = useState("");
-  const patchAuthOperation = usePatchAuthOperation();
+  const { updateAccount } = useUpdateAccount();
 
   const isValidatedImage = useCallback(
     (file: File) => {
@@ -94,7 +90,7 @@ export const useUpdateAccountForm = () => {
     }
 
     try {
-      await patchAuthOperation(params);
+      await updateAccount(params);
       reset();
       setImageFile(null);
       setFileName("");
