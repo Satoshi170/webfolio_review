@@ -1,7 +1,7 @@
 import Footer from "./components/layouts/Footer";
 import Header from "./components/layouts/Header";
 import Main from "./components/layouts/Main";
-import ToastWrapper from "./components/wrappers/ToastWrapper";
+import Toast from "./features/toast";
 import Providers from "./providers";
 
 export const metadata = {
@@ -21,7 +21,7 @@ const RootLayout: React.FC<Props> = ({ children }) => {
           <Header />
           <Main>{children}</Main>
           <Footer />
-          <ToastWrapper />
+          <Toast />
         </Providers>
       </body>
     </html>

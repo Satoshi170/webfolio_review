@@ -6,7 +6,7 @@ import { useToast } from "@chakra-ui/react";
 
 import { useGetToastState } from "@/app/hooks/recoil/toastState/useGetToastState";
 
-const ToastWrapper: React.FC = () => {
+const Toast: React.FC = () => {
   const toast = useToast();
   const { status, message, timestamp } = useGetToastState();
   const toastIdRef = useRef<string | number | undefined>(undefined);
@@ -28,4 +28,4 @@ const ToastWrapper: React.FC = () => {
   return null;
 };
 
-export default ToastWrapper;
+export default Toast;
