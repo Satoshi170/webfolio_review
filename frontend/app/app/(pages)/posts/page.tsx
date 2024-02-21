@@ -2,8 +2,8 @@
 
 import { Text } from "@chakra-ui/react";
 
+import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/WithRedirectIfLoggedOut";
 import { useGetPortfolios } from "@/app/hooks/swr/portfolio/useGetPortfolios";
-import WithRedirectIfLoggedOut from "@/app/components/HOCs/WithRedirectIfLoggedOut";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
 import PostCard from "@/app/components/organisms/posts/PostCard";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
