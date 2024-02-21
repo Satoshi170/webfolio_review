@@ -1,6 +1,6 @@
+import Main from "./components/layouts/Main";
 import Footer from "./components/organisms/Footer";
 import Header from "./components/organisms/Header";
-import Main from "./components/organisms/Main";
 import ToastWrapper from "./components/wrappers/ToastWrapper";
 import Providers from "./providers";
 
