@@ -2,13 +2,13 @@
 
 import { MenuItem, useDisclosure } from "@chakra-ui/react";
 
-import { useDeleteAuthSignOutOperation } from "@/app/hooks/operations/auth/useDeleteAuthSignOutOperation";
+import DeleteConfirmationModal from "@/app/components/organisms/modals/DeleteConfirmationModal";
 
-import DeleteConfirmationModal from "../../modals/DeleteConfirmationModal";
+import { useSignOut } from "./useSignOut";
 
-const SignOutButtonWithConfirmation: React.FC = () => {
+const SignOutButtonWithModal: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const signOut = useDeleteAuthSignOutOperation();
+  const signOut = useSignOut();
   const handleConfirm = async () => {
     await signOut();
     onClose();
@@ -29,4 +29,4 @@ const SignOutButtonWithConfirmation: React.FC = () => {
   );
 };
 
-export default SignOutButtonWithConfirmation;
+export default SignOutButtonWithModal;

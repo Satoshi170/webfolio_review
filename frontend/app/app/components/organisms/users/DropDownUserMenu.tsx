@@ -13,10 +13,10 @@ import {
 } from "@chakra-ui/react";
 import { IoMdArrowDropdown } from "react-icons/io";
 
+import SignOutButtonWithModal from "@/app/features/auth/signOut/SignOutButtonWithModal";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
 import UserIcon from "../../atoms/users/UserIcon";
-import SignOutButtonWithConfirmation from "../apiActionButtons/auth/SignOutButtonWithConfirmation";
 
 const DropDownUserMenuButton: React.FC = () => {
   const { isLogin, userData } = useGetLoginState();
@@ -50,7 +50,7 @@ const DropDownUserMenuButton: React.FC = () => {
           アカウント設定
         </MenuItem>
         <MenuDivider />
-        <SignOutButtonWithConfirmation />
+        <SignOutButtonWithModal />
       </MenuList>
     </Menu>
   );
