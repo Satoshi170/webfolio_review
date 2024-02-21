@@ -2,7 +2,8 @@
 
 import { VStack, Text } from "@chakra-ui/react";
 
-import GuestLoginButton from "./apiActionButtons/auth/GuestLoginButton";
+import GuestLoginButton from "@/app/features/auth/guestLogin/GuestLoginButton";
+
 import SignUpLinkButton from "../molecules/actionButtons/auth/SignUpLinkButton";
 
 const AboutSiteSection: React.FC = () => {

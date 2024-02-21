@@ -2,10 +2,10 @@
 
 import { Button } from "@chakra-ui/react";
 
-import { usePostAuthGuestSignInOperation } from "@/app/hooks/operations/auth/usePostAuthGuestSignInOperation";
+import { useGuestLogin } from "./useGuestLogin";
 
 const GuestLoginButton: React.FC = () => {
-  const guestLogin = usePostAuthGuestSignInOperation();
+  const guestLogin = useGuestLogin();
 
   return (
     <Button onClick={guestLogin} colorScheme="gray" variant="link">
