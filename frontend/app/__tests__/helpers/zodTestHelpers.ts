@@ -1,12 +1,12 @@
 import type { ZodSchema } from "zod";
 
-export interface getErrorMessagesProps<T extends Record<string, unknown>> {
+export interface getErrorMessagesProps<T extends Record<string, any>> {
   schema: ZodSchema;
   data: T;
   field: string;
 }
 
-export const getErrorMessages = <T extends Record<string, unknown>>({
+export const getErrorMessages = <T extends Record<string, any>>({
   schema,
   data,
   field
