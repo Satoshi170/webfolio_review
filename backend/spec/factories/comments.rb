@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :comment do
     user { nil }
-    portfolio { nil }
+    article { nil }
     content { "MyString" }
     tag_ids { nil }
   end

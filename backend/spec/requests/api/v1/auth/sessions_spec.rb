@@ -48,8 +48,8 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
       end
 
       context "roleがguestの場合" do
-        context "portfoliosが存在する時" do
-          let(:portfolio) { create(:portfolio, user: guest_user) }
+        context "articlesが存在する時" do
+          let(:article) { create(:article, user: guest_user) }
           it "ログアウトに成功し削除はされないこと" do
             auth_headers = sign_in(email: user.email, password: user.password)
             expect do
@@ -61,8 +61,8 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
         end
 
         context "goodsが存在する時" do
-          let(:portfolio) { create(:portfolio, user: user) }
-          let!(:good) { create(:good, user: guest_user, portfolio: portfolio) }
+          let(:article) { create(:article, user: user) }
+          let!(:good) { create(:good, user: guest_user, article: article) }
           it "ログアウトに成功し削除はされないこと" do
             auth_headers = sign_in(email: guest_user.email, password: guest_user.password)
             expect do
@@ -72,7 +72,7 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
           end
         end
 
-        context "portfolios,goodsが存在しない時" do
+        context "articles,goodsが存在しない時" do
           it "ログアウトに成功しguest_userが削除される" do
             auth_headers = sign_in(email: guest_user.email, password: guest_user.password)
             expect do

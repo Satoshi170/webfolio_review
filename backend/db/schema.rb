@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_02_220228) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_23_172236) do
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,13 +39,24 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_220228) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "articles", charset: "utf8mb4", force: :cascade do |t|
+    t.string "title"
+    t.string "content"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "operation_status", default: 0, null: false
+    t.string "portfolio_site_url", null: false
+    t.string "repository_url"
+  end
+
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "portfolio_id", null: false
+    t.bigint "article_id", null: false
     t.string "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["portfolio_id"], name: "index_comments_on_portfolio_id"
+    t.index ["article_id"], name: "index_comments_on_article_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -60,23 +71,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_220228) do
 
   create_table "goods", charset: "utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "portfolio_id", null: false
+    t.bigint "article_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["portfolio_id"], name: "index_goods_on_portfolio_id"
-    t.index ["user_id", "portfolio_id"], name: "index_goods_on_user_id_and_portfolio_id", unique: true
+    t.index ["article_id"], name: "index_goods_on_article_id"
+    t.index ["user_id", "article_id"], name: "index_goods_on_user_id_and_article_id", unique: true
     t.index ["user_id"], name: "index_goods_on_user_id"
-  end
-
-  create_table "portfolios", charset: "utf8mb4", force: :cascade do |t|
-    t.string "title"
-    t.string "content"
-    t.integer "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "operation_status", default: 0, null: false
-    t.string "portfolio_site_url", null: false
-    t.string "repository_url"
   end
 
   create_table "tags", charset: "utf8mb4", force: :cascade do |t|
@@ -112,10 +112,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_02_220228) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comments", "portfolios", on_delete: :cascade
+  add_foreign_key "comments", "articles", on_delete: :cascade
   add_foreign_key "comments", "users", on_delete: :cascade
   add_foreign_key "comments_tags", "comments"
   add_foreign_key "comments_tags", "tags"
-  add_foreign_key "goods", "portfolios", on_delete: :cascade
+  add_foreign_key "goods", "articles", on_delete: :cascade
   add_foreign_key "goods", "users", on_delete: :cascade
 end

@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :portfolio do
+  factory :article do
     title { "testTitle" }
     content { "testContent" }
     operation_status { "active" }

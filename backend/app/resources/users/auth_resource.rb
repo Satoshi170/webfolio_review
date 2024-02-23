@@ -10,7 +10,7 @@ class Users::AuthResource
   end
 
   many :goods do
-    attributes :portfolio_id
+    attributes :article_id
   end
 
   many :comments do
@@ -20,7 +20,7 @@ class Users::AuthResource
       comment.tags.map(&:name)
     end
 
-    one :portfolio do
+    one :article do
       attributes :id, :title
     end
   end
