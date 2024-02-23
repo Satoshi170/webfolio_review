@@ -1,7 +1,7 @@
-class Portfolios::PortfolioResource
+class Articles::ArticleResource
   include Alba::Resource
 
-  root_key :portfolio
+  root_key :article
 
   attributes :id,
              :title,

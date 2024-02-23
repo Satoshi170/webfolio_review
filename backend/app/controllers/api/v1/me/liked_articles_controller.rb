@@ -1,9 +1,9 @@
-class Api::V1::Me::LikedPortfoliosController < ApplicationController
+class Api::V1::Me::LikedArticlesController < ApplicationController
   before_action :authenticate_api_v1_user!, only: [:index]
 
   def index
-    portfolios = current_api_v1_user.liked_portfolios
-    if portfolios.empty?
+    articles = current_api_v1_user.liked_articles
+    if articles.empty?
       render json: {
                status: "success",
                message: "No goods found",
@@ -11,11 +11,11 @@ class Api::V1::Me::LikedPortfoliosController < ApplicationController
              },
              status: :ok
     else
-      portfolios = current_api_v1_user.liked_portfolios
+      articles = current_api_v1_user.liked_articles
       render json: {
                status: "success",
-               message: "Loaded portfolios",
-               data: Portfolios::PortfolioResource.new(portfolios).serializable_hash,
+               message: "Loaded articles",
+               data: Articles::ArticleResource.new(articles).serializable_hash,
              },
              status: :ok
     end

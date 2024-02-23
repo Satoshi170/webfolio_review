@@ -1,8 +1,8 @@
-class Api::V1::Portfolios::GoodsController < ApplicationController
+class Api::V1::Articles::GoodsController < ApplicationController
   before_action :authenticate_api_v1_user!, only: [:create, :destroy]
 
   def create
-    good = Good.new(user_id: current_api_v1_user.id, portfolio_id: params[:portfolio_id])
+    good = Good.new(user_id: current_api_v1_user.id, article_id: params[:article_id])
 
     if good.save
       render json: {
@@ -21,7 +21,7 @@ class Api::V1::Portfolios::GoodsController < ApplicationController
   end
 
   def destroy
-    good = Good.find_by!(user_id: current_api_v1_user.id, portfolio_id: params[:portfolio_id])
+    good = Good.find_by!(user_id: current_api_v1_user.id, article_id: params[:article_id])
     good.destroy
     render json: { status: 'success', message: 'Good destroyed' }, status: :ok
   end

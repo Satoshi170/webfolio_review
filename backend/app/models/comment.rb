@@ -1,6 +1,6 @@
 class Comment < ApplicationRecord
   belongs_to :user
-  belongs_to :portfolio
+  belongs_to :article
   has_many :comments_tags
   has_many :tags, through: :comments_tags
 

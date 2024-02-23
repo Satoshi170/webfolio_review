@@ -23,7 +23,7 @@ class Api::V1::Auth::DeviseSessionsController < DeviseTokenAuth::SessionsControl
     return unless @saved_resource
 
     should_destroy = @saved_resource.role == "guest" &&
-                     @saved_resource.portfolios.blank? &&
+                     @saved_resource.articles.blank? &&
                      @saved_resource.goods.blank? &&
                      @saved_resource.comments.blank?
 

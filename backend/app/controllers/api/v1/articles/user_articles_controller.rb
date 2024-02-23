@@ -1,8 +1,8 @@
-class Api::V1::Portfolios::UserPortfoliosController < ApplicationController
+class Api::V1::Articles::UserArticlesController < ApplicationController
   before_action :set_user_id, only: [:index]
 
   def index
-    user = User.includes(:portfolios, { portfolios: [:goods, :comments] }, image_attachment: :blob).
+    user = User.includes(:articles, { articles: [:goods, :comments] }, image_attachment: :blob).
       find_by(id: @user_id)
 
     if user.nil?
@@ -10,8 +10,8 @@ class Api::V1::Portfolios::UserPortfoliosController < ApplicationController
     else
       render json: {
                status: "success",
-               message: "Loaded portfolios",
-               data: Portfolios::UserPortfolioResource.new(user).serializable_hash,
+               message: "Loaded articles",
+               data: Articles::UserArticleResource.new(user).serializable_hash,
              },
              status: :ok
     end

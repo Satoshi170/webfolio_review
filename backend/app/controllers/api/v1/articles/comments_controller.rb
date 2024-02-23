@@ -1,15 +1,15 @@
-class Api::V1::Portfolios::CommentsController < ApplicationController
+class Api::V1::Articles::CommentsController < ApplicationController
   before_action :set_comment, only: [:update, :destroy]
   before_action :authenticate_api_v1_user!, only: [:create, :update, :destroy]
   before_action :authorize_user_for_comment!, only: [:update, :destroy]
 
   def create
-    comment_params_with_user_and_portfolio = comment_params.merge({
+    comment_params_with_user_and_article = comment_params.merge({
       user_id: current_api_v1_user.id,
-      portfolio_id: params[:portfolio_id],
+      article_id: params[:article_id],
     })
 
-    @comment = Comment.new(comment_params_with_user_and_portfolio)
+    @comment = Comment.new(comment_params_with_user_and_article)
 
     if @comment.save
       render json: {

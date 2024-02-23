@@ -16,18 +16,18 @@ Rails.application.routes.draw do
         end
       end
 
-      scope module: "portfolios" do
-        resources :portfolios do
+      scope module: "articles" do
+        resources :articles do
           resource :goods, only: [:create, :destroy]
           resources :comments, only: [:create, :update, :destroy]
         end
-        resources :user_portfolios, only: [:index]
-        resources :latest_portfolios, only: [:index]
-        resources :popular_portfolios, only: [:index]
+        resources :user_articles, only: [:index]
+        resources :latest_articles, only: [:index]
+        resources :popular_articles, only: [:index]
       end
 
       namespace :me do
-        resources :liked_portfolios, only: [:index]
+        resources :liked_articles, only: [:index]
       end
     end
   end
