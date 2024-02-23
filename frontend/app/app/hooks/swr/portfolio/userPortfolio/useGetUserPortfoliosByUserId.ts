@@ -3,7 +3,7 @@ import { useSWRWithAxiosFetcher } from "../../useSWRWithAxiosFetcher";
 import type { GetUserPortfoliosResponse } from "@/app/types/axios/portfolio/user_portfolio/getUserPortfolioByUserId";
 
 export const useGetUserPortfoliosByUserId = (userId: number) => {
-  const endPoint = "/user_portfolios";
+  const endPoint = "/user_articles";
   const params = { userId };
   const { responseData, ...other } = useSWRWithAxiosFetcher<GetUserPortfoliosResponse>(
     [endPoint, params],

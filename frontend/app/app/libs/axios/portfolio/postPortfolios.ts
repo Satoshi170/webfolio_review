@@ -14,7 +14,7 @@ import type {
 
 export const postPortfolios = async (params: PostPortfoliosParams): Promise<void> => {
   try {
-    await api.post("/portfolios", params, addAuthInfoToRequest({}));
+    await api.post("/articles", params, addAuthInfoToRequest({}));
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       const responseData = error.response.data as PostPortfoliosErrorData;

@@ -7,7 +7,7 @@ export const deletePortfoliosByIdComments = async (
   commentId: number
 ): Promise<void> => {
   await api.delete(
-    `/portfolios/${portfolioId}/comments/${commentId}`,
+    `/articles/${portfolioId}/comments/${commentId}`,
     addAuthInfoToRequest({})
   );
 };

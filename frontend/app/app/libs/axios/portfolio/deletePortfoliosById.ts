@@ -14,7 +14,7 @@ import type {
 export const deletePortfoliosById = async (id: number): Promise<void> => {
   try {
     await api.delete<DeletePortfoliosByIdSuccessData>(
-      `/portfolios/${id}`,
+      `/articles/${id}`,
       addAuthInfoToRequest({})
     );
   } catch (error) {

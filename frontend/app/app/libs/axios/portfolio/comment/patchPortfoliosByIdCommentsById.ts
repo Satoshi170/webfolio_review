@@ -10,7 +10,7 @@ export const patchPortfoliosByIdComments = async (
   params: PostCommentParams
 ): Promise<void> => {
   await api.patch(
-    `/portfolios/${portfolioId}/comments/${commentId}`,
+    `/articles/${portfolioId}/comments/${commentId}`,
     { comment: params },
     addAuthInfoToRequest({})
   );
