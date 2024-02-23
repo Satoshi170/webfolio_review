@@ -9,7 +9,7 @@ export const postPortfoliosByIdComments = async (
   params: PostCommentParams
 ): Promise<void> => {
   await api.post(
-    `/portfolios/${portfolioId}/comments`,
+    `/articles/${portfolioId}/comments`,
     { comment: params },
     addAuthInfoToRequest({})
   );

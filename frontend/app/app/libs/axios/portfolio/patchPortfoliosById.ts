@@ -30,7 +30,7 @@ export const patchPortfoliosById = async (
 ): Promise<void> => {
   try {
     await api.patch<PatchPortfoliosByIdSuccessData>(
-      `/portfolios/${id}`,
+      `/articles/${id}`,
       params,
       addAuthInfoToRequest({})
     );
