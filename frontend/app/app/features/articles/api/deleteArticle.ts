@@ -1,17 +1,16 @@
 import axios from "axios";
 
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
-
-import addAuthInfoToRequest from "../../cookie/loadAuthInfo";
-import { UnauthorizedResponseDataSchema } from "../../zod/apiErrorResponses/auth/responseDataSchema";
-import api from "../api";
+import api from "@/app/libs/axios/api";
+import addAuthInfoToRequest from "@/app/libs/cookie/loadAuthInfo";
+import { UnauthorizedResponseDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/responseDataSchema";
 
 import type {
   DeletePortfoliosByIdErrorData,
   DeletePortfoliosByIdSuccessData
 } from "@/app/types/axios/portfolio/deletePortfoliosById";
 
-export const deletePortfoliosById = async (id: number): Promise<void> => {
+export const deleteArticle = async (id: number): Promise<void> => {
   try {
     await api.delete<DeletePortfoliosByIdSuccessData>(
       `/articles/${id}`,

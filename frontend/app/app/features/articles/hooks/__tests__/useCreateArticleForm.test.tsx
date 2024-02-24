@@ -1,6 +1,5 @@
 import { act, renderHook } from "@testing-library/react";
 
-import { validPortfolioData } from "@/__tests__/fixtures/portfolio/validPortfolioData";
 import { validPostPortfoliosData } from "@/__tests__/fixtures/portfolio/validPostPortfolioData";
 import {
   mockSetErrorToast,
@@ -8,14 +7,15 @@ import {
   mockUseSetToastState
 } from "@/__tests__/mocks/hooks/recoil/toastState/mockUseSetToastState";
 import { mockReactHookForm } from "@/__tests__/mocks/reactHookForm/mockReactHookForm";
-import { usePatchPortfoliosByIdForm } from "@/app/hooks/forms/portfolio/usePatchPortfoliosByIdForm";
-import { patchPortfoliosById } from "@/app/libs/axios/portfolio/patchPortfoliosById";
+
+import { postArticle } from "../../api/postArticle";
+import { useCreateArticleForm } from "../useCreateArticleForm";
 
 jest.mock("react-hook-form", () => mockReactHookForm);
-jest.mock("@/app/libs/axios/portfolio/patchPortfoliosById");
 jest.mock("@/app/hooks/recoil/toastState/useSetToastState", () => mockUseSetToastState);
+jest.mock("../../api/postArticle");
 
-describe("usePatchPortfoliosByIdForm", () => {
+describe("useCreateArticleForm", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -25,11 +25,9 @@ describe("usePatchPortfoliosByIdForm", () => {
 
   describe("onSubmit", () => {
     describe("エラーが発生しない時", () => {
-      it("セットされるトーストのstatusはsuccessである", async () => {
-        (patchPortfoliosById as jest.Mock).mockResolvedValue(undefined);
-        const { result } = renderHook(() =>
-          usePatchPortfoliosByIdForm(validPortfolioData)
-        );
+      it("setSuccessToastが呼び出される", async () => {
+        (postArticle as jest.Mock).mockResolvedValue(undefined);
+        const { result } = renderHook(() => useCreateArticleForm());
         await act(async () => {
           await result.current.onSubmit(validPostPortfoliosData);
         });
@@ -40,11 +38,9 @@ describe("usePatchPortfoliosByIdForm", () => {
     describe("エラーが発生する時", () => {
       const errorMessage = "Error";
 
-      it("適切なメッセージがセットされる", async () => {
-        (patchPortfoliosById as jest.Mock).mockRejectedValue(new Error(errorMessage));
-        const { result } = renderHook(() =>
-          usePatchPortfoliosByIdForm(validPortfolioData)
-        );
+      it("setErrorToastが呼び出される", async () => {
+        (postArticle as jest.Mock).mockRejectedValue(new Error(errorMessage));
+        const { result } = renderHook(() => useCreateArticleForm());
         await act(async () => {
           await result.current.onSubmit(validPostPortfoliosData);
         });

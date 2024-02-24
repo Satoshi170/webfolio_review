@@ -4,7 +4,8 @@ import { mockUnexpectedResponse } from "@/__tests__/fixtures/unexpectedResponseD
 import { mockApi, mockAxios, mockPatch } from "@/__tests__/mocks/axios/api";
 import { mockAddAuthInfoToRequest } from "@/__tests__/mocks/cookie/mockLoadAuthInfo";
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
-import { patchPortfoliosById } from "@/app/libs/axios/portfolio/patchPortfoliosById";
+
+import { patchArticle } from "../patchArticle";
 
 import type {
   PatchPortfoliosByIdFailedData,
@@ -14,7 +15,7 @@ import type {
 jest.mock("@/app/libs/cookie/loadAuthInfo", () => mockAddAuthInfoToRequest);
 jest.mock("@/app/libs/axios/api", () => mockApi);
 
-describe("patchPortfoliosById", () => {
+describe("patchArticle", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -35,9 +36,7 @@ describe("patchPortfoliosById", () => {
 
     it("エラーをスローしない", async () => {
       mockPatch.mockResolvedValue(mockPatchPortfoliosByIdSuccessResponse);
-      await expect(
-        patchPortfoliosById(1, validPostPortfoliosData)
-      ).resolves.not.toThrow();
+      await expect(patchArticle(1, validPostPortfoliosData)).resolves.not.toThrow();
     });
   });
 
@@ -47,7 +46,7 @@ describe("patchPortfoliosById", () => {
         it("適切なエラーがスローされる", async () => {
           mockAxios.isAxiosError.mockReturnValue(true);
           mockPatch.mockRejectedValue(mockUnauthorizedResponse);
-          await expect(patchPortfoliosById(1, validPostPortfoliosData)).rejects.toThrow(
+          await expect(patchArticle(1, validPostPortfoliosData)).rejects.toThrow(
             mockUnauthorizedResponse.response.data.errors.join(", ")
           );
         });
@@ -69,7 +68,7 @@ describe("patchPortfoliosById", () => {
         it("適切なエラーがスローされる", async () => {
           mockAxios.isAxiosError.mockReturnValue(true);
           mockPatch.mockRejectedValue(mockPatchPortfoliosByIdFailedResponse);
-          await expect(patchPortfoliosById(1, validPostPortfoliosData)).rejects.toThrow(
+          await expect(patchArticle(1, validPostPortfoliosData)).rejects.toThrow(
             mockPatchPortfoliosByIdFailedData.errors.join(", ")
           );
         });
@@ -79,7 +78,7 @@ describe("patchPortfoliosById", () => {
         it("適切なエラーがスローされる", async () => {
           mockAxios.isAxiosError.mockReturnValue(true);
           mockPatch.mockRejectedValue(mockUnexpectedResponse);
-          await expect(patchPortfoliosById(1, validPostPortfoliosData)).rejects.toThrow(
+          await expect(patchArticle(1, validPostPortfoliosData)).rejects.toThrow(
             UNEXPECTED_ERROR_MESSAGE
           );
         });
@@ -92,7 +91,7 @@ describe("patchPortfoliosById", () => {
       const mockError = new Error("networkError");
       mockAxios.isAxiosError.mockReturnValue(false);
       mockPatch.mockRejectedValue(mockError);
-      await expect(patchPortfoliosById(1, validPostPortfoliosData)).rejects.toThrow(
+      await expect(patchArticle(1, validPostPortfoliosData)).rejects.toThrow(
         "networkError"
       );
     });

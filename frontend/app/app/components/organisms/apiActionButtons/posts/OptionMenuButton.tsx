@@ -3,8 +3,8 @@
 import { IconButton, Menu, MenuButton, MenuList } from "@chakra-ui/react";
 import { AiOutlineMore } from "react-icons/ai";
 
-import DeletePortfoliosButtonWithConfirmation from "./DeletePortfoliosButtonWithConfirmation";
-import PatchPostsByIdButton from "./PatchPortfoliosButton";
+import DeleteArticleButtonWithModal from "@/app/features/articles/components/DeleteArticleButtonWithModal";
+import UpdateArticleButtonWithFormModal from "@/app/features/articles/components/UpdateArticleButtonWithFormModal";
 
 import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
@@ -21,8 +21,8 @@ const OptionPostMenuButton: React.FC<Props> = ({ portfolioData }) => {
         variant="ghost"
       />
       <MenuList>
-        <PatchPostsByIdButton portfolioData={portfolioData} />
-        <DeletePortfoliosButtonWithConfirmation id={portfolioData.id} />
+        <UpdateArticleButtonWithFormModal articleData={portfolioData} />
+        <DeleteArticleButtonWithModal articleId={portfolioData.id} />
       </MenuList>
     </Menu>
   );

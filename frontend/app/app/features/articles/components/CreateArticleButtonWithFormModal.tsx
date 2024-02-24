@@ -12,13 +12,14 @@ import {
   Spacer
 } from "@chakra-ui/react";
 
-import { usePostPortfoliosForm } from "@/app/hooks/forms/portfolio/usePostPortfoliosForm";
 import InputField from "@/app/components/molecules/fields/InputField";
 import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
 import { operationStatusOptions } from "@/app/components/molecules/fields/SelectBoxField/options/operationStatusOptions";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
 
-const CreatePostButtonWithModal: React.FC = () => {
+import { useCreateArticleForm } from "../hooks/useCreateArticleForm";
+
+const CreateArticleButtonWithFormModal: React.FC = () => {
   const {
     onClose,
     onOpen,
@@ -29,7 +30,7 @@ const CreatePostButtonWithModal: React.FC = () => {
     isValid,
     handleFormSubmit,
     isLoading
-  } = usePostPortfoliosForm();
+  } = useCreateArticleForm();
 
   return (
     <>
@@ -102,4 +103,4 @@ const CreatePostButtonWithModal: React.FC = () => {
   );
 };
 
-export default CreatePostButtonWithModal;
+export default CreateArticleButtonWithFormModal;

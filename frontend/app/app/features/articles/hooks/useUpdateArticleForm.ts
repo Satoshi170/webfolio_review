@@ -5,17 +5,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { candidateOperationStatusData } from "@/app/constants/datas/portfolios/operationStatuses";
-import { patchPortfoliosById } from "@/app/libs/axios/portfolio/patchPortfoliosById";
-import { PortfolioSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioSchema";
+import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
-import { useSetToastState } from "../../recoil/toastState/useSetToastState";
+import { ArticleSchema } from "./articleSchema";
+import { patchArticle } from "../api/patchArticle";
 
 import type { PatchPortfoliosByIdParams } from "@/app/types/axios/portfolio/patchPortfoliosById";
 import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 import type { FormEvent } from "react";
 
-export const usePatchPortfoliosByIdForm = (portfolioData: PortfolioData) => {
+export const useUpdateArticleForm = (portfolioData: PortfolioData) => {
   const defaultOperationStatusValue =
     candidateOperationStatusData[portfolioData.operationStatus].toString();
   const {
@@ -25,7 +25,7 @@ export const usePatchPortfoliosByIdForm = (portfolioData: PortfolioData) => {
     watch,
     formState: { errors, isValid }
   } = useForm({
-    resolver: zodResolver(PortfolioSchema),
+    resolver: zodResolver(ArticleSchema),
     mode: "onChange",
     defaultValues: {
       title: portfolioData.title,
@@ -52,7 +52,7 @@ export const usePatchPortfoliosByIdForm = (portfolioData: PortfolioData) => {
   const onSubmit = async (params: PatchPortfoliosByIdParams) => {
     setIsLoading(true);
     try {
-      await patchPortfoliosById(portfolioData.id, params);
+      await patchArticle(portfolioData.id, params);
       setSuccessToast("更新に成功しました");
     } catch (e) {
       const errorMessage = resolveErrorMessage(e);

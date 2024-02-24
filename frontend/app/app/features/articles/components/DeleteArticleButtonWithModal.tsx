@@ -2,19 +2,19 @@
 
 import { MenuItem, useDisclosure } from "@chakra-ui/react";
 
-import { useDeletePortfoliosByIdOperation } from "@/app/hooks/operations/portfolio/useDeletePortfoliosByIdOperation";
+import DeleteConfirmationModal from "@/app/components/organisms/modals/DeleteConfirmationModal";
 
-import DeleteConfirmationModal from "../../modals/DeleteConfirmationModal";
+import { useDeleteArticle } from "../hooks/useDeleteArticle";
 
 interface Props {
-  id: number;
+  articleId: number;
 }
 
-const DeletePortfoliosButtonWithConfirmation: React.FC<Props> = ({ id }) => {
+const DeleteArticleButtonWithModal: React.FC<Props> = ({ articleId }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const deletePortfoliosByIdOperation = useDeletePortfoliosByIdOperation();
+  const deleteArticleOperation = useDeleteArticle();
   const handleConfirm = async () => {
-    await deletePortfoliosByIdOperation(id);
+    await deleteArticleOperation(articleId);
     onClose();
   };
 
@@ -35,4 +35,4 @@ const DeletePortfoliosButtonWithConfirmation: React.FC<Props> = ({ id }) => {
   );
 };
 
-export default DeletePortfoliosButtonWithConfirmation;
+export default DeleteArticleButtonWithModal;

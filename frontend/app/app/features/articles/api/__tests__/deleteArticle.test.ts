@@ -3,14 +3,15 @@ import { mockUnexpectedResponse } from "@/__tests__/fixtures/unexpectedResponseD
 import { mockApi, mockAxios, mockDelete } from "@/__tests__/mocks/axios/api";
 import { mockAddAuthInfoToRequest } from "@/__tests__/mocks/cookie/mockLoadAuthInfo";
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
-import { deletePortfoliosById } from "@/app/libs/axios/portfolio/deletePortfoliosById";
+
+import { deleteArticle } from "../deleteArticle";
 
 import type { DeletePortfoliosByIdSuccessData } from "@/app/types/axios/portfolio/deletePortfoliosById";
 
 jest.mock("@/app/libs/cookie/loadAuthInfo", () => mockAddAuthInfoToRequest);
 jest.mock("@/app/libs/axios/api", () => mockApi);
 
-describe("deletePortfoliosById", () => {
+describe("deleteArticle", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -31,7 +32,7 @@ describe("deletePortfoliosById", () => {
 
     it("エラーをスローしない", async () => {
       mockDelete.mockResolvedValue(mockDeletePortfoliosByIdSuccessResponse);
-      await expect(deletePortfoliosById(1)).resolves.not.toThrow();
+      await expect(deleteArticle(1)).resolves.not.toThrow();
     });
   });
 
@@ -44,7 +45,7 @@ describe("deletePortfoliosById", () => {
       describe("レスポンスデータの型がUnauthorizedResponseDataを満たす場合", () => {
         it("適切なエラーがスローされる", async () => {
           mockDelete.mockRejectedValue(mockUnauthorizedResponse);
-          await expect(deletePortfoliosById(1)).rejects.toThrow(
+          await expect(deleteArticle(1)).rejects.toThrow(
             mockUnauthorizedResponse.response.data.errors.join(", ")
           );
         });
@@ -53,7 +54,7 @@ describe("deletePortfoliosById", () => {
       describe("レスポンスデータの型がUnauthorizedResponseDataを満たさない場合", () => {
         it("適切なエラーがスローされる", async () => {
           mockDelete.mockRejectedValue(mockUnexpectedResponse);
-          await expect(deletePortfoliosById(1)).rejects.toThrow(UNEXPECTED_ERROR_MESSAGE);
+          await expect(deleteArticle(1)).rejects.toThrow(UNEXPECTED_ERROR_MESSAGE);
         });
       });
     });
@@ -67,7 +68,7 @@ describe("deletePortfoliosById", () => {
     it("元のエラーがスローされる", async () => {
       const mockError = new Error("networkError");
       mockDelete.mockRejectedValue(mockError);
-      await expect(deletePortfoliosById(1)).rejects.toThrow("networkError");
+      await expect(deleteArticle(1)).rejects.toThrow("networkError");
     });
   });
 });
