@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Text } from "@chakra-ui/react";
 
 import ArticleCard from "@/app/features/articles/components/layouts/ArticleCard";
-import { useGetUserPortfoliosByUserId } from "@/app/hooks/swr/portfolio/userPortfolio/useGetUserPortfoliosByUserId";
+import { useGetUserArticles } from "@/app/features/articles/hooks/useGetUserArticles";
 import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
@@ -16,14 +16,13 @@ const UserIdPostsPage: React.FC = () => {
   const pathname = usePathname();
   const newPathname = pathname.replace(/\/posts$/, "");
   const id = getIdOrTriggerNotFound({ pathname: newPathname, routeKey: "users" });
-  const { portfoliosData, error, errorStatus, isLoading } =
-    useGetUserPortfoliosByUserId(id);
+  const { articlesData, error, errorStatus, isLoading } = useGetUserArticles(id);
 
   if (errorStatus) {
     return <Error statusCode={errorStatus} />;
   }
 
-  if (error || !portfoliosData) {
+  if (error || !articlesData) {
     return (
       <CenteredBox>
         <GoBackLink />
@@ -39,7 +38,7 @@ const UserIdPostsPage: React.FC = () => {
     );
   }
 
-  if (portfoliosData && portfoliosData.length == 0) {
+  if (articlesData && articlesData.length == 0) {
     return (
       <CenteredBox>
         <GoBackLink />
@@ -51,8 +50,8 @@ const UserIdPostsPage: React.FC = () => {
   return (
     <CenteredBox>
       <GoBackLink />
-      {portfoliosData.map((portfolioData, i) => (
-        <ArticleCard articleData={portfolioData} linkOptions={{ body: true }} key={i} />
+      {articlesData.map((articleData, i) => (
+        <ArticleCard articleData={articleData} linkOptions={{ body: true }} key={i} />
       ))}
     </CenteredBox>
   );
