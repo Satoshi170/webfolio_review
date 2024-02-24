@@ -3,13 +3,13 @@
 import { Text } from "@chakra-ui/react";
 
 import ArticleCard from "@/app/features/articles/components/layouts/ArticleCard";
+import { useGetArticles } from "@/app/features/articles/hooks/useGetArticles";
 import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedOut";
-import { useGetPortfolios } from "@/app/hooks/swr/portfolio/useGetPortfolios";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
 const PostsPage: React.FC = () => {
-  const { portfoliosData, error, isLoading } = useGetPortfolios();
+  const { articlesData, error, isLoading } = useGetArticles();
 
   if (isLoading) {
     <CenteredBox>
@@ -17,7 +17,7 @@ const PostsPage: React.FC = () => {
     </CenteredBox>;
   }
 
-  if (error || !portfoliosData) {
+  if (error || !articlesData) {
     return (
       <CenteredBox>
         <Text>データの取得に失敗しました</Text>
@@ -27,9 +27,9 @@ const PostsPage: React.FC = () => {
 
   return (
     <CenteredBox>
-      {portfoliosData.map((portfolioData, i) => (
+      {articlesData.map((articleData, i) => (
         <ArticleCard
-          articleData={portfolioData}
+          articleData={articleData}
           linkOptions={{ header: true, body: true }}
           key={i}
         />

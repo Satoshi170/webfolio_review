@@ -9,21 +9,21 @@ import SeeMoreButton from "./components/atoms/SeeMoreButton";
 import AboutSiteSection from "./components/organisms/AboutSiteSection";
 import CenteredBox from "./components/styledWrappers/CenteredBox";
 import ArticleCard from "./features/articles/components/layouts/ArticleCard";
+import { useGetLatestArticles } from "./features/articles/hooks/useGetLatestArticles";
+import { useGetPopularArticles } from "./features/articles/hooks/useGetPopularArticles";
 import { useGetLoginState } from "./hooks/recoil/loginState/useGetLoginState";
-import { useGetLatestPortfolios } from "./hooks/swr/portfolio/latestPortfolio/useGetLatestPortfolios";
-import { useGetPopularPortfolios } from "./hooks/swr/portfolio/popularPortfolio/useGetPopularPortfolios";
 
 const HomePage: React.FC = () => {
   const {
-    popularPortfoliosData,
+    popularArticlesData,
     error: error1,
     isLoading: isLoading1
-  } = useGetPopularPortfolios();
+  } = useGetPopularArticles();
   const {
-    latestPortfoliosData,
+    latestArticlesData,
     error: error2,
     isLoading: isLoading2
-  } = useGetLatestPortfolios();
+  } = useGetLatestArticles();
   const router = useRouter();
   const { isLogin } = useGetLoginState();
 
@@ -35,7 +35,7 @@ const HomePage: React.FC = () => {
     );
   }
 
-  if (error1 || error2 || !latestPortfoliosData || !popularPortfoliosData) {
+  if (error1 || error2 || !latestArticlesData || !popularArticlesData) {
     return <Text>データの取得に失敗しました</Text>;
   }
 
@@ -43,18 +43,18 @@ const HomePage: React.FC = () => {
     <CenteredBox>
       {!isLogin && <AboutSiteSection />}
       <Heading my="2">最近の投稿</Heading>
-      {latestPortfoliosData.map((portfolioData, i) => (
+      {latestArticlesData.map((article, i) => (
         <ArticleCard
-          articleData={portfolioData}
+          articleData={article}
           linkOptions={{ header: true, body: true }}
           key={i}
         />
       ))}
       <SeeMoreButton onClick={() => router.push("/posts")} />
       <Heading my="2">話題の投稿</Heading>
-      {popularPortfoliosData.map((portfolioData, i) => (
+      {popularArticlesData.map((article, i) => (
         <ArticleCard
-          articleData={portfolioData}
+          articleData={article}
           linkOptions={{ header: true, body: true }}
           key={i}
         />
