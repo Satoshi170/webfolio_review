@@ -1,11 +1,10 @@
 import axios from "axios";
 
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
-
-import addAuthInfoToRequest from "../../cookie/loadAuthInfo";
-import { UnauthorizedResponseDataSchema } from "../../zod/apiErrorResponses/auth/responseDataSchema";
-import { PatchPortfoliosByIdFailedDataSchema } from "../../zod/apiErrorResponses/portfolio/patchPortfoliosByIdDataSchema";
-import api from "../api";
+import api from "@/app/libs/axios/api";
+import addAuthInfoToRequest from "@/app/libs/cookie/loadAuthInfo";
+import { UnauthorizedResponseDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/responseDataSchema";
+import { PatchPortfoliosByIdFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/portfolio/patchPortfoliosByIdDataSchema";
 
 import type { UnauthorizedResponseData } from "@/app/types/auth";
 import type {
@@ -24,7 +23,7 @@ const generateErrorMessage = (responseData: PatchPortfoliosByIdErrorData) => {
   return UNEXPECTED_ERROR_MESSAGE;
 };
 
-export const patchPortfoliosById = async (
+export const patchArticle = async (
   id: number,
   params: PatchPortfoliosByIdParams
 ): Promise<void> => {

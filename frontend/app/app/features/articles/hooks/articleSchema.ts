@@ -5,22 +5,23 @@ import {
   INVALID_OPERATION_ERROR_MESSAGE,
   MUST_BE_URL_ERROR_MESSAGE
 } from "@/app/constants/errors/Messages";
-import { PortfolioValidationErrorMessages } from "@/app/constants/errors/portfolio/Messages";
+
+import { ArticleValidationErrorMessages } from "./messages";
 
 const validOperationStatusValues = Object.values(candidateOperationStatusData);
 const validOperationStatusStringValues = validOperationStatusValues.map((num) =>
   num.toString()
 );
 
-export const PortfolioSchema = z.object({
+export const ArticleSchema = z.object({
   title: z
     .string()
-    .min(1, PortfolioValidationErrorMessages.titleRequired)
-    .max(25, PortfolioValidationErrorMessages.titleTooLong),
+    .min(1, ArticleValidationErrorMessages.titleRequired)
+    .max(25, ArticleValidationErrorMessages.titleTooLong),
   content: z
     .string()
-    .min(1, PortfolioValidationErrorMessages.contentRequired)
-    .max(255, PortfolioValidationErrorMessages.contentTooLong),
+    .min(1, ArticleValidationErrorMessages.contentRequired)
+    .max(255, ArticleValidationErrorMessages.contentTooLong),
   operationStatus: z
     .string()
     .refine((str) => validOperationStatusStringValues.includes(str), {
@@ -28,7 +29,7 @@ export const PortfolioSchema = z.object({
     }),
   portfolioSiteUrl: z
     .string()
-    .min(1, PortfolioValidationErrorMessages.portfolioSiteUrlRequired)
+    .min(1, ArticleValidationErrorMessages.portfolioSiteUrlRequired)
     .url(MUST_BE_URL_ERROR_MESSAGE),
   repositoryUrl: z.preprocess(
     (val) => {

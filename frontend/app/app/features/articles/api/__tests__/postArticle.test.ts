@@ -4,17 +4,18 @@ import { mockUnexpectedResponse } from "@/__tests__/fixtures/unexpectedResponseD
 import { mockApi, mockAxios, mockPost } from "@/__tests__/mocks/axios/api";
 import { mockAddAuthInfoToRequest } from "@/__tests__/mocks/cookie/mockLoadAuthInfo";
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
-import { postPortfolios } from "@/app/libs/axios/portfolio/postPortfolios";
+
+import { postArticle } from "../postArticle";
 
 import type {
-  PostPortfoliosFailedData,
-  PostPortfoliosSuccessData
+  PostPortfoliosSuccessData,
+  PostPortfoliosFailedData
 } from "@/app/types/axios/portfolio/postPortfolios";
 
 jest.mock("@/app/libs/cookie/loadAuthInfo", () => mockAddAuthInfoToRequest);
 jest.mock("@/app/libs/axios/api", () => mockApi);
 
-describe("postPortfolios", () => {
+describe("postArticle", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -35,7 +36,7 @@ describe("postPortfolios", () => {
 
     it("エラーをスローしない", async () => {
       mockPost.mockResolvedValue(mockPostPortfoliosSuccessResponse);
-      await expect(postPortfolios(validPostPortfoliosData)).resolves.not.toThrow();
+      await expect(postArticle(validPostPortfoliosData)).resolves.not.toThrow();
     });
   });
 
@@ -45,7 +46,7 @@ describe("postPortfolios", () => {
         it("適切なエラーがスローされる", async () => {
           mockAxios.isAxiosError.mockReturnValue(true);
           mockPost.mockRejectedValue(mockUnauthorizedResponse);
-          await expect(postPortfolios(validPostPortfoliosData)).rejects.toThrow(
+          await expect(postArticle(validPostPortfoliosData)).rejects.toThrow(
             mockUnauthorizedResponse.response.data.errors.join(", ")
           );
         });
@@ -67,7 +68,7 @@ describe("postPortfolios", () => {
         it("適切なエラーがスローされる", async () => {
           mockAxios.isAxiosError.mockReturnValue(true);
           mockPost.mockRejectedValue(mockPostPortfoliosFailedResponse);
-          await expect(postPortfolios(validPostPortfoliosData)).rejects.toThrow(
+          await expect(postArticle(validPostPortfoliosData)).rejects.toThrow(
             mockPostPortfoliosFailedData.errors.join(", ")
           );
         });
@@ -77,7 +78,7 @@ describe("postPortfolios", () => {
         it("適切なエラーがスローされる", async () => {
           mockAxios.isAxiosError.mockReturnValue(true);
           mockPost.mockRejectedValue(mockUnexpectedResponse);
-          await expect(postPortfolios(validPostPortfoliosData)).rejects.toThrow(
+          await expect(postArticle(validPostPortfoliosData)).rejects.toThrow(
             UNEXPECTED_ERROR_MESSAGE
           );
         });
@@ -90,9 +91,7 @@ describe("postPortfolios", () => {
       const mockError = new Error("networkError");
       mockAxios.isAxiosError.mockReturnValue(false);
       mockPost.mockRejectedValue(mockError);
-      await expect(postPortfolios(validPostPortfoliosData)).rejects.toThrow(
-        "networkError"
-      );
+      await expect(postArticle(validPostPortfoliosData)).rejects.toThrow("networkError");
     });
   });
 });

@@ -1,4 +1,4 @@
-export const PortfolioValidationErrorMessages = {
+export const ArticleValidationErrorMessages = {
   titleRequired: "タイトルを入力してください",
   titleTooLong: "タイトルは25文字以内である必要があります",
   contentRequired: "本文を入力してください",

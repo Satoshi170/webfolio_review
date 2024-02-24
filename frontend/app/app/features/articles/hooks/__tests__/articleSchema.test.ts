@@ -6,58 +6,59 @@ import {
   INVALID_OPERATION_ERROR_MESSAGE,
   MUST_BE_URL_ERROR_MESSAGE
 } from "@/app/constants/errors/Messages";
-import { PortfolioValidationErrorMessages } from "@/app/constants/errors/portfolio/Messages";
-import { PortfolioSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioSchema";
+
+import { ArticleSchema } from "../articleSchema";
+import { ArticleValidationErrorMessages } from "../messages";
 
 import type { getErrorMessagesProps } from "@/__tests__/helpers/zodTestHelpers";
 import type { PostPortfoliosParams } from "@/app/types/axios/portfolio/postPortfolios";
 
-const getPostPortfolioErrorMessages = (
+const validationErrorMessages = (
   data: PostPortfoliosParams,
   field: keyof PostPortfoliosParams
 ) => {
   const props: getErrorMessagesProps<PostPortfoliosParams> = {
-    schema: PortfolioSchema,
+    schema: ArticleSchema,
     data,
     field
   };
   return getErrorMessages(props);
 };
 
-describe("PortfolioSchema", () => {
+describe("ArticleSchema", () => {
   it("全て正しい形式の場合エラーをスローしない", () => {
-    expect(() => PortfolioSchema.parse(validPostPortfoliosData)).not.toThrow();
+    expect(() => ArticleSchema.parse(validPostPortfoliosData)).not.toThrow();
   });
 
   describe("title", () => {
     it("titleが入力されていない時、正しいエラーメッセージをスローする", () => {
       const invalidTitleData = { ...validPostPortfoliosData, title: "" };
-      expect(() => PortfolioSchema.parse(invalidTitleData)).toThrow(ZodError);
-      const titleErrors = getPostPortfolioErrorMessages(invalidTitleData, "title");
-      expect(titleErrors[0]).toBe(PortfolioValidationErrorMessages.titleRequired);
+      expect(() => ArticleSchema.parse(invalidTitleData)).toThrow(ZodError);
+      const titleErrors = validationErrorMessages(invalidTitleData, "title");
+      expect(titleErrors[0]).toBe(ArticleValidationErrorMessages.titleRequired);
     });
 
     it("titleが26文字以上の時、正しいエラーメッセージをスローする", () => {
       const invalidTitleData = { ...validPostPortfoliosData, title: "a".repeat(26) };
-      expect(() => PortfolioSchema.parse(invalidTitleData)).toThrow(ZodError);
-      const titleErrors = getPostPortfolioErrorMessages(invalidTitleData, "title");
-      expect(titleErrors[0]).toBe(PortfolioValidationErrorMessages.titleTooLong);
+      expect(() => ArticleSchema.parse(invalidTitleData)).toThrow(ZodError);
+      const titleErrors = validationErrorMessages(invalidTitleData, "title");
+      expect(titleErrors[0]).toBe(ArticleValidationErrorMessages.titleTooLong);
     });
   });
 
   describe("content", () => {
     it("contentが入力されていない時、正しいエラーメッセージをスローする", () => {
       const invalidContentData = { ...validPostPortfoliosData, content: "" };
-      expect(() => PortfolioSchema.parse(invalidContentData)).toThrow(ZodError);
-      const contentErrors = getPostPortfolioErrorMessages(invalidContentData, "content");
-      expect(contentErrors[0]).toBe(PortfolioValidationErrorMessages.contentRequired);
+      expect(() => ArticleSchema.parse(invalidContentData)).toThrow(ZodError);
+      const contentErrors = validationErrorMessages(invalidContentData, "content");
+      expect(contentErrors[0]).toBe(ArticleValidationErrorMessages.contentRequired);
     });
 
     it("contentが256文字以上の時、正しいエラーメッセージをスローする", () => {
       const invalidContentData = { ...validPostPortfoliosData, content: "a".repeat(256) };
-      expect(() => PortfolioSchema.parse(invalidContentData)).toThrow(ZodError);
-      const contentErrors = getPostPortfolioErrorMessages(invalidContentData, "content");
-      expect(contentErrors[0]).toBe(PortfolioValidationErrorMessages.contentTooLong);
+      expect(() => ArticleSchema.parse(invalidContentData)).toThrow(ZodError);
+      const contentErrors = validationErrorMessages(invalidContentData, "content");
+      expect(contentErrors[0]).toBe(ArticleValidationErrorMessages.contentTooLong);
     });
   });
 
@@ -67,8 +68,8 @@ describe("PortfolioSchema", () => {
         ...validPostPortfoliosData,
         operationStatus: "test"
       };
-      expect(() => PortfolioSchema.parse(invalidOperationStatusData)).toThrow(ZodError);
-      const OperationStatusErrors = getPostPortfolioErrorMessages(
+      expect(() => ArticleSchema.parse(invalidOperationStatusData)).toThrow(ZodError);
+      const OperationStatusErrors = validationErrorMessages(
         invalidOperationStatusData,
         "operationStatus"
       );
@@ -82,13 +83,13 @@ describe("PortfolioSchema", () => {
         ...validPostPortfoliosData,
         portfolioSiteUrl: ""
       };
-      expect(() => PortfolioSchema.parse(invalidPortfolioSiteUrlData)).toThrow(ZodError);
-      const portfolioSiteUrlErrors = getPostPortfolioErrorMessages(
+      expect(() => ArticleSchema.parse(invalidPortfolioSiteUrlData)).toThrow(ZodError);
+      const portfolioSiteUrlErrors = validationErrorMessages(
         invalidPortfolioSiteUrlData,
         "portfolioSiteUrl"
       );
       expect(portfolioSiteUrlErrors[0]).toBe(
-        PortfolioValidationErrorMessages.portfolioSiteUrlRequired
+        ArticleValidationErrorMessages.portfolioSiteUrlRequired
       );
     });
 
@@ -97,8 +98,8 @@ describe("PortfolioSchema", () => {
         ...validPostPortfoliosData,
         portfolioSiteUrl: "test"
       };
-      expect(() => PortfolioSchema.parse(invalidPortfolioSiteUrlData)).toThrow(ZodError);
-      const portfolioSiteUrlErrors = getPostPortfolioErrorMessages(
+      expect(() => ArticleSchema.parse(invalidPortfolioSiteUrlData)).toThrow(ZodError);
+      const portfolioSiteUrlErrors = validationErrorMessages(
         invalidPortfolioSiteUrlData,
         "portfolioSiteUrl"
       );
@@ -112,7 +113,7 @@ describe("PortfolioSchema", () => {
         ...validPostPortfoliosData,
         repositoryUrl: ""
       };
-      expect(() => PortfolioSchema.parse(invalidRepositoryUrlData)).not.toThrow();
+      expect(() => ArticleSchema.parse(invalidRepositoryUrlData)).not.toThrow();
     });
 
     it("repositoryUrlがURLでない時、正しいエラーメッセージをスローする", () => {
@@ -120,8 +121,8 @@ describe("PortfolioSchema", () => {
         ...validPostPortfoliosData,
         repositoryUrl: "test"
       };
-      expect(() => PortfolioSchema.parse(invalidRepositoryUrlData)).toThrow(ZodError);
-      const repositoryUrlErrors = getPostPortfolioErrorMessages(
+      expect(() => ArticleSchema.parse(invalidRepositoryUrlData)).toThrow(ZodError);
+      const repositoryUrlErrors = validationErrorMessages(
         invalidRepositoryUrlData,
         "repositoryUrl"
       );

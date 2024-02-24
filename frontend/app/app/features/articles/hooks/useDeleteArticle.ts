@@ -1,17 +1,17 @@
 import { useCallback } from "react";
 
-import { deletePortfoliosById } from "@/app/libs/axios/portfolio/deletePortfoliosById";
+import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
-import { useSetToastState } from "../../recoil/toastState/useSetToastState";
+import { deleteArticle } from "../api/deleteArticle";
 
-export const useDeletePortfoliosByIdOperation = () => {
+export const useDeleteArticle = () => {
   const { setSuccessToast, setErrorToast } = useSetToastState();
 
-  const deletePortfoliosByIdOperation = useCallback(
+  const deleteArticleOperation = useCallback(
     async (id: number) => {
       try {
-        await deletePortfoliosById(id);
+        await deleteArticle(id);
         window.location.reload();
         setSuccessToast("投稿の削除に成功しました");
       } catch (e) {
@@ -22,5 +22,5 @@ export const useDeletePortfoliosByIdOperation = () => {
     [setSuccessToast, setErrorToast]
   );
 
-  return deletePortfoliosByIdOperation;
+  return deleteArticleOperation;
 };

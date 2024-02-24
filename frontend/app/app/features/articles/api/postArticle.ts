@@ -1,18 +1,17 @@
 import axios from "axios";
 
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
-
-import addAuthInfoToRequest from "../../cookie/loadAuthInfo";
-import { UnauthorizedResponseDataSchema } from "../../zod/apiErrorResponses/auth/responseDataSchema";
-import { PostPortfoliosFailedDataSchema } from "../../zod/apiErrorResponses/portfolio/postPortfoliosDataSchema";
-import api from "../api";
+import api from "@/app/libs/axios/api";
+import addAuthInfoToRequest from "@/app/libs/cookie/loadAuthInfo";
+import { UnauthorizedResponseDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/responseDataSchema";
+import { PostPortfoliosFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/portfolio/postPortfoliosDataSchema";
 
 import type {
   PostPortfoliosErrorData,
   PostPortfoliosParams
 } from "@/app/types/axios/portfolio/postPortfolios";
 
-export const postPortfolios = async (params: PostPortfoliosParams): Promise<void> => {
+export const postArticle = async (params: PostPortfoliosParams): Promise<void> => {
   try {
     await api.post("/articles", params, addAuthInfoToRequest({}));
   } catch (error) {

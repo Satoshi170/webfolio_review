@@ -4,23 +4,23 @@ import { useDisclosure } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { postPortfolios } from "@/app/libs/axios/portfolio/postPortfolios";
-import { PortfolioSchema } from "@/app/libs/zod/formValidations/portfolio/portfolioSchema";
+import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
-import { useSetToastState } from "../../recoil/toastState/useSetToastState";
+import { ArticleSchema } from "./articleSchema";
+import { postArticle } from "../api/postArticle";
 
 import type { PostPortfoliosParams } from "@/app/types/axios/portfolio/postPortfolios";
 import type { FormEvent } from "react";
 
-export const usePostPortfoliosForm = () => {
+export const useCreateArticleForm = () => {
   const {
     control,
     register,
     handleSubmit,
     formState: { errors, isValid }
   } = useForm<PostPortfoliosParams>({
-    resolver: zodResolver(PortfolioSchema),
+    resolver: zodResolver(ArticleSchema),
     mode: "onChange",
     defaultValues: {
       title: "",
@@ -37,7 +37,7 @@ export const usePostPortfoliosForm = () => {
   const onSubmit = async (params: PostPortfoliosParams) => {
     setIsLoading(true);
     try {
-      await postPortfolios(params);
+      await postArticle(params);
       setSuccessToast("投稿に成功しました");
     } catch (e) {
       const errorMessage = resolveErrorMessage(e);
