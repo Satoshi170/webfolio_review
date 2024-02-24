@@ -9,9 +9,9 @@ import UpdateArticleButtonWithFormModal from "@/app/features/articles/components
 import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 interface Props {
-  portfolioData: PortfolioData;
+  articleData: PortfolioData;
 }
-const OptionPostMenuButton: React.FC<Props> = ({ portfolioData }) => {
+const OptionArticleMenuButton: React.FC<Props> = ({ articleData }) => {
   return (
     <Menu>
       <MenuButton
@@ -21,11 +21,11 @@ const OptionPostMenuButton: React.FC<Props> = ({ portfolioData }) => {
         variant="ghost"
       />
       <MenuList>
-        <UpdateArticleButtonWithFormModal articleData={portfolioData} />
-        <DeleteArticleButtonWithModal articleId={portfolioData.id} />
+        <UpdateArticleButtonWithFormModal articleData={articleData} />
+        <DeleteArticleButtonWithModal articleId={articleData.id} />
       </MenuList>
     </Menu>
   );
 };
 
-export default OptionPostMenuButton;
+export default OptionArticleMenuButton;

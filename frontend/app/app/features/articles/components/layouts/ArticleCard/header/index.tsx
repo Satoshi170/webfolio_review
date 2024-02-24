@@ -4,23 +4,24 @@ import NextLink from "next/link";
 
 import { CardHeader, Flex, Heading } from "@chakra-ui/react";
 
-import UserIcon from "../../atoms/users/UserIcon";
-import OptionPostMenuButton from "../../organisms/apiActionButtons/posts/OptionMenuButton";
+import UserIcon from "@/app/components/atoms/users/UserIcon";
+
+import OptionArticleMenuButton from "./sections/OptionMenuButton";
 
 import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 interface Props {
   isLink?: boolean;
   isUserPost?: boolean;
-  portfolioData: PortfolioData;
+  articleData: PortfolioData;
 }
 
-const PostCardHeader: React.FC<Props> = ({
+const ArticleCardHeader: React.FC<Props> = ({
   isLink = false,
   isUserPost = false,
-  portfolioData
+  articleData
 }) => {
-  const { user } = portfolioData;
+  const { user } = articleData;
   const image = user.image || "/defaultUserImage.png";
 
   return (
@@ -37,10 +38,10 @@ const PostCardHeader: React.FC<Props> = ({
           <UserIcon image={image} name={user.name} diameter={39} />
           <Heading fontSize="md">{user.name}</Heading>
         </Flex>
-        {isUserPost && <OptionPostMenuButton portfolioData={portfolioData} />}
+        {isUserPost && <OptionArticleMenuButton articleData={articleData} />}
       </Flex>
     </CardHeader>
   );
 };
 
-export default PostCardHeader;
+export default ArticleCardHeader;

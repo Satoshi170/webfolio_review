@@ -4,9 +4,9 @@ import { Card } from "@chakra-ui/react";
 
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
-import PostCardBody from "../../molecules/posts/PostCardBody";
-import PostCardFooter from "../../molecules/posts/PostCardFooter";
-import PostCardHeader from "../../molecules/posts/PostCardHeader";
+import ArticleCardBody from "./body";
+import ArticleCardFooter from "./footer";
+import ArticleCardHeader from "./header";
 
 import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
@@ -14,31 +14,32 @@ interface LinkOptions {
   header?: boolean;
   body?: boolean;
 }
+
 interface Props {
-  portfolioData: PortfolioData;
+  articleData: PortfolioData;
   linkOptions?: LinkOptions;
 }
 
-const PostCard: React.FC<Props> = ({ portfolioData, linkOptions }) => {
+const ArticleCard: React.FC<Props> = ({ articleData, linkOptions }) => {
   const { isLogin, userData } = useGetLoginState();
-  if (!portfolioData || !portfolioData.user) {
+  if (!articleData || !articleData.user) {
     return null;
   }
 
-  const { user } = portfolioData;
+  const { user } = articleData;
   const isUserPost = isLogin ? userData.id == user.id : false;
 
   return (
     <Card py="1" w={{ base: "auto", md: "md" }} rounded="none">
-      <PostCardHeader
-        portfolioData={portfolioData}
+      <ArticleCardHeader
+        articleData={articleData}
         isLink={linkOptions?.header}
         isUserPost={isUserPost}
       />
-      <PostCardBody portfolioData={portfolioData} isLink={linkOptions?.body} />
-      <PostCardFooter portfolioData={portfolioData} />
+      <ArticleCardBody articleData={articleData} isLink={linkOptions?.body} />
+      <ArticleCardFooter articleData={articleData} />
     </Card>
   );
 };
 
-export default PostCard;
+export default ArticleCard;

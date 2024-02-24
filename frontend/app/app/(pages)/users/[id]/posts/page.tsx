@@ -5,11 +5,11 @@ import { usePathname } from "next/navigation";
 
 import { Text } from "@chakra-ui/react";
 
+import ArticleCard from "@/app/features/articles/components/layouts/ArticleCard";
 import { useGetUserPortfoliosByUserId } from "@/app/hooks/swr/portfolio/userPortfolio/useGetUserPortfoliosByUserId";
 import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
-import PostCard from "@/app/components/organisms/posts/PostCard";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
 const UserIdPostsPage: React.FC = () => {
@@ -52,7 +52,7 @@ const UserIdPostsPage: React.FC = () => {
     <CenteredBox>
       <GoBackLink />
       {portfoliosData.map((portfolioData, i) => (
-        <PostCard portfolioData={portfolioData} linkOptions={{ body: true }} key={i} />
+        <ArticleCard articleData={portfolioData} linkOptions={{ body: true }} key={i} />
       ))}
     </CenteredBox>
   );

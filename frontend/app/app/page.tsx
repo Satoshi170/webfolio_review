@@ -7,8 +7,8 @@ import { Heading, Text } from "@chakra-ui/react";
 import LoadingSpinner from "./components/atoms/LoadingSpinner";
 import SeeMoreButton from "./components/atoms/SeeMoreButton";
 import AboutSiteSection from "./components/organisms/AboutSiteSection";
-import PostCard from "./components/organisms/posts/PostCard";
 import CenteredBox from "./components/styledWrappers/CenteredBox";
+import ArticleCard from "./features/articles/components/layouts/ArticleCard";
 import { useGetLoginState } from "./hooks/recoil/loginState/useGetLoginState";
 import { useGetLatestPortfolios } from "./hooks/swr/portfolio/latestPortfolio/useGetLatestPortfolios";
 import { useGetPopularPortfolios } from "./hooks/swr/portfolio/popularPortfolio/useGetPopularPortfolios";
@@ -44,8 +44,8 @@ const HomePage: React.FC = () => {
       {!isLogin && <AboutSiteSection />}
       <Heading my="2">最近の投稿</Heading>
       {latestPortfoliosData.map((portfolioData, i) => (
-        <PostCard
-          portfolioData={portfolioData}
+        <ArticleCard
+          articleData={portfolioData}
           linkOptions={{ header: true, body: true }}
           key={i}
         />
@@ -53,8 +53,8 @@ const HomePage: React.FC = () => {
       <SeeMoreButton onClick={() => router.push("/posts")} />
       <Heading my="2">話題の投稿</Heading>
       {popularPortfoliosData.map((portfolioData, i) => (
-        <PostCard
-          portfolioData={portfolioData}
+        <ArticleCard
+          articleData={portfolioData}
           linkOptions={{ header: true, body: true }}
           key={i}
         />

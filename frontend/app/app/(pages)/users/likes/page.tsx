@@ -2,11 +2,11 @@
 
 import { Text } from "@chakra-ui/react";
 
+import ArticleCard from "@/app/features/articles/components/layouts/ArticleCard";
 import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedOut";
 import { useGetLikedPortfolios } from "@/app/hooks/swr/me/useGetLikedPortfolios";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
-import PostCard from "@/app/components/organisms/posts/PostCard";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
 const UserLikesPage: React.FC = () => {
@@ -39,8 +39,8 @@ const UserLikesPage: React.FC = () => {
       return (
         <CenteredBox>
           {portfoliosData.map((portfolioData, i) => (
-            <PostCard
-              portfolioData={portfolioData}
+            <ArticleCard
+              articleData={portfolioData}
               linkOptions={{ header: true, body: true }}
               key={i}
             />
