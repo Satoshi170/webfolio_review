@@ -2,9 +2,10 @@ import { Card } from "@chakra-ui/react";
 import { render, screen } from "@testing-library/react";
 
 import { validPortfolioData } from "@/__tests__/fixtures/portfolio/validPortfolioData";
-import PostCardBody from "@/app/components/molecules/posts/PostCardBody";
 
-describe("<PostCardBody />", () => {
+import ArticleCardBody from ".";
+
+describe("<ArticleCardBody />", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -17,7 +18,7 @@ describe("<PostCardBody />", () => {
       it("aタグが存在する", () => {
         render(
           <Card>
-            <PostCardBody portfolioData={validPortfolioData} isLink={true} />
+            <ArticleCardBody articleData={validPortfolioData} isLink={true} />
           </Card>
         );
         const anchorElement = screen.getByRole("link");
@@ -29,7 +30,7 @@ describe("<PostCardBody />", () => {
       it("aタグが存在しない", () => {
         render(
           <Card>
-            <PostCardBody portfolioData={validPortfolioData} isLink={false} />
+            <ArticleCardBody articleData={validPortfolioData} isLink={false} />
           </Card>
         );
         const anchorElement = screen.queryByRole("link");

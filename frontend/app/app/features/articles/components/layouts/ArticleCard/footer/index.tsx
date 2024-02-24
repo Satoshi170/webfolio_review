@@ -3,20 +3,19 @@
 import { CardFooter, Divider, Flex, Stack, Text } from "@chakra-ui/react";
 
 import { usePostOrDeletePortfoliosByIdGoodsOperation } from "@/app/hooks/operations/portfolio/good/usePostOrDeletePortfoliosByIdGoodsOperation";
-
-import CreateCommentButtonWithModal from "../../organisms/apiActionButtons/posts/comments/CreateCommentButtonWithModal";
-import LikeButton from "../actionButtons/LikeButton";
+import LikeButton from "@/app/components/molecules/actionButtons/LikeButton";
+import CreateCommentButtonWithModal from "@/app/components/organisms/apiActionButtons/posts/comments/CreateCommentButtonWithModal";
 
 import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 interface Props {
-  portfolioData: PortfolioData;
+  articleData: PortfolioData;
 }
 
-const PostCardFooter: React.FC<Props> = ({ portfolioData }) => {
-  const { updatedAt } = portfolioData;
+const ArticleCardFooter: React.FC<Props> = ({ articleData }) => {
+  const { updatedAt } = articleData;
   const { isLiked, toggleLike, totalLiked } =
-    usePostOrDeletePortfoliosByIdGoodsOperation(portfolioData);
+    usePostOrDeletePortfoliosByIdGoodsOperation(articleData);
 
   return (
     <CardFooter>
@@ -25,7 +24,7 @@ const PostCardFooter: React.FC<Props> = ({ portfolioData }) => {
         <Flex justifyContent="space-between" alignItems="center">
           <Flex alignItems="center">
             <LikeButton onClick={toggleLike} isLiked={isLiked} totalLiked={totalLiked} />
-            <CreateCommentButtonWithModal portfolioData={portfolioData} />
+            <CreateCommentButtonWithModal portfolioData={articleData} />
           </Flex>
           <Text fontSize="sm" color="blackAlpha.500" my="auto">
             {updatedAt.toLocaleDateString()}
@@ -36,4 +35,4 @@ const PostCardFooter: React.FC<Props> = ({ portfolioData }) => {
   );
 };
 
-export default PostCardFooter;
+export default ArticleCardFooter;

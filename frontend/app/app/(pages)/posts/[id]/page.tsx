@@ -3,13 +3,13 @@
 import Error from "next/error";
 import { usePathname } from "next/navigation";
 
+import ArticleCard from "@/app/features/articles/components/layouts/ArticleCard";
 import { CommentContext } from "@/app/hooks/datas/useCommentData";
 import { PortfolioContext } from "@/app/hooks/datas/usePortfolioData";
 import { useGetPortfoliosById } from "@/app/hooks/swr/portfolio/useGetPortfoliosById";
 import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
-import PostCard from "@/app/components/organisms/posts/PostCard";
 import PostCommentCard from "@/app/components/organisms/posts/comments/PostCommentCard";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
@@ -45,7 +45,7 @@ const PostsIdPage: React.FC = () => {
       <CenteredBox>
         <PortfolioContext.Provider value={portfolioData}>
           <GoBackLink />
-          <PostCard portfolioData={portfolioData} linkOptions={{ header: true }} />
+          <ArticleCard articleData={portfolioData} linkOptions={{ header: true }} />
           {comments &&
             comments.length >= 1 &&
             comments.map((commentData, i) => (

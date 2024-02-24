@@ -11,11 +11,11 @@ import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 interface Props {
   isLink?: boolean;
-  portfolioData: PortfolioData;
+  articleData: PortfolioData;
 }
 
-const PostCardBody: React.FC<Props> = ({ isLink = false, portfolioData }) => {
-  const { id, title, content } = portfolioData;
+const ArticleCardBody: React.FC<Props> = ({ isLink = false, articleData }) => {
+  const { id, title, content } = articleData;
 
   return (
     <CardBody
@@ -31,4 +31,4 @@ const PostCardBody: React.FC<Props> = ({ isLink = false, portfolioData }) => {
   );
 };
 
-export default PostCardBody;
+export default ArticleCardBody;

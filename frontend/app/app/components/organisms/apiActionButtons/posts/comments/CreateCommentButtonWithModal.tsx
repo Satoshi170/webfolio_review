@@ -13,14 +13,14 @@ import {
   Stack
 } from "@chakra-ui/react";
 
+import ArticleCardBody from "@/app/features/articles/components/layouts/ArticleCard/body";
+import ArticleCardHeader from "@/app/features/articles/components/layouts/ArticleCard/header";
 import { usePostCommentForm } from "@/app/hooks/forms/portfolio/comment/usePostCommentForm";
 import SubmitButton from "@/app/components/atoms/SubmitButton";
 import CommentButton from "@/app/components/molecules/actionButtons/CommentButton";
 import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
 import { commentTagOptions } from "@/app/components/molecules/fields/SelectBoxField/options/commentTagOptions";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
-import PostCardBody from "@/app/components/molecules/posts/PostCardBody";
-import PostCardHeader from "@/app/components/molecules/posts/PostCardHeader";
 
 import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
@@ -51,8 +51,8 @@ const CreateCommentButtonWithModal: React.FC<Props> = ({ portfolioData }) => {
           <ModalCloseButton />
           <ModalBody>
             <Card>
-              <PostCardHeader portfolioData={portfolioData} />
-              <PostCardBody portfolioData={portfolioData} />
+              <ArticleCardHeader articleData={portfolioData} />
+              <ArticleCardBody articleData={portfolioData} />
               <CardFooter>
                 <Stack w="full">
                   <Divider />

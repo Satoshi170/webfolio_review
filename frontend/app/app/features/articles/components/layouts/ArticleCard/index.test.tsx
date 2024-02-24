@@ -3,30 +3,31 @@ import { render, screen } from "@testing-library/react";
 import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
 import { validPortfolioData } from "@/__tests__/fixtures/portfolio/validPortfolioData";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
-import PostCard from "@/app/components/organisms/posts/PostCard";
+
+import ArticleCard from ".";
 
 jest.mock("@/app/hooks/recoil/loginState/useGetLoginState");
-jest.mock("@/app/components/molecules/posts/PostCardHeader", () => {
+jest.mock("./header", () => {
   interface Props {
     isUserPost: boolean;
   }
 
-  const MockedPostCardHeader: React.FC<Props> = ({ isUserPost }) => {
-    return <div data-testid="mockedPostCardHeader" data-isuserpost={isUserPost}></div>;
+  const MockedHeader: React.FC<Props> = ({ isUserPost }) => {
+    return <div data-testid="header" data-isuserpost={isUserPost}></div>;
   };
 
-  return MockedPostCardHeader;
+  return MockedHeader;
 });
 
-jest.mock("@/app/components/molecules/posts/PostCardFooter", () => {
-  const MockedPostCardFooter: React.FC = () => {
-    return <div>MockedPostCardFooter</div>;
+jest.mock("./footer", () => {
+  const MockedFooter: React.FC = () => {
+    return <div>MockedFooter</div>;
   };
 
-  return MockedPostCardFooter;
+  return MockedFooter;
 });
 
-describe("<PostCard/>", () => {
+describe("<ArticleCard/>", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -36,7 +37,7 @@ describe("<PostCard/>", () => {
 
   describe("isUserPost", () => {
     describe("isLoginがtrueの場合", () => {
-      describe("data.idとportfolioData.user.idが一致する場合", () => {
+      describe("userData.idとarticleData.user.idが一致する場合", () => {
         it("isUserPostはtrueである", () => {
           const portfolioOwnerData = { ...validUserData, id: validPortfolioData.user.id };
           (useGetLoginState as jest.Mock).mockReturnValue({
@@ -44,13 +45,13 @@ describe("<PostCard/>", () => {
             userData: portfolioOwnerData
           });
 
-          render(<PostCard portfolioData={validPortfolioData} />);
-          const headerElement = screen.getByTestId("mockedPostCardHeader");
+          render(<ArticleCard articleData={validPortfolioData} />);
+          const headerElement = screen.getByTestId("header");
           expect(headerElement.getAttribute("data-isuserpost")).toBe("true");
         });
       });
 
-      describe("data.idとportfolioData.user.idが一致しない場合", () => {
+      describe("userData.idとarticleData.user.idが一致しない場合", () => {
         it("isUserPostはfalseである", () => {
           const nonOwnerUserData = {
             ...validUserData,
@@ -62,8 +63,8 @@ describe("<PostCard/>", () => {
             userData: nonOwnerUserData
           });
 
-          render(<PostCard portfolioData={validPortfolioData} />);
-          const headerElement = screen.getByTestId("mockedPostCardHeader");
+          render(<ArticleCard articleData={validPortfolioData} />);
+          const headerElement = screen.getByTestId("header");
           expect(headerElement.getAttribute("data-isuserpost")).toBe("false");
         });
       });
@@ -76,8 +77,8 @@ describe("<PostCard/>", () => {
           userData: null
         });
 
-        render(<PostCard portfolioData={validPortfolioData} />);
-        const headerElement = screen.getByTestId("mockedPostCardHeader");
+        render(<ArticleCard articleData={validPortfolioData} />);
+        const headerElement = screen.getByTestId("header");
         expect(headerElement.getAttribute("data-isuserpost")).toBe("false");
       });
     });
