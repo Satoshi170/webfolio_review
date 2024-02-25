@@ -11,8 +11,8 @@ import {
   ModalOverlay
 } from "@chakra-ui/react";
 
+import { useArticleData } from "@/app/features/articles/hooks/useArticleData";
 import { useCommentData } from "@/app/hooks/datas/useCommentData";
-import { usePortfolioData } from "@/app/hooks/datas/usePortfolioData";
 import { usePatchCommentForm } from "@/app/hooks/forms/portfolio/comment/usePatchCommentForm";
 import SubmitButton from "@/app/components/atoms/SubmitButton";
 import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
@@ -20,7 +20,7 @@ import { commentTagOptions } from "@/app/components/molecules/fields/SelectBoxFi
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
 
 const PatchCommentButtonWithModal: React.FC = () => {
-  const portfolioData = usePortfolioData();
+  const articleData = useArticleData();
   const commentData = useCommentData();
 
   const {
@@ -33,7 +33,7 @@ const PatchCommentButtonWithModal: React.FC = () => {
     isOpen,
     onOpen,
     onClose
-  } = usePatchCommentForm(portfolioData.id, commentData);
+  } = usePatchCommentForm(articleData.id, commentData);
 
   return (
     <>
