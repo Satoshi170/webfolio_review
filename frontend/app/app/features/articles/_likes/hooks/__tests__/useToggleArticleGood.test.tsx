@@ -3,19 +3,20 @@ import { act, renderHook, waitFor } from "@testing-library/react";
 import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
 import { validPortfolioData } from "@/__tests__/fixtures/portfolio/validPortfolioData";
 import { mockUseSetToastState } from "@/__tests__/mocks/hooks/recoil/toastState/mockUseSetToastState";
-import { usePostOrDeletePortfoliosByIdGoodsOperation } from "@/app/hooks/operations/portfolio/good/usePostOrDeletePortfoliosByIdGoodsOperation";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
-import { deletePortfoliosByIdGoods } from "@/app/libs/axios/portfolio/good/deletePortfoliosByIdGoods";
-import { postPortfoliosByIdGoods } from "@/app/libs/axios/portfolio/good/postPortfoliosByIdGoods";
 
-jest.mock("@/app/libs/axios/portfolio/good/deletePortfoliosByIdGoods");
-jest.mock("@/app/libs/axios/portfolio/good/postPortfoliosByIdGoods");
-jest.mock("@/app/hooks/recoil/toastState/useSetToastState", () => mockUseSetToastState);
+import { deleteArticleGood } from "../../api/deleteArticleGood";
+import { postArticleGood } from "../../api/postArticleGood";
+import { useToggleLikeArticleGood } from "../useToggleArticleGood";
+
 jest.mock("@/app/hooks/recoil/loginState/useGetLoginState");
+jest.mock("@/app/hooks/recoil/toastState/useSetToastState", () => mockUseSetToastState);
+jest.mock("../../api/deleteArticleGood");
+jest.mock("../../api/postArticleGood");
 
 jest.useFakeTimers();
 
-describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
+describe("useToggleLikeArticleGood", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -40,7 +41,7 @@ describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
       describe("userData.IdがPortfolioData.goodsのuserIdに存在する場合", () => {
         it("trueになる", () => {
           const { result } = renderHook(() =>
-            usePostOrDeletePortfoliosByIdGoodsOperation({
+            useToggleLikeArticleGood({
               ...validPortfolioData,
               goods: includeUserIdGoods
             })
@@ -53,7 +54,7 @@ describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
       describe("userData.IdがPortfolioData.goodsのuserIdに存在しない場合", () => {
         it("falseになる", () => {
           const { result } = renderHook(() =>
-            usePostOrDeletePortfoliosByIdGoodsOperation({
+            useToggleLikeArticleGood({
               ...validPortfolioData,
               goods: nonIncludeUserIdGoods
             })
@@ -73,9 +74,7 @@ describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
       });
 
       it("falseになる", () => {
-        const { result } = renderHook(() =>
-          usePostOrDeletePortfoliosByIdGoodsOperation(validPortfolioData)
-        );
+        const { result } = renderHook(() => useToggleLikeArticleGood(validPortfolioData));
 
         expect(result.current.isLiked).toBe(false);
       });
@@ -83,8 +82,8 @@ describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
   });
 
   describe("toggleLike", () => {
-    const mockPostGoods = postPortfoliosByIdGoods as jest.Mock;
-    const mockDeleteGoods = deletePortfoliosByIdGoods as jest.Mock;
+    const mockPostGood = postArticleGood as jest.Mock;
+    const mockDeleteGood = deleteArticleGood as jest.Mock;
 
     describe("1000ms内にボタンが押された回数が奇数回の場合", () => {
       beforeEach(() => {
@@ -96,9 +95,9 @@ describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
 
       describe("initialLikedがtrueの時", () => {
         it("mockDeleteGoodsが呼び出されエラーがなくその後奇数回押されるとmockPostGoodsが呼び出される", async () => {
-          mockDeleteGoods.mockResolvedValue(undefined);
+          mockDeleteGood.mockResolvedValue(undefined);
           const { result } = renderHook(() =>
-            usePostOrDeletePortfoliosByIdGoodsOperation({
+            useToggleLikeArticleGood({
               ...validPortfolioData,
               goods: includeUserIdGoods
             })
@@ -112,8 +111,8 @@ describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
           });
 
           await waitFor(() => {
-            expect(mockPostGoods).toHaveBeenCalledTimes(0);
-            expect(mockDeleteGoods).toHaveBeenCalledTimes(1);
+            expect(mockPostGood).toHaveBeenCalledTimes(0);
+            expect(mockDeleteGood).toHaveBeenCalledTimes(1);
           });
 
           act(() => {
@@ -122,17 +121,17 @@ describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
           });
 
           await waitFor(() => {
-            expect(mockPostGoods).toHaveBeenCalledTimes(1);
-            expect(mockDeleteGoods).toHaveBeenCalledTimes(1);
+            expect(mockPostGood).toHaveBeenCalledTimes(1);
+            expect(mockDeleteGood).toHaveBeenCalledTimes(1);
           });
         });
       });
 
       describe("initialLikedがfalseの時", () => {
         it("mockPostGoodsが呼び出されエラーがなくその後奇数回押されるとmockDeleteGoodsが呼び出される", async () => {
-          mockPostGoods.mockResolvedValue(undefined);
+          mockPostGood.mockResolvedValue(undefined);
           const { result } = renderHook(() =>
-            usePostOrDeletePortfoliosByIdGoodsOperation({
+            useToggleLikeArticleGood({
               ...validPortfolioData,
               goods: nonIncludeUserIdGoods
             })
@@ -146,8 +145,8 @@ describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
           });
 
           await waitFor(() => {
-            expect(mockPostGoods).toHaveBeenCalledTimes(1);
-            expect(mockDeleteGoods).toHaveBeenCalledTimes(0);
+            expect(mockPostGood).toHaveBeenCalledTimes(1);
+            expect(mockDeleteGood).toHaveBeenCalledTimes(0);
           });
 
           act(() => {
@@ -156,8 +155,8 @@ describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
           });
 
           await waitFor(() => {
-            expect(mockPostGoods).toHaveBeenCalledTimes(1);
-            expect(mockDeleteGoods).toHaveBeenCalledTimes(1);
+            expect(mockPostGood).toHaveBeenCalledTimes(1);
+            expect(mockDeleteGood).toHaveBeenCalledTimes(1);
           });
         });
       });
@@ -172,7 +171,7 @@ describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
 
         it("mockDeleteGoodsもmockPostGoodsも呼び出されない", () => {
           const { result } = renderHook(() =>
-            usePostOrDeletePortfoliosByIdGoodsOperation(validPortfolioData)
+            useToggleLikeArticleGood(validPortfolioData)
           );
 
           expect(result.current.isLiked).toBe(true);
@@ -184,8 +183,8 @@ describe("usePostOrDeletePortfoliosByIdGoodsOperation", () => {
             jest.advanceTimersByTime(1000);
           });
 
-          expect(mockPostGoods).not.toHaveBeenCalled();
-          expect(mockDeleteGoods).not.toHaveBeenCalled();
+          expect(mockPostGood).not.toHaveBeenCalled();
+          expect(mockDeleteGood).not.toHaveBeenCalled();
         });
       });
     });

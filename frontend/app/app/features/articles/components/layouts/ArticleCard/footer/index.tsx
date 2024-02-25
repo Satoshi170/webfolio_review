@@ -2,8 +2,8 @@
 
 import { CardFooter, Divider, Flex, Stack, Text } from "@chakra-ui/react";
 
-import { usePostOrDeletePortfoliosByIdGoodsOperation } from "@/app/hooks/operations/portfolio/good/usePostOrDeletePortfoliosByIdGoodsOperation";
-import LikeButton from "@/app/components/molecules/actionButtons/LikeButton";
+import LikeButton from "@/app/features/articles/_likes/components/layouts/LikeButton";
+import { useToggleLikeArticleGood } from "@/app/features/articles/_likes/hooks/useToggleArticleGood";
 import CreateCommentButtonWithModal from "@/app/components/organisms/apiActionButtons/posts/comments/CreateCommentButtonWithModal";
 
 import type { ArticleData } from "@/app/features/articles/types/articleData";
@@ -14,8 +14,7 @@ interface Props {
 
 const ArticleCardFooter: React.FC<Props> = ({ articleData }) => {
   const { updatedAt } = articleData;
-  const { isLiked, toggleLike, totalLiked } =
-    usePostOrDeletePortfoliosByIdGoodsOperation(articleData);
+  const { isLiked, toggleLike, totalLiked } = useToggleLikeArticleGood(articleData);
 
   return (
     <CardFooter>
