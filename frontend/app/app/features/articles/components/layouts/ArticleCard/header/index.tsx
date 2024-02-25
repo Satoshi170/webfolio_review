@@ -8,12 +8,12 @@ import UserIcon from "@/app/components/atoms/users/UserIcon";
 
 import OptionArticleMenuButton from "./sections/OptionMenuButton";
 
-import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import type { ArticleData } from "@/app/features/articles/types/articleData";
 
 interface Props {
   isLink?: boolean;
   isUserPost?: boolean;
-  articleData: PortfolioData;
+  articleData: ArticleData;
 }
 
 const ArticleCardHeader: React.FC<Props> = ({

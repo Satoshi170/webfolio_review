@@ -1,8 +1,8 @@
 import { validUserData } from "../auth/validUserData";
 
-import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import type { ArticleData } from "@/app/features/articles/types/articleData";
 
-export const validPortfolioData: PortfolioData = {
+export const validPortfolioData: ArticleData = {
   id: 1,
   title: "testTitle",
   content: "testContent",

@@ -1,6 +1,6 @@
-import type { CommentData } from "./comment/comment";
-import type { UserData } from "../../auth";
 import type { candidateOperationStatusData } from "@/app/constants/datas/portfolios/operationStatuses";
+import type { UserData } from "@/app/types/auth";
+import type { CommentData } from "@/app/types/axios/portfolio/comment/comment";
 
 interface Good {
   userId: number;
@@ -8,7 +8,7 @@ interface Good {
 
 type OperationStatus = keyof typeof candidateOperationStatusData;
 
-export interface PortfolioData {
+export interface ArticleData {
   id: number;
   title: string;
   content: string;

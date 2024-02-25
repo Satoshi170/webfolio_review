@@ -6,19 +6,19 @@ import addAuthInfoToRequest from "@/app/libs/cookie/loadAuthInfo";
 import { UnauthorizedResponseDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/responseDataSchema";
 
 import type {
-  DeletePortfoliosByIdErrorData,
-  DeletePortfoliosByIdSuccessData
-} from "@/app/types/axios/portfolio/deletePortfoliosById";
+  DeleteArticleErrorData,
+  DeleteArticleSuccessData
+} from "../types/api/deleteArticle";
 
 export const deleteArticle = async (id: number): Promise<void> => {
   try {
-    await api.delete<DeletePortfoliosByIdSuccessData>(
+    await api.delete<DeleteArticleSuccessData>(
       `/articles/${id}`,
       addAuthInfoToRequest({})
     );
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      const responseData = error.response.data as DeletePortfoliosByIdErrorData;
+      const responseData = error.response.data as DeleteArticleErrorData;
 
       if (UnauthorizedResponseDataSchema.safeParse(responseData).success) {
         const errorMessage = responseData.errors.join(", ");

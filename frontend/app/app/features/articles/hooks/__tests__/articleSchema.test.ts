@@ -10,14 +10,14 @@ import {
 import { ArticleSchema } from "../articleSchema";
 import { ArticleValidationErrorMessages } from "../messages";
 
+import type { PostArticleParams } from "../../types/api/postArticle";
 import type { getErrorMessagesProps } from "@/__tests__/helpers/zodTestHelpers";
-import type { PostPortfoliosParams } from "@/app/types/axios/portfolio/postPortfolios";
 
 const validationErrorMessages = (
-  data: PostPortfoliosParams,
-  field: keyof PostPortfoliosParams
+  data: PostArticleParams,
+  field: keyof PostArticleParams
 ) => {
-  const props: getErrorMessagesProps<PostPortfoliosParams> = {
+  const props: getErrorMessagesProps<PostArticleParams> = {
     schema: ArticleSchema,
     data,
     field

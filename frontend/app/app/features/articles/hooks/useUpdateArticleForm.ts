@@ -11,13 +11,13 @@ import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 import { ArticleSchema } from "./articleSchema";
 import { patchArticle } from "../api/patchArticle";
 
-import type { PatchPortfoliosByIdParams } from "@/app/types/axios/portfolio/patchPortfoliosById";
-import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import type { PatchArticleParams } from "../types/api/patchArticle";
+import type { ArticleData } from "../types/articleData";
 import type { FormEvent } from "react";
 
-export const useUpdateArticleForm = (portfolioData: PortfolioData) => {
+export const useUpdateArticleForm = (articleData: ArticleData) => {
   const defaultOperationStatusValue =
-    candidateOperationStatusData[portfolioData.operationStatus].toString();
+    candidateOperationStatusData[articleData.operationStatus].toString();
   const {
     control,
     register,
@@ -28,11 +28,11 @@ export const useUpdateArticleForm = (portfolioData: PortfolioData) => {
     resolver: zodResolver(ArticleSchema),
     mode: "onChange",
     defaultValues: {
-      title: portfolioData.title,
-      content: portfolioData.content,
+      title: articleData.title,
+      content: articleData.content,
       operationStatus: defaultOperationStatusValue,
-      portfolioSiteUrl: portfolioData.portfolioSiteUrl,
-      repositoryUrl: portfolioData.repositoryUrl
+      portfolioSiteUrl: articleData.portfolioSiteUrl,
+      repositoryUrl: articleData.repositoryUrl
     }
   });
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,19 +40,19 @@ export const useUpdateArticleForm = (portfolioData: PortfolioData) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const isChange = !(
-    watch("title") == portfolioData.title &&
-    watch("content") == portfolioData.content &&
+    watch("title") == articleData.title &&
+    watch("content") == articleData.content &&
     watch("operationStatus") == defaultOperationStatusValue &&
-    watch("portfolioSiteUrl") == portfolioData.portfolioSiteUrl &&
-    watch("repositoryUrl") == portfolioData.repositoryUrl
+    watch("portfolioSiteUrl") == articleData.portfolioSiteUrl &&
+    watch("repositoryUrl") == articleData.repositoryUrl
   );
 
   const isFormValid = isChange && isValid;
 
-  const onSubmit = async (params: PatchPortfoliosByIdParams) => {
+  const onSubmit = async (params: PatchArticleParams) => {
     setIsLoading(true);
     try {
-      await patchArticle(portfolioData.id, params);
+      await patchArticle(articleData.id, params);
       setSuccessToast("更新に成功しました");
     } catch (e) {
       const errorMessage = resolveErrorMessage(e);

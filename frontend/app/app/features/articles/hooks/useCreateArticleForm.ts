@@ -10,7 +10,7 @@ import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 import { ArticleSchema } from "./articleSchema";
 import { postArticle } from "../api/postArticle";
 
-import type { PostPortfoliosParams } from "@/app/types/axios/portfolio/postPortfolios";
+import type { PostArticleParams } from "../types/api/postArticle";
 import type { FormEvent } from "react";
 
 export const useCreateArticleForm = () => {
@@ -19,7 +19,7 @@ export const useCreateArticleForm = () => {
     register,
     handleSubmit,
     formState: { errors, isValid }
-  } = useForm<PostPortfoliosParams>({
+  } = useForm<PostArticleParams>({
     resolver: zodResolver(ArticleSchema),
     mode: "onChange",
     defaultValues: {
@@ -34,7 +34,7 @@ export const useCreateArticleForm = () => {
   const { setSuccessToast, setErrorToast } = useSetToastState();
   const [isLoading, setIsLoading] = useState(false);
 
-  const onSubmit = async (params: PostPortfoliosParams) => {
+  const onSubmit = async (params: PostArticleParams) => {
     setIsLoading(true);
     try {
       await postArticle(params);

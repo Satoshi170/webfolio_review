@@ -20,10 +20,10 @@ import TextareaField from "@/app/components/molecules/fields/TextareaField";
 
 import { useUpdateArticleForm } from "../hooks/useUpdateArticleForm";
 
-import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import type { ArticleData } from "../types/articleData";
 
 interface Props {
-  articleData: PortfolioData;
+  articleData: ArticleData;
 }
 
 const UpdateArticleButtonWithFormModal: React.FC<Props> = ({ articleData }) => {

@@ -22,13 +22,13 @@ import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
 import { commentTagOptions } from "@/app/components/molecules/fields/SelectBoxField/options/commentTagOptions";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
 
-import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import type { ArticleData } from "@/app/features/articles/types/articleData";
 
 interface Props {
-  portfolioData: PortfolioData;
+  articleData: ArticleData;
 }
 
-const CreateCommentButtonWithModal: React.FC<Props> = ({ portfolioData }) => {
+const CreateCommentButtonWithModal: React.FC<Props> = ({ articleData }) => {
   const {
     register,
     control,
@@ -39,11 +39,11 @@ const CreateCommentButtonWithModal: React.FC<Props> = ({ portfolioData }) => {
     isOpen,
     onOpen,
     onClose
-  } = usePostCommentForm(portfolioData.id);
+  } = usePostCommentForm(articleData.id);
 
   return (
     <>
-      <CommentButton totalCommented={portfolioData.comments.length} onClick={onOpen} />
+      <CommentButton totalCommented={articleData.comments.length} onClick={onOpen} />
       <Modal isOpen={isOpen} onClose={onClose} size="lg" isCentered>
         <ModalOverlay />
         <ModalContent>
@@ -51,8 +51,8 @@ const CreateCommentButtonWithModal: React.FC<Props> = ({ portfolioData }) => {
           <ModalCloseButton />
           <ModalBody>
             <Card>
-              <ArticleCardHeader articleData={portfolioData} />
-              <ArticleCardBody articleData={portfolioData} />
+              <ArticleCardHeader articleData={articleData} />
+              <ArticleCardBody articleData={articleData} />
               <CardFooter>
                 <Stack w="full">
                   <Divider />

@@ -6,10 +6,10 @@ import { usePostOrDeletePortfoliosByIdGoodsOperation } from "@/app/hooks/operati
 import LikeButton from "@/app/components/molecules/actionButtons/LikeButton";
 import CreateCommentButtonWithModal from "@/app/components/organisms/apiActionButtons/posts/comments/CreateCommentButtonWithModal";
 
-import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import type { ArticleData } from "@/app/features/articles/types/articleData";
 
 interface Props {
-  articleData: PortfolioData;
+  articleData: ArticleData;
 }
 
 const ArticleCardFooter: React.FC<Props> = ({ articleData }) => {
@@ -24,7 +24,7 @@ const ArticleCardFooter: React.FC<Props> = ({ articleData }) => {
         <Flex justifyContent="space-between" alignItems="center">
           <Flex alignItems="center">
             <LikeButton onClick={toggleLike} isLiked={isLiked} totalLiked={totalLiked} />
-            <CreateCommentButtonWithModal portfolioData={articleData} />
+            <CreateCommentButtonWithModal articleData={articleData} />
           </Flex>
           <Text fontSize="sm" color="blackAlpha.500" my="auto">
             {updatedAt.toLocaleDateString()}
