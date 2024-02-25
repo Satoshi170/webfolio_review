@@ -1,9 +1,9 @@
+import type { ArticleData } from "../articleData";
 import type { UserDataWithoutGoodsAndComments } from "@/app/types/auth";
-import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
 
 export interface GetUserArticlesResponseData {
   user: UserDataWithoutGoodsAndComments;
-  articles: PortfolioData[] | [];
+  articles: ArticleData[] | [];
 }
 
 export interface GetUserArticlesSuccessData {

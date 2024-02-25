@@ -1,7 +1,7 @@
-import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import type { ArticleData } from "../articleData";
 
 export interface GetArticlesSuccessData {
   status: "success";
   message: string;
-  data: PortfolioData[] | [];
+  data: ArticleData[] | [];
 }

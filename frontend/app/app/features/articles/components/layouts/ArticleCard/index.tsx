@@ -8,7 +8,7 @@ import ArticleCardBody from "./body";
 import ArticleCardFooter from "./footer";
 import ArticleCardHeader from "./header";
 
-import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import type { ArticleData } from "../../../types/articleData";
 
 interface LinkOptions {
   header?: boolean;
@@ -16,7 +16,7 @@ interface LinkOptions {
 }
 
 interface Props {
-  articleData: PortfolioData;
+  articleData: ArticleData;
   linkOptions?: LinkOptions;
 }
 

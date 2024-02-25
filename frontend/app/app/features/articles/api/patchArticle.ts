@@ -6,36 +6,36 @@ import addAuthInfoToRequest from "@/app/libs/cookie/loadAuthInfo";
 import { UnauthorizedResponseDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/responseDataSchema";
 import { PatchPortfoliosByIdFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/portfolio/patchPortfoliosByIdDataSchema";
 
-import type { UnauthorizedResponseData } from "@/app/types/auth";
 import type {
-  PatchPortfoliosByIdErrorData,
-  PatchPortfoliosByIdFailedData,
-  PatchPortfoliosByIdParams,
-  PatchPortfoliosByIdSuccessData
-} from "@/app/types/axios/portfolio/patchPortfoliosById";
+  PatchArticleErrorData,
+  PatchArticleFailedData,
+  PatchArticleParams,
+  PatchArticleSuccessData
+} from "../types/api/patchArticle";
+import type { UnauthorizedResponseData } from "@/app/types/auth";
 
-const generateErrorMessage = (responseData: PatchPortfoliosByIdErrorData) => {
+const generateErrorMessage = (responseData: PatchArticleErrorData) => {
   if (UnauthorizedResponseDataSchema.safeParse(responseData).success) {
     return (responseData as UnauthorizedResponseData).errors.join(", ");
   } else if (PatchPortfoliosByIdFailedDataSchema.safeParse(responseData).success) {
-    return (responseData as PatchPortfoliosByIdFailedData).errors.join(", ");
+    return (responseData as PatchArticleFailedData).errors.join(", ");
   }
   return UNEXPECTED_ERROR_MESSAGE;
 };
 
 export const patchArticle = async (
   id: number,
-  params: PatchPortfoliosByIdParams
+  params: PatchArticleParams
 ): Promise<void> => {
   try {
-    await api.patch<PatchPortfoliosByIdSuccessData>(
+    await api.patch<PatchArticleSuccessData>(
       `/articles/${id}`,
       params,
       addAuthInfoToRequest({})
     );
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
-      const responseData = error.response.data as PatchPortfoliosByIdErrorData;
+      const responseData = error.response.data as PatchArticleErrorData;
       const errorMessage = generateErrorMessage(responseData);
       throw new Error(errorMessage);
     }

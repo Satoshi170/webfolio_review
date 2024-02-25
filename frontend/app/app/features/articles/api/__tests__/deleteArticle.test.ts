@@ -6,7 +6,7 @@ import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 
 import { deleteArticle } from "../deleteArticle";
 
-import type { DeletePortfoliosByIdSuccessData } from "@/app/types/axios/portfolio/deletePortfoliosById";
+import type { DeleteArticleSuccessData } from "../../types/api/deleteArticle";
 
 jest.mock("@/app/libs/cookie/loadAuthInfo", () => mockAddAuthInfoToRequest);
 jest.mock("@/app/libs/axios/api", () => mockApi);
@@ -21,7 +21,7 @@ describe("deleteArticle", () => {
   });
 
   describe("リクエストに成功した時", () => {
-    const mockDeletePortfoliosByIdSuccessData: DeletePortfoliosByIdSuccessData = {
+    const mockDeletePortfoliosByIdSuccessData: DeleteArticleSuccessData = {
       status: "success",
       message: "successMessage"
     };

@@ -6,10 +6,10 @@ import { AiOutlineMore } from "react-icons/ai";
 import DeleteArticleButtonWithModal from "@/app/features/articles/components/DeleteArticleButtonWithModal";
 import UpdateArticleButtonWithFormModal from "@/app/features/articles/components/UpdateArticleButtonWithFormModal";
 
-import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import type { ArticleData } from "@/app/features/articles/types/articleData";
 
 interface Props {
-  articleData: PortfolioData;
+  articleData: ArticleData;
 }
 const OptionArticleMenuButton: React.FC<Props> = ({ articleData }) => {
   return (

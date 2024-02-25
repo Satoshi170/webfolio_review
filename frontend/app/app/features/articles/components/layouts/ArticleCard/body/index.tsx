@@ -7,11 +7,11 @@ import Linkify from "linkify-react";
 
 import RenderLink from "@/app/libs/linkify/RenderLink";
 
-import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import type { ArticleData } from "@/app/features/articles/types/articleData";
 
 interface Props {
   isLink?: boolean;
-  articleData: PortfolioData;
+  articleData: ArticleData;
 }
 
 const ArticleCardBody: React.FC<Props> = ({ isLink = false, articleData }) => {

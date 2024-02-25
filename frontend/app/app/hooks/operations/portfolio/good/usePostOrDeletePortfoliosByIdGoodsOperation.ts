@@ -7,16 +7,14 @@ import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState
 import { deletePortfoliosByIdGoods } from "@/app/libs/axios/portfolio/good/deletePortfoliosByIdGoods";
 import { postPortfoliosByIdGoods } from "@/app/libs/axios/portfolio/good/postPortfoliosByIdGoods";
 
-import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import type { ArticleData } from "@/app/features/articles/types/articleData";
 
-export const usePostOrDeletePortfoliosByIdGoodsOperation = (
-  portfolioData: PortfolioData
-) => {
+export const usePostOrDeletePortfoliosByIdGoodsOperation = (articleData: ArticleData) => {
   const { isLogin, userData } = useGetLoginState();
   const { setUnexpectedErrorToast } = useSetToastState();
 
   const initialLiked = isLogin
-    ? portfolioData.goods.some((good) => good.userId === userData.id)
+    ? articleData.goods.some((good) => good.userId === userData.id)
     : false;
 
   const [isLiked, setIsLiked] = useState(initialLiked);
@@ -33,9 +31,9 @@ export const usePostOrDeletePortfoliosByIdGoodsOperation = (
 
       try {
         if (isAlreadyLikedRef.current) {
-          await deletePortfoliosByIdGoods(portfolioData.id);
+          await deletePortfoliosByIdGoods(articleData.id);
         } else {
-          await postPortfoliosByIdGoods(portfolioData.id);
+          await postPortfoliosByIdGoods(articleData.id);
         }
         isAlreadyLikedRef.current = !isAlreadyLikedRef.current;
       } catch (e) {
@@ -44,7 +42,7 @@ export const usePostOrDeletePortfoliosByIdGoodsOperation = (
         clickCountRef.current = 0;
       }
     },
-    [setUnexpectedErrorToast, portfolioData],
+    [setUnexpectedErrorToast, articleData],
     1000
   );
 
@@ -56,9 +54,9 @@ export const usePostOrDeletePortfoliosByIdGoodsOperation = (
 
   let totalLiked: number;
   if (initialLiked) {
-    totalLiked = portfolioData.goods.length - Number(!isLiked);
+    totalLiked = articleData.goods.length - Number(!isLiked);
   } else {
-    totalLiked = portfolioData.goods.length + Number(isLiked);
+    totalLiked = articleData.goods.length + Number(isLiked);
   }
 
   return { isLiked, toggleLike, totalLiked };

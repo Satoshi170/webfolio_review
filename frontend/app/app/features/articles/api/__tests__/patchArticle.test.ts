@@ -8,9 +8,9 @@ import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { patchArticle } from "../patchArticle";
 
 import type {
-  PatchPortfoliosByIdFailedData,
-  PatchPortfoliosByIdSuccessData
-} from "@/app/types/axios/portfolio/patchPortfoliosById";
+  PatchArticleFailedData,
+  PatchArticleSuccessData
+} from "../../types/api/patchArticle";
 
 jest.mock("@/app/libs/cookie/loadAuthInfo", () => mockAddAuthInfoToRequest);
 jest.mock("@/app/libs/axios/api", () => mockApi);
@@ -25,7 +25,7 @@ describe("patchArticle", () => {
   });
 
   describe("リクエストに成功した時", () => {
-    const mockPatchPortfoliosByIdSuccessData: PatchPortfoliosByIdSuccessData = {
+    const mockPatchPortfoliosByIdSuccessData: PatchArticleSuccessData = {
       status: "success",
       message: "successMessage"
     };
@@ -53,7 +53,7 @@ describe("patchArticle", () => {
       });
 
       describe("レスポンスデータの型がPatchPortfoliosByIdFailedDataを満たす場合", () => {
-        const mockPatchPortfoliosByIdFailedData: PatchPortfoliosByIdFailedData = {
+        const mockPatchPortfoliosByIdFailedData: PatchArticleFailedData = {
           status: "error",
           message: "failed",
           errors: ["failed"]

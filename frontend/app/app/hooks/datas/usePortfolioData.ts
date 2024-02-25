@@ -1,8 +1,8 @@
 import { createContext, useContext } from "react";
 
-import type { PortfolioData } from "@/app/types/axios/portfolio/portfolioData";
+import type { ArticleData } from "@/app/features/articles/types/articleData";
 
-export const PortfolioContext = createContext<PortfolioData | null>(null);
+export const PortfolioContext = createContext<ArticleData | null>(null);
 
 export const usePortfolioData = () => {
   const portfolioData = useContext(PortfolioContext);
