@@ -2,19 +2,19 @@
 
 import { MenuItem, useDisclosure } from "@chakra-ui/react";
 
+import { useArticleData } from "@/app/features/articles/hooks/useArticleData";
 import { useCommentData } from "@/app/hooks/datas/useCommentData";
-import { usePortfolioData } from "@/app/hooks/datas/usePortfolioData";
 import { useDeleteComment } from "@/app/hooks/operations/portfolio/comment/useDeleteComment";
 
 import DeleteConfirmationModal from "../../../modals/DeleteConfirmationModal";
 
 const DeleteCommentButtonWithModal: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const portfolioData = usePortfolioData();
+  const articleData = useArticleData();
   const commentData = useCommentData();
   const deleteComment = useDeleteComment();
   const handleConfirm = async () => {
-    await deleteComment(portfolioData.id, commentData.id);
+    await deleteComment(articleData.id, commentData.id);
     onClose;
   };
 

@@ -4,9 +4,9 @@ import Error from "next/error";
 import { usePathname } from "next/navigation";
 
 import ArticleCard from "@/app/features/articles/components/layouts/ArticleCard";
+import { ArticleContext } from "@/app/features/articles/hooks/useArticleData";
 import { useGetArticle } from "@/app/features/articles/hooks/useGetArticle";
 import { CommentContext } from "@/app/hooks/datas/useCommentData";
-import { PortfolioContext } from "@/app/hooks/datas/usePortfolioData";
 import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
@@ -43,7 +43,7 @@ const PostsIdPage: React.FC = () => {
 
     return (
       <CenteredBox>
-        <PortfolioContext.Provider value={articleData}>
+        <ArticleContext.Provider value={articleData}>
           <GoBackLink />
           <ArticleCard articleData={articleData} linkOptions={{ header: true }} />
           {comments &&
@@ -53,7 +53,7 @@ const PostsIdPage: React.FC = () => {
                 <PostCommentCard key={i} />
               </CommentContext.Provider>
             ))}
-        </PortfolioContext.Provider>
+        </ArticleContext.Provider>
       </CenteredBox>
     );
   }
