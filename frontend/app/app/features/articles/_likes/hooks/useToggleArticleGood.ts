@@ -4,12 +4,13 @@ import useDebouncedCallback from "beautiful-react-hooks/useDebouncedCallback";
 
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
-import { deletePortfoliosByIdGoods } from "@/app/libs/axios/portfolio/good/deletePortfoliosByIdGoods";
-import { postPortfoliosByIdGoods } from "@/app/libs/axios/portfolio/good/postPortfoliosByIdGoods";
+
+import { deleteArticleGood } from "../api/deleteArticleGood";
+import { postArticleGood } from "../api/postArticleGood";
 
 import type { ArticleData } from "@/app/features/articles/types/articleData";
 
-export const usePostOrDeletePortfoliosByIdGoodsOperation = (articleData: ArticleData) => {
+export const useToggleLikeArticleGood = (articleData: ArticleData) => {
   const { isLogin, userData } = useGetLoginState();
   const { setUnexpectedErrorToast } = useSetToastState();
 
@@ -31,9 +32,9 @@ export const usePostOrDeletePortfoliosByIdGoodsOperation = (articleData: Article
 
       try {
         if (isAlreadyLikedRef.current) {
-          await deletePortfoliosByIdGoods(articleData.id);
+          await deleteArticleGood(articleData.id);
         } else {
-          await postPortfoliosByIdGoods(articleData.id);
+          await postArticleGood(articleData.id);
         }
         isAlreadyLikedRef.current = !isAlreadyLikedRef.current;
       } catch (e) {
