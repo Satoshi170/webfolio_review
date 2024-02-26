@@ -1,6 +1,6 @@
 import { ZodError } from "zod";
 
-import { validPostPortfoliosData } from "@/__tests__/fixtures/portfolio/validPostPortfolioData";
+import { validPostArticleData } from "@/__tests__/fixtures/articles/validPostArticleData";
 import { getErrorMessages } from "@/__tests__/helpers/zodTestHelpers";
 import {
   INVALID_OPERATION_ERROR_MESSAGE,
@@ -27,19 +27,19 @@ const validationErrorMessages = (
 
 describe("ArticleSchema", () => {
   it("全て正しい形式の場合エラーをスローしない", () => {
-    expect(() => ArticleSchema.parse(validPostPortfoliosData)).not.toThrow();
+    expect(() => ArticleSchema.parse(validPostArticleData)).not.toThrow();
   });
 
   describe("title", () => {
     it("titleが入力されていない時、正しいエラーメッセージをスローする", () => {
-      const invalidTitleData = { ...validPostPortfoliosData, title: "" };
+      const invalidTitleData = { ...validPostArticleData, title: "" };
       expect(() => ArticleSchema.parse(invalidTitleData)).toThrow(ZodError);
       const titleErrors = validationErrorMessages(invalidTitleData, "title");
       expect(titleErrors[0]).toBe(ArticleValidationErrorMessages.titleRequired);
     });
 
     it("titleが26文字以上の時、正しいエラーメッセージをスローする", () => {
-      const invalidTitleData = { ...validPostPortfoliosData, title: "a".repeat(26) };
+      const invalidTitleData = { ...validPostArticleData, title: "a".repeat(26) };
       expect(() => ArticleSchema.parse(invalidTitleData)).toThrow(ZodError);
       const titleErrors = validationErrorMessages(invalidTitleData, "title");
       expect(titleErrors[0]).toBe(ArticleValidationErrorMessages.titleTooLong);
@@ -48,14 +48,14 @@ describe("ArticleSchema", () => {
 
   describe("content", () => {
     it("contentが入力されていない時、正しいエラーメッセージをスローする", () => {
-      const invalidContentData = { ...validPostPortfoliosData, content: "" };
+      const invalidContentData = { ...validPostArticleData, content: "" };
       expect(() => ArticleSchema.parse(invalidContentData)).toThrow(ZodError);
       const contentErrors = validationErrorMessages(invalidContentData, "content");
       expect(contentErrors[0]).toBe(ArticleValidationErrorMessages.contentRequired);
     });
 
     it("contentが256文字以上の時、正しいエラーメッセージをスローする", () => {
-      const invalidContentData = { ...validPostPortfoliosData, content: "a".repeat(256) };
+      const invalidContentData = { ...validPostArticleData, content: "a".repeat(256) };
       expect(() => ArticleSchema.parse(invalidContentData)).toThrow(ZodError);
       const contentErrors = validationErrorMessages(invalidContentData, "content");
       expect(contentErrors[0]).toBe(ArticleValidationErrorMessages.contentTooLong);
@@ -65,7 +65,7 @@ describe("ArticleSchema", () => {
   describe("operationStatus", () => {
     it("operationが規定外の時、正しいエラーメッセージをスローする", () => {
       const invalidOperationStatusData = {
-        ...validPostPortfoliosData,
+        ...validPostArticleData,
         operationStatus: "test"
       };
       expect(() => ArticleSchema.parse(invalidOperationStatusData)).toThrow(ZodError);
@@ -80,7 +80,7 @@ describe("ArticleSchema", () => {
   describe("portfolioSiteUrl", () => {
     it("portfolioSiteUrlが入力されていない時、正しいエラーメッセージをスローする", () => {
       const invalidPortfolioSiteUrlData = {
-        ...validPostPortfoliosData,
+        ...validPostArticleData,
         portfolioSiteUrl: ""
       };
       expect(() => ArticleSchema.parse(invalidPortfolioSiteUrlData)).toThrow(ZodError);
@@ -95,7 +95,7 @@ describe("ArticleSchema", () => {
 
     it("portfolioSiteUrlがURLでない時、正しいエラーメッセージをスローする", () => {
       const invalidPortfolioSiteUrlData = {
-        ...validPostPortfoliosData,
+        ...validPostArticleData,
         portfolioSiteUrl: "test"
       };
       expect(() => ArticleSchema.parse(invalidPortfolioSiteUrlData)).toThrow(ZodError);
@@ -110,7 +110,7 @@ describe("ArticleSchema", () => {
   describe("repositoryUrl", () => {
     it("repositoryUrlが入力されていない時、エラーをスローしない", () => {
       const invalidRepositoryUrlData = {
-        ...validPostPortfoliosData,
+        ...validPostArticleData,
         repositoryUrl: ""
       };
       expect(() => ArticleSchema.parse(invalidRepositoryUrlData)).not.toThrow();
@@ -118,7 +118,7 @@ describe("ArticleSchema", () => {
 
     it("repositoryUrlがURLでない時、正しいエラーメッセージをスローする", () => {
       const invalidRepositoryUrlData = {
-        ...validPostPortfoliosData,
+        ...validPostArticleData,
         repositoryUrl: "test"
       };
       expect(() => ArticleSchema.parse(invalidRepositoryUrlData)).toThrow(ZodError);

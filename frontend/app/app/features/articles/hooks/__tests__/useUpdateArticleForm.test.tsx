@@ -1,7 +1,7 @@
 import { act, renderHook } from "@testing-library/react";
 
-import { validPortfolioData } from "@/__tests__/fixtures/portfolio/validPortfolioData";
-import { validPostPortfoliosData } from "@/__tests__/fixtures/portfolio/validPostPortfolioData";
+import { validArticleData } from "@/__tests__/fixtures/articles/validArticleData";
+import { validPostArticleData } from "@/__tests__/fixtures/articles/validPostArticleData";
 import {
   mockSetErrorToast,
   mockSetSuccessToast,
@@ -28,9 +28,9 @@ describe("useUpdateArticleForm", () => {
     describe("エラーが発生しない時", () => {
       it("セットされるトーストのstatusはsuccessである", async () => {
         (patchArticle as jest.Mock).mockResolvedValue(undefined);
-        const { result } = renderHook(() => useUpdateArticleForm(validPortfolioData));
+        const { result } = renderHook(() => useUpdateArticleForm(validArticleData));
         await act(async () => {
-          await result.current.onSubmit(validPostPortfoliosData);
+          await result.current.onSubmit(validPostArticleData);
         });
         expect(mockSetSuccessToast).toHaveBeenCalled();
       });
@@ -41,9 +41,9 @@ describe("useUpdateArticleForm", () => {
 
       it("適切なメッセージがセットされる", async () => {
         (patchArticle as jest.Mock).mockRejectedValue(new Error(errorMessage));
-        const { result } = renderHook(() => useUpdateArticleForm(validPortfolioData));
+        const { result } = renderHook(() => useUpdateArticleForm(validArticleData));
         await act(async () => {
-          await result.current.onSubmit(validPostPortfoliosData);
+          await result.current.onSubmit(validPostArticleData);
         });
         expect(mockSetErrorToast).toHaveBeenCalled();
       });

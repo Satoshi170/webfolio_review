@@ -1,7 +1,7 @@
 import { Card } from "@chakra-ui/react";
 import { render, screen } from "@testing-library/react";
 
-import { validPortfolioData } from "@/__tests__/fixtures/portfolio/validPortfolioData";
+import { validArticleData } from "@/__tests__/fixtures/articles/validArticleData";
 
 import ArticleCardHeader from ".";
 
@@ -18,13 +18,13 @@ describe("<ArticleCardHeader />", () => {
       it("aタグが存在する", () => {
         render(
           <Card>
-            <ArticleCardHeader articleData={validPortfolioData} isLink={true} />
+            <ArticleCardHeader articleData={validArticleData} isLink={true} />
           </Card>
         );
         const anchorElement = screen.getByRole("link");
         expect(anchorElement).toHaveAttribute(
           "href",
-          `/users/${validPortfolioData.user.id}/posts`
+          `/users/${validArticleData.user.id}/posts`
         );
       });
     });
@@ -33,7 +33,7 @@ describe("<ArticleCardHeader />", () => {
       it("aタグが存在しない", () => {
         render(
           <Card>
-            <ArticleCardHeader articleData={validPortfolioData} isLink={false} />
+            <ArticleCardHeader articleData={validArticleData} isLink={false} />
           </Card>
         );
         const anchorElement = screen.queryByRole("link");

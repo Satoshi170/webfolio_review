@@ -1,6 +1,6 @@
 import type { PostArticleParams } from "@/app/features/articles/types/api/postArticle";
 
-export const validPostPortfoliosData: PostArticleParams = {
+export const validPostArticleData: PostArticleParams = {
   title: "testTitle",
   content: "testContent",
   operationStatus: "0",
