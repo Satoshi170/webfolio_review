@@ -5,7 +5,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { RecoilRoot } from "recoil";
 
 import CheckLoginWrapper from "./features/auth/userSession/CheckLoginWrapper";
-import theme from "./theme/theme";
+import theme from "./theme";
 
 interface Props {
   children: React.ReactNode;
