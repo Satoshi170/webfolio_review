@@ -1,6 +1,6 @@
-import type { PostCommentFormParams } from "@/app/types/axios/portfolio/comment/comment";
+import type { CommentFormParams } from "@/app/features/articles/_comments/types/api";
 
-export const validPortfolioCommentData: PostCommentFormParams = {
+export const validPortfolioCommentData: CommentFormParams = {
   content: "testContent",
   tagIds: ["1"]
 };

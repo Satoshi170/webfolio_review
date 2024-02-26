@@ -3,14 +3,14 @@
 import Error from "next/error";
 import { usePathname } from "next/navigation";
 
+import ArticleCommentCard from "@/app/features/articles/_comments/components/layouts/ArticleCommentCard";
+import { CommentContext } from "@/app/features/articles/_comments/hooks/useCommentData";
 import ArticleCard from "@/app/features/articles/components/layouts/ArticleCard";
 import { ArticleContext } from "@/app/features/articles/hooks/useArticleData";
 import { useGetArticle } from "@/app/features/articles/hooks/useGetArticle";
-import { CommentContext } from "@/app/hooks/datas/useCommentData";
 import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
-import PostCommentCard from "@/app/components/organisms/posts/comments/PostCommentCard";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
 const PostsIdPage: React.FC = () => {
@@ -50,7 +50,7 @@ const PostsIdPage: React.FC = () => {
             comments.length >= 1 &&
             comments.map((commentData, i) => (
               <CommentContext.Provider value={commentData} key={i}>
-                <PostCommentCard key={i} />
+                <ArticleCommentCard key={i} />
               </CommentContext.Provider>
             ))}
         </ArticleContext.Provider>

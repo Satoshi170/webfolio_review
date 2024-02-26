@@ -1,4 +1,4 @@
-import type { CommentTagData } from "./axios/portfolio/comment/comment";
+import type { CommentTagData } from "../features/articles/_comments/types";
 import type { UnauthorizedResponseDataSchema } from "../libs/zod/apiErrorResponses/auth/responseDataSchema";
 import type { z } from "zod";
 
