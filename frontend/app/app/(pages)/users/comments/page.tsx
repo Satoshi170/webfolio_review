@@ -14,11 +14,11 @@ import {
   Text
 } from "@chakra-ui/react";
 
+import ArticleCommentTags from "@/app/features/articles/_comments/components/layouts/ArticleCommentCard/footer/sections/ArticleCommentTags";
 import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedOut";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import UpdatedDateText from "@/app/components/atoms/texts/UpdatedDateText";
-import PostCommentTags from "@/app/components/molecules/posts/comments/PostCommentTags";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
 const UserCommentsPage: React.FC = () => {
@@ -55,7 +55,7 @@ const UserCommentsPage: React.FC = () => {
               <Divider />
               <Flex justifyContent="space-between" direction="row-reverse" w="full">
                 <UpdatedDateText date={commentData.updatedAt} />
-                <PostCommentTags tags={commentData.tags} />
+                <ArticleCommentTags tags={commentData.tags} />
               </Flex>
             </Stack>
           </CardFooter>
