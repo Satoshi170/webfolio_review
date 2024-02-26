@@ -1,6 +1,6 @@
-import { useSWRWithAxiosFetcher } from "./useSWRWithAxiosFetcher";
+import { useSWRWithAxiosFetcher } from "@/app/hooks/swr/useSWRWithAxiosFetcher";
 
-import type { URLMetaData } from "@/app/types/axios/metaData";
+import type { URLMetaData } from "../types/metaData";
 
 export const useGetURLMetaData = (url: string) => {
   const URI = encodeURI(url);

@@ -4,10 +4,9 @@ import Link from "next/link";
 
 import { Box, HStack, Heading, SkeletonText, Text, VStack } from "@chakra-ui/react";
 
-import { useGetURLMetaData } from "@/app/hooks/swr/useGetMetaData";
-
-import LinkCardImage from "../molecules/linkCards/LinkCardImage";
-import LinkCardURLText from "../molecules/linkCards/LinkCardURLText";
+import LinkCardImage from "./sections/LinkCardImage";
+import LinkCardURLText from "./sections/LinkCardURLText";
+import { useGetURLMetaData } from "../../hooks/useGetMetaData";
 
 interface MetaDataLinkCardProps {
   url: string;
