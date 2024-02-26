@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 
+import { validArticleData } from "@/__tests__/fixtures/articles/validArticleData";
 import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
-import { validPortfolioData } from "@/__tests__/fixtures/portfolio/validPortfolioData";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
 import ArticleCard from ".";
@@ -39,13 +39,13 @@ describe("<ArticleCard/>", () => {
     describe("isLoginがtrueの場合", () => {
       describe("userData.idとarticleData.user.idが一致する場合", () => {
         it("isUserPostはtrueである", () => {
-          const portfolioOwnerData = { ...validUserData, id: validPortfolioData.user.id };
+          const portfolioOwnerData = { ...validUserData, id: validArticleData.user.id };
           (useGetLoginState as jest.Mock).mockReturnValue({
             isLogin: true,
             userData: portfolioOwnerData
           });
 
-          render(<ArticleCard articleData={validPortfolioData} />);
+          render(<ArticleCard articleData={validArticleData} />);
           const headerElement = screen.getByTestId("header");
           expect(headerElement.getAttribute("data-isuserpost")).toBe("true");
         });
@@ -55,7 +55,7 @@ describe("<ArticleCard/>", () => {
         it("isUserPostはfalseである", () => {
           const nonOwnerUserData = {
             ...validUserData,
-            id: validPortfolioData.user.id + 1
+            id: validArticleData.user.id + 1
           };
 
           (useGetLoginState as jest.Mock).mockReturnValue({
@@ -63,7 +63,7 @@ describe("<ArticleCard/>", () => {
             userData: nonOwnerUserData
           });
 
-          render(<ArticleCard articleData={validPortfolioData} />);
+          render(<ArticleCard articleData={validArticleData} />);
           const headerElement = screen.getByTestId("header");
           expect(headerElement.getAttribute("data-isuserpost")).toBe("false");
         });
@@ -77,7 +77,7 @@ describe("<ArticleCard/>", () => {
           userData: null
         });
 
-        render(<ArticleCard articleData={validPortfolioData} />);
+        render(<ArticleCard articleData={validArticleData} />);
         const headerElement = screen.getByTestId("header");
         expect(headerElement.getAttribute("data-isuserpost")).toBe("false");
       });

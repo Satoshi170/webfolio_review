@@ -1,5 +1,5 @@
+import { validPostArticleData } from "@/__tests__/fixtures/articles/validPostArticleData";
 import { mockUnauthorizedResponse } from "@/__tests__/fixtures/auth/unauthorizedResponseData";
-import { validPostPortfoliosData } from "@/__tests__/fixtures/portfolio/validPostPortfolioData";
 import { mockUnexpectedResponse } from "@/__tests__/fixtures/unexpectedResponseData";
 import { mockApi, mockAxios, mockPatch } from "@/__tests__/mocks/axios/api";
 import { mockAddAuthInfoToRequest } from "@/__tests__/mocks/cookie/mockLoadAuthInfo";
@@ -36,7 +36,7 @@ describe("patchArticle", () => {
 
     it("エラーをスローしない", async () => {
       mockPatch.mockResolvedValue(mockPatchPortfoliosByIdSuccessResponse);
-      await expect(patchArticle(1, validPostPortfoliosData)).resolves.not.toThrow();
+      await expect(patchArticle(1, validPostArticleData)).resolves.not.toThrow();
     });
   });
 
@@ -46,7 +46,7 @@ describe("patchArticle", () => {
         it("適切なエラーがスローされる", async () => {
           mockAxios.isAxiosError.mockReturnValue(true);
           mockPatch.mockRejectedValue(mockUnauthorizedResponse);
-          await expect(patchArticle(1, validPostPortfoliosData)).rejects.toThrow(
+          await expect(patchArticle(1, validPostArticleData)).rejects.toThrow(
             mockUnauthorizedResponse.response.data.errors.join(", ")
           );
         });
@@ -68,7 +68,7 @@ describe("patchArticle", () => {
         it("適切なエラーがスローされる", async () => {
           mockAxios.isAxiosError.mockReturnValue(true);
           mockPatch.mockRejectedValue(mockPatchPortfoliosByIdFailedResponse);
-          await expect(patchArticle(1, validPostPortfoliosData)).rejects.toThrow(
+          await expect(patchArticle(1, validPostArticleData)).rejects.toThrow(
             mockPatchPortfoliosByIdFailedData.errors.join(", ")
           );
         });
@@ -78,7 +78,7 @@ describe("patchArticle", () => {
         it("適切なエラーがスローされる", async () => {
           mockAxios.isAxiosError.mockReturnValue(true);
           mockPatch.mockRejectedValue(mockUnexpectedResponse);
-          await expect(patchArticle(1, validPostPortfoliosData)).rejects.toThrow(
+          await expect(patchArticle(1, validPostArticleData)).rejects.toThrow(
             UNEXPECTED_ERROR_MESSAGE
           );
         });
@@ -91,9 +91,7 @@ describe("patchArticle", () => {
       const mockError = new Error("networkError");
       mockAxios.isAxiosError.mockReturnValue(false);
       mockPatch.mockRejectedValue(mockError);
-      await expect(patchArticle(1, validPostPortfoliosData)).rejects.toThrow(
-        "networkError"
-      );
+      await expect(patchArticle(1, validPostArticleData)).rejects.toThrow("networkError");
     });
   });
 });

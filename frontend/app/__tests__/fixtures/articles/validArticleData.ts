@@ -2,7 +2,7 @@ import { validUserData } from "../auth/validUserData";
 
 import type { ArticleData } from "@/app/features/articles/types/articleData";
 
-export const validPortfolioData: ArticleData = {
+export const validArticleData: ArticleData = {
   id: 1,
   title: "testTitle",
   content: "testContent",

@@ -1,7 +1,7 @@
 import { act, renderHook, waitFor } from "@testing-library/react";
 
+import { validArticleData } from "@/__tests__/fixtures/articles/validArticleData";
 import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
-import { validPortfolioData } from "@/__tests__/fixtures/portfolio/validPortfolioData";
 import { mockUseSetToastState } from "@/__tests__/mocks/hooks/recoil/toastState/mockUseSetToastState";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
@@ -24,7 +24,7 @@ describe("useToggleLikeArticleGood", () => {
     jest.resetAllMocks();
   });
 
-  const nonIncludeUserIdGoods = validPortfolioData.goods.filter(
+  const nonIncludeUserIdGoods = validArticleData.goods.filter(
     (item) => item.userId !== validUserData.id
   );
   const includeUserIdGoods = [...nonIncludeUserIdGoods, { userId: validUserData.id }];
@@ -42,7 +42,7 @@ describe("useToggleLikeArticleGood", () => {
         it("trueになる", () => {
           const { result } = renderHook(() =>
             useToggleLikeArticleGood({
-              ...validPortfolioData,
+              ...validArticleData,
               goods: includeUserIdGoods
             })
           );
@@ -55,7 +55,7 @@ describe("useToggleLikeArticleGood", () => {
         it("falseになる", () => {
           const { result } = renderHook(() =>
             useToggleLikeArticleGood({
-              ...validPortfolioData,
+              ...validArticleData,
               goods: nonIncludeUserIdGoods
             })
           );
@@ -74,7 +74,7 @@ describe("useToggleLikeArticleGood", () => {
       });
 
       it("falseになる", () => {
-        const { result } = renderHook(() => useToggleLikeArticleGood(validPortfolioData));
+        const { result } = renderHook(() => useToggleLikeArticleGood(validArticleData));
 
         expect(result.current.isLiked).toBe(false);
       });
@@ -98,7 +98,7 @@ describe("useToggleLikeArticleGood", () => {
           mockDeleteGood.mockResolvedValue(undefined);
           const { result } = renderHook(() =>
             useToggleLikeArticleGood({
-              ...validPortfolioData,
+              ...validArticleData,
               goods: includeUserIdGoods
             })
           );
@@ -132,7 +132,7 @@ describe("useToggleLikeArticleGood", () => {
           mockPostGood.mockResolvedValue(undefined);
           const { result } = renderHook(() =>
             useToggleLikeArticleGood({
-              ...validPortfolioData,
+              ...validArticleData,
               goods: nonIncludeUserIdGoods
             })
           );
@@ -170,9 +170,7 @@ describe("useToggleLikeArticleGood", () => {
         });
 
         it("mockDeleteGoodsもmockPostGoodsも呼び出されない", () => {
-          const { result } = renderHook(() =>
-            useToggleLikeArticleGood(validPortfolioData)
-          );
+          const { result } = renderHook(() => useToggleLikeArticleGood(validArticleData));
 
           expect(result.current.isLiked).toBe(true);
 

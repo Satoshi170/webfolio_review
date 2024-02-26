@@ -1,6 +1,6 @@
 import { act, renderHook } from "@testing-library/react";
 
-import { validPostPortfoliosData } from "@/__tests__/fixtures/portfolio/validPostPortfolioData";
+import { validPostArticleData } from "@/__tests__/fixtures/articles/validPostArticleData";
 import {
   mockSetErrorToast,
   mockSetSuccessToast,
@@ -29,7 +29,7 @@ describe("useCreateArticleForm", () => {
         (postArticle as jest.Mock).mockResolvedValue(undefined);
         const { result } = renderHook(() => useCreateArticleForm());
         await act(async () => {
-          await result.current.onSubmit(validPostPortfoliosData);
+          await result.current.onSubmit(validPostArticleData);
         });
         expect(mockSetSuccessToast).toHaveBeenCalled();
       });
@@ -42,7 +42,7 @@ describe("useCreateArticleForm", () => {
         (postArticle as jest.Mock).mockRejectedValue(new Error(errorMessage));
         const { result } = renderHook(() => useCreateArticleForm());
         await act(async () => {
-          await result.current.onSubmit(validPostPortfoliosData);
+          await result.current.onSubmit(validPostArticleData);
         });
         expect(mockSetErrorToast).toHaveBeenCalled();
       });
