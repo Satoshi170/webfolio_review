@@ -4,13 +4,13 @@ import { Text } from "@chakra-ui/react";
 
 import ArticleCard from "@/app/features/articles/components/layouts/ArticleCard";
 import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedOut";
-import { useGetLikedPortfolios } from "@/app/hooks/swr/me/useGetLikedPortfolios";
+import { useGetLikedArticles } from "@/app/features/me/hooks/useGetLikedArticles";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
 const UserLikesPage: React.FC = () => {
-  const { portfoliosData, error, isLoading } = useGetLikedPortfolios();
+  const { articlesData, error, isLoading } = useGetLikedArticles();
 
   if (isLoading) {
     return (
@@ -28,8 +28,8 @@ const UserLikesPage: React.FC = () => {
     );
   }
 
-  if (portfoliosData) {
-    if (portfoliosData.length == 0) {
+  if (articlesData) {
+    if (articlesData.length == 0) {
       return (
         <CenteredBox>
           <Text>まだ投稿をいいねしていません</Text>
@@ -38,7 +38,7 @@ const UserLikesPage: React.FC = () => {
     } else {
       return (
         <CenteredBox>
-          {portfoliosData.map((portfolioData, i) => (
+          {articlesData.map((portfolioData, i) => (
             <ArticleCard
               articleData={portfolioData}
               linkOptions={{ header: true, body: true }}
