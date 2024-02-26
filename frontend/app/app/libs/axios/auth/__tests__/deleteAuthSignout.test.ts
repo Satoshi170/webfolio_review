@@ -2,8 +2,9 @@ import { mockUnexpectedResponse } from "@/__tests__/fixtures/unexpectedResponseD
 import { mockApi, mockAxios, mockDelete } from "@/__tests__/mocks/axios/api";
 import { mockAddAuthInfoToRequest } from "@/__tests__/mocks/cookie/mockLoadAuthInfo";
 import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
-import { deleteAuthSignOut } from "@/app/libs/axios/auth/deleteAuthSignOut";
 import { removeAuthInfo } from "@/app/libs/cookie/removeAuthInfo";
+
+import { deleteAuthSignOut } from "../deleteAuthSignOut";
 
 import type {
   DeleteAuthSignOutFailedData,
