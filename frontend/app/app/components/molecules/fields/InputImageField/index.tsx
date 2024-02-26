@@ -10,7 +10,7 @@ import {
 import { BiSolidCameraPlus } from "react-icons/bi";
 import { RxCross2 } from "react-icons/rx";
 
-import useInputImageField from "@/app/hooks/forms/useInputImageField";
+import useInputImageField from "./useInputImageField";
 
 import type { FieldError, FieldValues, Path, UseFormRegister } from "react-hook-form";
 

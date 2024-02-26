@@ -1,9 +1,9 @@
 import { render, screen } from "@testing-library/react";
 
-import InputImageField from "@/app/components/molecules/fields/InputImageField";
-
-import type { InputImageFieldProps } from "@/app/components/molecules/fields/InputImageField";
+import type { InputImageFieldProps } from ".";
 import type { FieldError } from "react-hook-form";
+
+import InputImageField from ".";
 
 interface TestImageFormValues {
   image: File;
@@ -12,7 +12,7 @@ const mockRegister = jest.fn().mockReturnValue({ ref: jest.fn() });
 const mockOnChange = jest.fn();
 const mockResetImage = jest.fn();
 
-jest.mock("@/app/hooks/forms/useInputImageField", () => ({
+jest.mock("./useInputImageField", () => ({
   __esModule: true,
   default: () => ({
     fileInput: { current: null },
