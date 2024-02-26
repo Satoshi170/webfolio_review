@@ -1,6 +1,7 @@
 import { mockApi, mockAxios, mockPatch } from "@/__tests__/mocks/axios/api";
 import { mockAddAuthInfoToRequest } from "@/__tests__/mocks/cookie/mockLoadAuthInfo";
-import { patchAuth } from "@/app/libs/axios/auth/patchAuth";
+
+import { patchAuth } from "../patchAuth";
 
 import type { PatchAuthErrorData } from "@/app/types/axios/auth/patchAuth";
 

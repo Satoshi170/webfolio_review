@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-import { saveAuthInfoFromHeader } from "@/app/libs/cookie/saveAuthInfo";
+import { saveAuthInfoFromHeader } from "../saveAuthInfo";
 
 import type { CustomAxiosResponse } from "@/app/types/axios/customAxiosResponse";
 

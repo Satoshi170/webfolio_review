@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 
-import addAuthInfoToRequest from "@/app/libs/cookie/loadAuthInfo";
+import addAuthInfoToRequest from "../loadAuthInfo";
 
 jest.mock("js-cookie");
 

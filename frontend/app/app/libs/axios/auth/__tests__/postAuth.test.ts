@@ -1,8 +1,9 @@
 import { validSignUpData } from "@/__tests__/fixtures/auth/validSignUpData";
 import { validUserData } from "@/__tests__/fixtures/auth/validUserData";
 import { mockApi, mockAxios, mockPost } from "@/__tests__/mocks/axios/api";
-import { postAuth } from "@/app/libs/axios/auth/postAuth";
 import { saveAuthInfoFromHeader } from "@/app/libs/cookie/saveAuthInfo";
+
+import { postAuth } from "../postAuth";
 
 import type {
   PostAuthErrorData,
