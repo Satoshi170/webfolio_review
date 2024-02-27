@@ -50,7 +50,7 @@ const HomePage: React.FC = () => {
           key={i}
         />
       ))}
-      <SeeMoreButton onClick={() => router.push("/posts")} />
+      <SeeMoreButton onClick={() => router.push("articles")} />
       <Heading my="2">話題の投稿</Heading>
       {popularArticlesData.map((article, i) => (
         <ArticleCard
@@ -59,7 +59,7 @@ const HomePage: React.FC = () => {
           key={i}
         />
       ))}
-      <SeeMoreButton onClick={() => router.push("/posts")} />
+      <SeeMoreButton onClick={() => router.push("/articles")} />
     </CenteredBox>
   );
 };

@@ -12,9 +12,9 @@ import GoBackLink from "@/app/components/atoms/GoBackLink";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
-const UserIdPostsPage: React.FC = () => {
+const UserIdArticlesPage: React.FC = () => {
   const pathname = usePathname();
-  const newPathname = pathname.replace(/\/posts$/, "");
+  const newPathname = pathname.replace(/\/articles$/, "");
   const id = getIdOrTriggerNotFound({ pathname: newPathname, routeKey: "users" });
   const { articlesData, error, errorStatus, isLoading } = useGetUserArticles(id);
 
@@ -57,4 +57,4 @@ const UserIdPostsPage: React.FC = () => {
   );
 };
 
-export default UserIdPostsPage;
+export default UserIdArticlesPage;

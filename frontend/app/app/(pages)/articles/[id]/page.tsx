@@ -13,9 +13,9 @@ import GoBackLink from "@/app/components/atoms/GoBackLink";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
-const PostsIdPage: React.FC = () => {
+const ArticlesIdPage: React.FC = () => {
   const pathname = usePathname();
-  const id = getIdOrTriggerNotFound({ pathname, routeKey: "posts" });
+  const id = getIdOrTriggerNotFound({ pathname, routeKey: "articles" });
   const { articleData, error, errorStatus, isLoading } = useGetArticle(id);
 
   if (errorStatus) {
@@ -59,4 +59,4 @@ const PostsIdPage: React.FC = () => {
   }
 };
 
-export default PostsIdPage;
+export default ArticlesIdPage;

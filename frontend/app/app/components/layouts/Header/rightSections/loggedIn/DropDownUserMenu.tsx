@@ -33,7 +33,7 @@ const DropDownUserMenuButton: React.FC = () => {
         </HStack>
       </MenuButton>
       <MenuList color="gray.800">
-        <MenuItem as={NextLink} href={`/users/${userData.id}/posts`}>
+        <MenuItem as={NextLink} href={`/users/${userData.id}/articles`}>
           自分の投稿
         </MenuItem>
         <MenuDivider />

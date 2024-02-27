@@ -33,7 +33,7 @@ const ArticleCardHeader: React.FC<Props> = ({
           alignItems="center"
           flexWrap="wrap"
           as={isLink ? NextLink : undefined}
-          href={isLink ? `/users/${user.id}/posts` : undefined}
+          href={isLink ? `/users/${user.id}/articles` : undefined}
         >
           <UserIcon image={image} name={user.name} diameter={39} />
           <Heading fontSize="md">{user.name}</Heading>

@@ -8,7 +8,7 @@ import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/With
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
-const PostsPage: React.FC = () => {
+const ArticlesPage: React.FC = () => {
   const { articlesData, error, isLoading } = useGetArticles();
 
   if (isLoading) {
@@ -38,4 +38,4 @@ const PostsPage: React.FC = () => {
   );
 };
 
-export default WithRedirectIfLoggedOut(PostsPage);
+export default WithRedirectIfLoggedOut(ArticlesPage);
