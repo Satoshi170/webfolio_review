@@ -21,7 +21,7 @@ const ArticleCardBody: React.FC<Props> = ({ isLink = false, articleData }) => {
     <CardBody
       py="1"
       as={isLink ? NextLink : undefined}
-      href={isLink ? `/posts/${id}` : undefined}
+      href={isLink ? `/articles/${id}` : undefined}
     >
       <Heading fontSize="xl">{title}</Heading>
       <Text fontSize="md" mt="3">
