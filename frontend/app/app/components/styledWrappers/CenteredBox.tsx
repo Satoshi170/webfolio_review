@@ -1,11 +1,10 @@
-import { Box, chakra } from "@chakra-ui/react";
+import { Container, chakra } from "@chakra-ui/react";
 
-const CenteredBox = chakra(Box, {
+const CenteredBox = chakra(Container, {
   baseStyle: {
     h: "auto",
     mx: "auto",
-    maxW: "lg",
-    alignItems: "center"
+    maxW: "container.lg"
   }
 });
 
