@@ -6,11 +6,11 @@ const operationStatusMappingOptions: MapOptions<typeof candidateOperationStatusD
   active: { label: "active", value: candidateOperationStatusData.active.toString() },
   maintenance: {
     label: "maintenance",
-    value: candidateOperationStatusData.inactive.toString()
+    value: candidateOperationStatusData.maintenance.toString()
   },
   inactive: {
     label: "inactive",
-    value: candidateOperationStatusData.maintenance.toString()
+    value: candidateOperationStatusData.inactive.toString()
   }
 };
 
