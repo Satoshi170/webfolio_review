@@ -16,7 +16,7 @@ interface Option extends OptionBase {
 
 interface Props<T extends FieldValues> {
   name: Path<T>;
-  label: string;
+  label?: string;
   options: Option[];
   placeholder: string;
   control: Control<T>;
@@ -43,7 +43,7 @@ const SelectBoxField = <T extends FieldValues>({
       name={name}
       render={({ field: { onChange, onBlur, ref, value } }) => (
         <FormControl id={name} isRequired={isRequired} isInvalid={!!error}>
-          <FormLabel htmlFor={name as string}>{label}</FormLabel>
+          {label && <FormLabel htmlFor={name as string}>{label}</FormLabel>}
           <Select<Option, typeof isMulti, GroupBase<Option>>
             isMulti={isMulti}
             name={name as string}

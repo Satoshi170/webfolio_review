@@ -6,7 +6,8 @@ import type { FieldError, FieldValues, Path, UseFormRegister } from "react-hook-
 
 export interface TextareaFieldProps<T extends FieldValues> {
   name: Path<T>;
-  label: string;
+  label?: string;
+  placeholder?: string;
   register: UseFormRegister<T>;
   error?: FieldError;
   isRequired?: boolean;
@@ -15,14 +16,20 @@ export interface TextareaFieldProps<T extends FieldValues> {
 const TextareaField = <T extends FieldValues>({
   name,
   label,
+  placeholder,
   register,
   error,
   isRequired = false
 }: TextareaFieldProps<T>) => {
   return (
     <FormControl isInvalid={!!error} isRequired={isRequired}>
-      <FormLabel htmlFor={name as string}>{label}</FormLabel>
-      <Textarea id={name as string} {...register(name)} h="200px"></Textarea>
+      {label && <FormLabel htmlFor={name as string}>{label}</FormLabel>}
+      <Textarea
+        id={name as string}
+        {...register(name)}
+        h="200px"
+        placeholder={placeholder}
+      ></Textarea>
       <FormErrorMessage>{error?.message}</FormErrorMessage>
     </FormControl>
   );
