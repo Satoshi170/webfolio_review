@@ -2,7 +2,7 @@
 
 import { Text } from "@chakra-ui/react";
 
-import ArticleCard from "@/app/features/articles/components/layouts/ArticleCard";
+import ArticleCardsGridList from "@/app/features/articles/components/ArticleCardsGridList";
 import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedOut";
 import { useGetLikedArticles } from "@/app/features/me/hooks/useGetLikedArticles";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
@@ -38,13 +38,7 @@ const UserLikesPage: React.FC = () => {
     } else {
       return (
         <CenteredBox>
-          {articlesData.map((portfolioData, i) => (
-            <ArticleCard
-              articleData={portfolioData}
-              linkOptions={{ header: true, body: true }}
-              key={i}
-            />
-          ))}
+          <ArticleCardsGridList articlesData={articlesData} />
         </CenteredBox>
       );
     }

@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 import { Text } from "@chakra-ui/react";
 
-import ArticleCard from "@/app/features/articles/components/layouts/ArticleCard";
+import ArticleCardsGridList from "@/app/features/articles/components/ArticleCardsGridList";
 import { useGetUserArticles } from "@/app/features/articles/hooks/useGetUserArticles";
 import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
@@ -50,9 +50,7 @@ const UserIdPostsPage: React.FC = () => {
   return (
     <CenteredBox>
       <GoBackLink />
-      {articlesData.map((articleData, i) => (
-        <ArticleCard articleData={articleData} linkOptions={{ body: true }} key={i} />
-      ))}
+      <ArticleCardsGridList articlesData={articlesData} />
     </CenteredBox>
   );
 };
