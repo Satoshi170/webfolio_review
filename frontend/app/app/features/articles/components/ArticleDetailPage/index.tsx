@@ -18,13 +18,13 @@ import UpdatedDateText from "@/app/components/atoms/texts/UpdatedDateText";
 import UserIcon from "@/app/components/atoms/users/UserIcon";
 
 import OperationStatusBadge from "./OperationStatusBadge";
+import OptionArticleMenuButton from "./OptionMenuButton";
 import CreateCommentForm from "../../_comments/components/CreateCommentForm";
 import ArticleCommentCard from "../../_comments/components/layouts/ArticleCommentCard";
 import { CommentContext } from "../../_comments/hooks/useCommentData";
 import LikeButton from "../../_likes/components/layouts/LikeButton";
 import { useToggleLikeArticleGood } from "../../_likes/hooks/useToggleArticleGood";
 import { ArticleContext } from "../../hooks/useArticleData";
-import OptionArticleMenuButton from "../layouts/ArticleCard/header/sections/OptionMenuButton";
 
 import type { ArticleData } from "../../types/articleData";
 
