@@ -15,7 +15,7 @@ const ArticleCommentCard: React.FC = () => {
   const isUserComment = isLogin ? commentData.user.id == userData.id : false;
 
   return (
-    <Card w={{ base: "auto", md: "md" }} rounded="none">
+    <Card w="auto" rounded="none">
       <ArticleCommentCardHeader isUserComment={isUserComment} />
       <Spacer my="-3" />
       <ArticleCommentCardBody />
