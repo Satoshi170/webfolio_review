@@ -3,13 +3,13 @@ import { candidateOperationStatusData } from "@/app/constants/datas/portfolios/o
 import type { MapOptions, Option } from "./types";
 
 const operationStatusMappingOptions: MapOptions<typeof candidateOperationStatusData> = {
-  active: { label: "active", value: candidateOperationStatusData.active.toString() },
+  active: { label: "稼働中", value: candidateOperationStatusData.active.toString() },
   maintenance: {
-    label: "maintenance",
+    label: "メンテナンス中",
     value: candidateOperationStatusData.maintenance.toString()
   },
   inactive: {
-    label: "inactive",
+    label: "サービス終了",
     value: candidateOperationStatusData.inactive.toString()
   }
 };
