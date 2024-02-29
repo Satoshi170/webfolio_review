@@ -24,7 +24,7 @@ describe("<ArticleCardHeader />", () => {
         const anchorElement = screen.getByRole("link");
         expect(anchorElement).toHaveAttribute(
           "href",
-          `/users/${validArticleData.user.id}/posts`
+          `/users/${validArticleData.user.id}/articles`
         );
       });
     });
