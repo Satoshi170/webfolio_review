@@ -3,10 +3,10 @@ import type { UnauthorizedResponseDataSchema } from "../libs/zod/apiErrorRespons
 import type { z } from "zod";
 
 interface Good {
-  portfolioId: number;
+  articleId: number;
 }
 
-interface Portfolio {
+interface Article {
   id: number;
   title: string;
 }
@@ -14,7 +14,7 @@ interface Comment {
   content: string;
   tags: CommentTagData[];
   updatedAt: Date;
-  portfolio: Portfolio;
+  article: Article;
 }
 
 export interface UserData {
