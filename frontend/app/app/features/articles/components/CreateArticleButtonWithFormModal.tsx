@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Box,
   Button,
   Modal,
   ModalBody,
@@ -64,6 +65,7 @@ const CreateArticleButtonWithFormModal: React.FC = () => {
               error={errors.content}
               isRequired={true}
             />
+            <Spacer my="3" />
             <InputField
               name="portfolioSiteUrl"
               label="ポートフォリオサイトURL"
@@ -71,14 +73,16 @@ const CreateArticleButtonWithFormModal: React.FC = () => {
               error={errors.portfolioSiteUrl}
               isRequired={true}
             />
-            <SelectBoxField
-              name="operationStatus"
-              label="運用状況"
-              options={operationStatusOptions}
-              placeholder="pick"
-              control={control}
-              error={errors.operationStatus}
-            />
+            <Box w="50%" my="3">
+              <SelectBoxField
+                name="operationStatus"
+                label="運用状況"
+                options={operationStatusOptions}
+                control={control}
+                error={errors.operationStatus}
+              />
+            </Box>
+            <Spacer my="3" />
             <InputField
               name="repositoryUrl"
               label="リポジトリURL"

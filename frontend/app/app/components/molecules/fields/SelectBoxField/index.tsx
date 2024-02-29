@@ -18,7 +18,7 @@ interface Props<T extends FieldValues> {
   name: Path<T>;
   label?: string;
   options: Option[];
-  placeholder: string;
+  placeholder?: string;
   control: Control<T>;
   error: Merge<FieldError, (FieldError | undefined)[]> | undefined;
   isMulti?: boolean;
