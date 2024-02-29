@@ -27,7 +27,7 @@ const ArticleCard: React.FC<Props> = ({ articleData }) => {
   const { id, title, updatedAt, user, goods } = articleData;
 
   return (
-    <Card w="full" h="auto" as={NextLink} href={`articles/${id}`}>
+    <Card w="full" h="auto" as={NextLink} href={`/articles/${id}`}>
       <CardHeader>
         <Flex flex="1" gap="2" alignItems="center">
           <UserIcon image={user.image} name={user.name} diameter={30} />
