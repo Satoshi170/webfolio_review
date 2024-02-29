@@ -7,16 +7,18 @@ import {
   CardHeader,
   Flex,
   Heading,
+  Icon,
   Stack,
   Text
 } from "@chakra-ui/react";
+import { BiComment } from "react-icons/bi";
 
 import LinkCardWithMetaData from "@/app/features/link_preview/components/LinkCard";
 import UpdatedDateText from "@/app/components/atoms/texts/UpdatedDateText";
 import UserIcon from "@/app/components/atoms/users/UserIcon";
 
 import OperationStatusBadge from "./OperationStatusBadge";
-import CreateCommentButtonWithFormModal from "../../_comments/components/CreateCommentButtonWithFormModal";
+import CreateCommentForm from "../../_comments/components/CreateCommentForm";
 import ArticleCommentCard from "../../_comments/components/layouts/ArticleCommentCard";
 import { CommentContext } from "../../_comments/hooks/useCommentData";
 import LikeButton from "../../_likes/components/layouts/LikeButton";
@@ -70,13 +72,16 @@ const ArticleDetailPage: React.FC<Props> = ({ articleData, isUser }) => {
             )}
           </CardBody>
           <CardFooter alignItems="center" justifyContent="space-between">
-            <Flex>
+            <Flex gap="3" alignItems="center">
               <LikeButton
                 onClick={toggleLike}
                 isLiked={isLiked}
                 totalLiked={totalLiked}
               />
-              <CreateCommentButtonWithFormModal articleData={articleData} />
+              <Flex alignItems="center" color="blackAlpha.500" gap="2">
+                <Icon as={BiComment} />
+                <Text>{comments.length}</Text>
+              </Flex>
             </Flex>
             <Flex gap="3">
               <UpdatedDateText date={updatedAt} />
@@ -84,6 +89,7 @@ const ArticleDetailPage: React.FC<Props> = ({ articleData, isUser }) => {
             </Flex>
           </CardFooter>
         </Card>
+        <CreateCommentForm articleData={articleData} />
         {comments &&
           comments.length >= 1 &&
           comments.map((commentData, i) => (
