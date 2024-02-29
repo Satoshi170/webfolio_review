@@ -2,7 +2,7 @@
 
 import { Text } from "@chakra-ui/react";
 
-import ArticleCard from "@/app/features/articles/components/layouts/ArticleCard";
+import ArticleCardsGridList from "@/app/features/articles/components/ArticleCardsGridList";
 import { useGetArticles } from "@/app/features/articles/hooks/useGetArticles";
 import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedOut";
 import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
@@ -27,13 +27,7 @@ const PostsPage: React.FC = () => {
 
   return (
     <CenteredBox>
-      {articlesData.map((articleData, i) => (
-        <ArticleCard
-          articleData={articleData}
-          linkOptions={{ header: true, body: true }}
-          key={i}
-        />
-      ))}
+      <ArticleCardsGridList articlesData={articlesData} />
     </CenteredBox>
   );
 };

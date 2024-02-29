@@ -8,7 +8,7 @@ import LoadingSpinner from "./components/atoms/LoadingSpinner";
 import SeeMoreButton from "./components/atoms/SeeMoreButton";
 import AboutSiteSection from "./components/organisms/AboutSiteSection";
 import CenteredBox from "./components/styledWrappers/CenteredBox";
-import ArticleCard from "./features/articles/components/layouts/ArticleCard";
+import ArticleCardsGridList from "./features/articles/components/ArticleCardsGridList";
 import { useGetLatestArticles } from "./features/articles/hooks/useGetLatestArticles";
 import { useGetPopularArticles } from "./features/articles/hooks/useGetPopularArticles";
 import { useGetLoginState } from "./hooks/recoil/loginState/useGetLoginState";
@@ -43,23 +43,11 @@ const HomePage: React.FC = () => {
     <CenteredBox>
       {!isLogin && <AboutSiteSection />}
       <Heading my="2">最近の投稿</Heading>
-      {latestArticlesData.map((article, i) => (
-        <ArticleCard
-          articleData={article}
-          linkOptions={{ header: true, body: true }}
-          key={i}
-        />
-      ))}
-      <SeeMoreButton onClick={() => router.push("/posts")} />
+      <ArticleCardsGridList articlesData={popularArticlesData} />
+      <SeeMoreButton onClick={() => router.push("/articles")} />
       <Heading my="2">話題の投稿</Heading>
-      {popularArticlesData.map((article, i) => (
-        <ArticleCard
-          articleData={article}
-          linkOptions={{ header: true, body: true }}
-          key={i}
-        />
-      ))}
-      <SeeMoreButton onClick={() => router.push("/posts")} />
+      <ArticleCardsGridList articlesData={latestArticlesData} />
+      <SeeMoreButton onClick={() => router.push("/articles")} />
     </CenteredBox>
   );
 };
