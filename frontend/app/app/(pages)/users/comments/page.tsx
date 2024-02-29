@@ -43,7 +43,7 @@ const UserCommentsPage: React.FC = () => {
       <GoBackLink />
       {commentDatas.map((commentData, i) => (
         <Card key={i} w={{ base: "auto", md: "md" }} rounded="none">
-          <CardBody w="full" as={NextLink} href={`/posts/${commentData.portfolio.id}`}>
+          <CardBody w="full" as={NextLink} href={`/articles/${commentData.portfolio.id}`}>
             <Text fontSize="md">{commentData.content}</Text>
             <Spacer my="1" />
             <Box bg="gray.200" p="3">

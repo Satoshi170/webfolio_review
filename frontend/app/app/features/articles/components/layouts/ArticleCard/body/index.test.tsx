@@ -22,7 +22,7 @@ describe("<ArticleCardBody />", () => {
           </Card>
         );
         const anchorElement = screen.getByRole("link");
-        expect(anchorElement).toHaveAttribute("href", `/posts/${validArticleData.id}`);
+        expect(anchorElement).toHaveAttribute("href", `/articles/${validArticleData.id}`);
       });
     });
 

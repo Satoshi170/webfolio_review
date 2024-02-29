@@ -14,7 +14,7 @@ import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
 const UserIdPostsPage: React.FC = () => {
   const pathname = usePathname();
-  const newPathname = pathname.replace(/\/posts$/, "");
+  const newPathname = pathname.replace(/\/articles$/, "");
   const id = getIdOrTriggerNotFound({ pathname: newPathname, routeKey: "users" });
   const { articlesData, error, errorStatus, isLoading } = useGetUserArticles(id);
 
