@@ -17,7 +17,7 @@ import {
 import ArticleCommentTags from "@/app/features/articles/_comments/components/layouts/ArticleCommentCard/footer/sections/ArticleCommentTags";
 import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedOut";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
-import GoBackLink from "@/app/components/atoms/GoBackLink";
+import GoBackLink from "@/app/components/atoms/links/GoBackLink";
 import UpdatedDateText from "@/app/components/atoms/texts/UpdatedDateText";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 

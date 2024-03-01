@@ -8,7 +8,7 @@ import { Text } from "@chakra-ui/react";
 import ArticleCardsGridList from "@/app/features/articles/components/ArticleCardsGridList";
 import { useGetUserArticles } from "@/app/features/articles/hooks/useGetUserArticles";
 import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
-import GoBackLink from "@/app/components/atoms/GoBackLink";
+import GoBackLink from "@/app/components/atoms/links/GoBackLink";
 import LoadingSpinner from "@/app/components/atoms/spinners/LoadingSpinner";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 

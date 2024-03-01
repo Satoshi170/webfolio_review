@@ -1,6 +1,6 @@
 "use client";
 
-import BlueLinkButton from "@/app/components/atoms/BlueLinkButton";
+import BlueLinkButton from "@/app/components/atoms/links/BlueLinkButton";
 
 const SignUpLinkButton: React.FC = () => {
   return <BlueLinkButton href="/auth/sign_up" text="新規登録" />;
