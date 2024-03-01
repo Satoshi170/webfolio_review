@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-import { Box, HStack, Heading, SkeletonText, Text, VStack } from "@chakra-ui/react";
+import { Heading, LinkBox, LinkOverlay, Stack, Text } from "@chakra-ui/react";
 
 import LinkCardImage from "./sections/LinkCardImage";
 import LinkCardURLText from "./sections/LinkCardURLText";
@@ -15,41 +15,36 @@ interface MetaDataLinkCardProps {
 const LinkCardWithMetaData: React.FC<MetaDataLinkCardProps> = ({ url }) => {
   const { URLMetaData, error, isLoading } = useGetURLMetaData(url);
 
-  if (error || !URLMetaData || !URLMetaData.title) return <Link href={url}>{url}</Link>;
+  if (isLoading || error || !URLMetaData || !URLMetaData.title)
+    return <Link href={url}>{url}</Link>;
 
   const { title, description, image, favicon } = URLMetaData;
 
   return (
-    <Box
+    <LinkBox
       borderWidth="1px"
-      borderRadius="lg"
+      rounded="lg"
       overflow="hidden"
-      w={{ base: "auto", lg: "lg" }}
-      h="6.575rem"
+      w={{ base: "auto", xl: "xl" }}
+      h="7rem"
+      display="flex"
+      as="article"
     >
-      <HStack
-        h="full"
-        as="a"
-        href={url}
-        rel="noreferrer noopener nofollow"
-        target="_blank"
-      >
-        <LinkCardImage image={image} url={url} isLoading={isLoading} />
-        <VStack w="70%">
-          <SkeletonText noOfLines={5} isLoaded={!isLoading} p="1">
-            <Heading fontSize="md" noOfLines={1} mb="1">
-              {title}
-            </Heading>
-            {description && (
-              <Text fontSize="xs" color="blackAlpha.600" noOfLines={2} mb="1">
-                {description}
-              </Text>
-            )}
-            <LinkCardURLText favicon={favicon} url={url} />
-          </SkeletonText>
-        </VStack>
-      </HStack>
-    </Box>
+      <LinkCardImage image={image} url={url} />
+      <Stack p="1">
+        <Heading size="sm" noOfLines={1} m="1">
+          <LinkOverlay href={url} rel="noreferrer noopener nofollow" target="_blank">
+            {title}
+          </LinkOverlay>
+        </Heading>
+        {description && (
+          <Text fontSize="xs" color="blackAlpha.600" noOfLines={2} mb="1">
+            {description}
+          </Text>
+        )}
+        <LinkCardURLText favicon={favicon} url={url} />
+      </Stack>
+    </LinkBox>
   );
 };
 
