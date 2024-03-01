@@ -6,7 +6,7 @@ import ArticleCardsGridList from "@/app/features/articles/components/ArticleCard
 import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedOut";
 import { useGetLikedArticles } from "@/app/features/me/hooks/useGetLikedArticles";
 import GoBackLink from "@/app/components/atoms/GoBackLink";
-import LoadingSpinner from "@/app/components/atoms/LoadingSpinner";
+import LoadingSpinner from "@/app/components/atoms/spinners/LoadingSpinner";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
 const UserLikesPage: React.FC = () => {
