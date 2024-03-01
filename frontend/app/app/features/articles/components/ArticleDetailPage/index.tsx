@@ -78,7 +78,7 @@ const ArticleDetailPage: React.FC<Props> = ({ articleData, isUser }) => {
                 isLiked={isLiked}
                 totalLiked={totalLiked}
               />
-              <Flex alignItems="center" color="blackAlpha.500" gap="2">
+              <Flex alignItems="center" color="gray.500" gap="2">
                 <Icon as={BiComment} />
                 <Text>{comments.length}</Text>
               </Flex>
