@@ -1,6 +1,7 @@
 "use client";
 
 import {
+  Box,
   MenuItem,
   Modal,
   ModalBody,
@@ -69,6 +70,8 @@ const UpdateArticleButtonWithFormModal: React.FC<Props> = ({ articleData }) => {
               error={errors.content}
               isRequired={true}
             />
+            <Spacer my="3" />
+
             <InputField
               name="portfolioSiteUrl"
               label="ポートフォリオサイトURL"
@@ -76,14 +79,17 @@ const UpdateArticleButtonWithFormModal: React.FC<Props> = ({ articleData }) => {
               error={errors.portfolioSiteUrl}
               isRequired={true}
             />
-            <SelectBoxField
-              name="operationStatus"
-              label="運用状況"
-              options={operationStatusOptions}
-              placeholder="pick"
-              control={control}
-              error={errors.operationStatus}
-            />
+            <Box w="50%" my="3">
+              <SelectBoxField
+                name="operationStatus"
+                label="運用状況"
+                options={operationStatusOptions}
+                placeholder="pick"
+                control={control}
+                error={errors.operationStatus}
+              />
+            </Box>
+            <Spacer my="3" />
             <InputField
               name="repositoryUrl"
               label="リポジトリURL"
