@@ -1,4 +1,4 @@
-import CustomLink from "@/app/components/atoms/CustomLink";
+import CustomLink from "./CustomLink";
 
 import type { IntermediateRepresentation } from "linkifyjs";
 
