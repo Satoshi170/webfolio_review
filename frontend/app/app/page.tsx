@@ -42,10 +42,10 @@ const HomePage: React.FC = () => {
   return (
     <CenteredBox>
       {!isLogin && <AboutSiteSection />}
-      <Heading my="2">最近の投稿</Heading>
+      <Heading my="2">話題の投稿</Heading>
       <ArticleCardsGridList articlesData={popularArticlesData} />
       <SeeMoreButton onClick={() => router.push("/articles")} />
-      <Heading my="2">話題の投稿</Heading>
+      <Heading my="2">最近の投稿</Heading>
       <ArticleCardsGridList articlesData={latestArticlesData} />
       <SeeMoreButton onClick={() => router.push("/articles")} />
     </CenteredBox>
