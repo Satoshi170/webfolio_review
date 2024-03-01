@@ -32,14 +32,14 @@ const UserCommentsPage: React.FC = () => {
 
   if (commentDatas.length === 0) {
     return (
-      <CenteredBox>
+      <CenteredBox centerContent>
         <Text>まだ投稿にコメントをしていません</Text>
       </CenteredBox>
     );
   }
 
   return (
-    <CenteredBox>
+    <CenteredBox centerContent>
       <GoBackLink />
       {commentDatas.map((commentData, i) => (
         <Card key={i} w={{ base: "auto", md: "md" }} rounded="none">
