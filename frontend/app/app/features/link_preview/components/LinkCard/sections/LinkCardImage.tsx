@@ -7,28 +7,22 @@ import { Box, Image } from "@chakra-ui/react";
 interface LinkCardImageProps {
   image: string | null;
   url: string;
-  isLoading?: boolean;
 }
 
-const LinkCardImage: React.FC<LinkCardImageProps> = ({
-  image,
-  url,
-  isLoading = false
-}) => {
+const LinkCardImage: React.FC<LinkCardImageProps> = ({ image, url }) => {
   const [hasError, setHasError] = useState(false);
-  const widePercent = "30%";
+  const widePercent = "35%";
 
-  if (isLoading || hasError || !image) {
+  if (hasError || !image) {
     return <Box w={widePercent} h="full" bg="gray.400" />;
   }
 
   return (
     <Image
       w={widePercent}
-      h="full"
       src={image}
       alt={url}
-      objectFit="cover"
+      objectFit="scale-down"
       onError={() => {
         setHasError(true);
       }}
