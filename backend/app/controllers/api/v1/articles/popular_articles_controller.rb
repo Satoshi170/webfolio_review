@@ -6,11 +6,7 @@ class Api::V1::Articles::PopularArticlesController < ApplicationController
       order('COUNT(goods.id) DESC').
       limit(3)
 
-    render json: {
-             status: "success",
-             message: "Loaded articles",
-             data: Articles::ArticleResource.new(articles).serializable_hash,
-           },
+    render json: Articles::ArticleResource.new(articles).serializable_hash,
            status: :ok
   end
 end

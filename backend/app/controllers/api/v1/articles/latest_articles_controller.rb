@@ -4,11 +4,7 @@ class Api::V1::Articles::LatestArticlesController < ApplicationController
       order(updated_at: :desc).
       limit(3)
 
-    render json: {
-             status: "success",
-             message: "Loaded articles",
-             data: Articles::ArticleResource.new(articles).serializable_hash,
-           },
+    render json: Articles::ArticleResource.new(articles).serializable_hash,
            status: :ok
   end
 end
