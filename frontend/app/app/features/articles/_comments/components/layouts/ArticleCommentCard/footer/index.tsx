@@ -2,7 +2,7 @@
 
 import { CardFooter, Divider, Flex, Stack } from "@chakra-ui/react";
 
-import UpdatedDateText from "@/app/components/atoms/texts/UpdatedDateText";
+import { UpdatedDateText } from "@/app/components/atoms/texts";
 
 import ArticleCommentTags from "./sections/ArticleCommentTags";
 import { useCommentData } from "../../../../hooks/useCommentData";
