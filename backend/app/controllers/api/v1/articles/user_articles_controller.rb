@@ -8,11 +8,7 @@ class Api::V1::Articles::UserArticlesController < ApplicationController
     if user.nil?
       render json: { status: "error", message: "User can't find" }, status: :not_found
     else
-      render json: {
-               status: "success",
-               message: "Loaded articles",
-               data: Articles::UserArticleResource.new(user).serializable_hash,
-             },
+      render json: Articles::UserArticleResource.new(user).serializable_hash,
              status: :ok
     end
   end
