@@ -20,7 +20,7 @@ RSpec.describe "Api::V1::Articles::UserArticles", type: :request do
 
         expect(response).to have_http_status(:ok)
         json_response = JSON.parse(response.body)
-        expect(json_response["data"]["articles"].map do |article|
+        expect(json_response["articles"].map do |article|
                  article["user"]["id"]
                end).to all(eq(user1.id))
       end
