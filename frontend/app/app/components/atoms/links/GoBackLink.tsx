@@ -8,7 +8,7 @@ interface Props {
   text?: string;
 }
 
-const GoBackLink: React.FC<Props> = ({ text = "戻る" }) => {
+export const GoBackLink: React.FC<Props> = ({ text = "戻る" }) => {
   const router = useRouter();
 
   return (
@@ -17,5 +17,3 @@ const GoBackLink: React.FC<Props> = ({ text = "戻る" }) => {
     </Link>
   );
 };
-
-export default GoBackLink;
