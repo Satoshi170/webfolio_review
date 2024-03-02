@@ -14,7 +14,7 @@ import {
 import { BiComment } from "react-icons/bi";
 
 import LinkCardWithMetaData from "@/app/features/link_preview/components/LinkCard";
-import UpdatedDateText from "@/app/components/atoms/texts/UpdatedDateText";
+import { UpdatedDateText } from "@/app/components/atoms/texts";
 import UserIcon from "@/app/components/atoms/users/UserIcon";
 
 import OperationStatusBadge from "./OperationStatusBadge";

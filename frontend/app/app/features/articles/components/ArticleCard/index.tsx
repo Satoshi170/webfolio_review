@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { AiOutlineHeart } from "react-icons/ai";
 
-import UpdatedDateText from "@/app/components/atoms/texts/UpdatedDateText";
+import { UpdatedDateText } from "@/app/components/atoms/texts";
 import UserIcon from "@/app/components/atoms/users/UserIcon";
 
 import type { ArticleData } from "../../types/articleData";

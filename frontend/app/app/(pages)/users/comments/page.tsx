@@ -18,7 +18,7 @@ import ArticleCommentTags from "@/app/features/articles/_comments/components/lay
 import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedOut";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 import { GoBackLink } from "@/app/components/atoms/links";
-import UpdatedDateText from "@/app/components/atoms/texts/UpdatedDateText";
+import { UpdatedDateText } from "@/app/components/atoms/texts";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
 const UserCommentsPage: React.FC = () => {
