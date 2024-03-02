@@ -8,8 +8,7 @@ import { Text } from "@chakra-ui/react";
 import ArticleCardsGridList from "@/app/features/articles/components/ArticleCardsGridList";
 import { useGetUserArticles } from "@/app/features/articles/hooks/useGetUserArticles";
 import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
-import { GoBackLink } from "@/app/components/atoms/links";
-import { LoadingSpinner } from "@/app/components/atoms/spinners";
+import { GoBackLink, LoadingSpinner } from "@/app/components/atoms";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
 const UserIdPostsPage: React.FC = () => {

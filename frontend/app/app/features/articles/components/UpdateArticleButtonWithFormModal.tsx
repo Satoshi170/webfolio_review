@@ -13,7 +13,7 @@ import {
   Spacer
 } from "@chakra-ui/react";
 
-import { SubmitButton } from "@/app/components/atoms/buttons";
+import { SubmitButton } from "@/app/components/atoms";
 import InputField from "@/app/components/molecules/fields/InputField";
 import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
