@@ -3,7 +3,7 @@ import { candidateTagData } from "../datas/tags";
 import type {
   MapOptions,
   Option
-} from "@/app/components/molecules/fields/SelectBoxField/options/types";
+} from "@/app/components/molecules/fields/SelectBoxField/types";
 
 const commentTagMappingOptions: MapOptions<typeof candidateTagData> = {
   "bug report": {

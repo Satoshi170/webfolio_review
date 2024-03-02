@@ -15,9 +15,9 @@ import {
 
 import InputField from "@/app/components/molecules/fields/InputField";
 import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
-import { operationStatusOptions } from "@/app/components/molecules/fields/SelectBoxField/options/operationStatusOptions";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
 
+import { operationStatusOptions } from "../constants/operationStatusOptions";
 import { useCreateArticleForm } from "../hooks/useCreateArticleForm";
 
 const CreateArticleButtonWithFormModal: React.FC = () => {
