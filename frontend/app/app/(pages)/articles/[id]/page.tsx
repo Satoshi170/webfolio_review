@@ -8,7 +8,7 @@ import { useGetArticle } from "@/app/features/articles/hooks/useGetArticle";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
 import { GoBackLink } from "@/app/components/atoms/links";
-import LoadingSpinner from "@/app/components/atoms/spinners/LoadingSpinner";
+import { LoadingSpinner } from "@/app/components/atoms/spinners";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
 const PostsIdPage: React.FC = () => {

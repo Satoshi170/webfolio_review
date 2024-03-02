@@ -2,7 +2,7 @@
 
 import { Flex, Spinner } from "@chakra-ui/react";
 
-const FullPageLoadingSpinner = () => {
+export const FullPageLoadingSpinner = () => {
   return (
     <Flex h="100vh" justifyContent="center" alignItems="center">
       <Spinner
@@ -15,5 +15,3 @@ const FullPageLoadingSpinner = () => {
     </Flex>
   );
 };
-
-export default FullPageLoadingSpinner;
