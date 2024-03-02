@@ -9,7 +9,7 @@ interface Props {
   text: string;
 }
 
-const MessengerLinkButton: React.FC<Props> = ({ href, text }) => {
+export const BlueLinkButton: React.FC<Props> = ({ href, text }) => {
   return (
     <Button
       as={NextLink}
@@ -21,5 +21,3 @@ const MessengerLinkButton: React.FC<Props> = ({ href, text }) => {
     </Button>
   );
 };
-
-export default MessengerLinkButton;
