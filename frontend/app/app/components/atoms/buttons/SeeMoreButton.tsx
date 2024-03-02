@@ -8,12 +8,10 @@ interface Props {
   onClick: () => void;
 }
 
-const SeeMoreButton: React.FC<Props> = ({ onClick }) => {
+export const SeeMoreButton: React.FC<Props> = WithSignInAlert(({ onClick }) => {
   return (
     <Button onClick={onClick} w="full" textAlign="center" variant="link" my="3">
       もっと見る
     </Button>
   );
-};
-
-export default WithSignInAlert(SeeMoreButton);
+});

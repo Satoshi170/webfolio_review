@@ -8,7 +8,7 @@ interface Props {
   isDisabled: boolean;
 }
 
-const SubmitButton: React.FC<Props> = ({ text, isLoading, isDisabled }) => {
+export const SubmitButton: React.FC<Props> = ({ text, isLoading, isDisabled }) => {
   return (
     <Button
       colorScheme="messenger"
@@ -20,5 +20,3 @@ const SubmitButton: React.FC<Props> = ({ text, isLoading, isDisabled }) => {
     </Button>
   );
 };
-
-export default SubmitButton;
