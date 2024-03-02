@@ -5,7 +5,7 @@ import { Text } from "@chakra-ui/react";
 import ArticleCardsGridList from "@/app/features/articles/components/ArticleCardsGridList";
 import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedOut";
 import { useGetLikedArticles } from "@/app/features/me/hooks/useGetLikedArticles";
-import { GoBackLink } from "@/app/components/atoms/links";
+import { GoBackLink } from "@/app/components/atoms";
 import { LoadingSpinner } from "@/app/components/atoms/spinners";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 

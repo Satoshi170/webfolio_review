@@ -2,7 +2,7 @@
 
 import { CardHeader, Flex, Heading } from "@chakra-ui/react";
 
-import { UserIcon } from "@/app/components/atoms/images";
+import { UserIcon } from "@/app/components/atoms";
 
 import OptionCommentMenuButton from "./sections/OptionCommentMenuButton";
 import { useCommentData } from "../../../../hooks/useCommentData";

@@ -12,7 +12,7 @@ import {
 } from "@chakra-ui/react";
 
 import { useArticleData } from "@/app/features/articles/hooks/useArticleData";
-import { SubmitButton } from "@/app/components/atoms/buttons";
+import { SubmitButton } from "@/app/components/atoms";
 import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
 import TextareaField from "@/app/components/molecules/fields/TextareaField";
 
