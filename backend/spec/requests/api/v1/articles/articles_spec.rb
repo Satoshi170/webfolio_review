@@ -13,8 +13,7 @@ RSpec.describe "Api::V1::Articles::Articles", type: :request do
 
       expect(response).to have_http_status(:ok)
       json_response = JSON.parse(response.body)
-      expect(json_response["status"]).to eq("success")
-      expect(json_response["data"].length).to eq(3)
+      expect(json_response.length).to eq(3)
     end
   end
 
@@ -107,8 +106,7 @@ RSpec.describe "Api::V1::Articles::Articles", type: :request do
 
         expect(response).to have_http_status(:ok)
         json_response = JSON.parse(response.body)
-        expect(json_response["status"]).to eq("success")
-        expect(json_response["data"]["id"]).to eq(article.id)
+        expect(json_response["id"]).to eq(article.id)
       end
     end
   end
