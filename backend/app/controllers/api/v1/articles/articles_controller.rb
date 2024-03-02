@@ -7,11 +7,7 @@ class Api::V1::Articles::ArticlesController < ApplicationController
     articles = Article.includes(:goods, :comments, user: { image_attachment: :blob }).
       order(updated_at: :desc)
 
-    render json: {
-             status: "success",
-             message: "Loaded articles",
-             data: Articles::ArticleResource.new(articles).serializable_hash,
-           },
+    render json: Articles::ArticleResource.new(articles).serializable_hash,
            status: :ok
   end
 
@@ -35,11 +31,7 @@ class Api::V1::Articles::ArticlesController < ApplicationController
   end
 
   def show
-    render json: {
-             status: "success",
-             message: "Loaded the article",
-             data: Articles::ArticleResource.new(@article).serializable_hash,
-           },
+    render json: Articles::ArticleResource.new(@article).serializable_hash,
            status: :ok
   end
 
