@@ -8,7 +8,11 @@ interface Props {
   isDisabled: boolean;
 }
 
-const SubmitFullWideButton: React.FC<Props> = ({ text, isLoading, isDisabled }) => {
+export const SubmitFullWideButton: React.FC<Props> = ({
+  text,
+  isLoading,
+  isDisabled
+}) => {
   return (
     <Button
       mt="4"
@@ -23,5 +27,3 @@ const SubmitFullWideButton: React.FC<Props> = ({ text, isLoading, isDisabled }) 
     </Button>
   );
 };
-
-export default SubmitFullWideButton;
