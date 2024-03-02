@@ -8,26 +8,26 @@ RSpec.describe "Api::V1::Me::LikedArticles", type: :request do
 
   describe "GET /me/liked_articles" do
     context "user.goodsが[]の場合" do
-      it "200ステータスコードを返し、dataは[]である" do
+      it "200ステータスコードを返し、レスポンスボディは[]である" do
         get "/api/v1/me/liked_articles", headers: auth_headers
         expect(response).to have_http_status(:success)
         json_response = JSON.parse(response.body)
-        expect(json_response["data"]).to be_empty
+        expect(json_response).to be_empty
       end
     end
 
-    context "test" do
+    context "user.goodsが[]でない場合" do
       before do
         articles.each do |article|
           create(:good, user: user, article: article)
         end
       end
 
-      it "200ステータスコードを返し、dataの数はarticlesの数と一致する" do
+      it "200ステータスコードを返し、レスポンスボディの配列の要素数はarticlesの数と一致する" do
         get "/api/v1/me/liked_articles", headers: auth_headers
         expect(response).to have_http_status(:success)
         json_response = JSON.parse(response.body)
-        expect(json_response["data"].size).to eq(articles.size)
+        expect(json_response.size).to eq(articles.size)
       end
     end
   end
