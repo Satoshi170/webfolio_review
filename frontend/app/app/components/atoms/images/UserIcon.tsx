@@ -7,7 +7,8 @@ interface UserIconProps {
   name: string;
   diameter: number;
 }
-const UserIcon: React.FC<UserIconProps> = ({ image, name, diameter }) => {
+
+export const UserIcon: React.FC<UserIconProps> = ({ image, name, diameter }) => {
   const img = image ? image : "/defaultUserImage.png";
   return (
     <Image
@@ -20,5 +21,3 @@ const UserIcon: React.FC<UserIconProps> = ({ image, name, diameter }) => {
     />
   );
 };
-
-export default UserIcon;
