@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 
 import { loadingState } from "@/app/stores/atoms/loadingState";
-import FullPageLoadingSpinner from "@/app/components/atoms/spinners/FullPageLoadingSpinner";
+import { FullPageLoadingSpinner } from "@/app/components/atoms/spinners";
 
 import { useCheckLogin } from "./useCheckLogin";
 

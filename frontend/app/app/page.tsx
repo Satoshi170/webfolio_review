@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Heading, Text } from "@chakra-ui/react";
 
 import { SeeMoreButton } from "./components/atoms/buttons";
-import LoadingSpinner from "./components/atoms/spinners/LoadingSpinner";
+import { LoadingSpinner } from "./components/atoms/spinners";
 import AboutSiteSection from "./components/organisms/AboutSiteSection";
 import CenteredBox from "./components/styledWrappers/CenteredBox";
 import ArticleCardsGridList from "./features/articles/components/ArticleCardsGridList";

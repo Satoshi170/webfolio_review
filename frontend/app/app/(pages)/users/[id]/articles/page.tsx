@@ -9,7 +9,7 @@ import ArticleCardsGridList from "@/app/features/articles/components/ArticleCard
 import { useGetUserArticles } from "@/app/features/articles/hooks/useGetUserArticles";
 import { getIdOrTriggerNotFound } from "@/app/utils/getIdOrTriggerNotFound";
 import { GoBackLink } from "@/app/components/atoms/links";
-import LoadingSpinner from "@/app/components/atoms/spinners/LoadingSpinner";
+import { LoadingSpinner } from "@/app/components/atoms/spinners";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
 const UserIdPostsPage: React.FC = () => {
