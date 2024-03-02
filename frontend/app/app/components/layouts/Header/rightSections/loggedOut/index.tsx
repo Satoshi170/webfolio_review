@@ -15,8 +15,8 @@ import {
 } from "@chakra-ui/react";
 import { RxHamburgerMenu } from "react-icons/rx";
 
-import SignInLinkButton from "@/app/components/molecules/actionButtons/auth/SignInLinkButton";
-import SignUpLinkButton from "@/app/components/molecules/actionButtons/auth/SignUpLinkButton";
+import SignInLinkButton from "@/app/features/auth/components/SignInLinkButton";
+import SignUpLinkButton from "@/app/features/auth/components/SignUpLinkButton";
 
 const LoggedOutHeaderRightSection: React.FC = () => {
   const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
