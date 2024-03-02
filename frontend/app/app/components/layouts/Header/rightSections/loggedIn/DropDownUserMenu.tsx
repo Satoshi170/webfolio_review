@@ -15,7 +15,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 
 import SignOutButtonWithModal from "@/app/features/auth/signOut/SignOutButtonWithModal";
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
-import UserIcon from "@/app/components/atoms/users/UserIcon";
+import { UserIcon } from "@/app/components/atoms/images";
 
 const DropDownUserMenuButton: React.FC = () => {
   const { isLogin, userData } = useGetLoginState();
