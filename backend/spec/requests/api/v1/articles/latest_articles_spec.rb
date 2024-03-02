@@ -13,9 +13,9 @@ RSpec.describe "Api::V1::Articles::LatestArticles", type: :request do
 
       expect(response).to have_http_status(:ok)
       json_response = JSON.parse(response.body)
-      expect(json_response["data"].length).to eq(3)
+      expect(json_response.length).to eq(3)
 
-      ids = json_response["data"].map { |article| article["id"] }
+      ids = json_response.map { |article| article["id"] }
       expected_ids = [article1, article2, article3].map(&:id)
 
       expect(ids).to match_array(expected_ids)
