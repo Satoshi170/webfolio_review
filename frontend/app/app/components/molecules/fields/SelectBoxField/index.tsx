@@ -9,15 +9,19 @@ import { getErrorMessageForMultiSelect } from "@/app/utils/getErrorMessageForMul
 import type { GroupBase, MultiValue, OptionBase, SingleValue } from "chakra-react-select";
 import type { Control, FieldError, FieldValues, Merge, Path } from "react-hook-form";
 
-interface Option extends OptionBase {
+export interface SelectOption extends OptionBase {
   label: string;
   value: string;
 }
 
+export type MapSelectOptions<T> = {
+  [K in keyof T]: SelectOption;
+};
+
 interface Props<T extends FieldValues> {
   name: Path<T>;
   label?: string;
-  options: Option[];
+  options: SelectOption[];
   placeholder?: string;
   control: Control<T>;
   error: Merge<FieldError, (FieldError | undefined)[]> | undefined;
@@ -25,7 +29,7 @@ interface Props<T extends FieldValues> {
   isRequired?: boolean;
 }
 
-const SelectBoxField = <T extends FieldValues>({
+export const SelectBoxField = <T extends FieldValues>({
   name,
   label,
   options,
@@ -44,7 +48,7 @@ const SelectBoxField = <T extends FieldValues>({
       render={({ field: { onChange, onBlur, ref, value } }) => (
         <FormControl id={name} isRequired={isRequired} isInvalid={!!error}>
           {label && <FormLabel htmlFor={name as string}>{label}</FormLabel>}
-          <Select<Option, typeof isMulti, GroupBase<Option>>
+          <Select<SelectOption, typeof isMulti, GroupBase<SelectOption>>
             isMulti={isMulti}
             name={name as string}
             options={options}
@@ -63,11 +67,13 @@ const SelectBoxField = <T extends FieldValues>({
             onChange={
               isMulti
                 ? (newValue) => {
-                    const values = (newValue as MultiValue<Option>).map((x) => x.value);
+                    const values = (newValue as MultiValue<SelectOption>).map(
+                      (x) => x.value
+                    );
                     onChange(values);
                   }
                 : (newValue) => {
-                    const value = (newValue as SingleValue<Option>)?.value;
+                    const value = (newValue as SingleValue<SelectOption>)?.value;
                     onChange(value);
                   }
             }
@@ -79,5 +85,3 @@ const SelectBoxField = <T extends FieldValues>({
     ></Controller>
   );
 };
-
-export default SelectBoxField;

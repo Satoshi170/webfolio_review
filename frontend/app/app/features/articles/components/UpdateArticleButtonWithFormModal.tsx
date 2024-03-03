@@ -14,9 +14,11 @@ import {
 } from "@chakra-ui/react";
 
 import { SubmitButton } from "@/app/components/atoms";
-import InputField from "@/app/components/molecules/fields/InputField";
-import SelectBoxField from "@/app/components/molecules/fields/SelectBoxField";
-import TextareaField from "@/app/components/molecules/fields/TextareaField";
+import {
+  InputField,
+  SelectBoxField,
+  TextareaField
+} from "@/app/components/molecules/fields";
 
 import { operationStatusOptions } from "../constants/operationStatusOptions";
 import { useUpdateArticleForm } from "../hooks/useUpdateArticleForm";

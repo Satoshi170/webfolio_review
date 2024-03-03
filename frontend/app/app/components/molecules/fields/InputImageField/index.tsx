@@ -27,7 +27,7 @@ export interface InputImageFieldProps<T extends FieldValues> {
   isRequired?: boolean;
 }
 
-const InputImageField = <T extends FieldValues>({
+export const InputImageField = <T extends FieldValues>({
   name,
   label,
   error,
@@ -72,5 +72,3 @@ const InputImageField = <T extends FieldValues>({
     </FormControl>
   );
 };
-
-export default InputImageField;

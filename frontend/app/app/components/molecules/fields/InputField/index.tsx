@@ -13,7 +13,7 @@ export interface InputFieldProps<T extends FieldValues> {
   isRequired?: boolean;
 }
 
-const InputField = <T extends FieldValues>({
+export const InputField = <T extends FieldValues>({
   name,
   label,
   register,
@@ -29,5 +29,3 @@ const InputField = <T extends FieldValues>({
     </FormControl>
   );
 };
-
-export default InputField;
