@@ -3,8 +3,7 @@
 import { Spacer, Text } from "@chakra-ui/react";
 
 import { SubmitFullWideButton } from "@/app/components/atoms";
-import InputField from "@/app/components/molecules/fields/InputField";
-import InputImageField from "@/app/components/molecules/fields/InputImageField";
+import { InputField, InputImageField } from "@/app/components/molecules/fields";
 
 import { useUpdateAccountForm } from "./useUpdateAccountForm";
 

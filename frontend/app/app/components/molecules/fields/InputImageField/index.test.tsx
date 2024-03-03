@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import type { InputImageFieldProps } from ".";
 import type { FieldError } from "react-hook-form";
 
-import InputImageField from ".";
+import { InputImageField } from ".";
 
 interface TestImageFormValues {
   image: File;

@@ -13,7 +13,7 @@ export interface TextareaFieldProps<T extends FieldValues> {
   isRequired?: boolean;
 }
 
-const TextareaField = <T extends FieldValues>({
+export const TextareaField = <T extends FieldValues>({
   name,
   label,
   placeholder,
@@ -34,5 +34,3 @@ const TextareaField = <T extends FieldValues>({
     </FormControl>
   );
 };
-
-export default TextareaField;

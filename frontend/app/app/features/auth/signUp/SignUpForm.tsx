@@ -1,7 +1,7 @@
 "use client";
 
 import { SubmitFullWideButton } from "@/app/components/atoms";
-import InputField from "@/app/components/molecules/fields/InputField";
+import { InputField } from "@/app/components/molecules/fields";
 
 import { useSignUpForm } from "./useSignUpForm";
 

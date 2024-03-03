@@ -1,11 +1,10 @@
 import { candidateOperationStatusData } from "@/app/constants/datas/portfolios/operationStatuses";
 
-import type {
-  MapOptions,
-  Option
-} from "@/app/components/molecules/fields/SelectBoxField/types";
+import type { MapSelectOptions, SelectOption } from "@/app/components/molecules/fields";
 
-const operationStatusMappingOptions: MapOptions<typeof candidateOperationStatusData> = {
+const operationStatusMappingOptions: MapSelectOptions<
+  typeof candidateOperationStatusData
+> = {
   active: { label: "稼働中", value: candidateOperationStatusData.active.toString() },
   maintenance: {
     label: "メンテナンス中",
@@ -17,6 +16,6 @@ const operationStatusMappingOptions: MapOptions<typeof candidateOperationStatusD
   }
 };
 
-export const operationStatusOptions: Option[] = Object.values(
+export const operationStatusOptions: SelectOption[] = Object.values(
   operationStatusMappingOptions
 );
