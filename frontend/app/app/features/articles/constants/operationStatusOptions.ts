@@ -1,6 +1,6 @@
 import { candidateOperationStatusData } from "@/app/constants/datas/portfolios/operationStatuses";
 
-import type { MapSelectOptions, SelectOption } from "@/app/components/molecules/fields";
+import type { MapSelectOptions, SelectOption } from "@/app/components/molecules";
 
 const operationStatusMappingOptions: MapSelectOptions<
   typeof candidateOperationStatusData

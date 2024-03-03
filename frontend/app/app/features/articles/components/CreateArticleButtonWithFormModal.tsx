@@ -13,11 +13,7 @@ import {
   Spacer
 } from "@chakra-ui/react";
 
-import {
-  InputField,
-  SelectBoxField,
-  TextareaField
-} from "@/app/components/molecules/fields";
+import { InputField, SelectBoxField, TextareaField } from "@/app/components/molecules";
 
 import { operationStatusOptions } from "../constants/operationStatusOptions";
 import { useCreateArticleForm } from "../hooks/useCreateArticleForm";
