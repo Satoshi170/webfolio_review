@@ -13,7 +13,7 @@ import {
 
 import { useArticleData } from "@/app/features/articles/hooks/useArticleData";
 import { SubmitButton } from "@/app/components/atoms";
-import { SelectBoxField, TextareaField } from "@/app/components/molecules/fields";
+import { SelectBoxField, TextareaField } from "@/app/components/molecules";
 
 import { commentTagOptions } from "./commentTagOptions";
 import { useCommentData } from "../hooks/useCommentData";

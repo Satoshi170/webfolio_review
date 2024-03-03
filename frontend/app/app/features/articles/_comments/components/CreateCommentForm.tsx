@@ -3,7 +3,7 @@
 import { Box, Card, CardBody, CardFooter } from "@chakra-ui/react";
 
 import { SubmitButton } from "@/app/components/atoms";
-import { SelectBoxField, TextareaField } from "@/app/components/molecules/fields";
+import { SelectBoxField, TextareaField } from "@/app/components/molecules";
 
 import { commentTagOptions } from "./commentTagOptions";
 import { useCreateCommentForm } from "../hooks/useCreateCommentForm";

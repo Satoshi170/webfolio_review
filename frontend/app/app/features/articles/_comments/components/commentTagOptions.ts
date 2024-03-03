@@ -1,6 +1,6 @@
 import { candidateTagData } from "../datas/tags";
 
-import type { MapSelectOptions, SelectOption } from "@/app/components/molecules/fields";
+import type { MapSelectOptions, SelectOption } from "@/app/components/molecules";
 
 const commentTagMappingOptions: MapSelectOptions<typeof candidateTagData> = {
   "bug report": {
