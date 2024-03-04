@@ -6,12 +6,14 @@ import {
   mockSetSuccessToast,
   mockUseSetToastState
 } from "@/__tests__/mocks/hooks/recoil/toastState/mockUseSetToastState";
+import { mockNavigation } from "@/__tests__/mocks/mockNavigation";
 import { mockReactHookForm } from "@/__tests__/mocks/reactHookForm/mockReactHookForm";
 
 import { postArticle } from "../../api/postArticle";
 import { useCreateArticleForm } from "../useCreateArticleForm";
 
 jest.mock("react-hook-form", () => mockReactHookForm);
+jest.mock("next/navigation", () => mockNavigation);
 jest.mock("@/app/hooks/recoil/toastState/useSetToastState", () => mockUseSetToastState);
 jest.mock("../../api/postArticle");
 

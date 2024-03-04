@@ -7,10 +7,16 @@ import { UnauthorizedResponseDataSchema } from "@/app/libs/zod/apiErrorResponses
 import { PostPortfoliosFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/portfolio/postPortfoliosDataSchema";
 
 import type { PostArticleErrorData, PostArticleParams } from "../types/api/postArticle";
+import type { ArticleData } from "../types/articleData";
 
-export const postArticle = async (params: PostArticleParams): Promise<void> => {
+export const postArticle = async (params: PostArticleParams): Promise<ArticleData> => {
   try {
-    await api.post("/articles", params, addAuthInfoToRequest({}));
+    const response = await api.post<ArticleData>(
+      "/articles",
+      params,
+      addAuthInfoToRequest({})
+    );
+    return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       const responseData = error.response.data as PostArticleErrorData;
