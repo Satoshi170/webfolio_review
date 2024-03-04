@@ -43,15 +43,13 @@ RSpec.describe "Api::V1::Articles::Articles", type: :request do
           end.to change(Article, :count).by(1)
 
           expect(response).to have_http_status(:created)
-          json_response = JSON.parse(response.body)
-          expect(json_response).to eq({
-            "status" => "success",
-            "message" => "Article created successfully",
-          })
 
           created_article = Article.last
           expect(created_article.title).to eq(valid_article_params[:title])
           expect(created_article.content).to eq(valid_article_params[:content])
+
+          json_response = JSON.parse(response.body)
+          expect(json_response["id"]).to eq(created_article.id.to_i)
         end
       end
 

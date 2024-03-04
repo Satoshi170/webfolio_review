@@ -15,10 +15,7 @@ class Api::V1::Articles::ArticlesController < ApplicationController
     @article = current_api_v1_user.articles.build(article_params)
 
     if @article.save
-      render json: {
-               status: "success",
-               message: "Article created successfully",
-             },
+      render json: Articles::ArticleResource.new(@article).serializable_hash,
              status: :created
     else
       render json: {
