@@ -83,4 +83,26 @@ RSpec.describe "Api::V1::Articles::Goods", type: :request do
       end
     end
   end
+
+  describe "GET /goods/check" do
+    context "すでにいいね済みの場合" do
+      let!(:good) { create(:good, user: user, article: article) }
+
+      it "is_likedはtrueである" do
+        get "/api/v1/articles/#{article.id}/goods/check", headers: auth_headers
+        expect(response).to have_http_status(:ok)
+        json_response = JSON.parse(response.body)
+        expect(json_response["is_liked"]).to be true
+      end
+    end
+
+    context "いいねされていない場合" do
+      it "is_likedはfalseである" do
+        get "/api/v1/articles/#{article.id}/goods/check", headers: auth_headers
+        expect(response).to have_http_status(:ok)
+        json_response = JSON.parse(response.body)
+        expect(json_response["is_liked"]).to be false
+      end
+    end
+  end
 end
