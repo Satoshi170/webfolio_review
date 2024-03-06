@@ -1,5 +1,5 @@
 class Api::V1::Articles::GoodsController < ApplicationController
-  before_action :authenticate_api_v1_user!, only: [:create, :destroy]
+  before_action :authenticate_api_v1_user!, only: [:create, :destroy, :check]
 
   def create
     good = Good.new(user_id: current_api_v1_user.id, article_id: params[:article_id])
@@ -24,5 +24,12 @@ class Api::V1::Articles::GoodsController < ApplicationController
     good = Good.find_by!(user_id: current_api_v1_user.id, article_id: params[:article_id])
     good.destroy
     render json: { status: 'success', message: 'Good destroyed' }, status: :ok
+  end
+
+  def check
+    article_id = params[:article_id].to_i
+    is_liked = current_api_v1_user.goods.exists?(article_id: article_id)
+    render json: { is_liked: is_liked },
+           status: :ok
   end
 end

@@ -18,7 +18,9 @@ Rails.application.routes.draw do
 
       scope module: "articles" do
         resources :articles do
-          resource :goods, only: [:create, :destroy]
+          resource :goods, only: [:create, :destroy] do
+            get "check", on: :collection
+          end
           resources :comments, only: [:create, :update, :destroy]
         end
         resources :user_articles, only: [:index]
