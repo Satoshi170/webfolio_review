@@ -23,7 +23,7 @@ interface Props {
 }
 
 const ArticleCard: React.FC<Props> = ({ articleData }) => {
-  const { id, title, updatedAt, user, goods } = articleData;
+  const { id, title, updatedAt, user, totalLikes } = articleData;
 
   return (
     <Card w="full" h="auto" as={NextLink} href={`/articles/${id}`}>
@@ -39,7 +39,7 @@ const ArticleCard: React.FC<Props> = ({ articleData }) => {
       <CardFooter alignItems="center" justifyContent="space-between">
         <Flex alignItems="center" color="blackAlpha.500" gap="1">
           <Icon as={AiOutlineHeart} />
-          <Text>{goods.length}</Text>
+          <Text>{totalLikes}</Text>
         </Flex>
         <UpdatedDateText date={updatedAt} />
       </CardFooter>

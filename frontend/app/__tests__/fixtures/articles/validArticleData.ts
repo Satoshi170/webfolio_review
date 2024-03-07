@@ -9,9 +9,9 @@ export const validArticleData: ArticleData = {
   operationStatus: "active",
   portfolioSiteUrl: "http://example.cpm",
   repositoryUrl: "http://example.com",
+  totalLikes: 3,
   updatedAt: new Date(),
   user: validUserData,
-  goods: [{ userId: 1 }, { userId: 2 }, { userId: 3 }],
   comments: [
     {
       id: 1,
