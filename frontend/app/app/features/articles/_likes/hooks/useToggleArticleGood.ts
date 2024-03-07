@@ -58,7 +58,7 @@ export const useToggleLikeArticleGood = (articleData: ArticleData) => {
     void debouncedToggle();
   };
 
-  let totalLiked = articleData.goods.length;
+  let totalLiked = articleData.totalLikes;
 
   switch (initialLiked) {
     case true:

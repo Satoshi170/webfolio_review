@@ -5,6 +5,5 @@ export const validUserData: UserData = {
   name: "testuser",
   role: "user",
   image: "/defaultUserImage.png",
-  goods: [],
   comments: []
 };
