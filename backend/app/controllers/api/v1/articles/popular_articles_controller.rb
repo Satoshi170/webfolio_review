@@ -1,6 +1,6 @@
 class Api::V1::Articles::PopularArticlesController < ApplicationController
   def index
-    articles = Article.includes(:goods, :comments, user: { image_attachment: :blob }).
+    articles = Article.includes(:comments, user: { image_attachment: :blob }).
       left_joins(:goods).
       group(:id).
       order('COUNT(goods.id) DESC').

@@ -4,7 +4,7 @@ class Api::V1::Articles::ArticlesController < ApplicationController
   before_action :authorize_user_for_article!, only: [:update, :destroy]
 
   def index
-    articles = Article.includes(:goods, :comments, user: { image_attachment: :blob }).
+    articles = Article.includes(:comments, user: { image_attachment: :blob }).
       order(updated_at: :desc)
 
     render json: Articles::ArticleResource.new(articles).serializable_hash,

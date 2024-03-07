@@ -2,7 +2,7 @@ class Api::V1::Articles::UserArticlesController < ApplicationController
   before_action :set_user_id, only: [:index]
 
   def index
-    user = User.includes(:articles, { articles: [:goods, :comments] }, image_attachment: :blob).
+    user = User.includes(:articles, { articles: [:comments] }, image_attachment: :blob).
       find_by(id: @user_id)
 
     if user.nil?
