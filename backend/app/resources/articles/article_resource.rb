@@ -9,13 +9,10 @@ class Articles::ArticleResource
              :operation_status,
              :portfolio_site_url,
              :repository_url,
+             :total_likes,
              :updated_at
 
   one :user, resource: Users::UserResource
-
-  many :goods do
-    attributes :user_id
-  end
 
   many :comments, resource: Comments::CommentResource
 end
