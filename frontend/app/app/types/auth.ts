@@ -2,10 +2,6 @@ import type { CommentTagData } from "../features/articles/_comments/types";
 import type { UnauthorizedResponseDataSchema } from "../libs/zod/apiErrorResponses/auth/responseDataSchema";
 import type { z } from "zod";
 
-interface Good {
-  articleId: number;
-}
-
 interface Article {
   id: number;
   title: string;
@@ -22,7 +18,6 @@ export interface UserData {
   name: string;
   role: "user" | "guest";
   image: string;
-  goods: Good[];
   comments: Comment[];
 }
 

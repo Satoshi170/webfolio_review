@@ -9,10 +9,6 @@ class Users::AuthResource
     user.image_url
   end
 
-  many :goods do
-    attributes :article_id
-  end
-
   many :comments do
     attributes :content, :updated_at
 
