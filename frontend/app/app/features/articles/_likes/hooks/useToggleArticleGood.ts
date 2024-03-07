@@ -1,26 +1,29 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import useDebouncedCallback from "beautiful-react-hooks/useDebouncedCallback";
 
-import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 
+import { useGetIsLiked } from "./useGetIsLiked";
 import { deleteArticleGood } from "../api/deleteArticleGood";
 import { postArticleGood } from "../api/postArticleGood";
 
 import type { ArticleData } from "@/app/features/articles/types/articleData";
 
 export const useToggleLikeArticleGood = (articleData: ArticleData) => {
-  const { isLogin, userData } = useGetLoginState();
+  const { initialLiked, isLoading } = useGetIsLiked(articleData.id);
+  const [isLiked, setIsLiked] = useState<boolean>(false);
+  const isAlreadyLikedRef = useRef<boolean>(false);
+  const clickCountRef = useRef<number>(0);
+
+  useEffect(() => {
+    if (initialLiked !== undefined) {
+      setIsLiked(initialLiked);
+      isAlreadyLikedRef.current = initialLiked;
+    }
+  }, [initialLiked]);
+
   const { setUnexpectedErrorToast } = useSetToastState();
-
-  const initialLiked = isLogin
-    ? articleData.goods.some((good) => good.userId === userData.id)
-    : false;
-
-  const [isLiked, setIsLiked] = useState(initialLiked);
-  const isAlreadyLikedRef = useRef(initialLiked);
-  const clickCountRef = useRef(0);
 
   const debouncedToggle = useDebouncedCallback(
     async () => {
@@ -48,16 +51,22 @@ export const useToggleLikeArticleGood = (articleData: ArticleData) => {
   );
 
   const toggleLike = () => {
+    if (isLoading || initialLiked == undefined) return;
+
     setIsLiked(!isLiked);
     clickCountRef.current += 1;
     void debouncedToggle();
   };
 
-  let totalLiked: number;
-  if (initialLiked) {
-    totalLiked = articleData.goods.length - Number(!isLiked);
-  } else {
-    totalLiked = articleData.goods.length + Number(isLiked);
+  let totalLiked = articleData.goods.length;
+
+  switch (initialLiked) {
+    case true:
+      totalLiked -= Number(!isLiked);
+      break;
+    case false:
+      totalLiked += Number(isLiked);
+      break;
   }
 
   return { isLiked, toggleLike, totalLiked };
