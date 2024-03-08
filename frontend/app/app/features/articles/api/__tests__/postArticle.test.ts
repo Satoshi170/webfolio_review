@@ -1,3 +1,4 @@
+import { validArticleData } from "@/__tests__/fixtures/articles/validArticleData";
 import { validPostArticleData } from "@/__tests__/fixtures/articles/validPostArticleData";
 import { mockUnauthorizedResponse } from "@/__tests__/fixtures/auth/unauthorizedResponseData";
 import { mockUnexpectedResponse } from "@/__tests__/fixtures/unexpectedResponseData";
@@ -7,10 +8,7 @@ import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 
 import { postArticle } from "../postArticle";
 
-import type {
-  PostArticleFailedData,
-  PostArticleSuccessData
-} from "../../types/api/postArticle";
+import type { PostArticleFailedData } from "../../types/api/postArticle";
 
 jest.mock("@/app/libs/cookie/loadAuthInfo", () => mockAddAuthInfoToRequest);
 jest.mock("@/app/libs/axios/api", () => mockApi);
@@ -25,17 +23,12 @@ describe("postArticle", () => {
   });
 
   describe("リクエストに成功した時", () => {
-    const mockPostPortfoliosByIdSuccessData: PostArticleSuccessData = {
-      status: "success",
-      message: "successMessage"
-    };
-
-    const mockPostPortfoliosSuccessResponse = {
-      data: mockPostPortfoliosByIdSuccessData
+    const mockPostArticlesSuccessResponse = {
+      data: validArticleData
     };
 
     it("エラーをスローしない", async () => {
-      mockPost.mockResolvedValue(mockPostPortfoliosSuccessResponse);
+      mockPost.mockResolvedValue(mockPostArticlesSuccessResponse);
       await expect(postArticle(validPostArticleData)).resolves.not.toThrow();
     });
   });
@@ -53,7 +46,7 @@ describe("postArticle", () => {
       });
 
       describe("レスポンスデータの型がPatchPortfoliosByIdFailedDataを満たす場合", () => {
-        const mockPostPortfoliosFailedData: PostArticleFailedData = {
+        const mockPostArticlesFailedData: PostArticleFailedData = {
           status: "error",
           message: "failed",
           errors: ["failed"]
@@ -61,7 +54,7 @@ describe("postArticle", () => {
 
         const mockPostPortfoliosFailedResponse = {
           response: {
-            data: mockPostPortfoliosFailedData
+            data: mockPostArticlesFailedData
           }
         };
 
@@ -69,7 +62,7 @@ describe("postArticle", () => {
           mockAxios.isAxiosError.mockReturnValue(true);
           mockPost.mockRejectedValue(mockPostPortfoliosFailedResponse);
           await expect(postArticle(validPostArticleData)).rejects.toThrow(
-            mockPostPortfoliosFailedData.errors.join(", ")
+            mockPostArticlesFailedData.errors.join(", ")
           );
         });
       });
