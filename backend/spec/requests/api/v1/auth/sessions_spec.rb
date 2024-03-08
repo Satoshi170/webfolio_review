@@ -109,7 +109,6 @@ RSpec.describe "Api::V1::Auth::Sessions", type: :request do
             "id" => user.id,
             "name" => user.name,
             "image" => user.image_url,
-            "goods" => user.goods,
             "comments" => user.comments,
             "role" => "user",
           },
