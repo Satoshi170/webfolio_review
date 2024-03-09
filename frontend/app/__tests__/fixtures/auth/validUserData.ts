@@ -4,6 +4,5 @@ export const validUserData: UserData = {
   id: 1,
   name: "testuser",
   role: "user",
-  image: "/defaultUserImage.png",
-  comments: []
+  image: "/defaultUserImage.png"
 };
