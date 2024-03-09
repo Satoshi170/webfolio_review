@@ -12,6 +12,7 @@ export interface ArticleData {
   portfolioSiteUrl: string;
   repositoryUrl: string | null;
   updatedAt: Date;
+  totalComments: number;
   totalLikes: number;
   user: UserData;
   comments: CommentData[];
