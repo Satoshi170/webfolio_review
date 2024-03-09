@@ -1,7 +1,7 @@
 class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :article
-  has_many :comments_tags
+  has_many :comments_tags, dependent: :delete_all
   has_many :tags, through: :comments_tags
 
   validates :content,
