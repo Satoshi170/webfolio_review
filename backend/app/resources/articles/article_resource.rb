@@ -9,6 +9,7 @@ class Articles::ArticleResource
              :operation_status,
              :portfolio_site_url,
              :repository_url,
+             :total_comments,
              :total_likes,
              :updated_at
 
