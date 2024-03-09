@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_03_07_133939) do
+ActiveRecord::Schema[7.0].define(version: 2024_03_09_120037) do
   create_table "active_storage_attachments", charset: "utf8mb4", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -49,6 +49,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_03_07_133939) do
     t.string "portfolio_site_url", null: false
     t.string "repository_url"
     t.integer "total_likes", default: 0, null: false
+    t.integer "total_comments", default: 0, null: false
   end
 
   create_table "comments", charset: "utf8mb4", force: :cascade do |t|
