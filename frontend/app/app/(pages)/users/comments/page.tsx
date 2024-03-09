@@ -16,20 +16,16 @@ import {
 
 import ArticleCommentTags from "@/app/features/articles/_comments/components/layouts/ArticleCommentCard/footer/sections/ArticleCommentTags";
 import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedOut";
-import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
+import { useGetMyComments } from "@/app/features/me/hooks/useGetMyComments";
 import { GoBackLink, UpdatedDateText } from "@/app/components/atoms";
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
 const UserCommentsPage: React.FC = () => {
-  const { isLogin, userData } = useGetLoginState();
+  const { commentsData, isLoading } = useGetMyComments();
 
-  if (!isLogin) {
-    return null;
-  }
+  if (isLoading || !commentsData) return null;
 
-  const commentDatas = userData.comments;
-
-  if (commentDatas.length === 0) {
+  if (commentsData.length === 0) {
     return (
       <CenteredBox centerContent>
         <Text>まだ投稿にコメントをしていません</Text>
@@ -40,7 +36,7 @@ const UserCommentsPage: React.FC = () => {
   return (
     <CenteredBox centerContent>
       <GoBackLink />
-      {commentDatas.map((commentData, i) => (
+      {commentsData.map((commentData, i) => (
         <Card key={i} w={{ base: "auto", md: "md" }} rounded="none">
           <CardBody w="full" as={NextLink} href={`/articles/${commentData.article.id}`}>
             <Text fontSize="md">{commentData.content}</Text>
