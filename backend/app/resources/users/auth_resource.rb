@@ -8,16 +8,4 @@ class Users::AuthResource
   attribute :image do |user|
     user.image_url
   end
-
-  many :comments do
-    attributes :content, :updated_at
-
-    attribute :tags do |comment|
-      comment.tags.map(&:name)
-    end
-
-    one :article do
-      attributes :id, :title
-    end
-  end
 end
