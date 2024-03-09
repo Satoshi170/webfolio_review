@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 
       namespace :me do
         resources :liked_articles, only: [:index]
+        resources :comments, only: [:index]
       end
     end
   end
