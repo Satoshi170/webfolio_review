@@ -1,14 +1,14 @@
 import { useSWRWithAxiosFetcher } from "@/app/hooks/swr/useSWRWithAxiosFetcher";
 
 import type { CommentTagData } from "../types";
-import type { UserDataWithoutGoodsAndComments } from "@/app/types/auth";
+import type { UserData } from "@/app/types/auth";
 
 interface Response {
   id: number;
   content: string;
   updatedAt: Date;
   tags: CommentTagData[];
-  user: UserDataWithoutGoodsAndComments;
+  user: UserData;
 }
 
 export const useGetComments = (articleId: number) => {
