@@ -12,13 +12,5 @@ export const validArticleData: ArticleData = {
   totalLikes: 3,
   updatedAt: new Date(),
   user: validUserData,
-  comments: [
-    {
-      id: 1,
-      content: "testComment",
-      updatedAt: new Date(),
-      tags: [],
-      user: validUserData
-    }
-  ]
+  totalComments: 3
 };

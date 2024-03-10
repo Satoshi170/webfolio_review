@@ -1,4 +1,3 @@
-import type { CommentData } from "../_comments/types";
 import type { candidateOperationStatusData } from "@/app/constants/datas/portfolios/operationStatuses";
 import type { UserData } from "@/app/types/auth";
 
@@ -15,5 +14,4 @@ export interface ArticleData {
   totalComments: number;
   totalLikes: number;
   user: UserData;
-  comments: CommentData[];
 }
