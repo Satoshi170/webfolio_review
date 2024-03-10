@@ -14,6 +14,4 @@ class Articles::ArticleResource
              :updated_at
 
   one :user, resource: Users::UserResource
-
-  many :comments, resource: Comments::CommentResource
 end
