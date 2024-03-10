@@ -3,6 +3,13 @@ class Api::V1::Articles::CommentsController < ApplicationController
   before_action :authenticate_api_v1_user!, only: [:create, :update, :destroy]
   before_action :authorize_user_for_comment!, only: [:update, :destroy]
 
+  def index
+    comments = Comment.where(article_id: params[:article_id]).
+      includes(:tags, user: { image_attachment: :blob })
+    render json: Comments::CommentResource.new(comments).serializable_hash,
+           status: :ok
+  end
+
   def create
     comment_params_with_user_and_article = comment_params.merge({
       user_id: current_api_v1_user.id,
