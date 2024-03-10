@@ -1,4 +1,4 @@
-import type { UnauthorizedResponseData, UserData } from "../../auth";
+import type { UnauthorizedResponseData, MyData } from "../../auth";
 import type { PatchAuthFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/patchAuthDataSchema";
 import type { z } from "zod";
 
@@ -12,7 +12,7 @@ export interface PatchAuthParams extends PatchAuthParamsBase {
 
 export interface PatchAuthSuccessData {
   status: "success";
-  data: UserData;
+  data: MyData;
 }
 
 export type PatchAuthFailedData = z.infer<typeof PatchAuthFailedDataSchema>;

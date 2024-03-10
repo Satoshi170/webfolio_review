@@ -1,5 +1,5 @@
 import type { PostAuthSignInCredentials } from "./postAuthSignIn";
-import type { UserData } from "../../auth";
+import type { MyData } from "../../auth";
 import type { PostAuthFailedDataSchema } from "@/app/libs/zod/apiErrorResponses/auth/postAuthDataSchema";
 import type { z } from "zod";
 
@@ -10,7 +10,7 @@ export interface PostAuthCredentials extends PostAuthSignInCredentials {
 
 export interface PostAuthSuccessData {
   status: "success";
-  data: UserData;
+  data: MyData;
 }
 
 export type PostAuthFailedData = z.infer<typeof PostAuthFailedDataSchema>;
