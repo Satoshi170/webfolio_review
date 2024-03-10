@@ -21,6 +21,7 @@ import OptionArticleMenuButton from "./OptionMenuButton";
 import CreateCommentForm from "../../_comments/components/CreateCommentForm";
 import ArticleCommentCard from "../../_comments/components/layouts/ArticleCommentCard";
 import { CommentContext } from "../../_comments/hooks/useCommentData";
+import { useGetComments } from "../../_comments/hooks/useGetComments";
 import LikeButton from "../../_likes/components/layouts/LikeButton";
 import { useToggleLikeArticleGood } from "../../_likes/hooks/useToggleArticleGood";
 import { ArticleContext } from "../../hooks/useArticleData";
@@ -39,12 +40,13 @@ const ArticleDetailPage: React.FC<Props> = ({ articleData, isUser }) => {
     portfolioSiteUrl,
     operationStatus,
     repositoryUrl,
+    totalComments,
     updatedAt,
-    user,
-    comments
+    user
   } = articleData;
 
   const { isLiked, toggleLike, totalLiked } = useToggleLikeArticleGood(articleData);
+  const { commentsData } = useGetComments(articleData.id);
 
   return (
     <ArticleContext.Provider value={articleData}>
@@ -79,7 +81,7 @@ const ArticleDetailPage: React.FC<Props> = ({ articleData, isUser }) => {
               />
               <Flex alignItems="center" color="gray.500" gap="2">
                 <Icon as={BiComment} />
-                <Text>{comments.length}</Text>
+                <Text>{totalComments}</Text>
               </Flex>
             </Flex>
             <Flex gap="3">
@@ -89,9 +91,9 @@ const ArticleDetailPage: React.FC<Props> = ({ articleData, isUser }) => {
           </CardFooter>
         </Card>
         <CreateCommentForm articleData={articleData} />
-        {comments &&
-          comments.length >= 1 &&
-          comments.map((commentData, i) => (
+        {commentsData &&
+          commentsData.length >= 1 &&
+          commentsData.map((commentData, i) => (
             <CommentContext.Provider value={commentData} key={i}>
               <ArticleCommentCard key={i} />
             </CommentContext.Provider>
