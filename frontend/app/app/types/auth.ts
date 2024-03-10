@@ -8,7 +8,7 @@ export interface MyData {
   image: string;
 }
 
-export interface UserDataWithoutGoodsAndComments {
+export interface UserData {
   id: number;
   name: string;
   image: string;

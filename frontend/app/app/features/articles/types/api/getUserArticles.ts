@@ -1,7 +1,7 @@
 import type { ArticleData } from "../articleData";
-import type { UserDataWithoutGoodsAndComments } from "@/app/types/auth";
+import type { UserData } from "@/app/types/auth";
 
 export interface GetUserArticlesResponseData {
-  user: UserDataWithoutGoodsAndComments;
+  user: UserData;
   articles: ArticleData[] | [];
 }
