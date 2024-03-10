@@ -1,21 +1,15 @@
 import { useSWRWithAxiosAndAuth } from "@/app/hooks/swr/useSWRWithAxiosAndAuth";
 
-import type { CommentTagData } from "../../articles/_comments/types";
+import type { CommentData } from "../../articles/_comments/types";
+import type { ArticleData } from "../../articles/types/articleData";
 
-interface Comment {
-  id: number;
-  content: string;
-  updatedAt: Date;
-  tags: CommentTagData[];
-  article: {
-    id: number;
-    title: string;
-  };
+interface MyComment extends Omit<CommentData, "user"> {
+  article: Pick<ArticleData, "id" | "title">;
 }
 
 export const useGetMyComments = () => {
   const endpoint = "/me/comments";
-  const { responseData, ...other } = useSWRWithAxiosAndAuth<Comment[] | []>(endpoint, {
+  const { responseData, ...other } = useSWRWithAxiosAndAuth<MyComment[] | []>(endpoint, {
     errorRetryCount: 2
   });
   return { commentsData: responseData, ...other };
