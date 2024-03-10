@@ -11,6 +11,16 @@ RSpec.describe "Api::V1::Articles::Comments", type: :request do
   end
   let(:invalid_comment_params) { valid_comment_params.merge(content: "") }
 
+  describe "GET /comments" do
+    let!(:comments) { create_list(:comment, 3, user: user1, article: article) }
+    it "配列の要素数とコメント総数が一致する" do
+      get "/api/v1/articles/#{article.id}/comments"
+      expect(response).to have_http_status(:success)
+      json_response = JSON.parse(response.body)
+      expect(json_response.size).to eq(comments.size)
+    end
+  end
+
   describe "POST /comments" do
     context "headerが適切な場合" do
       context "有効なパラメータが指定された場合" do
