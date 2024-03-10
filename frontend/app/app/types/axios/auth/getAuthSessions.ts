@@ -1,8 +1,8 @@
-import type { UserData } from "../../auth";
+import type { MyData } from "../../auth";
 
 export interface GetAuthSessionsTrueData {
   isLogin: true;
-  data: UserData;
+  data: MyData;
 }
 
 export interface GetAuthSessionsFalseData {

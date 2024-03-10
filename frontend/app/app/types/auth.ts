@@ -1,7 +1,7 @@
 import type { UnauthorizedResponseDataSchema } from "../libs/zod/apiErrorResponses/auth/responseDataSchema";
 import type { z } from "zod";
 
-export interface UserData {
+export interface MyData {
   id: number;
   name: string;
   role: "user" | "guest";

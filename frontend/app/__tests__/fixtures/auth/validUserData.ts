@@ -1,6 +1,6 @@
-import type { UserData } from "@/app/types/auth";
+import type { MyData } from "@/app/types/auth";
 
-export const validUserData: UserData = {
+export const validUserData: MyData = {
   id: 1,
   name: "testuser",
   role: "user",
