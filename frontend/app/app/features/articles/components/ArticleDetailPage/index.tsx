@@ -35,6 +35,7 @@ interface Props {
 
 const ArticleDetailPage: React.FC<Props> = ({ articleData, isUser }) => {
   const {
+    id,
     content,
     title,
     portfolioSiteUrl,
@@ -46,7 +47,7 @@ const ArticleDetailPage: React.FC<Props> = ({ articleData, isUser }) => {
   } = articleData;
 
   const { isLiked, toggleLike, totalLiked } = useToggleLikeArticleGood(articleData);
-  const { commentsData } = useGetComments(articleData.id);
+  const { commentsData } = useGetComments(id);
 
   return (
     <ArticleContext.Provider value={articleData}>
@@ -57,7 +58,7 @@ const ArticleDetailPage: React.FC<Props> = ({ articleData, isUser }) => {
               <UserIcon image={user.image} name={user.name} diameter={30} />
               <Heading fontSize="md">{user.name}</Heading>
             </Flex>
-            {isUser && <OptionArticleMenuButton articleData={articleData} />}
+            {isUser && <OptionArticleMenuButton />}
           </CardHeader>
           <CardBody>
             <Heading fontSize="lg" mb="3">
@@ -90,7 +91,7 @@ const ArticleDetailPage: React.FC<Props> = ({ articleData, isUser }) => {
             </Flex>
           </CardFooter>
         </Card>
-        <CreateCommentForm articleData={articleData} />
+        <CreateCommentForm />
         {commentsData &&
           commentsData.length >= 1 &&
           commentsData.map((commentData, i) => (

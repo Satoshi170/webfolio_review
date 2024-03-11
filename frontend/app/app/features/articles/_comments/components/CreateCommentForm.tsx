@@ -6,17 +6,13 @@ import { SubmitButton } from "@/app/components/atoms";
 import { SelectBoxField, TextareaField } from "@/app/components/molecules";
 
 import { commentTagOptions } from "./commentTagOptions";
+import { useArticleData } from "../../hooks/useArticleData";
 import { useCreateCommentForm } from "../hooks/useCreateCommentForm";
 
-import type { ArticleData } from "../../types/articleData";
-
-interface Props {
-  articleData: ArticleData;
-}
-
-const CreateCommentForm: React.FC<Props> = ({ articleData }) => {
+const CreateCommentForm: React.FC = () => {
+  const { id } = useArticleData();
   const { register, control, isLoading, isValid, errors, handleFormSubmit } =
-    useCreateCommentForm(articleData.id);
+    useCreateCommentForm(id);
 
   return (
     <Card rounded="none" p="3">
