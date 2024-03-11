@@ -6,12 +6,7 @@ import { AiOutlineMore } from "react-icons/ai";
 import DeleteArticleButtonWithModal from "@/app/features/articles/components/DeleteArticleButtonWithModal";
 import UpdateArticleButtonWithFormModal from "@/app/features/articles/components/UpdateArticleButtonWithFormModal";
 
-import type { ArticleData } from "@/app/features/articles/types/articleData";
-
-interface Props {
-  articleData: ArticleData;
-}
-const OptionArticleMenuButton: React.FC<Props> = ({ articleData }) => {
+const OptionArticleMenuButton: React.FC = () => {
   return (
     <Menu>
       <MenuButton
@@ -21,8 +16,8 @@ const OptionArticleMenuButton: React.FC<Props> = ({ articleData }) => {
         variant="ghost"
       />
       <MenuList>
-        <UpdateArticleButtonWithFormModal articleData={articleData} />
-        <DeleteArticleButtonWithModal articleId={articleData.id} />
+        <UpdateArticleButtonWithFormModal />
+        <DeleteArticleButtonWithModal />
       </MenuList>
     </Menu>
   );

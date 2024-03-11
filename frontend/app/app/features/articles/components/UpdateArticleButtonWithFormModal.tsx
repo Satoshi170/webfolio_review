@@ -17,15 +17,11 @@ import { SubmitButton } from "@/app/components/atoms";
 import { InputField, SelectBoxField, TextareaField } from "@/app/components/molecules";
 
 import { operationStatusOptions } from "../constants/operationStatusOptions";
+import { useArticleData } from "../hooks/useArticleData";
 import { useUpdateArticleForm } from "../hooks/useUpdateArticleForm";
 
-import type { ArticleData } from "../types/articleData";
-
-interface Props {
-  articleData: ArticleData;
-}
-
-const UpdateArticleButtonWithFormModal: React.FC<Props> = ({ articleData }) => {
+const UpdateArticleButtonWithFormModal: React.FC = () => {
+  const articleData = useArticleData();
   const {
     control,
     register,

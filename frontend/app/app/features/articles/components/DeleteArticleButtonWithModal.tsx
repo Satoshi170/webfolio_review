@@ -4,17 +4,15 @@ import { MenuItem, useDisclosure } from "@chakra-ui/react";
 
 import DeleteConfirmationModal from "@/app/components/organisms/modals/DeleteConfirmationModal";
 
+import { useArticleData } from "../hooks/useArticleData";
 import { useDeleteArticle } from "../hooks/useDeleteArticle";
 
-interface Props {
-  articleId: number;
-}
-
-const DeleteArticleButtonWithModal: React.FC<Props> = ({ articleId }) => {
+const DeleteArticleButtonWithModal: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const deleteArticleOperation = useDeleteArticle();
+  const { id } = useArticleData();
   const handleConfirm = async () => {
-    await deleteArticleOperation(articleId);
+    await deleteArticleOperation(id);
     onClose();
   };
 
