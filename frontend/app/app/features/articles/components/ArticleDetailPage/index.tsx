@@ -1,10 +1,8 @@
 "use client";
 
-import { Card, Stack } from "@chakra-ui/react";
+import { Stack } from "@chakra-ui/react";
 
-import ArticleBody from "./Article/Body";
-import ArticleFooter from "./Article/Footer";
-import ArticleHeader from "./Article/Header";
+import ArticleSection from "./Article";
 import CreateCommentForm from "../../_comments/components/CreateCommentForm";
 import ArticleCommentCard from "../../_comments/components/layouts/ArticleCommentCard";
 import { CommentContext } from "../../_comments/hooks/useCommentData";
@@ -25,11 +23,7 @@ const ArticleDetailPage: React.FC<Props> = ({ articleData, isUser }) => {
   return (
     <ArticleContext.Provider value={articleData}>
       <Stack spacing="0">
-        <Card rounded="none">
-          <ArticleHeader isUser={isUser} />
-          <ArticleBody />
-          <ArticleFooter />
-        </Card>
+        <ArticleSection isUser={isUser} />
         <CreateCommentForm />
         {commentsData &&
           commentsData.length >= 1 &&
