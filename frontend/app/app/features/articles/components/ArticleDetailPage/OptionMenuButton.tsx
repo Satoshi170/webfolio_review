@@ -1,12 +1,14 @@
 "use client";
 
-import { IconButton, Menu, MenuButton, MenuList } from "@chakra-ui/react";
+import { IconButton, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { AiOutlineMore } from "react-icons/ai";
 
 import DeleteArticleButtonWithModal from "@/app/features/articles/components/DeleteArticleButtonWithModal";
-import UpdateArticleButtonWithFormModal from "@/app/features/articles/components/UpdateArticleButtonWithFormModal";
+
+import { useEditMode } from "../../hooks/useEditMode";
 
 const OptionArticleMenuButton: React.FC = () => {
+  const { setIsEditMode } = useEditMode();
   return (
     <Menu>
       <MenuButton
@@ -16,7 +18,7 @@ const OptionArticleMenuButton: React.FC = () => {
         variant="ghost"
       />
       <MenuList>
-        <UpdateArticleButtonWithFormModal />
+        <MenuItem onClick={() => setIsEditMode(true)}>編集する</MenuItem>
         <DeleteArticleButtonWithModal />
       </MenuList>
     </Menu>
