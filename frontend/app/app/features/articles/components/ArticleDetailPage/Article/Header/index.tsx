@@ -3,6 +3,7 @@
 import { CardHeader, Flex, Heading } from "@chakra-ui/react";
 
 import { useArticleData } from "@/app/features/articles/hooks/useArticleData";
+import { useEditMode } from "@/app/features/articles/hooks/useEditMode";
 import { UserIcon } from "@/app/components/atoms";
 
 import OptionArticleMenuButton from "../../OptionMenuButton";
@@ -12,6 +13,7 @@ interface Props {
 }
 const ArticleHeader: React.FC<Props> = ({ isUser }) => {
   const { user } = useArticleData();
+  const { isEditMode } = useEditMode();
 
   return (
     <CardHeader as={Flex}>
@@ -19,7 +21,7 @@ const ArticleHeader: React.FC<Props> = ({ isUser }) => {
         <UserIcon image={user.image} name={user.name} diameter={30} />
         <Heading fontSize="md">{user.name}</Heading>
       </Flex>
-      {isUser && <OptionArticleMenuButton />}
+      {isUser && !isEditMode && <OptionArticleMenuButton />}
     </CardHeader>
   );
 };
