@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { useDisclosure } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -22,6 +21,7 @@ export const useUpdateArticleForm = (articleData: ArticleData) => {
     control,
     register,
     handleSubmit,
+    reset,
     watch,
     formState: { errors, isValid }
   } = useForm({
@@ -35,7 +35,6 @@ export const useUpdateArticleForm = (articleData: ArticleData) => {
       repositoryUrl: articleData.repositoryUrl
     }
   });
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const { setSuccessToast, setErrorToast } = useSetToastState();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -65,7 +64,6 @@ export const useUpdateArticleForm = (articleData: ArticleData) => {
   const formSubmit = handleSubmit(onSubmit);
   const handleFormSubmit = async (e: FormEvent) => {
     await formSubmit(e);
-    onClose();
     window.location.reload();
   };
 
@@ -75,10 +73,8 @@ export const useUpdateArticleForm = (articleData: ArticleData) => {
     errors,
     isFormValid,
     onSubmit,
+    reset,
     handleFormSubmit,
-    isLoading,
-    isOpen,
-    onOpen,
-    onClose
+    isLoading
   };
 };
