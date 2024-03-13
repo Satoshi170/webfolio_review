@@ -8,6 +8,7 @@ import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
 import { ArticleSchema } from "./articleSchema";
+import { useEditMode } from "./useEditMode";
 import { useGetArticle } from "./useGetArticle";
 import { patchArticle } from "../api/patchArticle";
 
@@ -39,6 +40,7 @@ export const useUpdateArticleForm = (articleData: ArticleData) => {
   const { setSuccessToast, setErrorToast } = useSetToastState();
   const [isLoading, setIsLoading] = useState(false);
   const { mutate } = useGetArticle(articleData.id);
+  const { setIsEditMode } = useEditMode();
 
   const isChange = !(
     watch("title") == articleData.title &&
@@ -61,6 +63,7 @@ export const useUpdateArticleForm = (articleData: ArticleData) => {
       setErrorToast(errorMessage);
     } finally {
       setIsLoading(false);
+      setIsEditMode(false);
     }
   };
 
