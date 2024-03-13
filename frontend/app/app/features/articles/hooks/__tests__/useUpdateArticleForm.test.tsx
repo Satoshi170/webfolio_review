@@ -14,6 +14,18 @@ import { useUpdateArticleForm } from "../useUpdateArticleForm";
 
 jest.mock("react-hook-form", () => mockReactHookForm);
 jest.mock("@/app/hooks/recoil/toastState/useSetToastState", () => mockUseSetToastState);
+jest.mock("../useEditMode", () => ({
+  useEditMode: () => ({
+    setIsEditMode: jest.fn()
+  })
+}));
+
+jest.mock("../useGetArticle", () => ({
+  useGetArticle: () => ({
+    mutate: jest.fn()
+  })
+}));
+
 jest.mock("../../api/patchArticle");
 
 describe("useUpdateArticleForm", () => {
