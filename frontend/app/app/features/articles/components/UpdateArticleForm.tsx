@@ -13,15 +13,23 @@ import { useUpdateArticleForm } from "../hooks/useUpdateArticleForm";
 const UpdateArticleForm: React.FC = () => {
   const articleData = useArticleData();
   const { setIsEditMode } = useEditMode();
-  const { control, register, errors, isFormValid, handleFormSubmit, reset, isLoading } =
-    useUpdateArticleForm(articleData);
+  const {
+    control,
+    register,
+    errors,
+    isFormValid,
+    handleSubmit,
+    onSubmit,
+    reset,
+    isLoading
+  } = useUpdateArticleForm(articleData);
 
   const cancel = () => {
     reset();
     setIsEditMode(false);
   };
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <InputField
         name="title"
         label="タイトル"

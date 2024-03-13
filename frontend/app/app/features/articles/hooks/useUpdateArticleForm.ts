@@ -14,7 +14,6 @@ import { patchArticle } from "../api/patchArticle";
 
 import type { PatchArticleParams } from "../types/api/patchArticle";
 import type { ArticleData } from "../types/articleData";
-import type { FormEvent } from "react";
 
 export const useUpdateArticleForm = (articleData: ArticleData) => {
   const defaultOperationStatusValue =
@@ -67,19 +66,14 @@ export const useUpdateArticleForm = (articleData: ArticleData) => {
     }
   };
 
-  const formSubmit = handleSubmit(onSubmit);
-  const handleFormSubmit = async (e: FormEvent) => {
-    await formSubmit(e);
-  };
-
   return {
     control,
     register,
     errors,
     isFormValid,
+    handleSubmit,
     onSubmit,
     reset,
-    handleFormSubmit,
     isLoading
   };
 };
