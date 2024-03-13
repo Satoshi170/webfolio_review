@@ -1,3 +1,4 @@
+import { validArticleData } from "@/__tests__/fixtures/articles/validArticleData";
 import { validPostArticleData } from "@/__tests__/fixtures/articles/validPostArticleData";
 import { mockUnauthorizedResponse } from "@/__tests__/fixtures/auth/unauthorizedResponseData";
 import { mockUnexpectedResponse } from "@/__tests__/fixtures/unexpectedResponseData";
@@ -7,10 +8,7 @@ import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 
 import { patchArticle } from "../patchArticle";
 
-import type {
-  PatchArticleFailedData,
-  PatchArticleSuccessData
-} from "../../types/api/patchArticle";
+import type { PatchArticleFailedData } from "../../types/api/patchArticle";
 
 jest.mock("@/app/libs/cookie/loadAuthInfo", () => mockAddAuthInfoToRequest);
 jest.mock("@/app/libs/axios/api", () => mockApi);
@@ -25,17 +23,12 @@ describe("patchArticle", () => {
   });
 
   describe("リクエストに成功した時", () => {
-    const mockPatchPortfoliosByIdSuccessData: PatchArticleSuccessData = {
-      status: "success",
-      message: "successMessage"
-    };
-
-    const mockPatchPortfoliosByIdSuccessResponse = {
-      data: mockPatchPortfoliosByIdSuccessData
+    const mockPatchArticleSuccessResponse = {
+      data: validArticleData
     };
 
     it("エラーをスローしない", async () => {
-      mockPatch.mockResolvedValue(mockPatchPortfoliosByIdSuccessResponse);
+      mockPatch.mockResolvedValue(mockPatchArticleSuccessResponse);
       await expect(patchArticle(1, validPostArticleData)).resolves.not.toThrow();
     });
   });

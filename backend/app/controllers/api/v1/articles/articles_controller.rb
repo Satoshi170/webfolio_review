@@ -34,10 +34,7 @@ class Api::V1::Articles::ArticlesController < ApplicationController
 
   def update
     if @article.update(article_params)
-      render json: {
-               status: "success",
-               message: "Article updated successfully",
-             },
+      render json: Articles::ArticleResource.new(@article).serializable_hash,
              status: :ok
     else
       render json: {
