@@ -8,6 +8,7 @@ import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
 import { ArticleSchema } from "./articleSchema";
+import { useGetArticle } from "./useGetArticle";
 import { patchArticle } from "../api/patchArticle";
 
 import type { PatchArticleParams } from "../types/api/patchArticle";
@@ -37,6 +38,7 @@ export const useUpdateArticleForm = (articleData: ArticleData) => {
   });
   const { setSuccessToast, setErrorToast } = useSetToastState();
   const [isLoading, setIsLoading] = useState(false);
+  const { mutate } = useGetArticle(articleData.id);
 
   const isChange = !(
     watch("title") == articleData.title &&
@@ -51,7 +53,8 @@ export const useUpdateArticleForm = (articleData: ArticleData) => {
   const onSubmit = async (params: PatchArticleParams) => {
     setIsLoading(true);
     try {
-      await patchArticle(articleData.id, params);
+      const response = await patchArticle(articleData.id, params);
+      await mutate(response);
       setSuccessToast("更新に成功しました");
     } catch (e) {
       const errorMessage = resolveErrorMessage(e);
@@ -64,7 +67,6 @@ export const useUpdateArticleForm = (articleData: ArticleData) => {
   const formSubmit = handleSubmit(onSubmit);
   const handleFormSubmit = async (e: FormEvent) => {
     await formSubmit(e);
-    window.location.reload();
   };
 
   return {
