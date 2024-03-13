@@ -19,10 +19,7 @@ class Api::V1::Articles::CommentsController < ApplicationController
     @comment = Comment.new(comment_params_with_user_and_article)
 
     if @comment.save
-      render json: {
-               status: "success",
-               message: "Comment created successfully",
-             },
+      render json: Comments::CommentResource.new(@comment).serializable_hash,
              status: :created
     else
       render json: {
