@@ -71,6 +71,7 @@ const UpdateArticleForm: React.FC = () => {
         register={register}
         error={errors.repositoryUrl}
       />
+      <Spacer my="3" />
       <SubmitButton isDisabled={!isFormValid} isLoading={isLoading} text="修正する" />
       <Button onClick={cancel} variant="ghost">
         キャンセル
