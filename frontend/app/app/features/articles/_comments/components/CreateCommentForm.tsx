@@ -11,12 +11,12 @@ import { useCreateCommentForm } from "../hooks/useCreateCommentForm";
 
 const CreateCommentForm: React.FC = () => {
   const { id } = useArticleData();
-  const { register, control, isLoading, isValid, errors, handleFormSubmit } =
+  const { register, control, isLoading, isValid, errors, handleSubmit, onSubmit } =
     useCreateCommentForm(id);
 
   return (
     <Card rounded="none" p="3">
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <CardBody>
           <TextareaField
             name="content"
