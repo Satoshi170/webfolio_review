@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { useDisclosure } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
@@ -8,14 +7,15 @@ import { UNEXPECTED_ERROR_MESSAGE } from "@/app/constants/errors/Messages";
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 
 import { CommentSchema } from "./commentSchema";
+import { useGetComments } from "./useGetComments";
 import { postArticleComment } from "../api/postArticleComment";
 
 import type { CommentParams } from "../types/api";
-import type { FormEvent } from "react";
 
 export const useCreateCommentForm = (id: number) => {
   const {
     register,
+    reset,
     handleSubmit,
     control,
     formState: { errors, isValid }
@@ -25,15 +25,17 @@ export const useCreateCommentForm = (id: number) => {
     defaultValues: { tagIds: [] }
   });
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
   const { setSuccessToast, setErrorToast } = useSetToastState();
+  const { mutate } = useGetComments(id);
 
   const onSubmit = async (params: CommentParams) => {
     setIsLoading(true);
     try {
-      await postArticleComment(id, params);
+      const newComment = await postArticleComment(id, params);
+      reset();
       setSuccessToast("コメントの作成に成功しました");
+      await mutate((currentComments) => [newComment, ...(currentComments ?? [])], false);
     } catch (e) {
       const errorMessage = e instanceof Error ? e.message : UNEXPECTED_ERROR_MESSAGE;
       setErrorToast(errorMessage);
@@ -42,23 +44,13 @@ export const useCreateCommentForm = (id: number) => {
     }
   };
 
-  const formSubmit = handleSubmit(onSubmit);
-  const handleFormSubmit = async (e: FormEvent) => {
-    await formSubmit(e);
-    onClose();
-    window.location.reload();
-  };
-
   return {
     register,
     control,
     errors,
     isLoading,
     isValid,
-    onSubmit,
-    handleFormSubmit,
-    isOpen,
-    onOpen,
-    onClose
+    handleSubmit,
+    onSubmit
   };
 };
