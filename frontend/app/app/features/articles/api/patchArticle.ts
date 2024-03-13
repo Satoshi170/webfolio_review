@@ -9,9 +9,9 @@ import { PatchPortfoliosByIdFailedDataSchema } from "@/app/libs/zod/apiErrorResp
 import type {
   PatchArticleErrorData,
   PatchArticleFailedData,
-  PatchArticleParams,
-  PatchArticleSuccessData
+  PatchArticleParams
 } from "../types/api/patchArticle";
+import type { ArticleData } from "../types/articleData";
 import type { UnauthorizedResponseData } from "@/app/types/auth";
 
 const generateErrorMessage = (responseData: PatchArticleErrorData) => {
@@ -26,13 +26,14 @@ const generateErrorMessage = (responseData: PatchArticleErrorData) => {
 export const patchArticle = async (
   id: number,
   params: PatchArticleParams
-): Promise<void> => {
+): Promise<ArticleData> => {
   try {
-    await api.patch<PatchArticleSuccessData>(
+    const response = await api.patch<ArticleData>(
       `/articles/${id}`,
       params,
       addAuthInfoToRequest({})
     );
+    return response.data;
   } catch (error) {
     if (axios.isAxiosError(error) && error.response) {
       const responseData = error.response.data as PatchArticleErrorData;
