@@ -5,10 +5,10 @@ import { useForm } from "react-hook-form";
 
 import { candidateOperationStatusData } from "@/app/constants/datas/portfolios/operationStatuses";
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
+import { useEditMode } from "@/app/hooks/useEditMode";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
 import { ArticleSchema } from "./articleSchema";
-import { useEditMode } from "./useEditMode";
 import { useGetArticle } from "./useGetArticle";
 import { patchArticle } from "../api/patchArticle";
 

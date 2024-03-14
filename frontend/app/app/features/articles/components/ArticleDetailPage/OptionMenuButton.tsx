@@ -4,8 +4,7 @@ import { IconButton, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/rea
 import { AiOutlineMore } from "react-icons/ai";
 
 import DeleteArticleButtonWithModal from "@/app/features/articles/components/DeleteArticleButtonWithModal";
-
-import { useEditMode } from "../../hooks/useEditMode";
+import { useEditMode } from "@/app/hooks/useEditMode";
 
 const OptionArticleMenuButton: React.FC = () => {
   const { setIsEditMode } = useEditMode();

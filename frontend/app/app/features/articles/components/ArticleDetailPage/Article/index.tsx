@@ -2,10 +2,11 @@
 
 import { Card } from "@chakra-ui/react";
 
+import { EditModeProvider } from "@/app/hooks/useEditMode";
+
 import ArticleBody from "./Body";
 import ArticleFooter from "./Footer";
 import ArticleHeader from "./Header";
-import { EditModeProvider } from "../../../hooks/useEditMode";
 
 interface Props {
   isUser: boolean;
