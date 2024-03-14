@@ -12,9 +12,9 @@ const DeleteCommentButtonWithModal: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const articleData = useArticleData();
   const commentData = useCommentData();
-  const deleteComment = useDeleteComment();
+  const deleteComment = useDeleteComment(articleData.id);
   const handleConfirm = async () => {
-    await deleteComment(articleData.id, commentData.id);
+    await deleteComment(commentData.id);
     onClose;
   };
 
