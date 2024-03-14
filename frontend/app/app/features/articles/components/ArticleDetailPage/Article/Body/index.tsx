@@ -3,8 +3,8 @@
 import { CardBody, Heading, Text } from "@chakra-ui/react";
 
 import { useArticleData } from "@/app/features/articles/hooks/useArticleData";
-import { useEditMode } from "@/app/features/articles/hooks/useEditMode";
 import LinkCardWithMetaData from "@/app/features/link_preview/components/LinkCard";
+import { useEditMode } from "@/app/hooks/useEditMode";
 
 import UpdateArticleForm from "../../../UpdateArticleForm";
 

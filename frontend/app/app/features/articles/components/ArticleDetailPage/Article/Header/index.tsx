@@ -3,7 +3,7 @@
 import { CardHeader, Flex, Heading } from "@chakra-ui/react";
 
 import { useArticleData } from "@/app/features/articles/hooks/useArticleData";
-import { useEditMode } from "@/app/features/articles/hooks/useEditMode";
+import { useEditMode } from "@/app/hooks/useEditMode";
 import { UserIcon } from "@/app/components/atoms";
 
 import OptionArticleMenuButton from "../../OptionMenuButton";
