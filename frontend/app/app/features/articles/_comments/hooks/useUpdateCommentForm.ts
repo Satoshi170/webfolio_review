@@ -2,13 +2,14 @@ import { useCallback, useState } from "react";
 
 import { useDisclosure } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { equals, identity, sortBy } from "ramda";
+import { equals, identity, reject, sortBy } from "ramda";
 import { useForm } from "react-hook-form";
 
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
 import { CommentSchema } from "./commentSchema";
+import { useGetComments } from "./useGetComments";
 import { patchArticleComment } from "../api/patchArticleComment";
 import { candidateTagData } from "../datas/tags";
 
@@ -33,6 +34,7 @@ export const useUpdateCommentForm = (articleId: number, commentData: CommentData
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
   const { setSuccessToast, setErrorToast } = useSetToastState();
+  const { mutate } = useGetComments(articleId);
 
   const isChange = () => {
     const isContentChanged = !(watch("content") == commentData.content);
@@ -53,8 +55,21 @@ export const useUpdateCommentForm = (articleId: number, commentData: CommentData
       setIsLoading(true);
       const transformedParamsByZod = params as unknown as CommentParams;
       try {
-        await patchArticleComment(articleId, commentData.id, transformedParamsByZod);
+        const newComment = await patchArticleComment(
+          articleId,
+          commentData.id,
+          transformedParamsByZod
+        );
         setSuccessToast("コメントの更新に成功しました");
+        await mutate((currentComments) => {
+          if (!currentComments) return currentComments;
+
+          const other = reject(
+            (comment: CommentData) => comment.id === commentData.id,
+            currentComments
+          );
+          return [newComment, ...other];
+        }, false);
       } catch (e) {
         const errorMessage = resolveErrorMessage(e);
         setErrorToast(errorMessage);
@@ -62,7 +77,7 @@ export const useUpdateCommentForm = (articleId: number, commentData: CommentData
         setIsLoading(false);
       }
     },
-    [commentData.id, articleId, setErrorToast, setSuccessToast]
+    [commentData.id, articleId, mutate, setErrorToast, setSuccessToast]
   );
 
   const formSubmit = handleSubmit(onSubmit);
@@ -70,7 +85,6 @@ export const useUpdateCommentForm = (articleId: number, commentData: CommentData
     async (e: FormEvent) => {
       await formSubmit(e);
       onClose();
-      window.location.reload();
     },
     [formSubmit, onClose]
   );
