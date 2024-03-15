@@ -6,7 +6,7 @@ import { useArticleData } from "@/app/features/articles/hooks/useArticleData";
 import { useEditMode } from "@/app/hooks/useEditMode";
 import { UserIcon } from "@/app/components/atoms";
 
-import OptionArticleMenuButton from "../../OptionMenuButton";
+import OptionArticleMenuButton from "./OptionMenuButton";
 
 interface Props {
   isUser: boolean;
