@@ -3,7 +3,6 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
-import { candidateOperationStatusData } from "@/app/constants/datas/portfolios/operationStatuses";
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
 import { useEditMode } from "@/app/hooks/useEditMode";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
@@ -11,6 +10,7 @@ import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 import { ArticleSchema } from "./articleSchema";
 import { useGetArticle } from "./useGetArticle";
 import { patchArticle } from "../api/patchArticle";
+import { candidateOperationStatusData } from "../constants/operationStatuses";
 
 import type { PatchArticleParams } from "../types/api/patchArticle";
 import type { ArticleData } from "../types/articleData";
