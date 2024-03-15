@@ -1,11 +1,11 @@
 import { useCallback, useState } from "react";
 
-import { useDisclosure } from "@chakra-ui/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { equals, identity, reject, sortBy } from "ramda";
 import { useForm } from "react-hook-form";
 
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
+import { useEditMode } from "@/app/hooks/useEditMode";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
 import { CommentSchema } from "./commentSchema";
@@ -15,14 +15,14 @@ import { candidateTagData } from "../datas/tags";
 
 import type { CommentData } from "../types";
 import type { CommentFormParams, CommentParams } from "../types/api";
-import type { FormEvent } from "react";
 
 export const useUpdateCommentForm = (articleId: number, commentData: CommentData) => {
   const defaultTagIds = commentData.tags.map((item) => candidateTagData[item].toString());
   const {
     register,
-    handleSubmit,
+    reset,
     control,
+    handleSubmit,
     watch,
     formState: { errors, isValid }
   } = useForm<CommentFormParams>({
@@ -31,10 +31,10 @@ export const useUpdateCommentForm = (articleId: number, commentData: CommentData
     defaultValues: { content: commentData.content, tagIds: defaultTagIds }
   });
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [isLoading, setIsLoading] = useState(false);
   const { setSuccessToast, setErrorToast } = useSetToastState();
   const { mutate } = useGetComments(articleId);
+  const { setIsEditMode } = useEditMode();
 
   const isChange = () => {
     const isContentChanged = !(watch("content") == commentData.content);
@@ -75,29 +75,20 @@ export const useUpdateCommentForm = (articleId: number, commentData: CommentData
         setErrorToast(errorMessage);
       } finally {
         setIsLoading(false);
+        setIsEditMode(false);
       }
     },
-    [commentData.id, articleId, mutate, setErrorToast, setSuccessToast]
-  );
-
-  const formSubmit = handleSubmit(onSubmit);
-  const handleFormSubmit = useCallback(
-    async (e: FormEvent) => {
-      await formSubmit(e);
-      onClose();
-    },
-    [formSubmit, onClose]
+    [commentData.id, articleId, mutate, setErrorToast, setSuccessToast, setIsEditMode]
   );
 
   return {
     register,
+    reset,
     control,
     errors,
+    handleSubmit,
+    onSubmit,
     isLoading,
-    isFormValid,
-    handleFormSubmit,
-    isOpen,
-    onOpen,
-    onClose
+    isFormValid
   };
 };

@@ -1,12 +1,14 @@
 "use client";
 
-import { IconButton, Menu, MenuButton, MenuList } from "@chakra-ui/react";
+import { IconButton, Menu, MenuButton, MenuItem, MenuList } from "@chakra-ui/react";
 import { AiOutlineMore } from "react-icons/ai";
 
+import { useEditMode } from "@/app/hooks/useEditMode";
+
 import DeleteCommentButtonWithModal from "../../../../DeleteCommentButtonWithModal";
-import PatchCommentButtonWithModal from "../../../../UpdateCommentButtonWithFormModal";
 
 const OptionCommentMenuButton: React.FC = () => {
+  const { setIsEditMode } = useEditMode();
   return (
     <Menu>
       <MenuButton
@@ -16,7 +18,7 @@ const OptionCommentMenuButton: React.FC = () => {
         variant="ghost"
       />
       <MenuList>
-        <PatchCommentButtonWithModal />
+        <MenuItem onClick={() => setIsEditMode(true)}>編集する</MenuItem>
         <DeleteCommentButtonWithModal />
       </MenuList>
     </Menu>

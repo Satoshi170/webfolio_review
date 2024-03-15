@@ -2,6 +2,7 @@
 
 import { CardHeader, Flex, Heading } from "@chakra-ui/react";
 
+import { useEditMode } from "@/app/hooks/useEditMode";
 import { UserIcon } from "@/app/components/atoms";
 
 import OptionCommentMenuButton from "./sections/OptionCommentMenuButton";
@@ -13,6 +14,7 @@ interface Props {
 
 const ArticleCommentCardHeader: React.FC<Props> = ({ isUserComment = false }) => {
   const commentData = useCommentData();
+  const { isEditMode } = useEditMode();
   const { user } = commentData;
   const image = user.image || "/defaultUserImage.png";
 
@@ -23,7 +25,7 @@ const ArticleCommentCardHeader: React.FC<Props> = ({ isUserComment = false }) =>
           <UserIcon image={image} name={user.name} diameter={25} />
           <Heading fontSize="sm">{user.name}</Heading>
         </Flex>
-        {isUserComment && <OptionCommentMenuButton />}
+        {isUserComment && !isEditMode && <OptionCommentMenuButton />}
       </Flex>
     </CardHeader>
   );
