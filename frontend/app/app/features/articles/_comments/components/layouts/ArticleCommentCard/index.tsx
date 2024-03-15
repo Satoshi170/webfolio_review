@@ -3,6 +3,7 @@
 import { Card, Spacer } from "@chakra-ui/react";
 
 import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
+import { EditModeProvider } from "@/app/hooks/useEditMode";
 
 import ArticleCommentCardBody from "./body";
 import ArticleCommentCardFooter from "./footer";
@@ -15,13 +16,15 @@ const ArticleCommentCard: React.FC = () => {
   const isUserComment = isLogin ? commentData.user.id == userData.id : false;
 
   return (
-    <Card w="auto" rounded="none">
-      <ArticleCommentCardHeader isUserComment={isUserComment} />
-      <Spacer my="-3" />
-      <ArticleCommentCardBody />
-      <Spacer my="-3" />
-      <ArticleCommentCardFooter />
-    </Card>
+    <EditModeProvider>
+      <Card w="auto" rounded="none">
+        <ArticleCommentCardHeader isUserComment={isUserComment} />
+        <Spacer my="-3" />
+        <ArticleCommentCardBody />
+        <Spacer my="-3" />
+        <ArticleCommentCardFooter />
+      </Card>
+    </EditModeProvider>
   );
 };
 
