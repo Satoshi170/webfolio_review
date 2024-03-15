@@ -34,10 +34,7 @@ class Api::V1::Articles::CommentsController < ApplicationController
   def update
     if @comment.update(comment_params)
       update_tag_ids
-      render json: {
-               status: "success",
-               message: "Comment updated successfully",
-             },
+      render json: Comments::CommentResource.new(@comment).serializable_hash,
              status: :ok
     else
       render json: {
