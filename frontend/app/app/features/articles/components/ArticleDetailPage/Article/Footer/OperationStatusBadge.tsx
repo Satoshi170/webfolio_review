@@ -3,7 +3,7 @@
 import { HStack, Icon, Text } from "@chakra-ui/react";
 import { GrStatusGoodSmall } from "react-icons/gr";
 
-import type { ArticleData } from "../../types/articleData";
+import type { ArticleData } from "@/app/features/articles/types/articleData";
 
 interface Props {
   value: ArticleData["operationStatus"];

@@ -8,7 +8,7 @@ import { useToggleLikeArticleGood } from "@/app/features/articles/_likes/hooks/u
 import { useArticleData } from "@/app/features/articles/hooks/useArticleData";
 import { UpdatedDateText } from "@/app/components/atoms";
 
-import OperationStatusBadge from "../../OperationStatusBadge";
+import OperationStatusBadge from "./OperationStatusBadge";
 
 const ArticleFooter: React.FC = () => {
   const articleData = useArticleData();
