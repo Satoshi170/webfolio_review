@@ -1,12 +1,12 @@
 import { z } from "zod";
 
-import { candidateOperationStatusData } from "@/app/constants/datas/portfolios/operationStatuses";
 import {
   INVALID_OPERATION_ERROR_MESSAGE,
   MUST_BE_URL_ERROR_MESSAGE
 } from "@/app/constants/errors/Messages";
 
 import { ArticleValidationErrorMessages } from "./messages";
+import { candidateOperationStatusData } from "../constants/operationStatuses";
 
 const validOperationStatusValues = Object.values(candidateOperationStatusData);
 const validOperationStatusStringValues = validOperationStatusValues.map((num) =>

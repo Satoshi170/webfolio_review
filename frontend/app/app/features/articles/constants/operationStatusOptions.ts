@@ -1,4 +1,4 @@
-import { candidateOperationStatusData } from "@/app/constants/datas/portfolios/operationStatuses";
+import { candidateOperationStatusData } from "./operationStatuses";
 
 import type { MapSelectOptions, SelectOption } from "@/app/components/molecules";
 
