@@ -5,7 +5,7 @@ import { AiOutlineMore } from "react-icons/ai";
 
 import { useEditMode } from "@/app/hooks/useEditMode";
 
-import DeleteCommentButtonWithModal from "../../../../DeleteCommentButtonWithModal";
+import DeleteCommentButtonWithModal from "../../../DeleteCommentButtonWithModal";
 
 const OptionCommentMenuButton: React.FC = () => {
   const { setIsEditMode } = useEditMode();

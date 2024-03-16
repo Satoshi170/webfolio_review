@@ -4,7 +4,7 @@ import { Tag } from "@chakra-ui/react";
 
 import { postCommentTagStyles } from "./theme/styleMap";
 
-import type { CommentTagData } from "../../../types";
+import type { CommentTagData } from "../../types";
 
 interface Props {
   tag: CommentTagData;

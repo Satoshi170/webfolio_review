@@ -8,7 +8,7 @@ import { EditModeProvider } from "@/app/hooks/useEditMode";
 import ArticleCommentCardBody from "./body";
 import ArticleCommentCardFooter from "./footer";
 import ArticleCommentCardHeader from "./header";
-import { useCommentData } from "../../../hooks/useCommentData";
+import { useCommentData } from "../../hooks/useCommentData";
 
 const ArticleCommentCard: React.FC = () => {
   const { isLogin, userData } = useGetLoginState();
