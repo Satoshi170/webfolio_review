@@ -3,8 +3,8 @@
 import { Stack } from "@chakra-ui/react";
 
 import ArticleSection from "./Article";
+import ArticleCommentCard from "../../_comments/components/ArticleCommentCard";
 import CreateCommentForm from "../../_comments/components/CreateCommentForm";
-import ArticleCommentCard from "../../_comments/components/layouts/ArticleCommentCard";
 import { CommentContext } from "../../_comments/hooks/useCommentData";
 import { useGetComments } from "../../_comments/hooks/useGetComments";
 import { ArticleContext } from "../../hooks/useArticleData";

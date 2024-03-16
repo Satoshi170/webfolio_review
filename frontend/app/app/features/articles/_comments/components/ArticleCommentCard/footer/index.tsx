@@ -5,7 +5,7 @@ import { CardFooter, Divider, Flex, Stack } from "@chakra-ui/react";
 import { UpdatedDateText } from "@/app/components/atoms";
 
 import ArticleCommentTags from "./sections/ArticleCommentTags";
-import { useCommentData } from "../../../../hooks/useCommentData";
+import { useCommentData } from "../../../hooks/useCommentData";
 
 const ArticleCommentCardFooter: React.FC = () => {
   const commentData = useCommentData();

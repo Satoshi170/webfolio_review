@@ -6,8 +6,8 @@ import Linkify from "linkify-react";
 import { useEditMode } from "@/app/hooks/useEditMode";
 import RenderLink from "@/app/libs/linkify/RenderLink";
 
-import { useCommentData } from "../../../../hooks/useCommentData";
-import UpdateCommentForm from "../../../UpdateCommentForm";
+import { useCommentData } from "../../../hooks/useCommentData";
+import UpdateCommentForm from "../../UpdateCommentForm";
 
 const ArticleCommentCardBody: React.FC = () => {
   const commentData = useCommentData();

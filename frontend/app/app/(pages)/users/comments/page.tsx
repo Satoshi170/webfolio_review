@@ -14,7 +14,7 @@ import {
   Text
 } from "@chakra-ui/react";
 
-import ArticleCommentTags from "@/app/features/articles/_comments/components/layouts/ArticleCommentCard/footer/sections/ArticleCommentTags";
+import ArticleCommentTags from "@/app/features/articles/_comments/components/ArticleCommentCard/footer/sections/ArticleCommentTags";
 import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedOut";
 import { useGetMyComments } from "@/app/features/me/hooks/useGetMyComments";
 import { GoBackLink, UpdatedDateText } from "@/app/components/atoms";

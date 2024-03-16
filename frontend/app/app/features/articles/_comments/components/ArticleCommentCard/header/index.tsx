@@ -6,7 +6,7 @@ import { useEditMode } from "@/app/hooks/useEditMode";
 import { UserIcon } from "@/app/components/atoms";
 
 import OptionCommentMenuButton from "./sections/OptionCommentMenuButton";
-import { useCommentData } from "../../../../hooks/useCommentData";
+import { useCommentData } from "../../../hooks/useCommentData";
 
 interface Props {
   isUserComment?: boolean;
