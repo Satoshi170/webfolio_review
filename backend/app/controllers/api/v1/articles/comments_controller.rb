@@ -5,7 +5,8 @@ class Api::V1::Articles::CommentsController < ApplicationController
 
   def index
     comments = Comment.where(article_id: params[:article_id]).
-      includes(:tags, user: { image_attachment: :blob })
+      includes(:tags, user: { image_attachment: :blob }).
+      order(updated_at: :desc)
     render json: Comments::CommentResource.new(comments).serializable_hash,
            status: :ok
   end
