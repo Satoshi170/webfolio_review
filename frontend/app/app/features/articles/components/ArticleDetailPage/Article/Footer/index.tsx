@@ -3,7 +3,7 @@
 import { CardFooter, Flex, Icon, Text } from "@chakra-ui/react";
 import { BiComment } from "react-icons/bi";
 
-import LikeButton from "@/app/features/articles/_likes/components/layouts/LikeButton";
+import LikeButton from "@/app/features/articles/_likes/components/LikeButton";
 import { useToggleLikeArticleGood } from "@/app/features/articles/_likes/hooks/useToggleArticleGood";
 import { useArticleData } from "@/app/features/articles/hooks/useArticleData";
 import { UpdatedDateText } from "@/app/components/atoms";
