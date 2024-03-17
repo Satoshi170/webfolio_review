@@ -1,5 +1,7 @@
 "use client";
 
+import { Box, Divider, Heading } from "@chakra-ui/react";
+
 import CommentsList from "../../../_comments/components/CommentsList";
 import CreateCommentForm from "../../../_comments/components/CreateCommentForm";
 
@@ -13,10 +15,15 @@ const CommentSection: React.FC<Props> = ({ commentsData }) => {
   if (!commentsData) return null;
 
   return (
-    <>
-      <CreateCommentForm />
+    <Box bg="white">
+      <Heading as="h3" textAlign="center" size="md" my="4">
+        コメント
+      </Heading>
+      <Divider />
       <CommentsList commentsData={commentsData} />
-    </>
+      <Divider />
+      <CreateCommentForm />
+    </Box>
   );
 };
 
