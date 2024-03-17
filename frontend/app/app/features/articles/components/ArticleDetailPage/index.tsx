@@ -3,9 +3,7 @@
 import { Stack } from "@chakra-ui/react";
 
 import ArticleSection from "./Article";
-import ArticleCommentCard from "../../_comments/components/ArticleCommentCard";
-import CreateCommentForm from "../../_comments/components/CreateCommentForm";
-import { CommentContext } from "../../_comments/hooks/useCommentData";
+import CommentSection from "./Comment";
 import { useGetComments } from "../../_comments/hooks/useGetComments";
 import { ArticleContext } from "../../hooks/useArticleData";
 
@@ -24,14 +22,7 @@ const ArticleDetailPage: React.FC<Props> = ({ articleData, isUser }) => {
     <ArticleContext.Provider value={articleData}>
       <Stack spacing="0">
         <ArticleSection isUser={isUser} />
-        <CreateCommentForm />
-        {commentsData &&
-          commentsData.length >= 1 &&
-          commentsData.map((commentData, i) => (
-            <CommentContext.Provider value={commentData} key={i}>
-              <ArticleCommentCard key={i} />
-            </CommentContext.Provider>
-          ))}
+        <CommentSection commentsData={commentsData} />
       </Stack>
     </ArticleContext.Provider>
   );
