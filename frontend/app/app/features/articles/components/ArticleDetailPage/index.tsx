@@ -20,7 +20,7 @@ const ArticleDetailPage: React.FC<Props> = ({ articleData, isUser }) => {
 
   return (
     <ArticleContext.Provider value={articleData}>
-      <Stack spacing="0">
+      <Stack spacing="10">
         <ArticleSection isUser={isUser} />
         <CommentSection commentsData={commentsData} />
       </Stack>
