@@ -4,7 +4,7 @@ import type { z } from "zod";
 export interface UserData {
   id: number;
   name: string;
-  image: string;
+  image: string | null;
 }
 
 export interface MyData extends UserData {
