@@ -8,12 +8,10 @@ import CreateCommentForm from "../../../_comments/components/CreateCommentForm";
 import type { CommentData } from "../../../_comments/types";
 
 interface Props {
-  commentsData: CommentData[] | [] | undefined;
+  commentsData: CommentData[] | [];
 }
 
 const CommentSection: React.FC<Props> = ({ commentsData }) => {
-  if (!commentsData) return null;
-
   return (
     <Box bg="white">
       <Heading as="h3" textAlign="center" size="md" my="4">
