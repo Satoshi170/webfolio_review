@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import type { CommentData } from "../_comments/types";
 
 export const useSortComments = (initCommentsData: CommentData[] | []) => {
   const [comments, setComments] = useState(initCommentsData);
+
+  useEffect(() => {
+    setComments(initCommentsData);
+  }, [initCommentsData]);
 
   const sortOrder = (sortOrder: "asc" | "desc") => {
     if (sortOrder == "asc") {
