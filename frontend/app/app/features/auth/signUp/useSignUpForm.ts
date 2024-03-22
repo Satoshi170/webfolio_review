@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
 import { useSetToastState } from "@/app/hooks/recoil/toastState/useSetToastState";
+import { useFormGuard } from "@/app/hooks/useFormGuard";
 import { postAuth } from "@/app/libs/axios/auth/postAuth";
 import { resolveErrorMessage } from "@/app/utils/resolveErrorMessage";
 
@@ -19,11 +20,13 @@ export const useSignUpForm = () => {
     register,
     handleSubmit,
     setError,
-    formState: { errors, isValid }
+    formState: { errors, isDirty, isValid }
   } = useForm<PostAuthCredentials>({
     resolver: zodResolver(refinedSignUpSchema),
     mode: "onChange"
   });
+
+  useFormGuard(isDirty);
 
   const [isLoading, setIsLoading] = useState(false);
   const { setSuccessToast, setErrorToast } = useSetToastState();
