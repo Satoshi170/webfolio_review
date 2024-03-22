@@ -23,7 +23,13 @@ export const useSignUpForm = () => {
     formState: { errors, isDirty, isValid }
   } = useForm<PostAuthCredentials>({
     resolver: zodResolver(refinedSignUpSchema),
-    mode: "onChange"
+    mode: "onChange",
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      passwordConfirmation: ""
+    }
   });
 
   useFormGuard(isDirty);
