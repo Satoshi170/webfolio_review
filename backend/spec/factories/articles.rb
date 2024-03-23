@@ -5,6 +5,6 @@ FactoryBot.define do
     operation_status { "active" }
     portfolio_site_url { "http://example.com" }
     repository_url { nil }
-    user
+    user { nil }
   end
 end
