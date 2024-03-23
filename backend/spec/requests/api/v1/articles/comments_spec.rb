@@ -61,7 +61,7 @@ RSpec.describe "Api::V1::Articles::Comments", type: :request do
   end
 
   describe "PATCH /comments/:id" do
-    let!(:comment) { create(:comment, user: user1, article: article, tag_ids: [1]) }
+    let!(:comment) { create(:comment, user: user1, article: article, tags: [Tag.find(1)]) }
     context "headerが適切な場合" do
       context "有効なパラメータが指定された場合" do
         it "commnetの更新に成功する" do
