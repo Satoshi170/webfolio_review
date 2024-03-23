@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Api::V1::Articles::Goods", type: :request do
   let(:user) { create(:user) }
-  let(:article) { create(:article) }
+  let(:article) { create(:article, user: user) }
   let(:auth_headers) { sign_in({ email: user.email, password: user.password }) }
 
   describe "POST /goods" do

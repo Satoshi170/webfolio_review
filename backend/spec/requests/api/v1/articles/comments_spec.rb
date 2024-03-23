@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Api::V1::Articles::Comments", type: :request do
   let(:user1) { create(:user) }
   let(:user2) { create(:user) }
-  let(:article) { create(:article) }
+  let(:article) { create(:article, user: user1) }
   let(:auth_user1_headers) { sign_in({ email: user1.email, password: user1.password }) }
   let(:auth_user2_headers) { sign_in({ email: user2.email, password: user2.password }) }
   let(:valid_comment_params) do
