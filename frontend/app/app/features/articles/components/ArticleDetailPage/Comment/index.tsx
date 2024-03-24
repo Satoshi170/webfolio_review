@@ -32,8 +32,8 @@ const CommentSection: React.FC<Props> = ({ commentsData }) => {
 
   return (
     <Box bg="white">
-      <HStack my="4">
-        <Heading as="h3" textAlign="center" size="md" flex="1">
+      <HStack my="4" position="relative">
+        <Heading as="h3" textAlign="center" size="md" w="full">
           コメント
         </Heading>
         <Menu closeOnSelect={false}>
@@ -42,6 +42,8 @@ const CommentSection: React.FC<Props> = ({ commentsData }) => {
             aria-label="comment-options"
             icon={<MdSort />}
             variant="unstyled"
+            position="absolute"
+            right="0"
           />
           <MenuList>
             <MenuOptionGroup
