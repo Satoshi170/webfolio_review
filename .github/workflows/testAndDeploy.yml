@@ -31,6 +31,10 @@ jobs:
         shell: bash
         run: docker-compose exec  -T backend /bin/bash -c "bundle exec rubocop --require rubocop-airbnb"
 
+      - name: Run TypeScript Type Checking
+        shell: sh
+        run: docker-compose exec  -T frontend /bin/sh -c "yarn tsc --noEmit"
+
       - name: Run Jest
         shell: sh
         run: docker-compose exec  -T frontend /bin/sh -c "yarn test"
