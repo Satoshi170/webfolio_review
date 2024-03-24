@@ -4,7 +4,7 @@ class Comments::CommentResource
   attributes :id, :content, :updated_at
 
   attribute :tags do |comment|
-    comment.tags.map(&:name)
+    comment.tags.sort_by(&:id).map(&:name)
   end
 
   one :user, resource: Users::UserResource
