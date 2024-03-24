@@ -7,7 +7,8 @@ articles = Array.new(50) do
 end
 
 comments = Array.new(100) do
-  create(:comment, user: users.sample, article: articles.sample)
+  tags = Tag.all.sample(rand(0..2))
+  create(:comment, user: users.sample, article: articles.sample, tags: tags)
 end
 
 users.each do |user|
