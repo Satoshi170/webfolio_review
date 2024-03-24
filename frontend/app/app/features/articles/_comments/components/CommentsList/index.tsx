@@ -1,7 +1,6 @@
 "use client";
 
-import { Box } from "@chakra-ui/react";
-
+import NoComment from "./NoComment";
 import CommentCards from "../CommentCards";
 
 import type { CommentData } from "../../types";
@@ -11,11 +10,11 @@ interface Props {
 }
 
 const CommentsList: React.FC<Props> = ({ commentsData }) => {
-  return (
-    <Box>
-      <CommentCards commentsData={commentsData} />
-    </Box>
-  );
+  if (commentsData.length == 0) {
+    return <NoComment />;
+  }
+
+  return <CommentCards commentsData={commentsData} />;
 };
 
 export default CommentsList;
