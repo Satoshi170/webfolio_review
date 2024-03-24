@@ -14,6 +14,8 @@ import {
 } from "@chakra-ui/react";
 import { MdSort } from "react-icons/md";
 
+import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
+
 import CommentsList from "../../../_comments/components/CommentsList";
 import CreateCommentForm from "../../../_comments/components/CreateCommentForm";
 import { useSortComments } from "../../../hooks/useSortComments";
@@ -26,6 +28,7 @@ interface Props {
 
 const CommentSection: React.FC<Props> = ({ commentsData }) => {
   const { sortedComments, sortOrder } = useSortComments(commentsData);
+  const { isLogin } = useGetLoginState();
 
   return (
     <Box bg="white">
@@ -56,7 +59,7 @@ const CommentSection: React.FC<Props> = ({ commentsData }) => {
       <Divider />
       <CommentsList commentsData={sortedComments} />
       <Divider />
-      <CreateCommentForm />
+      {isLogin && <CreateCommentForm />}
     </Box>
   );
 };
