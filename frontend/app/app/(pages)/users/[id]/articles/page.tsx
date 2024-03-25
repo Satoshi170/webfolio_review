@@ -40,8 +40,9 @@ const UserIdPostsPage: React.FC = () => {
   if (articlesData && articlesData.length == 0) {
     return (
       <CenteredBox>
-        <GoBackLink />
-        <Text>まだ投稿がありません</Text>
+        <Text p="6" textAlign="center" w="full">
+          まだ投稿がありません
+        </Text>
       </CenteredBox>
     );
   }
