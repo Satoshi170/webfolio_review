@@ -19,9 +19,9 @@ const PostsPage: React.FC = () => {
 
   if (error || !articlesData) {
     return (
-      <CenteredBox>
-        <Text>データの取得に失敗しました</Text>
-      </CenteredBox>
+      <Text p="6" textAlign="center" w="full">
+        データの取得に失敗しました
+      </Text>
     );
   }
 
