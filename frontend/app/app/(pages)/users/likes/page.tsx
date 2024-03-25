@@ -21,7 +21,7 @@ const UserLikesPage: React.FC = () => {
   }
   if (error) {
     return (
-      <CenteredBox>
+      <CenteredBox centerContent>
         <Text>読み込みに失敗しました</Text>
         <GoBackLink />
       </CenteredBox>
@@ -31,7 +31,7 @@ const UserLikesPage: React.FC = () => {
   if (articlesData) {
     if (articlesData.length == 0) {
       return (
-        <CenteredBox>
+        <CenteredBox centerContent>
           <Text>まだ投稿をいいねしていません</Text>
         </CenteredBox>
       );
