@@ -16,8 +16,7 @@ const ArticleCardsGridList: React.FC<Props> = ({ articlesData }) => {
       w="full"
       templateColumns={{
         sm: "repeat(1, 1fr)",
-        md: "repeat(2, 1fr)",
-        lg: "repeat(3, 1fr)"
+        md: "repeat(2, 1fr)"
       }}
       gap={2}
     >
