@@ -1,8 +1,6 @@
 "use client";
 
-import Link from "next/link";
-
-import { Heading, LinkBox, LinkOverlay, Stack, Text } from "@chakra-ui/react";
+import { Heading, Link, LinkBox, LinkOverlay, Stack, Text } from "@chakra-ui/react";
 
 import LinkCardImage from "./sections/LinkCardImage";
 import LinkCardURLText from "./sections/LinkCardURLText";
@@ -16,7 +14,11 @@ const LinkCardWithMetaData: React.FC<MetaDataLinkCardProps> = ({ url }) => {
   const { URLMetaData, error, isLoading } = useGetURLMetaData(url);
 
   if (isLoading || error || !URLMetaData || !URLMetaData.title)
-    return <Link href={url}>{url}</Link>;
+    return (
+      <Link href={url} target="_blank" rel="noopener noreferrer nofollow" color="blue">
+        {url}
+      </Link>
+    );
 
   const { title, description, image, favicon } = URLMetaData;
 
