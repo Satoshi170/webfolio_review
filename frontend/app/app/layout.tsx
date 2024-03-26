@@ -9,7 +9,10 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Webfolio-Review",
   description:
-    "Webfolio-Review: webエンジニアのためのポートフォリオ共有プラットフォーム。"
+    "Webfolio-Review: webエンジニアのためのポートフォリオ共有プラットフォーム。",
+  openGraph: {
+    images: ["/Webfolio-Review.png"]
+  }
 };
 
 interface Props {
