@@ -2,7 +2,7 @@
 
 import { Text } from "@chakra-ui/react";
 
-import ArticleCardsGridList from "@/app/features/articles/components/ArticleCardsGridList";
+import ArticlesPage from "@/app/features/articles/components/ArticlesPage";
 import { useGetArticles } from "@/app/features/articles/hooks/useGetArticles";
 import WithRedirectIfLoggedOut from "@/app/features/auth/accessControl/page/WithRedirectIfLoggedOut";
 import { LoadingSpinner } from "@/app/components/atoms";
@@ -25,11 +25,7 @@ const PostsPage: React.FC = () => {
     );
   }
 
-  return (
-    <CenteredBox>
-      <ArticleCardsGridList articlesData={articlesData} />
-    </CenteredBox>
-  );
+  return <ArticlesPage articlesData={articlesData} />;
 };
 
 export default WithRedirectIfLoggedOut(PostsPage);
