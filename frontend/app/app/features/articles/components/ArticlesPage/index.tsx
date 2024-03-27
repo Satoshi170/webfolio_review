@@ -8,7 +8,8 @@ import {
   MenuOptionGroup,
   MenuItemOption,
   HStack,
-  Heading
+  Heading,
+  MenuDivider
 } from "@chakra-ui/react";
 import { MdSort } from "react-icons/md";
 
@@ -23,7 +24,7 @@ interface Props {
   articlesData: ArticleData[];
 }
 const ArticlesPage: React.FC<Props> = ({ articlesData }) => {
-  const { sortedArticles, sortOrder } = useSortArticles(articlesData);
+  const { sortedArticles, sortOrder, setExcludeFilter } = useSortArticles(articlesData);
 
   return (
     <CenteredBox>
@@ -50,6 +51,15 @@ const ArticlesPage: React.FC<Props> = ({ articlesData }) => {
               <MenuItemOption value="desc">最新順</MenuItemOption>
               <MenuItemOption value="asc">古い順</MenuItemOption>
               <MenuItemOption value="popular">いいねが多い順</MenuItemOption>
+            </MenuOptionGroup>
+            <MenuDivider />
+            <MenuOptionGroup
+              type="checkbox"
+              onChange={(val) => setExcludeFilter(val as ("maintenance" | "inactive")[])}
+              title="除外フィルタ"
+            >
+              <MenuItemOption value="maintenance">メンテナンス中</MenuItemOption>
+              <MenuItemOption value="inactive">サービス終了済み</MenuItemOption>
             </MenuOptionGroup>
           </MenuList>
         </Menu>
