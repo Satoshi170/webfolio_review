@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import type { ArticleData } from "../types/articleData";
 
-export const useSortArticles = (initArticleData: ArticleData[]) => {
+export const useSortAndFilterArticles = (initArticleData: ArticleData[]) => {
   const [articles, setArticles] = useState(initArticleData);
 
   const setExcludeFilter = (val: ("maintenance" | "inactive")[]) => {

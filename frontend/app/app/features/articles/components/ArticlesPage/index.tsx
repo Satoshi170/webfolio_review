@@ -15,7 +15,7 @@ import { MdSort } from "react-icons/md";
 
 import CenteredBox from "@/app/components/styledWrappers/CenteredBox";
 
-import { useSortArticles } from "../../hooks/useSortArticles";
+import { useSortAndFilterArticles } from "../../hooks/useSortAndFilterArticles";
 import ArticleCardsGridList from "../ArticleCardsGridList";
 
 import type { ArticleData } from "../../types/articleData";
@@ -24,7 +24,8 @@ interface Props {
   articlesData: ArticleData[];
 }
 const ArticlesPage: React.FC<Props> = ({ articlesData }) => {
-  const { sortedArticles, sortOrder, setExcludeFilter } = useSortArticles(articlesData);
+  const { sortedArticles, sortOrder, setExcludeFilter } =
+    useSortAndFilterArticles(articlesData);
 
   return (
     <CenteredBox>
