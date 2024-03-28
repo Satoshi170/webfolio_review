@@ -23,7 +23,7 @@ Rails.application.routes.draw do
           end
           resources :comments, only: [:index, :create, :update, :destroy]
         end
-        resources :user_articles, only: [:index]
+
         resources :latest_articles, only: [:index]
         resources :popular_articles, only: [:index]
       end
