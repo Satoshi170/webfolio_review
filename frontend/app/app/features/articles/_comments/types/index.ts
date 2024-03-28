@@ -7,6 +7,6 @@ export interface CommentData {
   id: number;
   content: string;
   updatedAt: Date;
-  tags: CommentTagData[] | [];
+  tags: CommentTagData[];
   user: UserData;
 }

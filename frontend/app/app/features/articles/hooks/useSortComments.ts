@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import type { CommentData } from "../_comments/types";
 
-export const useSortComments = (initCommentsData: CommentData[] | []) => {
+export const useSortComments = (initCommentsData: CommentData[]) => {
   const [comments, setComments] = useState(initCommentsData);
 
   useEffect(() => {
