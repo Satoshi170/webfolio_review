@@ -17,7 +17,7 @@ export const ArticleSchema = z.object({
   title: z
     .string()
     .min(1, ArticleValidationErrorMessages.titleRequired)
-    .max(25, ArticleValidationErrorMessages.titleTooLong),
+    .max(75, ArticleValidationErrorMessages.titleTooLong),
   content: z
     .string()
     .min(1, ArticleValidationErrorMessages.contentRequired)
