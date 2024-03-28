@@ -9,7 +9,7 @@ interface MyComment extends Omit<CommentData, "user"> {
 
 export const useGetMyComments = () => {
   const endpoint = "/me/comments";
-  const { responseData, ...other } = useSWRWithAxiosAndAuth<MyComment[] | []>(endpoint, {
+  const { responseData, ...other } = useSWRWithAxiosAndAuth<MyComment[]>(endpoint, {
     errorRetryCount: 2
   });
   return { commentsData: responseData, ...other };

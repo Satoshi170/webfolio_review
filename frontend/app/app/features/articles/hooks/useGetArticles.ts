@@ -4,11 +4,8 @@ import type { ArticleData } from "../types/articleData";
 
 export const useGetArticles = () => {
   const endpoint = "/articles";
-  const { responseData, ...other } = useSWRWithAxiosFetcher<ArticleData[] | []>(
-    endpoint,
-    {
-      errorRetryCount: 2
-    }
-  );
+  const { responseData, ...other } = useSWRWithAxiosFetcher<ArticleData[]>(endpoint, {
+    errorRetryCount: 2
+  });
   return { articlesData: responseData, ...other };
 };

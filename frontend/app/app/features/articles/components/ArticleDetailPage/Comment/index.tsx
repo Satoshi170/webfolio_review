@@ -23,7 +23,7 @@ import { useSortComments } from "../../../hooks/useSortComments";
 import type { CommentData } from "../../../_comments/types";
 
 interface Props {
-  commentsData: CommentData[] | [];
+  commentsData: CommentData[];
 }
 
 const CommentSection: React.FC<Props> = ({ commentsData }) => {
