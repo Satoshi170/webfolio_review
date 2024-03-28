@@ -38,8 +38,8 @@ describe("ArticleSchema", () => {
       expect(titleErrors[0]).toBe(ArticleValidationErrorMessages.titleRequired);
     });
 
-    it("titleが26文字以上の時、正しいエラーメッセージをスローする", () => {
-      const invalidTitleData = { ...validPostArticleData, title: "a".repeat(26) };
+    it("titleが76文字以上の時、正しいエラーメッセージをスローする", () => {
+      const invalidTitleData = { ...validPostArticleData, title: "a".repeat(76) };
       expect(() => ArticleSchema.parse(invalidTitleData)).toThrow(ZodError);
       const titleErrors = validationErrorMessages(invalidTitleData, "title");
       expect(titleErrors[0]).toBe(ArticleValidationErrorMessages.titleTooLong);
