@@ -10,7 +10,7 @@ class Article < ApplicationRecord
 
   validates :title,
             presence: true,
-            length: { maximum: 25 }
+            length: { maximum: 75 }
 
   validates :content,
             presence: true,

@@ -9,10 +9,10 @@ RSpec.describe Article, type: :model do
         expect(article.errors[:title]).to include("can't be blank")
       end
 
-      it "titleの長さは25文字以内である必要がある" do
-        article = Article.new(title: 'a' * 26)
+      it "titleの長さは75文字以内である必要がある" do
+        article = Article.new(title: 'a' * 76)
         expect(article).not_to be_valid
-        expect(article.errors[:title]).to include("is too long (maximum is 25 characters)")
+        expect(article.errors[:title]).to include("is too long (maximum is 75 characters)")
       end
     end
 
