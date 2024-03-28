@@ -1,40 +1,44 @@
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 import type { ArticleData } from "../types/articleData";
 
 export const useSortAndFilterArticles = (initArticleData: ArticleData[]) => {
-  const [articles, setArticles] = useState(initArticleData);
+  const [filterValues, setFilterValues] = useState<("maintenance" | "inactive")[]>([]);
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc" | "popular">("desc");
 
-  const setExcludeFilter = (val: ("maintenance" | "inactive")[]) => {
-    if (val.length == 0) {
-      setArticles(initArticleData);
-    } else {
-      const newArticles = initArticleData.filter(
-        (data) => !val.includes(data.operationStatus)
-      );
-      setArticles(newArticles);
-    }
-  };
+  const filteredAndSortedArticles = useMemo(() => {
+    const filteredArticles = initArticleData.filter(
+      (data) => !filterValues.includes(data.operationStatus)
+    );
 
-  const sortOrder = (sortOrder: "asc" | "desc" | "popular") => {
     switch (sortOrder) {
       case "asc":
-        setArticles((prev) =>
-          [...prev].sort((x, y) => x.updatedAt.getTime() - y.updatedAt.getTime())
-        );
+        filteredArticles.sort((x, y) => x.updatedAt.getTime() - y.updatedAt.getTime());
         break;
       case "desc":
-        setArticles((prev) =>
-          [...prev].sort((x, y) => y.updatedAt.getTime() - x.updatedAt.getTime())
-        );
+        filteredArticles.sort((x, y) => y.updatedAt.getTime() - x.updatedAt.getTime());
         break;
       case "popular":
-        setArticles((prev) => [...prev].sort((x, y) => y.totalLikes - x.totalLikes));
+        filteredArticles.sort((x, y) => y.totalLikes - x.totalLikes);
         break;
       default:
         throw new TypeError();
     }
+
+    return filteredArticles;
+  }, [initArticleData, filterValues, sortOrder]);
+
+  const setExcludeFilter = (val: ("maintenance" | "inactive")[]) => {
+    setFilterValues(val);
   };
 
-  return { sortedArticles: articles, sortOrder, setExcludeFilter };
+  const applySortOrder = (order: "asc" | "desc" | "popular") => {
+    setSortOrder(order);
+  };
+
+  return {
+    filteredAndSortedArticles,
+    applySortOrder,
+    setExcludeFilter
+  };
 };

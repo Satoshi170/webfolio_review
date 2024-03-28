@@ -24,7 +24,7 @@ interface Props {
   articlesData: ArticleData[];
 }
 const ArticlesPage: React.FC<Props> = ({ articlesData }) => {
-  const { sortedArticles, sortOrder, setExcludeFilter } =
+  const { filteredAndSortedArticles, applySortOrder, setExcludeFilter } =
     useSortAndFilterArticles(articlesData);
 
   return (
@@ -46,7 +46,7 @@ const ArticlesPage: React.FC<Props> = ({ articlesData }) => {
             <MenuOptionGroup
               type="radio"
               defaultValue="desc"
-              onChange={(val) => sortOrder(val as "asc" | "desc" | "popular")}
+              onChange={(val) => applySortOrder(val as "asc" | "desc" | "popular")}
               title="並び替え"
             >
               <MenuItemOption value="desc">最新順</MenuItemOption>
@@ -65,7 +65,7 @@ const ArticlesPage: React.FC<Props> = ({ articlesData }) => {
           </MenuList>
         </Menu>
       </HStack>
-      <ArticleCardsGridList articlesData={sortedArticles} />
+      <ArticleCardsGridList articlesData={filteredAndSortedArticles} />
     </CenteredBox>
   );
 };
