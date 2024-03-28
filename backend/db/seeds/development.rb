@@ -10,7 +10,7 @@ article1 = create(:article,
   user: user1
 )
 
-users = create_list(:user, 10)
+users = create_list(:user, 30)
 
 users.each do |user|
   create(:good, user: user, article: article1)
