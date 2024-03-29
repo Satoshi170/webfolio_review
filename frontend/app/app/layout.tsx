@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description:
     "Webfolio-Review: webエンジニアのためのポートフォリオ共有プラットフォーム。",
   openGraph: {
-    images: ["/webfolioReview.png"]
+    images: [`${process.env.NEXT_PUBLIC_HOSTNAME}/webfolioReview.png`]
   }
 };
 
