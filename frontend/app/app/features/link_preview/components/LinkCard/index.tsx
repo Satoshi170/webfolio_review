@@ -27,7 +27,7 @@ const LinkCardWithMetaData: React.FC<MetaDataLinkCardProps> = ({ url }) => {
       borderWidth="1px"
       rounded="lg"
       overflow="hidden"
-      w={{ base: "auto", xl: "xl" }}
+      maxW="2xl"
       h="7rem"
       display="flex"
       as="article"
