@@ -19,7 +19,7 @@ const LinkCardImage: React.FC<LinkCardImageProps> = ({ image, url }) => {
 
   return (
     <Image
-      w={widePercent}
+      maxW={widePercent}
       src={image}
       alt={url}
       objectFit="scale-down"
