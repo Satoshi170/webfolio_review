@@ -58,10 +58,12 @@ https://github.com/Satoshi170/webfolio_review/assets/122833678/0da5a63a-7609-4ce
 記事の詳細ページです。
 
 - **いいね機能**:　記事に対していいねをすることができます。いいねした投稿は「いいねした投稿」より確認できます。<br>
-  https://github.com/Satoshi170/webfolio_review/assets/122833678/8aec3177-8211-4d36-96e2-305dae0cd6ee
+
+https://github.com/Satoshi170/webfolio_review/assets/122833678/8aec3177-8211-4d36-96e2-305dae0cd6ee
 
 - **コメント機能**:　記事に対してコメントをすることができます。コメントした投稿は「コメントした投稿」より確認できます<br>
-  https://github.com/Satoshi170/webfolio_review/assets/122833678/b7d9665c-da58-41c9-974a-09cfbd58cbdd
+
+https://github.com/Satoshi170/webfolio_review/assets/122833678/b7d9665c-da58-41c9-974a-09cfbd58cbdd
 
 ### ページ共通要素
 
