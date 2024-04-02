@@ -16,7 +16,7 @@ export const useDeleteArticle = () => {
     async (id: number) => {
       try {
         await deleteArticle(id);
-        const redirectEndpoint = userData ? `/users/${userData.id}/articles` : "/";
+        const redirectEndpoint = userData ? "/users/articles" : "/";
         router.push(redirectEndpoint);
         setSuccessToast("投稿の削除に成功しました");
       } catch (e) {
