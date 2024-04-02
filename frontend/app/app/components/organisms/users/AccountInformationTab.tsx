@@ -3,19 +3,17 @@
 import { Heading, Spacer, Text } from "@chakra-ui/react";
 
 import UpdateAccountForm from "@/app/features/auth/updateAccount/UpdateAccountForm";
-import { useGetLoginState } from "@/app/hooks/recoil/loginState/useGetLoginState";
 
 import RoundedCenteredBox from "../../styledWrappers/RoundedCenteredBox";
 
-const AccountInformationTabPanel: React.FC = () => {
-  const { isLogin, userData } = useGetLoginState();
+import type { MyData } from "@/app/types/auth";
 
-  if (!isLogin) {
-    return null;
-  }
+interface Props {
+  userData: MyData;
+  isGuestUser: boolean;
+}
 
-  const isGuestUser = userData.role == "guest";
-
+const AccountInformationTabPanel: React.FC<Props> = ({ userData, isGuestUser }) => {
   return (
     <RoundedCenteredBox>
       <Heading as="h2" textAlign="center" mb="4">
