@@ -43,10 +43,10 @@ const HomePage: React.FC = () => {
       {!isLogin && <AboutSiteSection />}
       <Heading my="2">話題の投稿</Heading>
       <ArticleCardsGridList articlesData={popularArticlesData} />
-      <SeeMoreButton onClick={() => router.push("/articles")} />
+      <SeeMoreButton onClick={() => router.push("/articles?sort=popular")} />
       <Heading my="2">最近の投稿</Heading>
       <ArticleCardsGridList articlesData={latestArticlesData} />
-      <SeeMoreButton onClick={() => router.push("/articles")} />
+      <SeeMoreButton onClick={() => router.push("/articles?sort=desc")} />
     </CenteredBox>
   );
 };
