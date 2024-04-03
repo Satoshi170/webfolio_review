@@ -1,10 +1,8 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-
 import { Heading, Text } from "@chakra-ui/react";
 
-import { LoadingSpinner, SeeMoreButton } from "./components/atoms";
+import { LoadingSpinner, SeeMoreLinkButton } from "./components/atoms";
 import AboutSiteSection from "./components/organisms/AboutSiteSection";
 import CenteredBox from "./components/styledWrappers/CenteredBox";
 import ArticleCardsGridList from "./features/articles/components/ArticleCardsGridList";
@@ -23,7 +21,6 @@ const HomePage: React.FC = () => {
     error: error2,
     isLoading: isLoading2
   } = useGetLatestArticles();
-  const router = useRouter();
   const { isLogin } = useGetLoginState();
 
   if (isLoading1 || isLoading2) {
@@ -43,10 +40,10 @@ const HomePage: React.FC = () => {
       {!isLogin && <AboutSiteSection />}
       <Heading my="2">話題の投稿</Heading>
       <ArticleCardsGridList articlesData={popularArticlesData} />
-      <SeeMoreButton onClick={() => router.push("/articles?sort=popular")} />
+      <SeeMoreLinkButton href="/articles?sort=popular" />
       <Heading my="2">最近の投稿</Heading>
       <ArticleCardsGridList articlesData={latestArticlesData} />
-      <SeeMoreButton onClick={() => router.push("/articles?sort=desc")} />
+      <SeeMoreLinkButton href="/articles?sort=desc" />
     </CenteredBox>
   );
 };
