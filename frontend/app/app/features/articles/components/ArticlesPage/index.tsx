@@ -23,8 +23,9 @@ import type { ArticleData } from "../../types/articleData";
 interface Props {
   articlesData: ArticleData[];
 }
+
 const ArticlesPage: React.FC<Props> = ({ articlesData }) => {
-  const { filteredAndSortedArticles, applySortOrder, setExcludeFilter } =
+  const { initSort, filteredAndSortedArticles, applySortOrder, setExcludeFilter } =
     useSortAndFilterArticles(articlesData);
 
   return (
@@ -45,7 +46,7 @@ const ArticlesPage: React.FC<Props> = ({ articlesData }) => {
           <MenuList>
             <MenuOptionGroup
               type="radio"
-              defaultValue="desc"
+              defaultValue={initSort}
               onChange={(val) => applySortOrder(val as "asc" | "desc" | "popular")}
               title="並び替え"
             >

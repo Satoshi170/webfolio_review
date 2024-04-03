@@ -1,10 +1,19 @@
 import { useState, useMemo } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import type { ArticleData } from "../types/articleData";
 
 export const useSortAndFilterArticles = (initArticleData: ArticleData[]) => {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const defaultSortOrder = searchParams.get("sort") || "desc";
+  const initSort = (
+    ["asc", "desc", "popular"].includes(defaultSortOrder) ? defaultSortOrder : "desc"
+  ) as "asc" | "desc" | "popular";
+
   const [filterValues, setFilterValues] = useState<("maintenance" | "inactive")[]>([]);
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc" | "popular">("desc");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc" | "popular">(initSort);
 
   const filteredAndSortedArticles = useMemo(() => {
     const filteredArticles = initArticleData.filter(
@@ -33,10 +42,12 @@ export const useSortAndFilterArticles = (initArticleData: ArticleData[]) => {
   };
 
   const applySortOrder = (order: "asc" | "desc" | "popular") => {
+    router.replace(`${pathname}?sort=${order}`);
     setSortOrder(order);
   };
 
   return {
+    initSort,
     filteredAndSortedArticles,
     applySortOrder,
     setExcludeFilter
