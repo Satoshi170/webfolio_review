@@ -51,7 +51,7 @@ https://webfolio-review.com/
 - **ソート機能**:　記事一覧を「最新順」,「古い順」,「いいねが多い順」に並び替えることができます。
 - **フィルタリング機能**:　記事一覧からポートフォリオサイトが「メンテナンス中」、「サービス停止」の記事を除外することができます。
 
-https://github.com/Satoshi170/webfolio_review/assets/122833678/0da5a63a-7609-4cec-b0d1-ef5045b08002
+https://github.com/Satoshi170/webfolio_review/assets/122833678/8a1d0b62-b4de-4bfe-a435-7ae0e91d71d0
 
 ### /articles/:id
 
@@ -69,7 +69,7 @@ https://github.com/Satoshi170/webfolio_review/assets/122833678/b7d9665c-da58-41c
 
 ログイン状態であればどのページからでも記事を作成できます。
 
-https://github.com/Satoshi170/webfolio_review/assets/122833678/53061c44-884a-4dfa-8a5c-976a6acd1fc5
+https://github.com/Satoshi170/webfolio_review/assets/122833678/5dc99c82-1fd2-490f-a652-7b5f66d23b22
 
 ## 機能一覧
 
