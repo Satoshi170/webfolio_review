@@ -9,6 +9,7 @@ https://webfolio-review.com/
 - [機能一覧](#機能一覧)
 - [PR ポイント](#pr-ポイント)
 - [使用技術](#使用技術)
+- [ER図](#er-図)
 - [インフラ構成図](#インフラ構成図)
 - [今後の課題](#今後の課題)
 
@@ -135,6 +136,10 @@ https://github.com/Satoshi170/webfolio_review/assets/122833678/5dc99c82-1fd2-490
 
 - Docker
 - AWS
+
+## ER 図
+
+[erd.pdf](https://github.com/user-attachments/files/15528378/erd.pdf)
 
 ## インフラ構成図
 
