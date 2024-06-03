@@ -139,11 +139,11 @@ https://github.com/Satoshi170/webfolio_review/assets/122833678/5dc99c82-1fd2-490
 
 ## ER 図
 
-[erd.pdf](https://github.com/user-attachments/files/15528378/erd.pdf)
+![erd](https://github.com/Satoshi170/webfolio_review/assets/122833678/f796f68f-db56-4649-b73e-4bc39f2783af)
 
 ## インフラ構成図
 
-![](images/aws_structure.svg)
+![aws_structure](https://github.com/Satoshi170/webfolio_review/assets/122833678/0e647281-6a78-484a-b552-9c879c9794f9)
 
 ## 今後の課題
 
