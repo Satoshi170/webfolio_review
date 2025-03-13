@@ -1,7 +1,5 @@
 # Webfolio-Review
 
-https://webfolio-review.com/
-
 ## 目次
 
 - [Webfolio-Review とは](#webfolio-review-とは)
